@@ -22,8 +22,7 @@ public class ObstacleController : MonoBehaviour
     [SerializeField] private Vector3 maxPositionDistance;    
     [SerializeField] private AnimationCurve xAnimationCurve;
     [SerializeField] private AnimationCurve yAnimationCurve;
-    [SerializeField] private AnimationCurve zAnimationCurve;
-    [SerializeField] private bool linearAceleration = true;
+    [SerializeField] private AnimationCurve zAnimationCurve;    
 
     public event EventHandler OnTimerStop;
 
@@ -139,6 +138,10 @@ public class ObstacleController : MonoBehaviour
 
     private void ChangeMovementDirection(object sender, EventArgs e)
     {
+        if (movementType != MovementType.Linear)
+        {
+            return;
+        }
         movementDirection *= startingDirection;
         startingDirection *= -1;
     }
@@ -151,10 +154,7 @@ public class ObstacleController : MonoBehaviour
     private void OcilliatingMovement()
     {
         float movementProgress = timer / changeDirectionTime;
-        if (!linearAceleration)
-        {
-            startingPosition = transform.position;
-        }
+       
         Vector3 targetPosition = new Vector3();
         targetPosition.x = Mathf.Lerp(startingPosition.x, maxPosition.x, xAnimationCurve.Evaluate(movementProgress));
         targetPosition.y = Mathf.Lerp(startingPosition.y, maxPosition.y, yAnimationCurve.Evaluate(movementProgress));
