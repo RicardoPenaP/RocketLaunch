@@ -28,7 +28,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             ""id"": ""674db8e0-ec9b-440b-93a5-7bd350251c89"",
             ""actions"": [
                 {
-                    ""name"": ""SideMovement"",
+                    ""name"": ""Rotation"",
                     ""type"": ""Button"",
                     ""id"": ""235b1604-a4bc-4229-a902-43b8b6d18c6b"",
                     ""expectedControlType"": ""Button"",
@@ -54,7 +54,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""SideMovement"",
+                    ""action"": ""Rotation"",
                     ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
@@ -65,7 +65,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""SideMovement"",
+                    ""action"": ""Rotation"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -76,7 +76,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""SideMovement"",
+                    ""action"": ""Rotation"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -675,7 +675,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
 }");
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
-        m_Player_SideMovement = m_Player.FindAction("SideMovement", throwIfNotFound: true);
+        m_Player_Rotation = m_Player.FindAction("Rotation", throwIfNotFound: true);
         m_Player_StartEnginge = m_Player.FindAction("StartEnginge", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
@@ -750,13 +750,13 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     // Player
     private readonly InputActionMap m_Player;
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
-    private readonly InputAction m_Player_SideMovement;
+    private readonly InputAction m_Player_Rotation;
     private readonly InputAction m_Player_StartEnginge;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
         public PlayerActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
-        public InputAction @SideMovement => m_Wrapper.m_Player_SideMovement;
+        public InputAction @Rotation => m_Wrapper.m_Player_Rotation;
         public InputAction @StartEnginge => m_Wrapper.m_Player_StartEnginge;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
@@ -767,9 +767,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_PlayerActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_PlayerActionsCallbackInterfaces.Add(instance);
-            @SideMovement.started += instance.OnSideMovement;
-            @SideMovement.performed += instance.OnSideMovement;
-            @SideMovement.canceled += instance.OnSideMovement;
+            @Rotation.started += instance.OnRotation;
+            @Rotation.performed += instance.OnRotation;
+            @Rotation.canceled += instance.OnRotation;
             @StartEnginge.started += instance.OnStartEnginge;
             @StartEnginge.performed += instance.OnStartEnginge;
             @StartEnginge.canceled += instance.OnStartEnginge;
@@ -777,9 +777,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
 
         private void UnregisterCallbacks(IPlayerActions instance)
         {
-            @SideMovement.started -= instance.OnSideMovement;
-            @SideMovement.performed -= instance.OnSideMovement;
-            @SideMovement.canceled -= instance.OnSideMovement;
+            @Rotation.started -= instance.OnRotation;
+            @Rotation.performed -= instance.OnRotation;
+            @Rotation.canceled -= instance.OnRotation;
             @StartEnginge.started -= instance.OnStartEnginge;
             @StartEnginge.performed -= instance.OnStartEnginge;
             @StartEnginge.canceled -= instance.OnStartEnginge;
@@ -965,7 +965,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     }
     public interface IPlayerActions
     {
-        void OnSideMovement(InputAction.CallbackContext context);
+        void OnRotation(InputAction.CallbackContext context);
         void OnStartEnginge(InputAction.CallbackContext context);
     }
     public interface IUIActions

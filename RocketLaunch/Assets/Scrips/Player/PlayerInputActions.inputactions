@@ -6,7 +6,7 @@
             "id": "674db8e0-ec9b-440b-93a5-7bd350251c89",
             "actions": [
                 {
-                    "name": "SideMovement",
+                    "name": "Rotation",
                     "type": "Button",
                     "id": "235b1604-a4bc-4229-a902-43b8b6d18c6b",
                     "expectedControlType": "Button",
@@ -32,7 +32,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "SideMovement",
+                    "action": "Rotation",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
@@ -43,7 +43,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "SideMovement",
+                    "action": "Rotation",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -54,7 +54,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "SideMovement",
+                    "action": "Rotation",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },

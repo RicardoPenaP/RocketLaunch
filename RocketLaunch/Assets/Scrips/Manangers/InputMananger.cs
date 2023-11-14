@@ -34,16 +34,16 @@ public class InputMananger : MonoBehaviour
         inputActions.Disable();
     }
 
-    public bool TryGetSideMovementInput(out Vector2 sideMovementVector)
+    public bool TryGetRotationDirectionInput(out float rotationDirection)
     {
-        if (inputActions.Player.SideMovement.triggered)
+        if (inputActions.Player.Rotation.IsInProgress())
         {
-            sideMovementVector = inputActions.Player.SideMovement.ReadValue<Vector2>();
+            rotationDirection = inputActions.Player.Rotation.ReadValue<float>();
             return true;
         }
         else
         {
-            sideMovementVector = Vector2.zero;
+            rotationDirection = 0f;
             return false;
         }
     }
