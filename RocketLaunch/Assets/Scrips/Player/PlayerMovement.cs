@@ -26,8 +26,8 @@ public class PlayerMovement : MonoBehaviour
         if (InputMananger.Instance.GetStartEngineInput())
         {
             StartEngine();
+            
         }
-
         if (InputMananger.Instance.TryGetRotationDirectionInput(out float rotationDirection))
         {
             Rotate(rotationDirection);
@@ -43,8 +43,11 @@ public class PlayerMovement : MonoBehaviour
     private void Rotate(float rotationDirection)
     {
         Vector3 rotationVector = Vector3.forward * rotationDirection * rotationForce * Time.deltaTime;
-
         transform.Rotate(rotationVector);
-        //transform.ro
+        //Use it if you want to restrinct the rotation only when the ship is in movement
+        //if (Mathf.Abs(rigidbody.velocity.y) > Mathf.Epsilon)
+        //{
+           
+        //}  
     }
 }
