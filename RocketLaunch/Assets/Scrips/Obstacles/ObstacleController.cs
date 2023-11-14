@@ -5,7 +5,7 @@ using System;
 
 public class ObstacleController : MonoBehaviour
 {
-    public enum MovementType { Static, Linear, Ocillate, Expansion}
+    public enum MovementType { Static, Linear, Ocillate }
 
     [Header("Obstacle Controller")]
     [Header("General Settings")]
@@ -14,7 +14,6 @@ public class ObstacleController : MonoBehaviour
     [Header("Linear Settings")]
     [SerializeField] private MovementType movementType;
     [SerializeField] private float movementSpeed;
-    
     [SerializeField] private Vector3 movementDirection;
     [SerializeField,Range(-1f,1f)] private float startingDirection = 1f;
 
@@ -22,7 +21,12 @@ public class ObstacleController : MonoBehaviour
     [SerializeField] private Vector3 maxPositionDistance;    
     [SerializeField] private AnimationCurve xAnimationCurve;
     [SerializeField] private AnimationCurve yAnimationCurve;
-    [SerializeField] private AnimationCurve zAnimationCurve;    
+    [SerializeField] private AnimationCurve zAnimationCurve;
+
+    [Header("Expasion Settings")]
+    [SerializeField] private bool expansionActive = false;
+    [SerializeField, Min(0f)] private float expansionSpeed = 0f;
+    [SerializeField] private Vector3 expansionDirection;
 
     public event EventHandler OnTimerStop;
 
@@ -33,6 +37,7 @@ public class ObstacleController : MonoBehaviour
     private void Awake()
     {        
         OnTimerStop += ChangeMovementDirection;
+        OnTimerStop += ChangeExpansionDirection;
         ChangeMovementDirection(this, EventArgs.Empty);
 
         timer = 0;
@@ -64,22 +69,24 @@ public class ObstacleController : MonoBehaviour
                 movementSpeed = 0f;
                 movementDirection = Vector3.zero;
                 break;
-            case MovementType.Expansion:
-
-                break;
-            default:
-                break;
-        }
-        if (movementType == MovementType.Static)
-        {
-           
            
         }
 
-        if (movementType != MovementType.Ocillate)
+        if (!expansionActive)
         {
+            expansionSpeed = 0f;
+            expansionDirection = Vector3.zero;
            
         }
+        else
+        {
+            if (expansionDirection.magnitude > 1f)
+            {
+                expansionDirection = expansionDirection.normalized;
+            }
+            
+        }
+
 
         startingDirection = startingDirection > Mathf.Epsilon ? 1 : -1;
        
@@ -98,7 +105,8 @@ public class ObstacleController : MonoBehaviour
 
     private void OnDestroy()
     {
-        OnTimerStop -= ChangeMovementDirection;        
+        OnTimerStop -= ChangeMovementDirection;
+        OnTimerStop -= ChangeExpansionDirection;
     }
 
     private void UpdateMovement()
@@ -115,10 +123,10 @@ public class ObstacleController : MonoBehaviour
                 break;
             case MovementType.Ocillate:
                 OcilliatingMovement();
-                break;
-            case MovementType.Expansion:
-                break; 
+                break;           
         }
+
+        Expansion();
     }
 
     private void UpdateTimer()
@@ -146,6 +154,11 @@ public class ObstacleController : MonoBehaviour
         startingDirection *= -1;
     }
 
+    private void ChangeExpansionDirection(object sender, EventArgs e)
+    {
+        expansionDirection *= -1;
+    }
+
     private void LinearMovement()
     {
         transform.position += movementDirection * movementSpeed * Time.deltaTime;
@@ -161,5 +174,10 @@ public class ObstacleController : MonoBehaviour
         targetPosition.z = Mathf.Lerp(startingPosition.z, maxPosition.z, zAnimationCurve.Evaluate(movementProgress));
         
         transform.position = targetPosition;
+    }
+
+    private void Expansion()
+    {
+        transform.localScale += expansionDirection * expansionSpeed * Time.deltaTime;
     }
 }
