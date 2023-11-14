@@ -8,22 +8,28 @@ public class ObstacleController : MonoBehaviour
     public enum MovementType { Static, Linear, Ocillate, Expansion}
 
     [Header("Obstacle Controller")]
-
     [Header("General Settings")]
+    [SerializeField, Min(0f)] private float changeDirectionTime = 0f;
+
+    [Header("Linear Settings")]
     [SerializeField] private MovementType movementType;
     [SerializeField] private float movementSpeed;
-    [SerializeField] private float changeDirectionTime;
+    
     [SerializeField] private Vector3 movementDirection;
     [SerializeField,Range(-1f,1f)] private float startingDirection = 1f;
 
     [Header("Ocilliate Settings")]
-    [SerializeField] private float maxYDiference = 0;
-
+    [SerializeField] private Vector3 maxPositionDistance;    
+    [SerializeField] private AnimationCurve xAnimationCurve;
+    [SerializeField] private AnimationCurve yAnimationCurve;
+    [SerializeField] private AnimationCurve zAnimationCurve;
+    [SerializeField] private bool linearAceleration = true;
 
     public event EventHandler OnTimerStop;
 
     private float timer;
-    private float maxY;
+    private Vector3 maxPosition;
+    private Vector3 startingPosition;   
 
     private void Awake()
     {        
@@ -31,17 +37,49 @@ public class ObstacleController : MonoBehaviour
         ChangeMovementDirection(this, EventArgs.Empty);
 
         timer = 0;
-        maxY = transform.position.y + maxYDiference;
+        startingPosition = transform.position;
+        maxPosition = startingPosition + maxPositionDistance;
+        
     }
 
 
     private void OnValidate()
     {
+        switch (movementType)
+        {
+            case MovementType.Static:
+                movementSpeed = 0f;
+                movementDirection = Vector3.zero;
+                maxPositionDistance = Vector3.zero;
+                xAnimationCurve = new AnimationCurve();
+                yAnimationCurve = new AnimationCurve();
+                zAnimationCurve = new AnimationCurve();
+                break;
+            case MovementType.Linear:
+                maxPositionDistance = Vector3.zero;
+                xAnimationCurve = new AnimationCurve();
+                yAnimationCurve = new AnimationCurve();
+                zAnimationCurve = new AnimationCurve();
+                break;
+            case MovementType.Ocillate:
+                movementSpeed = 0f;
+                movementDirection = Vector3.zero;
+                break;
+            case MovementType.Expansion:
+
+                break;
+            default:
+                break;
+        }
         if (movementType == MovementType.Static)
         {
-            movementSpeed = 0f;
-            movementDirection = Vector3.zero;
-            maxYDiference = 0f;
+           
+           
+        }
+
+        if (movementType != MovementType.Ocillate)
+        {
+           
         }
 
         startingDirection = startingDirection > Mathf.Epsilon ? 1 : -1;
@@ -112,6 +150,16 @@ public class ObstacleController : MonoBehaviour
 
     private void OcilliatingMovement()
     {
-        transform.position += movementDirection * movementSpeed * Time.deltaTime;
+        float movementProgress = timer / changeDirectionTime;
+        if (!linearAceleration)
+        {
+            startingPosition = transform.position;
+        }
+        Vector3 targetPosition = new Vector3();
+        targetPosition.x = Mathf.Lerp(startingPosition.x, maxPosition.x, xAnimationCurve.Evaluate(movementProgress));
+        targetPosition.y = Mathf.Lerp(startingPosition.y, maxPosition.y, yAnimationCurve.Evaluate(movementProgress));
+        targetPosition.z = Mathf.Lerp(startingPosition.z, maxPosition.z, zAnimationCurve.Evaluate(movementProgress));
+        
+        transform.position = targetPosition;
     }
 }
