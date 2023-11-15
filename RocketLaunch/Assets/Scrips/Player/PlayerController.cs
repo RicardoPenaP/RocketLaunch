@@ -1,18 +1,47 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class PlayerController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [Header("Player Controller")]
+    [SerializeField] private int maxLifesAmount = 3;
+
+    public event EventHandler OnLifeRemove;
+    public event EventHandler OnDie;
+
+    private int currentLifesAmount;
+
+
+    private void Awake()
     {
-        
+        currentLifesAmount = maxLifesAmount;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnCollisionEnter(Collision collision)
     {
-        
+        if (collision.transform.TryGetComponent<ObstacleController>(out ObstacleController obstacle))
+        {
+            RemoveOneLife();
+        }
     }
+
+    private void RemoveOneLife()
+    {
+        currentLifesAmount--;        
+        OnLifeRemove?.Invoke(this, EventArgs.Empty);
+
+        if (currentLifesAmount <= 0)
+        {
+            currentLifesAmount = 0;
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        OnDie?.Invoke(this, EventArgs.Empty);
+    }
+
 }
