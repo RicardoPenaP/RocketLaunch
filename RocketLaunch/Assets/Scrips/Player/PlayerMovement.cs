@@ -53,12 +53,24 @@ public class PlayerMovement : MonoBehaviour
         if (InputMananger.Instance.GetMoveUpwardsInputWasReleasedThisFrame())
         {
             OnStopMovingUpwards?.Invoke(this,EventArgs.Empty);
-        }
-        
+        }        
 
         if (InputMananger.Instance.TryGetRotationDirectionInput(out float rotationDirection))
         {
             Rotate(rotationDirection);
+        }
+
+        if (InputMananger.Instance.GetRotationDirectionInputWasReleasedThisFrame(out float rotationDirectionInput))
+        {
+            if (rotationDirection > Mathf.Epsilon)
+            {
+                OnStopRotating?.Invoke(this, RotationDirection.Rigth);
+            }
+            else
+            {
+                OnStopRotating?.Invoke(this, RotationDirection.Left);
+            }
+           
         }
     }
 

@@ -48,6 +48,12 @@ public class InputMananger : MonoBehaviour
         }
     }
 
+    public bool GetRotationDirectionInputWasReleasedThisFrame(out float rotationDirection)
+    {
+        rotationDirection = inputActions.Player.Rotation.ReadValue<float>();
+        return inputActions.Player.Rotation.WasReleasedThisFrame();
+    }
+
     public bool GetMoveUpwardsInputIsInProgress()
     {        
         return inputActions.Player.MoveUpwards.IsInProgress();
