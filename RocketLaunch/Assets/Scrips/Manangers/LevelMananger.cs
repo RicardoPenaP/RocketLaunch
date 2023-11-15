@@ -6,6 +6,8 @@ using GameSceneManagement;
 
 public class LevelMananger : MonoBehaviour
 {
+    [Header("Level Mananger")]
+    [SerializeField] private GameScene nextLevel;
     public static LevelMananger Instance { get; private set; }
 
     private PlayerController playerController;
@@ -21,23 +23,32 @@ public class LevelMananger : MonoBehaviour
             Destroy(this);
             return;
         }
-
-        
     }
 
     private void Start()
     {
         playerController = FindAnyObjectByType<PlayerController>();
         playerController.OnDie += PlayerController_OnPlayerDie;
+        LevelPlatform.OnEndPlatformReached += LevelPlatform_OnEndPlatformReached;
     }
 
     private void OnDestroy()
     {
-        playerController.OnDie -= PlayerController_OnPlayerDie;
+        if (playerController)
+        {
+            playerController.OnDie -= PlayerController_OnPlayerDie;
+        }
+
+        LevelPlatform.OnEndPlatformReached -= LevelPlatform_OnEndPlatformReached;
     }
 
     public void PlayerController_OnPlayerDie(object sender, EventArgs e)
     {
         SceneManagement.ReloadCurrentScene();
+    }
+
+    public void LevelPlatform_OnEndPlatformReached(object sender, EventArgs e)
+    {
+        SceneManagement.LoadScene(nextLevel);
     }
 }

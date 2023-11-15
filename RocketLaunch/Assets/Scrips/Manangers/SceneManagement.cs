@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 namespace GameSceneManagement 
 {
-    public enum GameScene { MainMenu,TestLevel}
+    public enum GameScene { MainMenu,TestLevel, TestLevel1 }
     public static class SceneManagement
     {
         private static GameScene currentGameScene = GameScene.TestLevel;
@@ -17,7 +17,7 @@ namespace GameSceneManagement
         public static void ReloadCurrentScene()
         {
             LoadScene(currentGameScene);
-        }
+        }        
     }
 }
 

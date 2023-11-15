@@ -42,11 +42,6 @@ public class PlayerController : MonoBehaviour
             }
             RemoveOneLife();
         }
-
-        if (collision.transform.TryGetComponent<LevelPlatform>(out LevelPlatform levelPlatform))
-        {
-            SetLastPlatformReached(levelPlatform);
-        }
     }
 
     private void OnCollisionStay(Collision collision)
