@@ -48,10 +48,17 @@ public class InputMananger : MonoBehaviour
         }
     }
 
-    public bool GetStartEngineInput()
+    public bool GetMoveUpwardsInputIsInProgress()
     {        
         return inputActions.Player.StartEnginge.IsInProgress();
     }
+
+    public bool GetMoveUpwardsInputWasReleasedThisFrame()
+    {
+        return inputActions.Player.StartEnginge.WasReleasedThisFrame();
+    }
+
+
 
 
 }

@@ -5,9 +5,17 @@ using System;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public enum RotationDirection { Rigth, Left}
     [Header("Player Movement")]
     [SerializeField] private float engineForce = 10f;
     [SerializeField] private float rotationForce = 5f;
+
+    public event EventHandler OnStartMovingUpwards;
+    public event EventHandler OnStopMovingUpwards;
+    public event EventHandler<RotationDirection> OnStartRotating;
+    public event EventHandler<RotationDirection> OnStopRotating;
+
+    
 
     private PlayerController playerController;
     private new Rigidbody rigidbody;
@@ -37,18 +45,24 @@ public class PlayerMovement : MonoBehaviour
 
     private void UpdatePlayerMovement()
     {
-        if (InputMananger.Instance.GetStartEngineInput())
+        if (InputMananger.Instance.GetMoveUpwardsInputIsInProgress())
         {
-            StartEngine();
-            
+            MoveUpwards();            
         }
+
+        if (InputMananger.Instance.GetMoveUpwardsInputWasReleasedThisFrame())
+        {
+            OnStopMovingUpwards?.Invoke(this,EventArgs.Empty);
+        }
+        
+
         if (InputMananger.Instance.TryGetRotationDirectionInput(out float rotationDirection))
         {
             Rotate(rotationDirection);
         }
     }
 
-    private void StartEngine()
+    private void MoveUpwards()
     {
         Vector3 forceDirection = transform.up * engineForce;
         rigidbody.AddForce(forceDirection,ForceMode.Acceleration);
