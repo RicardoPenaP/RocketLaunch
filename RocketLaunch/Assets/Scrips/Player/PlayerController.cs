@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
 
     public event EventHandler OnLifeRemove;
     public event EventHandler OnDie;
+    public event EventHandler OnPlayerReset;
 
     //For testing
     [SerializeField] private int currentLifesAmount;
@@ -18,6 +19,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         currentLifesAmount = maxLifesAmount;
+        OnLifeRemove += PlayerReset;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -26,6 +28,11 @@ public class PlayerController : MonoBehaviour
         {
             RemoveOneLife();
         }
+    }
+
+    private void OnDestroy()
+    {
+        OnLifeRemove -= PlayerReset;
     }
 
     private void RemoveOneLife()
@@ -43,6 +50,11 @@ public class PlayerController : MonoBehaviour
     private void Die()
     {
         OnDie?.Invoke(this, EventArgs.Empty);
+    }
+
+    private void PlayerReset(object sender,EventArgs e)
+    {
+        OnPlayerReset?.Invoke(sender, e);
     }
 
 }

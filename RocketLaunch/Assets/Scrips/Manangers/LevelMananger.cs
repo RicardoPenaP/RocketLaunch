@@ -17,15 +17,15 @@ public class LevelMananger : MonoBehaviour
 
     private void Start()
     {
-        playerController.OnLifeRemove += PlayerController_OnLifeRemove;
+        playerController.OnPlayerReset += PlayerController_OnPlayerReset;
     }
 
     private void OnDestroy()
     {
-        playerController.OnLifeRemove -= PlayerController_OnLifeRemove;
+        playerController.OnPlayerReset -= PlayerController_OnPlayerReset;
     }
 
-    private void PlayerController_OnLifeRemove(object sender, EventArgs e)
+    private void PlayerController_OnPlayerReset(object sender, EventArgs e)
     {
         playerController.transform.position = startPoint.position;
     }
