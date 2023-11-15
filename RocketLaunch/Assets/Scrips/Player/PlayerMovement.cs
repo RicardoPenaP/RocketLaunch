@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -8,16 +9,29 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float engineForce = 10f;
     [SerializeField] private float rotationForce = 5f;
 
-    private Rigidbody rigidbody;
+    private PlayerController playerController;
+    private new Rigidbody rigidbody;
+    
 
     private void Awake()
     {
         rigidbody = GetComponent<Rigidbody>();
+        playerController = GetComponent<PlayerController>();
+    }
+
+    private void Start()
+    {
+        playerController.OnLifeRemove += PlayerController_OnLifeRemove;
     }
 
     private void Update()
     {
         UpdatePlayerMovement();
+    }
+
+    private void OnDestroy()
+    {
+        playerController.OnLifeRemove -= PlayerController_OnLifeRemove;
     }
 
 
@@ -49,5 +63,11 @@ public class PlayerMovement : MonoBehaviour
         //{
            
         //}  
+    }
+
+    private void PlayerController_OnLifeRemove(object sender, EventArgs e)
+    {
+        rigidbody.Sleep();
+        transform.rotation = Quaternion.identity;
     }
 }

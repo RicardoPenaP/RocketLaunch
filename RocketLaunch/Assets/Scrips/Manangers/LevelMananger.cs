@@ -20,6 +20,11 @@ public class LevelMananger : MonoBehaviour
         playerController.OnLifeRemove += PlayerController_OnLifeRemove;
     }
 
+    private void OnDestroy()
+    {
+        playerController.OnLifeRemove -= PlayerController_OnLifeRemove;
+    }
+
     private void PlayerController_OnLifeRemove(object sender, EventArgs e)
     {
         playerController.transform.position = startPoint.position;
