@@ -1,15 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+
 using UnityEngine.SceneManagement;
 
 
-namespace SceneManagement 
+namespace GameSceneManagement 
 {
     public enum GameScene { MainMenu,TestLevel}
     public static class SceneManagement
     {
-        private static GameScene currentGameScene = GameScene.MainMenu;
+        private static GameScene currentGameScene = GameScene.TestLevel;
         public static void LoadScene(GameScene gameScene)
         {
             currentGameScene = gameScene;

@@ -18,11 +18,12 @@ public class PlayerController : MonoBehaviour
     //For testing
     [SerializeField] private int currentLifesAmount;
 
-
+    public bool IsAlive { get; private set; }
     private void Awake()
     {
         playerInmune = GetComponent<PlayerInmune>();
         currentLifesAmount = maxLifesAmount;
+        IsAlive = true;
         OnLifeRemove += PlayerReset;
     }
 
@@ -45,6 +46,19 @@ public class PlayerController : MonoBehaviour
         if (collision.transform.TryGetComponent<LevelPlatform>(out LevelPlatform levelPlatform))
         {
             SetLastPlatformReached(levelPlatform);
+        }
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        if (playerInmune.IsInmune)
+        {
+            return;
+        }
+
+        if (collision.transform.TryGetComponent<ObstacleController>(out ObstacleController obstacle))
+        {           
+            RemoveOneLife();
         }
     }
 
@@ -71,14 +85,16 @@ public class PlayerController : MonoBehaviour
 
     private void RemoveOneLife()
     {
-        currentLifesAmount--;        
-        OnLifeRemove?.Invoke(this, EventArgs.Empty);
+        currentLifesAmount--;  
 
         if (currentLifesAmount <= 0)
         {
             currentLifesAmount = 0;
             Die();
+            IsAlive = false;
         }
+
+        OnLifeRemove?.Invoke(this, EventArgs.Empty);
     }
 
     private void Die()
@@ -88,6 +104,10 @@ public class PlayerController : MonoBehaviour
 
     private void PlayerReset(object sender,EventArgs e)
     {
+        if (!IsAlive)
+        {
+            return;
+        }
         transform.position = lastPlatformReached.GetSpawnPoint().position;
         OnPlayerReset?.Invoke(sender, e);
     }
