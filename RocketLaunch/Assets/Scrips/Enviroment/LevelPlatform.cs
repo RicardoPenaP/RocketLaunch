@@ -1,18 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class LevelPlatform : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public enum PlatformType { StartPlatform, SavePointPlatform, EndPlatform}
+   
+    [Header("Level Platform")]
+    [SerializeField] private PlatformType platformType;
+
+    private Transform spawnPoint;
+
+    private void Awake()
     {
-        
+        spawnPoint = transform.GetChild(0);
     }
 
-    // Update is called once per frame
-    void Update()
+    public PlatformType GetPlatformType()
     {
-        
+        return platformType;
     }
+
+    public Transform GetSpawnPoint()
+    {
+        return spawnPoint;
+    }
+
 }

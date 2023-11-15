@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour
     public event EventHandler OnPlayerReset;
 
     private PlayerInmune playerInmune;
+    private LevelPlatform lastPlatformReached;
+
     //For testing
     [SerializeField] private int currentLifesAmount;
 
@@ -22,6 +24,11 @@ public class PlayerController : MonoBehaviour
         playerInmune = GetComponent<PlayerInmune>();
         currentLifesAmount = maxLifesAmount;
         OnLifeRemove += PlayerReset;
+    }
+
+    private void Start()
+    {
+        SetStartPlatform();
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -34,11 +41,32 @@ public class PlayerController : MonoBehaviour
             }
             RemoveOneLife();
         }
+
+        if (collision.transform.TryGetComponent<LevelPlatform>(out LevelPlatform levelPlatform))
+        {
+            SetLastPlatformReached(levelPlatform);
+        }
     }
 
     private void OnDestroy()
     {
         OnLifeRemove -= PlayerReset;
+    }
+
+    private void SetStartPlatform()
+    {
+        LevelPlatform[] levelPlatforms = FindObjectsOfType<LevelPlatform>();
+        foreach (LevelPlatform levelPlatform in levelPlatforms)
+        {
+            if (levelPlatform.GetPlatformType() == LevelPlatform.PlatformType.StartPlatform)
+            {
+                lastPlatformReached = levelPlatform;
+                return;
+            }
+        }
+
+        Debug.LogError("The start platform doesnt exist");
+
     }
 
     private void RemoveOneLife()
@@ -60,7 +88,16 @@ public class PlayerController : MonoBehaviour
 
     private void PlayerReset(object sender,EventArgs e)
     {
+        transform.position = lastPlatformReached.GetSpawnPoint().position;
         OnPlayerReset?.Invoke(sender, e);
+    }
+
+    public void SetLastPlatformReached(LevelPlatform levelPlatform)
+    {
+        if (lastPlatformReached != levelPlatform)
+        {
+            lastPlatformReached = levelPlatform;
+        }
     }
 
 }
