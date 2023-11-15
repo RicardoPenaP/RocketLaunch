@@ -12,12 +12,14 @@ public class PlayerController : MonoBehaviour
     public event EventHandler OnDie;
     public event EventHandler OnPlayerReset;
 
+    private PlayerInmune playerInmune;
     //For testing
     [SerializeField] private int currentLifesAmount;
 
 
     private void Awake()
     {
+        playerInmune = GetComponent<PlayerInmune>();
         currentLifesAmount = maxLifesAmount;
         OnLifeRemove += PlayerReset;
     }
@@ -26,6 +28,10 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.transform.TryGetComponent<ObstacleController>(out ObstacleController obstacle))
         {
+            if (playerInmune.IsInmune)
+            {
+                return;
+            }
             RemoveOneLife();
         }
     }

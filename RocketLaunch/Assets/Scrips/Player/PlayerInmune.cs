@@ -24,6 +24,7 @@ public class PlayerInmune : MonoBehaviour
 
     private void Awake()
     {
+        IsInmune = false;
         playerController = GetComponent<PlayerController>();
         bodyMaterial = bodyMeshRenderer.sharedMaterial;
         glassMaterial = glassMeshRenderer.sharedMaterial;
@@ -46,6 +47,7 @@ public class PlayerInmune : MonoBehaviour
 
     private IEnumerator InmuneRoutine()
     {
+        IsInmune = true;
         float timer = 0f;
         float blinkDirectionTimer = 0f;
         float blinkDirection = -1f;
@@ -80,5 +82,7 @@ public class PlayerInmune : MonoBehaviour
 
         bodyMaterial.color = bodyMaterialColor;
         glassMaterial.color = glassMaterialColor;
+
+        IsInmune = false;
     }
 }
