@@ -27,6 +27,8 @@ public class LevelMananger : MonoBehaviour
 
     private void Start()
     {
+        Application.targetFrameRate = 60;
+
         playerController = FindAnyObjectByType<PlayerController>();
         playerController.OnDie += PlayerController_OnPlayerDie;
         LevelPlatform.OnEndPlatformReached += LevelPlatform_OnEndPlatformReached;

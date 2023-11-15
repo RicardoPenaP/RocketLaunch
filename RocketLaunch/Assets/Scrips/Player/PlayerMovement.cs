@@ -55,17 +55,15 @@ public class PlayerMovement : MonoBehaviour
             OnStopMovingUpwards?.Invoke(this,EventArgs.Empty);
         }
 
-        float rotationDirectionRaw;
-
-        if (InputMananger.Instance.TryGetRotationDirectionInput(out rotationDirectionRaw))
+        if (InputMananger.Instance.TryGetRotationDirectionInput(out float rotationDirectionRaw))
         {
             Rotate(rotationDirectionRaw);
-            ManageRotationVFX(rotationDirectionRaw, true);
+            ManageRotationVFX(true, rotationDirectionRaw);
         }
 
-        if (InputMananger.Instance.GetRotationDirectionInputWasReleasedThisFrame(out rotationDirectionRaw))
+        if (InputMananger.Instance.GetRotationDirectionInputWasReleasedThisFrame())
         {
-            ManageRotationVFX(rotationDirectionRaw, false);
+            ManageRotationVFX(false);
         }
     }
 
@@ -86,16 +84,17 @@ public class PlayerMovement : MonoBehaviour
         //}  
     }
 
-    private void ManageRotationVFX(float rotationDirectionRaw, bool startPlaying)
+    private void ManageRotationVFX(bool startPlaying, float rotationDirectionRaw = 0)
     {
-        RotationDirection rotationDirection = rotationDirectionRaw > Mathf.Epsilon ? RotationDirection.Rigth : RotationDirection.Left;
+        RotationDirection rotationDirection = rotationDirectionRaw > Mathf.Epsilon ? RotationDirection.Rigth : RotationDirection.Left;       
         if (startPlaying)
         {
             OnStartRotating?.Invoke(this, rotationDirection);            
         }
         else
         {
-            OnStopRotating?.Invoke(this, rotationDirection);
+            OnStopRotating?.Invoke(this, RotationDirection.Rigth);
+            OnStopRotating?.Invoke(this, RotationDirection.Left);
         }
         
     }

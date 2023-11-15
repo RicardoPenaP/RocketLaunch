@@ -48,9 +48,8 @@ public class InputMananger : MonoBehaviour
         }
     }
 
-    public bool GetRotationDirectionInputWasReleasedThisFrame(out float rotationDirection)
-    {
-        rotationDirection = inputActions.Player.Rotation.ReadValue<float>();
+    public bool GetRotationDirectionInputWasReleasedThisFrame()
+    {              
         return inputActions.Player.Rotation.WasReleasedThisFrame();
     }
 
