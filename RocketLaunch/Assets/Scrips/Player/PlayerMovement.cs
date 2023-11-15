@@ -47,7 +47,8 @@ public class PlayerMovement : MonoBehaviour
     {
         if (InputMananger.Instance.GetMoveUpwardsInputIsInProgress())
         {
-            MoveUpwards();            
+            MoveUpwards();
+            OnStartMovingUpwards?.Invoke(this, EventArgs.Empty);
         }
 
         if (InputMananger.Instance.GetMoveUpwardsInputWasReleasedThisFrame())
@@ -69,7 +70,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void MoveUpwards()
     {
-        Vector3 forceDirection = transform.up * engineForce;
+        Vector3 forceDirection = transform.up * engineForce * Time.deltaTime;
         rigidbody.AddForce(forceDirection,ForceMode.Acceleration);
     }
 

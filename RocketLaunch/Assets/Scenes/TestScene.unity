@@ -241,6 +241,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4290d0ee64e74d4cab0c3eee2c9b8a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nextLevel: 2
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -1357,6 +1358,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1019390625519375447, guid: d9861a88f1a55904bb6f971de7fa0b02,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2159965302525612095, guid: d9861a88f1a55904bb6f971de7fa0b02,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2492463987162060965, guid: d9861a88f1a55904bb6f971de7fa0b02,
         type: 3}
       propertyPath: inmuneTime
@@ -1369,8 +1380,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4090625583501126732, guid: d9861a88f1a55904bb6f971de7fa0b02,
         type: 3}
+      propertyPath: m_Mass
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4090625583501126732, guid: d9861a88f1a55904bb6f971de7fa0b02,
+        type: 3}
       propertyPath: m_Constraints
-      value: 48
+      value: 112
       objectReference: {fileID: 0}
     - target: {fileID: 4090625583501126734, guid: d9861a88f1a55904bb6f971de7fa0b02,
         type: 3}
@@ -1425,6 +1441,16 @@ PrefabInstance:
     - target: {fileID: 4090625583501126734, guid: d9861a88f1a55904bb6f971de7fa0b02,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4861768520265740112, guid: d9861a88f1a55904bb6f971de7fa0b02,
+        type: 3}
+      propertyPath: engineSide
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5810872863768111928, guid: d9861a88f1a55904bb6f971de7fa0b02,
+        type: 3}
+      propertyPath: engineSide
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
