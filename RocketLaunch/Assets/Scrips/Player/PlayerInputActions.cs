@@ -37,7 +37,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""StartEnginge"",
+                    ""name"": ""MoveUpwards"",
                     ""type"": ""Button"",
                     ""id"": ""ccbb0d97-a16a-41c7-a8ff-054085b8beb7"",
                     ""expectedControlType"": ""Button"",
@@ -87,7 +87,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""StartEnginge"",
+                    ""action"": ""MoveUpwards"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -676,7 +676,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Rotation = m_Player.FindAction("Rotation", throwIfNotFound: true);
-        m_Player_StartEnginge = m_Player.FindAction("StartEnginge", throwIfNotFound: true);
+        m_Player_MoveUpwards = m_Player.FindAction("MoveUpwards", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -751,13 +751,13 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Player;
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_Rotation;
-    private readonly InputAction m_Player_StartEnginge;
+    private readonly InputAction m_Player_MoveUpwards;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
         public PlayerActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @Rotation => m_Wrapper.m_Player_Rotation;
-        public InputAction @StartEnginge => m_Wrapper.m_Player_StartEnginge;
+        public InputAction @MoveUpwards => m_Wrapper.m_Player_MoveUpwards;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -770,9 +770,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Rotation.started += instance.OnRotation;
             @Rotation.performed += instance.OnRotation;
             @Rotation.canceled += instance.OnRotation;
-            @StartEnginge.started += instance.OnStartEnginge;
-            @StartEnginge.performed += instance.OnStartEnginge;
-            @StartEnginge.canceled += instance.OnStartEnginge;
+            @MoveUpwards.started += instance.OnMoveUpwards;
+            @MoveUpwards.performed += instance.OnMoveUpwards;
+            @MoveUpwards.canceled += instance.OnMoveUpwards;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -780,9 +780,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Rotation.started -= instance.OnRotation;
             @Rotation.performed -= instance.OnRotation;
             @Rotation.canceled -= instance.OnRotation;
-            @StartEnginge.started -= instance.OnStartEnginge;
-            @StartEnginge.performed -= instance.OnStartEnginge;
-            @StartEnginge.canceled -= instance.OnStartEnginge;
+            @MoveUpwards.started -= instance.OnMoveUpwards;
+            @MoveUpwards.performed -= instance.OnMoveUpwards;
+            @MoveUpwards.canceled -= instance.OnMoveUpwards;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -966,7 +966,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     public interface IPlayerActions
     {
         void OnRotation(InputAction.CallbackContext context);
-        void OnStartEnginge(InputAction.CallbackContext context);
+        void OnMoveUpwards(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

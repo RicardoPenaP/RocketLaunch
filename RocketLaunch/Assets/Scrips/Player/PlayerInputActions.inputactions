@@ -15,7 +15,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "StartEnginge",
+                    "name": "MoveUpwards",
                     "type": "Button",
                     "id": "ccbb0d97-a16a-41c7-a8ff-054085b8beb7",
                     "expectedControlType": "Button",
@@ -65,7 +65,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "StartEnginge",
+                    "action": "MoveUpwards",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

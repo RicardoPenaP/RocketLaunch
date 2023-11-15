@@ -50,12 +50,12 @@ public class InputMananger : MonoBehaviour
 
     public bool GetMoveUpwardsInputIsInProgress()
     {        
-        return inputActions.Player.StartEnginge.IsInProgress();
+        return inputActions.Player.MoveUpwards.IsInProgress();
     }
 
     public bool GetMoveUpwardsInputWasReleasedThisFrame()
     {
-        return inputActions.Player.StartEnginge.WasReleasedThisFrame();
+        return inputActions.Player.MoveUpwards.WasReleasedThisFrame();
     }
 
 
