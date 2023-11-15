@@ -4,11 +4,35 @@ using UnityEngine;
 
 public class SideEngineVFXController : MonoBehaviour
 {
+    [Header("Side Engine VFX Controller")]
+    [SerializeField] PlayerMovement.RotationDirection engineSide;
+
     private ParticleSystem[] sideEngineParticleSystems;
+    private PlayerMovement playerMovement;
+
 
     private void Awake()
     {
-        sideEngineParticleSystems = GetComponentsInChildren<ParticleSystem>();       
+        sideEngineParticleSystems = GetComponentsInChildren<ParticleSystem>();
+        playerMovement = GetComponentInParent<PlayerMovement>();
+    }
+
+    private void Start()
+    {
+        if (playerMovement)
+        {
+            playerMovement.OnStartRotating += PlayerMovement_OnStartRotating;
+            playerMovement.OnStopRotating += PlayerMovement_OnStopRotating;
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (playerMovement)
+        {
+            playerMovement.OnStartRotating -= PlayerMovement_OnStartRotating;
+            playerMovement.OnStopRotating -= PlayerMovement_OnStopRotating;
+        }
     }
 
     private void TurnOnEngineVFX()
@@ -25,6 +49,24 @@ public class SideEngineVFXController : MonoBehaviour
         {
             particleSystem.Stop();
         }
+    }
+
+    private void PlayerMovement_OnStartRotating(object sender, PlayerMovement.RotationDirection rotationDirection)
+    {
+        if (engineSide != rotationDirection)
+        {
+            return;
+        }
+        TurnOnEngineVFX();
+    }
+
+    private void PlayerMovement_OnStopRotating(object sender, PlayerMovement.RotationDirection rotationDirection)
+    {
+        if (engineSide != rotationDirection)
+        {
+            return;
+        }
+        TurnOffEngineVFX();
     }
 
 }
