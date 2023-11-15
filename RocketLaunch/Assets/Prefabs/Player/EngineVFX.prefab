@@ -24057,7 +24057,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8624681169349940271}
-  - component: {fileID: 1593240305570328601}
+  - component: {fileID: 3057621058269781731}
   m_Layer: 0
   m_Name: EngineVFX
   m_TagString: Untagged
@@ -24073,7 +24073,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8425986883435389324}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.036, y: -0.177, z: -0.179}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -24085,7 +24085,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1593240305570328601
+--- !u!114 &3057621058269781731
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -24094,6 +24094,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 8425986883435389324}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae5721e1d0f9bc14f99c06df0ce56bfc, type: 3}
+  m_Script: {fileID: 11500000, guid: a0bdf3906b9f273449c11d9cdc51f772, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

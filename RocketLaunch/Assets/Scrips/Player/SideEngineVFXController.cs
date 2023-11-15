@@ -4,15 +4,27 @@ using UnityEngine;
 
 public class SideEngineVFXController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private ParticleSystem[] sideEngineParticleSystems;
+
+    private void Awake()
     {
-        
+        sideEngineParticleSystems = GetComponentsInChildren<ParticleSystem>();       
     }
 
-    // Update is called once per frame
-    void Update()
+    private void TurnOnEngineVFX()
     {
-        
+        foreach (ParticleSystem particleSystem in sideEngineParticleSystems)
+        {
+            particleSystem.Play();
+        }
     }
+
+    private void TurnOffEngineVFX()
+    {
+        foreach (ParticleSystem particleSystem in sideEngineParticleSystems)
+        {
+            particleSystem.Stop();
+        }
+    }
+
 }
