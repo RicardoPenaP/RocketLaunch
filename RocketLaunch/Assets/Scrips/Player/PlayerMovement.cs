@@ -53,24 +53,19 @@ public class PlayerMovement : MonoBehaviour
         if (InputMananger.Instance.GetMoveUpwardsInputWasReleasedThisFrame())
         {
             OnStopMovingUpwards?.Invoke(this,EventArgs.Empty);
-        }        
-
-        if (InputMananger.Instance.TryGetRotationDirectionInput(out float rotationDirection))
-        {
-            Rotate(rotationDirection);
         }
 
-        if (InputMananger.Instance.GetRotationDirectionInputWasReleasedThisFrame(out float rotationDirectionInput))
+        float rotationDirectionRaw;
+
+        if (InputMananger.Instance.TryGetRotationDirectionInput(out rotationDirectionRaw))
         {
-            if (rotationDirection > Mathf.Epsilon)
-            {
-                OnStopRotating?.Invoke(this, RotationDirection.Rigth);
-            }
-            else
-            {
-                OnStopRotating?.Invoke(this, RotationDirection.Left);
-            }
-           
+            Rotate(rotationDirectionRaw);
+            ManageRotationVFX(rotationDirectionRaw, true);
+        }
+
+        if (InputMananger.Instance.GetRotationDirectionInputWasReleasedThisFrame(out rotationDirectionRaw))
+        {
+            ManageRotationVFX(rotationDirectionRaw, false);
         }
     }
 
@@ -89,6 +84,20 @@ public class PlayerMovement : MonoBehaviour
         //{
            
         //}  
+    }
+
+    private void ManageRotationVFX(float rotationDirectionRaw, bool startPlaying)
+    {
+        RotationDirection rotationDirection = rotationDirectionRaw > Mathf.Epsilon ? RotationDirection.Rigth : RotationDirection.Left;
+        if (startPlaying)
+        {
+            OnStartRotating?.Invoke(this, rotationDirection);            
+        }
+        else
+        {
+            OnStopRotating?.Invoke(this, rotationDirection);
+        }
+        
     }
 
     private void PlayerController_OnLifeRemove(object sender, EventArgs e)
