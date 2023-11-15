@@ -78,6 +78,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7268a10d01feaa4aa6d996619964b49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bodyMeshRenderer: {fileID: 8039156300145083543}
+  glassMeshRenderer: {fileID: 8039156300145083545}
+  inmuneTime: 1.5
+  blinkSpeed: 5
+  amountOfBlinks: 8
 --- !u!136 &4090625583501126733
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -113,13 +118,13 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4090625583501126721}
   serializedVersion: 2
-  m_Mass: 20
+  m_Mass: 15
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 48
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!1001 &4090625584858138029
 PrefabInstance:
@@ -193,6 +198,18 @@ PrefabInstance:
 --- !u!4 &2471518858188212390 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1911860528064810251, guid: b4ebfe3d8ab4def429989cd25349eb90,
+    type: 3}
+  m_PrefabInstance: {fileID: 4090625584858138029}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &8039156300145083543 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 6292654871760191802, guid: b4ebfe3d8ab4def429989cd25349eb90,
+    type: 3}
+  m_PrefabInstance: {fileID: 4090625584858138029}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &8039156300145083545 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 6292654871760191796, guid: b4ebfe3d8ab4def429989cd25349eb90,
     type: 3}
   m_PrefabInstance: {fileID: 4090625584858138029}
   m_PrefabAsset: {fileID: 0}
