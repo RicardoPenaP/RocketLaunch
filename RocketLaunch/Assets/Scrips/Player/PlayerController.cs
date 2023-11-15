@@ -6,12 +6,13 @@ using System;
 public class PlayerController : MonoBehaviour
 {
     [Header("Player Controller")]
-    [SerializeField] private int maxLifesAmount = 3;
+    [SerializeField] private int maxLifesAmount = 3;    
 
     public event EventHandler OnLifeRemove;
     public event EventHandler OnDie;
 
-    private int currentLifesAmount;
+    //For testing
+    [SerializeField] private int currentLifesAmount;
 
 
     private void Awake()

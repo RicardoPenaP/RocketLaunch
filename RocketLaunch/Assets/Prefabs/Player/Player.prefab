@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4090625583501126734}
   - component: {fileID: 4090625583501126735}
+  - component: {fileID: 1116074900621164636}
   - component: {fileID: 4090625583501126733}
   - component: {fileID: 4090625583501126730}
   - component: {fileID: 4090625583501126732}
@@ -50,6 +51,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   engineForce: 3
   rotationForce: 100
+--- !u!114 &1116074900621164636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4090625583501126721}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72b0e8e6d53c9e6408733da2eab75a4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxLifesAmount: 3
 --- !u!136 &4090625583501126733
 CapsuleCollider:
   m_ObjectHideFlags: 0

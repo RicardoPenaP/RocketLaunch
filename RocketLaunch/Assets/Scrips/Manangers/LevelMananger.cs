@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class LevelMananger : MonoBehaviour
 {
@@ -8,4 +9,19 @@ public class LevelMananger : MonoBehaviour
     [SerializeField] private Transform startPoint;
 
     private PlayerController playerController;
+
+    private void Awake()
+    {
+        playerController = FindAnyObjectByType<PlayerController>();
+    }
+
+    private void Start()
+    {
+        playerController.OnLifeRemove += PlayerController_OnLifeRemove;
+    }
+
+    private void PlayerController_OnLifeRemove(object sender, EventArgs e)
+    {
+        playerController.transform.position = startPoint.position;
+    }
 }
