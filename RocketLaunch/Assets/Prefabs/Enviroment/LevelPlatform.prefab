@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6586811598962368536}
   - component: {fileID: 7159748964980942878}
   - component: {fileID: 6586811598962368543}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LevelPlatform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,7 +72,7 @@ GameObject:
   - component: {fileID: 537129507584452687}
   - component: {fileID: 509097231705065528}
   - component: {fileID: 475375988516961981}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -153,7 +153,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6405379487661392302}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
