@@ -17,24 +17,6 @@ public class LevelPlatform : MonoBehaviour
         spawnPoint = transform.GetChild(1);
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.transform.TryGetComponent<PlayerController>(out PlayerController playerController))
-        {
-            if (playerController.transform.position.y > transform.position.y)
-            {
-                if (platformType == PlatformType.Landing)
-                {
-                    LandingPlatformReached();
-                }
-                else
-                {
-                    playerController.SetLastPlatformReached(this);
-                }
-            }                      
-        }
-    }
-
     public PlatformType GetPlatformType()
     {
         return platformType;
