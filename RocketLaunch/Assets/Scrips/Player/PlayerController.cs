@@ -67,7 +67,7 @@ public class PlayerController : MonoBehaviour
         LevelPlatform[] levelPlatforms = FindObjectsOfType<LevelPlatform>();
         foreach (LevelPlatform levelPlatform in levelPlatforms)
         {
-            if (levelPlatform.GetPlatformType() == LevelPlatform.PlatformType.StartPlatform)
+            if (levelPlatform.GetPlatformType() == LevelPlatform.PlatformType.Takeoff)
             {
                 lastPlatformReached = levelPlatform;
                 return;

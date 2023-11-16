@@ -31,7 +31,7 @@ public class LevelMananger : MonoBehaviour
 
         playerController = FindAnyObjectByType<PlayerController>();
         playerController.OnDie += PlayerController_OnPlayerDie;
-        LevelPlatform.OnEndPlatformReached += LevelPlatform_OnEndPlatformReached;
+        LevelPlatform.OnLandingPlatformReached += LevelPlatform_OnEndPlatformReached;
     }
 
     private void OnDestroy()
@@ -41,7 +41,7 @@ public class LevelMananger : MonoBehaviour
             playerController.OnDie -= PlayerController_OnPlayerDie;
         }
 
-        LevelPlatform.OnEndPlatformReached -= LevelPlatform_OnEndPlatformReached;
+        LevelPlatform.OnLandingPlatformReached -= LevelPlatform_OnEndPlatformReached;
     }
 
     public void PlayerController_OnPlayerDie(object sender, EventArgs e)
