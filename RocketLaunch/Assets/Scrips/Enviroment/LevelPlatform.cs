@@ -6,7 +6,7 @@ using System;
 public class LevelPlatform : MonoBehaviour
 {
     public enum PlatformType { Takeoff, SavePoint, Landing}
-    public static event EventHandler OnLandingPlatformReached;
+   
     [Header("Level Platform")]
     [SerializeField] private PlatformType platformType;
 
@@ -26,10 +26,4 @@ public class LevelPlatform : MonoBehaviour
     {
         return spawnPoint;
     }
-
-    private void LandingPlatformReached()
-    {
-        OnLandingPlatformReached?.Invoke(this, EventArgs.Empty);
-    }
-
 }

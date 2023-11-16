@@ -13,6 +13,7 @@ public class PlayerLandingController : MonoBehaviour
     [SerializeField] private float rotationSensibility = 1f;
     [SerializeField] private float rotationForce = 100f;
     [SerializeField] private LayerMask platformsLayerMask;
+    [SerializeField] private bool showGizmos = true;
 
     public event EventHandler OnPreLandingStart;
     public event EventHandler OnLandingStart;
@@ -29,6 +30,10 @@ public class PlayerLandingController : MonoBehaviour
 
     private void OnDrawGizmos()
     {
+        if (!showGizmos)
+        {
+            return;
+        }
         //For debugging
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, landingMinDistance);

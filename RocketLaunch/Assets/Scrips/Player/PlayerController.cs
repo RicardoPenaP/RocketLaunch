@@ -30,11 +30,13 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         SetStartPlatform();
+        playerCollisionHandler.OnCollisionEnterWithObject += PlayerCollisionHandler_OnCollisionEnterWithObject;
     }
 
     private void OnDestroy()
     {
         OnLifeRemove -= PlayerReset;
+        playerCollisionHandler.OnCollisionEnterWithObject -= PlayerCollisionHandler_OnCollisionEnterWithObject;
     }
 
     private void SetStartPlatform()
@@ -87,7 +89,7 @@ public class PlayerController : MonoBehaviour
         switch (e)
         {
             case PlayerCollisionHandler.CollisionInfo<ObstacleController> collisionInfo:
-
+                RemoveOneLife();
                 break;
 
             case PlayerCollisionHandler.CollisionInfo<LevelPlatform> collisionInfo:
