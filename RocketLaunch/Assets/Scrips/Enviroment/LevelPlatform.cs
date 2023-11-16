@@ -25,7 +25,7 @@ public class LevelPlatform : MonoBehaviour
             {
                 if (platformType == PlatformType.Landing)
                 {
-                    LandPlatformReached();
+                    LandingPlatformReached();
                 }
                 else
                 {
@@ -45,7 +45,7 @@ public class LevelPlatform : MonoBehaviour
         return spawnPoint;
     }
 
-    private void LandPlatformReached()
+    private void LandingPlatformReached()
     {
         OnLandingPlatformReached?.Invoke(this, EventArgs.Empty);
     }

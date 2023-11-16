@@ -15,13 +15,18 @@ public class PlayerCollisionHandler : MonoBehaviour
         }
     }
 
-    public event EventHandler OnCollisionEnterWithLevelPlatform;
+    public event EventHandler OnCollisionEnterWithObject;
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.transform.TryGetComponent<LevelPlatform>(out LevelPlatform levelPlatform))
         {
-            OnCollisionEnterWithLevelPlatform?.Invoke(this, new CollisionInfo<LevelPlatform>(levelPlatform));
+            OnCollisionEnterWithObject?.Invoke(this, new CollisionInfo<LevelPlatform>(levelPlatform));
+        }
+
+        if (collision.transform.TryGetComponent<ObstacleController>(out ObstacleController obstacleController))
+        {
+            OnCollisionEnterWithObject?.Invoke(this, new CollisionInfo<ObstacleController>(obstacleController));
         }
         
     }

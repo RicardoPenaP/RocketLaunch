@@ -14,14 +14,14 @@ public class PlayerController : MonoBehaviour
 
     private PlayerInmune playerInmune;
     private LevelPlatform lastPlatformReached;
-
-    //For testing
-    [SerializeField] private int currentLifesAmount;
-
+    private PlayerCollisionHandler playerCollisionHandler;
+    private int currentLifesAmount;
     public bool IsAlive { get; private set; }
+
     private void Awake()
     {
         playerInmune = GetComponent<PlayerInmune>();
+        playerCollisionHandler = GetComponent<PlayerCollisionHandler>();
         currentLifesAmount = maxLifesAmount;
         IsAlive = true;
         OnLifeRemove += PlayerReset;
@@ -30,31 +30,6 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         SetStartPlatform();
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.transform.TryGetComponent<ObstacleController>(out ObstacleController obstacle))
-        {
-            if (playerInmune.IsInmune)
-            {
-                return;
-            }
-            RemoveOneLife();
-        }
-    }
-
-    private void OnCollisionStay(Collision collision)
-    {
-        if (playerInmune.IsInmune)
-        {
-            return;
-        }
-
-        if (collision.transform.TryGetComponent<ObstacleController>(out ObstacleController obstacle))
-        {           
-            RemoveOneLife();
-        }
     }
 
     private void OnDestroy()
@@ -107,6 +82,25 @@ public class PlayerController : MonoBehaviour
         OnPlayerReset?.Invoke(sender, e);
     }
 
+    private void PlayerCollisionHandler_OnCollisionEnterWithObject(object sender, EventArgs e)
+    {
+        switch (e)
+        {
+            case PlayerCollisionHandler.CollisionInfo<ObstacleController> collisionInfo:
+
+                break;
+
+            case PlayerCollisionHandler.CollisionInfo<LevelPlatform> collisionInfo:
+                if (collisionInfo.collisionObject.GetPlatformType() == LevelPlatform.PlatformType.SavePoint)
+                {
+                    SetLastPlatformReached(collisionInfo.collisionObject);
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
     public void SetLastPlatformReached(LevelPlatform levelPlatform)
     {
         if (lastPlatformReached != levelPlatform)
@@ -115,4 +109,5 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    
 }
