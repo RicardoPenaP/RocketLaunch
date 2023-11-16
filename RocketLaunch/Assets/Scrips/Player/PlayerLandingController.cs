@@ -102,6 +102,7 @@ public class PlayerLandingController : MonoBehaviour
     {
         isLanding = true;
         OnLandingStart?.Invoke(this, EventArgs.Empty);
+        StartCoroutine(LandingRoutine());
     }
 
     private void LandingUpdate()
