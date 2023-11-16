@@ -22,7 +22,7 @@ public class CameraMananger : MonoBehaviour
     {
         playerMovement = FindObjectOfType<PlayerMovement>();
         playerLandingController = playerMovement.GetComponent<PlayerLandingController>();
-        currentCamera = GameCamera.Moving;
+        SetCurrentGameCamera(GameCamera.Moving);
     }
 
     private void Start()
