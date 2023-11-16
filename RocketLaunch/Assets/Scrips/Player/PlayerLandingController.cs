@@ -27,6 +27,12 @@ public class PlayerLandingController : MonoBehaviour
     private bool isPreLanding = false;
     private bool isLanding = false;
 
+    private void OnDrawGizmos()
+    {
+        //For debugging
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position, landingMinDistance);
+    }
 
     private void Awake()
     {
