@@ -89,6 +89,10 @@ public class PlayerController : MonoBehaviour
         switch (e)
         {
             case PlayerCollisionHandler.CollisionInfo<ObstacleController> collisionInfo:
+                if (playerInmune.IsInmune)
+                {
+                    break;
+                }
                 RemoveOneLife();
                 break;
 

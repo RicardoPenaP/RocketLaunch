@@ -11,6 +11,7 @@ public class LevelMananger : MonoBehaviour
     public static LevelMananger Instance { get; private set; }
 
     private PlayerController playerController;
+    private PlayerLandingController playerLandingController;
 
     private void Awake()
     {
@@ -30,7 +31,9 @@ public class LevelMananger : MonoBehaviour
         Application.targetFrameRate = 60;
 
         playerController = FindAnyObjectByType<PlayerController>();
+        playerLandingController = playerController.GetComponent<PlayerLandingController>();
         playerController.OnDie += PlayerController_OnPlayerDie;
+        playerLandingController.OnLandingFinished += PlayerLandingController_OnLandingFinished;
     }
 
     private void OnDestroy()
@@ -39,11 +42,22 @@ public class LevelMananger : MonoBehaviour
         {
             playerController.OnDie -= PlayerController_OnPlayerDie;
         }
+
+        if (playerLandingController)
+        {
+            playerLandingController.OnLandingFinished += PlayerLandingController_OnLandingFinished;
+        }
     }
 
-    public void PlayerController_OnPlayerDie(object sender, EventArgs e)
+    private void PlayerController_OnPlayerDie(object sender, EventArgs e)
     {
         SceneManagement.ReloadCurrentScene();
+    }
+
+    private void PlayerLandingController_OnLandingFinished(object sender, EventArgs e)
+    {
+        //level finished behaviour
+        Debug.Log("Level finished");
     }
 
 }

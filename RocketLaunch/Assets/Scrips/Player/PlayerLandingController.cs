@@ -19,6 +19,8 @@ public class PlayerLandingController : MonoBehaviour
     public event EventHandler OnLandingStart;
     public event EventHandler OnLandingFinished;
 
+    private PlayerCollisionHandler playerCollisionHandler;
+
     private LandingPlatform landingPlatform;
     private new Rigidbody rigidbody;
 
@@ -41,7 +43,16 @@ public class PlayerLandingController : MonoBehaviour
 
     private void Awake()
     {
+        playerCollisionHandler = GetComponent<PlayerCollisionHandler>();
         rigidbody = GetComponent<Rigidbody>();
+    }
+
+    private void Start()
+    {
+        if (playerCollisionHandler)
+        {
+            playerCollisionHandler.OnCollisionEnterWithObject += PlayerCollisionHandler_OnCollisionWithObject;
+        }
     }
 
     private void Update()
@@ -63,14 +74,11 @@ public class PlayerLandingController : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnDestroy()
     {
-        if (isLanding && collision.transform.TryGetComponent<LandingPlatform>(out LandingPlatform landingPlatform))
+        if (playerCollisionHandler)
         {
-            if (this.landingPlatform == landingPlatform)
-            {
-                LandingFinished();
-            }
+            playerCollisionHandler.OnCollisionEnterWithObject -= PlayerCollisionHandler_OnCollisionWithObject;
         }
     }
 
@@ -123,6 +131,17 @@ public class PlayerLandingController : MonoBehaviour
     {
         isLanding = false;
         OnLandingFinished?.Invoke(this, EventArgs.Empty);
+    }
+
+    private void PlayerCollisionHandler_OnCollisionWithObject(object sender, EventArgs e)
+    {
+        if (e is PlayerCollisionHandler.CollisionInfo<LevelPlatform> collisionInfo)
+        {
+            if (collisionInfo.collisionObject.GetPlatformType() == LevelPlatform.PlatformType.Landing && isLanding)
+            {
+                LandingFinished();
+            }            
+        }
     }
 
     private IEnumerator PreLandingRoutine()
