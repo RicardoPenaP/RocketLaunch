@@ -6,15 +6,13 @@ using System;
 public class PlayerInmune : MonoBehaviour
 {
     [Header("Player Inmune")]
-    [Header("Rocket Body References")]
-    [SerializeField] private MeshRenderer bodyMeshRenderer;
-    [SerializeField] private MeshRenderer glassMeshRenderer;
-
     [Header("Inmune Settings")]
     [SerializeField] private float inmuneTime = 1f;
-    [SerializeField] private float blinkSpeed = 10f;    
+    [SerializeField] private float blinkSpeed = 10f;
     [SerializeField] private int amountOfBlinks = 8;
-    
+
+    private MeshRenderer[] meshRenderers;
+    private List<Material> materials;
 
     private PlayerController playerController;
     private Material bodyMaterial;
@@ -26,8 +24,13 @@ public class PlayerInmune : MonoBehaviour
     {
         IsInmune = false;
         playerController = GetComponent<PlayerController>();
-        bodyMaterial = bodyMeshRenderer.sharedMaterial;
-        glassMaterial = glassMeshRenderer.sharedMaterial;
+        meshRenderers = GetComponentsInChildren<MeshRenderer>();
+        materials = new List<Material>();
+        foreach (MeshRenderer meshRenderer in meshRenderers)
+        {
+            materials.Add(meshRenderer.material);
+        }
+        
     }
 
     private void Start()
@@ -53,21 +56,17 @@ public class PlayerInmune : MonoBehaviour
         float blinkDirection = -1f;
         float blinkDirectionChangeTime = inmuneTime / amountOfBlinks;
 
-        Color bodyMaterialColor = bodyMaterial.color;
-        Color glassMaterialColor = glassMaterial.color;
-
         while (timer < inmuneTime)
         {
             timer += Time.deltaTime;
             blinkDirectionTimer += Time.deltaTime;
-            bodyMaterialColor = bodyMaterial.color;
-            glassMaterialColor = glassMaterial.color;
 
-            bodyMaterialColor.a = Mathf.Clamp(bodyMaterialColor.a + (blinkDirection * blinkSpeed * Time.deltaTime), 0, 1);
-            glassMaterialColor.a = Mathf.Clamp(glassMaterialColor.a + (blinkDirection * blinkSpeed * Time.deltaTime), 0, 1);
-
-            bodyMaterial.color = bodyMaterialColor;
-            glassMaterial.color = glassMaterialColor;
+            foreach (Material material in materials)
+            {
+                Color color = material.color;
+                color.a = Mathf.Clamp(color.a + (blinkDirection * blinkSpeed * Time.deltaTime), 0, 1);
+                material.color = color;
+            }
 
             if (blinkDirectionTimer >= blinkDirectionChangeTime)
             {
@@ -77,11 +76,12 @@ public class PlayerInmune : MonoBehaviour
             yield return null;
         }
 
-        bodyMaterialColor.a = 1f;
-        glassMaterialColor.a = 1f;
-
-        bodyMaterial.color = bodyMaterialColor;
-        glassMaterial.color = glassMaterialColor;
+        foreach (Material material in materials)
+        {
+            Color color = material.color;
+            color.a = 1;
+            material.color = color;
+        }
 
         IsInmune = false;
     }
