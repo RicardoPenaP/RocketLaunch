@@ -9619,6 +9619,7 @@ GameObject:
   - component: {fileID: 4090625583501126735}
   - component: {fileID: 1116074900621164636}
   - component: {fileID: 2492463987162060965}
+  - component: {fileID: 8078815222774770507}
   - component: {fileID: 4090625583501126733}
   - component: {fileID: 4090625583501126730}
   - component: {fileID: 4090625583501126732}
@@ -9686,11 +9687,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7268a10d01feaa4aa6d996619964b49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bodyMeshRenderer: {fileID: 8039156300145083543}
-  glassMeshRenderer: {fileID: 8039156300145083545}
   inmuneTime: 1.5
   blinkSpeed: 5
   amountOfBlinks: 8
+--- !u!114 &8078815222774770507
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4090625583501126721}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e34ffee8f309cf547a2b361228b280ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!136 &4090625583501126733
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -24497,18 +24508,6 @@ PrefabInstance:
 --- !u!4 &2471518858188212390 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1911860528064810251, guid: b4ebfe3d8ab4def429989cd25349eb90,
-    type: 3}
-  m_PrefabInstance: {fileID: 4090625584858138029}
-  m_PrefabAsset: {fileID: 0}
---- !u!23 &8039156300145083543 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 6292654871760191802, guid: b4ebfe3d8ab4def429989cd25349eb90,
-    type: 3}
-  m_PrefabInstance: {fileID: 4090625584858138029}
-  m_PrefabAsset: {fileID: 0}
---- !u!23 &8039156300145083545 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 6292654871760191796, guid: b4ebfe3d8ab4def429989cd25349eb90,
     type: 3}
   m_PrefabInstance: {fileID: 4090625584858138029}
   m_PrefabAsset: {fileID: 0}

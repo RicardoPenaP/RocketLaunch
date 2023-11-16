@@ -26,8 +26,7 @@ public class CameraMananger : MonoBehaviour
         {
             playerMovement.OnStartMovingUpwards += PlayerMovement_OnStartMovingUpwards;
             playerMovement.OnStopMovingUpwards += PlayerMovement_OnStopMovingUpwards;
-        }
-      
+        }      
     }
 
     private void OnDestroy()
