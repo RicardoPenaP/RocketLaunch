@@ -60,4 +60,6 @@ public class LevelMananger : MonoBehaviour
         Debug.Log("Level finished");
     }
 
+   
+
 }
