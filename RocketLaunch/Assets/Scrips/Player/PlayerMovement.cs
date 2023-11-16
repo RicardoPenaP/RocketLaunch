@@ -15,8 +15,6 @@ public class PlayerMovement : MonoBehaviour
     public event EventHandler<RotationDirection> OnStartRotating;
     public event EventHandler<RotationDirection> OnStopRotating;
 
-    
-
     private PlayerController playerController;
     private new Rigidbody rigidbody;
     
@@ -77,12 +75,7 @@ public class PlayerMovement : MonoBehaviour
     private void Rotate(float rotationDirection)
     {
         Vector3 rotationVector = Vector3.forward * rotationDirection * rotationForce * Time.deltaTime;
-        transform.Rotate(rotationVector);
-        //Use it if you want to restrinct the rotation only when the ship is in movement
-        //if (Mathf.Abs(rigidbody.velocity.y) > Mathf.Epsilon)
-        //{
-           
-        //}  
+        transform.Rotate(rotationVector);         
     }
 
     private void ManageRotationVFX(bool startPlaying, float rotationDirectionRaw = 0)
