@@ -14,7 +14,7 @@ public class LevelPlatform : MonoBehaviour
 
     private void Awake()
     {
-        spawnPoint = transform.GetChild(0);
+        spawnPoint = transform.GetChild(1);
     }
 
     private void OnCollisionEnter(Collision collision)
