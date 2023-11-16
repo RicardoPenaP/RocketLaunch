@@ -63,7 +63,10 @@ public class InputMananger : MonoBehaviour
         return inputActions.Player.MoveUpwards.WasReleasedThisFrame();
     }
 
-
+    public bool GetInteractInputWasTriggered()
+    {
+        return inputActions.Player.Interact.triggered;
+    }
 
 
 }

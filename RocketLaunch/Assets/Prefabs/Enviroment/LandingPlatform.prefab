@@ -65,7 +65,7 @@ PrefabInstance:
     - target: {fileID: 6586811598962368540, guid: ea68737ddacf94643912ee7aee06d593,
         type: 3}
       propertyPath: m_Name
-      value: LevelPlatform
+      value: LandingPlatform
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ea68737ddacf94643912ee7aee06d593, type: 3}

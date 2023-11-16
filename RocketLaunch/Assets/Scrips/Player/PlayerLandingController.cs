@@ -4,15 +4,38 @@ using UnityEngine;
 
 public class PlayerLandingController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [Header("Player Landing Controller")]
+    [SerializeField] private float landingMinDistance = 1f;
+    [SerializeField] private float prelandingDuration = 1f;
+    [SerializeField] private float landingDuration = 5f;
+    [SerializeField] private LayerMask platformsLayerMask;
+
+    private LevelPlatform landingPlatform;
+
+    private void Update()
     {
-        
+        if (TryGetLandingPlatform())
+        {
+
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    private bool TryGetLandingPlatform()
     {
-        
+        Collider[] colliders = Physics.OverlapSphere(transform.position, landingMinDistance, platformsLayerMask);
+        foreach (Collider collider in colliders)
+        {
+            if (collider.transform.TryGetComponent<LevelPlatform>(out LevelPlatform levelPlatform))
+            {
+                if (levelPlatform.GetPlatformType() == LevelPlatform.PlatformType.Landing)
+                {
+                    landingPlatform = levelPlatform;
+                    return true;
+                }
+            }
+        }
+
+        landingPlatform = null;
+        return false;
     }
 }
