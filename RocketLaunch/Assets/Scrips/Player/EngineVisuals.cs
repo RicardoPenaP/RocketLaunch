@@ -7,6 +7,7 @@ public class EngineVisuals : MonoBehaviour
     [Header("Engine Visuals")]
     [SerializeField] UIBar enginePowerBar;
     [SerializeField] UIBar engineTemperatureBar;
+    [SerializeField] UIBar fuelBar;
 
     private EngineController engineController;
 
@@ -17,6 +18,7 @@ public class EngineVisuals : MonoBehaviour
         {
             engineController.OnEnginePowerChange += EngineController_OnEnginePowerChange;
             engineController.OnEngineTemperatureChange += EngineController_OnEngineTemperatureChange;
+            engineController.OnFuelChange += EngineController_OnFuelChange;
         }
     }
 
@@ -26,6 +28,7 @@ public class EngineVisuals : MonoBehaviour
         {
             engineController.OnEnginePowerChange -= EngineController_OnEnginePowerChange;
             engineController.OnEngineTemperatureChange -= EngineController_OnEngineTemperatureChange;
+            engineController.OnFuelChange -= EngineController_OnFuelChange;
         }
     }
 
@@ -37,5 +40,10 @@ public class EngineVisuals : MonoBehaviour
     private void EngineController_OnEngineTemperatureChange(float currentValue, float maxValue)
     {
         engineTemperatureBar.UpdateFill(currentValue, maxValue);
+    }
+
+    private void EngineController_OnFuelChange(float currentValue, float maxValue)
+    {
+        fuelBar.UpdateFill(currentValue, maxValue);
     }
 }
