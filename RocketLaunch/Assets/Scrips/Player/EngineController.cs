@@ -12,11 +12,14 @@ public class EngineController : MonoBehaviour
     [SerializeField] private float powerSpeed;
 
     [Header("Temperature settings")]
-    [SerializeField] private float maxTemperature;
+    [SerializeField] private float maxEngineTemperature;
     [SerializeField] private float heatRate;
     [SerializeField] private float overHeatRestTime;
     [Tooltip("The percentage of the heat rate that is used to cool the engine")]
     [SerializeField,Range(0,100)] private int coolingRatePercentage;
+
+    public event Action<float, float> OnEnginePowerChange;
+    public event Action<float, float> OnEngineTemperatureChange;
 
     private PlayerMovement playerMovement;
 
@@ -73,21 +76,31 @@ public class EngineController : MonoBehaviour
         {
             return;
         }
-        currentEnginePower = Mathf.Clamp(currentEnginePower+ powerSpeed * Time.deltaTime, 0 ,maxEnginePower);
-        currentEngineTemperature = Mathf.Clamp(currentEngineTemperature + heatRate * Time.deltaTime, 0, maxTemperature);
 
-        if (currentEngineTemperature >= maxTemperature)
+        currentEnginePower = Mathf.Clamp(currentEnginePower+ powerSpeed * Time.deltaTime, 0 ,maxEnginePower);
+        currentEngineTemperature = Mathf.Clamp(currentEngineTemperature + heatRate * Time.deltaTime, 0, maxEngineTemperature);
+
+        if (currentEngineTemperature >= maxEngineTemperature)
         {
             IsOverHeated = true;
             StartCoroutine(OverHeatRestRoutine());
         }
+        OnEnginePowerChange?.Invoke(currentEnginePower, maxEnginePower);
+        OnEngineTemperatureChange?.Invoke(currentEngineTemperature, maxEngineTemperature);
     }
 
     private void CoolTheEngine()
     {
         currentEnginePower = Mathf.Clamp(currentEnginePower - powerSpeed * Time.deltaTime, 0, maxEnginePower);
+        OnEnginePowerChange?.Invoke(currentEnginePower, maxEnginePower);
+
+        if (IsOverHeated)
+        {
+            return;
+        }
         float coolRate = (heatRate * coolingRatePercentage) / 100;
-        currentEngineTemperature = Mathf.Clamp(currentEngineTemperature - coolRate * Time.deltaTime, 0, maxTemperature);
+        currentEngineTemperature = Mathf.Clamp(currentEngineTemperature - coolRate * Time.deltaTime, 0, maxEngineTemperature);
+        OnEngineTemperatureChange?.Invoke(currentEngineTemperature, maxEngineTemperature);
     }
 
     private void PlayerMovement_OnStartMovingUpwards(object sender, EventArgs e)
@@ -108,7 +121,8 @@ public class EngineController : MonoBehaviour
         {
             timer += Time.deltaTime;
             float progress = timer / overHeatRestTime;
-            currentEngineTemperature = Mathf.Lerp(maxTemperature, 0, progress);
+            currentEngineTemperature = Mathf.Lerp(maxEngineTemperature, 0, progress);
+            OnEngineTemperatureChange?.Invoke(currentEngineTemperature, maxEngineTemperature);
             yield return null;
         }
 
