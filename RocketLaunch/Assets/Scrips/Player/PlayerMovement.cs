@@ -19,7 +19,7 @@ public class PlayerMovement : MonoBehaviour
     private PlayerLandingController playerLandingController;
     private new Rigidbody rigidbody;
 
-    private bool canMove = true;
+    private bool canMove = true; 
 
     private void Awake()
     {

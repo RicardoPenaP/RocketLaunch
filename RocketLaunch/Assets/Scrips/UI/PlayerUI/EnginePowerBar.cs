@@ -15,9 +15,10 @@ public class EnginePowerBar : MonoBehaviour
         fillMaterial = fill.material;
     }
 
-    private void UpdateFill(float minValue, float maxValue)
+    private void UpdateFill(float currentValue, float maxValue)
     {
-        fill.fillAmount = minValue / maxValue;
+        fill.fillAmount = currentValue / maxValue;
     }
+
 
 }
