@@ -14,7 +14,9 @@ public class PlayerLandingController : MonoBehaviour
     [SerializeField] private float rotationForce = 100f;
     [SerializeField] private LayerMask platformsLayerMask;
     [SerializeField] private bool showGizmos = true;
-    [SerializeField] private float maxSpeedToStartLanding = 2;
+    [SerializeField, Min(0)] private float maxSpeedToStartLanding = 2f;
+    [SerializeField, Range(1f,360f)] private float maxAngleDirfereceToSuccessLanding = 10f;
+    [SerializeField] private float euler;
 
     public event EventHandler OnPreLandingStart;
     public event EventHandler OnLandingStart;
@@ -58,6 +60,7 @@ public class PlayerLandingController : MonoBehaviour
 
     private void Update()
     {
+        euler = Vector3.Angle(Vector3.right, transform.up);
         if (TryFindLandingPlatform())
         {
             if (Mathf.Abs(rigidbody.velocity.x) <= maxSpeedToStartLanding)
@@ -133,8 +136,24 @@ public class PlayerLandingController : MonoBehaviour
 
     private void LandingFinished()
     {
+        float currentAngle = Vector3.Angle(Vector3.right, transform.up);
+        if (currentAngle < 90 - maxAngleDirfereceToSuccessLanding || currentAngle > 90 + maxAngleDirfereceToSuccessLanding)
+        {
+            //Reset the landing process
+            ResetLanding();
+            return;
+        }
+
         isLanding = false;
+        rigidbody.isKinematic = true;
+        rigidbody.Sleep();        
         OnLandingFinished?.Invoke(this, EventArgs.Empty);
+    }
+
+    private void ResetLanding()
+    {
+        isLanding = false;
+        StartPreLanding();
     }
 
     private void PlayerCollisionHandler_OnCollisionWithObject(object sender, EventArgs e)
