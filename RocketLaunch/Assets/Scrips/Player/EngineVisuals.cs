@@ -13,10 +13,6 @@ public class EngineVisuals : MonoBehaviour
     private void Awake()
     {
         engineController = FindObjectOfType<EngineController>();
-    }
-
-    private void Start()
-    {
         if (engineController)
         {
             engineController.OnEnginePowerChange += EngineController_OnEnginePowerChange;

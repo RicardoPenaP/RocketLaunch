@@ -42,6 +42,10 @@ public class EngineController : MonoBehaviour
             playerMovement.OnStartMovingUpwards += PlayerMovement_OnStartMovingUpwards;
             playerMovement.OnStopMovingUpwards += PlayerMovement_OnStopMovingUpwards;
         }
+        currentEnginePower = 0;
+        currentEngineTemperature = 0;
+        OnEnginePowerChange?.Invoke(currentEnginePower, maxEnginePower);
+        OnEngineTemperatureChange?.Invoke(currentEngineTemperature, maxEngineTemperature);
     }
 
     private void OnDestroy()
@@ -110,7 +114,7 @@ public class EngineController : MonoBehaviour
 
     private void PlayerMovement_OnStopMovingUpwards(object sender, EventArgs e)
     {
-        isAddingPower = true;
+        isAddingPower = false;
     }
 
     private IEnumerator OverHeatRestRoutine()

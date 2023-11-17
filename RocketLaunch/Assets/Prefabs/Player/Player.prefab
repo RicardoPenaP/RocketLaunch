@@ -9739,10 +9739,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5654d69a84408f46891321505fefcba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxEnginePower: 0
-  powerSpeed: 0
-  maxTemperature: 0
-  temperatureSpeed: 0
+  maxEnginePower: 100
+  powerSpeed: 30
+  maxEngineTemperature: 100
+  heatRate: 10
+  overHeatRestTime: 2
+  coolingRatePercentage: 30
 --- !u!136 &4090625583501126733
 CapsuleCollider:
   m_ObjectHideFlags: 0

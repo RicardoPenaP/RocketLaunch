@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
 
     private PlayerController playerController;
     private PlayerLandingController playerLandingController;
+    private EngineController engineController;
     private new Rigidbody rigidbody;
 
     private bool canMove = true; 
@@ -26,6 +27,7 @@ public class PlayerMovement : MonoBehaviour
         rigidbody = GetComponent<Rigidbody>();
         playerController = GetComponent<PlayerController>();
         playerLandingController = GetComponent<PlayerLandingController>();
+        engineController = GetComponent<EngineController>();
     }
 
     private void Start()
@@ -64,7 +66,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (InputMananger.Instance.GetMoveUpwardsInputIsInProgress())
         {
-            if (canMove)
+            if (canMove && !engineController.IsOverHeated)
             {
                 MoveUpwards();
                 OnStartMovingUpwards?.Invoke(this, EventArgs.Empty);
@@ -78,7 +80,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (InputMananger.Instance.TryGetRotationDirectionInput(out float rotationDirectionRaw))
         {
-            if (canMove)
+            if (canMove && !engineController.IsOverHeated)
             {
                 Rotate(rotationDirectionRaw);
                 ManageRotationVFX(true, rotationDirectionRaw);
