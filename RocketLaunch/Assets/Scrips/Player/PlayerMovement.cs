@@ -66,7 +66,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (InputMananger.Instance.GetMoveUpwardsInputIsInProgress())
         {
-            if (canMove && !engineController.IsOverHeated)
+            if (CanMoveCheck())
             {
                 MoveUpwards();
                 OnStartMovingUpwards?.Invoke(this, EventArgs.Empty);
@@ -80,7 +80,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (InputMananger.Instance.TryGetRotationDirectionInput(out float rotationDirectionRaw))
         {
-            if (canMove && !engineController.IsOverHeated)
+            if (CanMoveCheck())
             {
                 Rotate(rotationDirectionRaw);
                 ManageRotationVFX(true, rotationDirectionRaw);
@@ -91,6 +91,11 @@ public class PlayerMovement : MonoBehaviour
         {
             ManageRotationVFX(false);
         }
+    }
+
+    private bool CanMoveCheck()
+    {
+        return canMove && !engineController.IsOverHeated && engineController.HasFuel;
     }
 
     private void MoveUpwards()
