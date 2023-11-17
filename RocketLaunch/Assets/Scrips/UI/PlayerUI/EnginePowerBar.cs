@@ -1,18 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnginePowerBar : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [Header("EnginePowerBar")]
+    [SerializeField] private Image fill;
+
+    private Material fillMaterial;
+
+    private void Awake()
     {
-        
+        fillMaterial = fill.material;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void UpdateFill(float minValue, float maxValue)
     {
-        
+        fill.fillAmount = minValue / maxValue;
     }
+
 }
