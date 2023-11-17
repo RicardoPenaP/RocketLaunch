@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class EnginePowerBar : MonoBehaviour
+public class UIBar : MonoBehaviour
 {
-    [Header("EnginePowerBar")]
+    [Header("UI Bar")]
     [SerializeField] private Image fill;
 
     private Material fillMaterial;
@@ -15,7 +15,7 @@ public class EnginePowerBar : MonoBehaviour
         fillMaterial = fill.material;
     }
 
-    private void UpdateFill(float currentValue, float maxValue)
+    public void UpdateFill(float currentValue, float maxValue)
     {
         fill.fillAmount = currentValue / maxValue;
     }
