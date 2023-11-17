@@ -9621,6 +9621,7 @@ GameObject:
   - component: {fileID: 1116074900621164636}
   - component: {fileID: 2492463987162060965}
   - component: {fileID: 8078815222774770507}
+  - component: {fileID: 5857852622797945443}
   - component: {fileID: 4090625583501126733}
   - component: {fileID: 4090625583501126730}
   - component: {fileID: 4090625583501126732}
@@ -9687,7 +9688,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxLifesAmount: 3
-  currentLifesAmount: 0
 --- !u!114 &2492463987162060965
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9723,6 +9723,26 @@ MonoBehaviour:
   platformsLayerMask:
     serializedVersion: 2
     m_Bits: 64
+  showGizmos: 1
+  maxSpeedToStartLanding: 2
+  maxAngleDirfereceToSuccessLanding: 10
+  euler: 0
+--- !u!114 &5857852622797945443
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4090625583501126721}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5654d69a84408f46891321505fefcba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxEnginePower: 0
+  powerSpeed: 0
+  maxTemperature: 0
+  temperatureSpeed: 0
 --- !u!136 &4090625583501126733
 CapsuleCollider:
   m_ObjectHideFlags: 0
