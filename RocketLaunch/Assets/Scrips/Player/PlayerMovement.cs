@@ -16,18 +16,30 @@ public class PlayerMovement : MonoBehaviour
     public event EventHandler<RotationDirection> OnStopRotating;
 
     private PlayerController playerController;
+    private PlayerLandingController playerLandingController;
     private new Rigidbody rigidbody;
-    
+
+    private bool canMove = true;
 
     private void Awake()
     {
         rigidbody = GetComponent<Rigidbody>();
         playerController = GetComponent<PlayerController>();
+        playerLandingController = GetComponent<PlayerLandingController>();
     }
 
     private void Start()
     {
-        playerController.OnLifeRemove += PlayerController_OnLifeRemove;
+        if (playerController)
+        {
+            playerController.OnLifeRemove += PlayerController_OnLifeRemove;
+        }
+
+        if (playerLandingController)
+        {
+            playerLandingController.OnPreLandingStart += PlayerLandingController_OnPreLandingStart;
+        }
+
     }
 
     private void Update()
@@ -37,16 +49,26 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnDestroy()
     {
-        playerController.OnLifeRemove -= PlayerController_OnLifeRemove;
-    }
+        if (playerController)
+        {
+            playerController.OnLifeRemove -= PlayerController_OnLifeRemove;
+        }
 
+        if (playerLandingController)
+        {
+            playerLandingController.OnPreLandingStart -= PlayerLandingController_OnPreLandingStart;
+        }
+    }
 
     private void UpdatePlayerMovement()
     {
         if (InputMananger.Instance.GetMoveUpwardsInputIsInProgress())
         {
-            MoveUpwards();
-            OnStartMovingUpwards?.Invoke(this, EventArgs.Empty);
+            if (canMove)
+            {
+                MoveUpwards();
+                OnStartMovingUpwards?.Invoke(this, EventArgs.Empty);
+            }
         }
 
         if (InputMananger.Instance.GetMoveUpwardsInputWasReleasedThisFrame())
@@ -56,8 +78,11 @@ public class PlayerMovement : MonoBehaviour
 
         if (InputMananger.Instance.TryGetRotationDirectionInput(out float rotationDirectionRaw))
         {
-            Rotate(rotationDirectionRaw);
-            ManageRotationVFX(true, rotationDirectionRaw);
+            if (canMove)
+            {
+                Rotate(rotationDirectionRaw);
+                ManageRotationVFX(true, rotationDirectionRaw);
+            }           
         }
 
         if (InputMananger.Instance.GetRotationDirectionInputWasReleasedThisFrame())
@@ -97,5 +122,10 @@ public class PlayerMovement : MonoBehaviour
     {
         rigidbody.Sleep();
         transform.rotation = Quaternion.identity;
+    }
+
+    private void PlayerLandingController_OnPreLandingStart(object sender, EventArgs e)
+    {
+        canMove = false;
     }
 }

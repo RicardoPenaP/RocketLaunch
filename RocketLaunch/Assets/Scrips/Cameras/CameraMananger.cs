@@ -18,6 +18,8 @@ public class CameraMananger : MonoBehaviour
 
     private GameCamera currentCamera;
 
+    private bool isLandingCameraActive = false;
+
     private void Awake()
     {
         playerMovement = FindObjectOfType<PlayerMovement>();
@@ -101,12 +103,17 @@ public class CameraMananger : MonoBehaviour
 
     private void PlayerLandingController_OnPreLandingStart(object sender, EventArgs e)
     {
+        isLandingCameraActive = true;
         SetCurrentGameCamera(GameCamera.Landing);
     }
 
     private IEnumerator ChangeCameraRoutine()
     {
         yield return new WaitForSeconds(changeToStillCameraTime);
-        SetCurrentGameCamera(GameCamera.Still);
+        if (!isLandingCameraActive)
+        {
+            SetCurrentGameCamera(GameCamera.Still);
+        }
+        
     }
 }

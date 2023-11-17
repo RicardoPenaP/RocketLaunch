@@ -14,6 +14,7 @@ public class PlayerLandingController : MonoBehaviour
     [SerializeField] private float rotationForce = 100f;
     [SerializeField] private LayerMask platformsLayerMask;
     [SerializeField] private bool showGizmos = true;
+    [SerializeField] private float maxSpeedToStartLanding = 2;
 
     public event EventHandler OnPreLandingStart;
     public event EventHandler OnLandingStart;
@@ -57,15 +58,18 @@ public class PlayerLandingController : MonoBehaviour
 
     private void Update()
     {
-        if (TryGetLandingPlatform())
+        if (TryFindLandingPlatform())
         {
-            if (InputMananger.Instance.GetInteractInputWasTriggered())
+            if (Mathf.Abs(rigidbody.velocity.x) <= maxSpeedToStartLanding)
             {
-                if (!isPreLanding && !isLanding)
+                if (InputMananger.Instance.GetInteractInputWasTriggered())
                 {
-                    StartPreLanding();
+                    if (!isPreLanding && !isLanding)
+                    {
+                        StartPreLanding();
+                    }
                 }
-            }
+            }            
         }
 
         if (isLanding)
@@ -82,7 +86,7 @@ public class PlayerLandingController : MonoBehaviour
         }
     }
 
-    private bool TryGetLandingPlatform()
+    private bool TryFindLandingPlatform()
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, landingMinDistance, platformsLayerMask);
         foreach (Collider collider in colliders)
