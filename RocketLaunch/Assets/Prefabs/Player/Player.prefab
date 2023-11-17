@@ -9740,11 +9740,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxEnginePower: 100
-  powerSpeed: 30
+  powerSpeed: 50
+  powerHeatRateMultiplierPercentage: 0.1
   maxEngineTemperature: 100
-  heatRate: 10
+  heatRate: 5
   overHeatRestTime: 2
-  coolingRatePercentage: 30
+  coolingRate: 7
 --- !u!136 &4090625583501126733
 CapsuleCollider:
   m_ObjectHideFlags: 0

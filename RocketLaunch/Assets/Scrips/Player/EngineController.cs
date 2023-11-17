@@ -10,13 +10,13 @@ public class EngineController : MonoBehaviour
     [Header("Power settings")]
     [SerializeField] private float maxEnginePower;
     [SerializeField] private float powerSpeed;
+    [SerializeField,Range(0f,1f)] private float powerHeatRateMultiplierPercentage = 0.2f;
 
     [Header("Temperature settings")]
     [SerializeField] private float maxEngineTemperature;
     [SerializeField] private float heatRate;
-    [SerializeField] private float overHeatRestTime;
-    [Tooltip("The percentage of the heat rate that is used to cool the engine")]
-    [SerializeField,Range(0,100)] private int coolingRatePercentage;
+    [SerializeField] private float overHeatRestTime;    
+    [SerializeField] private int coolingRate;
 
     public event Action<float, float> OnEnginePowerChange;
     public event Action<float, float> OnEngineTemperatureChange;
@@ -82,7 +82,8 @@ public class EngineController : MonoBehaviour
         }
 
         currentEnginePower = Mathf.Clamp(currentEnginePower+ powerSpeed * Time.deltaTime, 0 ,maxEnginePower);
-        currentEngineTemperature = Mathf.Clamp(currentEngineTemperature + heatRate * Time.deltaTime, 0, maxEngineTemperature);
+        float powerPercentageMultiplier = currentEnginePower * powerHeatRateMultiplierPercentage;
+        currentEngineTemperature = Mathf.Clamp(currentEngineTemperature + heatRate * powerPercentageMultiplier * Time.deltaTime, 0, maxEngineTemperature);
 
         if (currentEngineTemperature >= maxEngineTemperature)
         {
@@ -102,8 +103,8 @@ public class EngineController : MonoBehaviour
         {
             return;
         }
-        float coolRate = (heatRate * coolingRatePercentage) / 100;
-        currentEngineTemperature = Mathf.Clamp(currentEngineTemperature - coolRate * Time.deltaTime, 0, maxEngineTemperature);
+        
+        currentEngineTemperature = Mathf.Clamp(currentEngineTemperature - coolingRate * Time.deltaTime, 0, maxEngineTemperature);
         OnEngineTemperatureChange?.Invoke(currentEngineTemperature, maxEngineTemperature);
     }
 
