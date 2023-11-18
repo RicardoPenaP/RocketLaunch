@@ -11,14 +11,14 @@ public class MainEngineVFXController : MonoBehaviour
     private void Awake()
     {
         mainEngineParticleSystems = GetComponentsInChildren<ParticleSystem>();       
-        engineController = GetComponent<EngineController>();
+        engineController = GetComponentInParent<EngineController>();
     }
 
     private void Start()
     {
         if (engineController)
         {
-            engineController.OnIsEngineOnChange += EngineController_OnIsEngineOnChange;
+            engineController.OnMainEngineOn += EngineController_OnMainEngineOn;
         }
     }
 
@@ -26,7 +26,7 @@ public class MainEngineVFXController : MonoBehaviour
     {
         if (engineController)
         {
-            engineController.OnIsEngineOnChange -= EngineController_OnIsEngineOnChange;
+            engineController.OnMainEngineOn -= EngineController_OnMainEngineOn;
         }
     }
 
@@ -46,8 +46,9 @@ public class MainEngineVFXController : MonoBehaviour
     }
 
 
-    private void EngineController_OnIsEngineOnChange(bool isEngineOn)
+    private void EngineController_OnMainEngineOn(bool isEngineOn)
     {
         ToggleEngineVFX(isEngineOn);
     }
+
 }

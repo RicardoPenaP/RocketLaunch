@@ -9,29 +9,27 @@ public class SideEngineVFXController : MonoBehaviour
 
     private ParticleSystem[] sideEngineParticleSystems;
     private PlayerMovement playerMovement;
-
+    private EngineController engineController;
 
     private void Awake()
     {
         sideEngineParticleSystems = GetComponentsInChildren<ParticleSystem>();
-        playerMovement = GetComponentInParent<PlayerMovement>();
+        engineController = GetComponentInParent<EngineController>();
     }
 
     private void Start()
     {
-        if (playerMovement)
+        if (engineController)
         {
-            playerMovement.OnStartRotating += PlayerMovement_OnStartRotating;
-            playerMovement.OnStopRotating += PlayerMovement_OnStopRotating;
+            engineController.OnSideEngineOn += EngineController_OnSideEngineStateChange;            
         }
     }
 
     private void OnDestroy()
     {
-        if (playerMovement)
-        {
-            playerMovement.OnStartRotating -= PlayerMovement_OnStartRotating;
-            playerMovement.OnStopRotating -= PlayerMovement_OnStopRotating;
+        if (engineController)
+        {          
+            engineController.OnSideEngineOn -= EngineController_OnSideEngineStateChange;
         }
     }
 
@@ -51,23 +49,22 @@ public class SideEngineVFXController : MonoBehaviour
         }
     }
 
-    private void PlayerMovement_OnStartRotating(object sender, PlayerMovement.RotationDirection rotationDirection)
+    private void EngineController_OnSideEngineStateChange(PlayerMovement.RotationDirection rotationDirection, bool engineState)
     {
         if (engineSide != rotationDirection)
         {
             return;
         }
-        TurnOnEngineVFX();
-    }
 
-    private void PlayerMovement_OnStopRotating(object sender, PlayerMovement.RotationDirection rotationDirection)
-    {
-        if (engineSide != rotationDirection)
+        if (engineState)
         {
-            return;
+            TurnOnEngineVFX();
         }
-        TurnOffEngineVFX();
-
+        else
+        {
+            TurnOffEngineVFX();
+        }       
     }
+
 
 }

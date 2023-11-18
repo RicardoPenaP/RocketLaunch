@@ -12,8 +12,8 @@ public class PlayerMovement : MonoBehaviour
 
     public event EventHandler OnStartMovingUpwards;
     public event EventHandler OnStopMovingUpwards;
-    public event EventHandler<RotationDirection> OnStartRotating;
-    public event EventHandler<RotationDirection> OnStopRotating;
+    public event Action<RotationDirection> OnStartRotating;
+    public event Action<RotationDirection> OnStopRotating;
 
     private PlayerController playerController;
     private PlayerLandingController playerLandingController;
@@ -27,7 +27,7 @@ public class PlayerMovement : MonoBehaviour
         rigidbody = GetComponent<Rigidbody>();
         playerController = GetComponent<PlayerController>();
         playerLandingController = GetComponent<PlayerLandingController>();
-        engineController = GetComponent<EngineController>();
+        engineController = GetComponentInChildren<EngineController>();
     }
 
     private void Start()
@@ -83,13 +83,13 @@ public class PlayerMovement : MonoBehaviour
             if (CanMoveCheck())
             {
                 Rotate(rotationDirectionRaw);
-                ManageRotationVFX(true, rotationDirectionRaw);
+                ManageRotationEngine(true, rotationDirectionRaw);
             }           
         }
 
         if (InputMananger.Instance.GetRotationDirectionInputWasReleasedThisFrame())
         {
-            ManageRotationVFX(false);
+            ManageRotationEngine(false);
         }
     }
 
@@ -110,17 +110,17 @@ public class PlayerMovement : MonoBehaviour
         transform.Rotate(rotationVector);         
     }
 
-    private void ManageRotationVFX(bool startPlaying, float rotationDirectionRaw = 0)
+    private void ManageRotationEngine(bool startEngine, float rotationDirectionRaw = 0)
     {
         RotationDirection rotationDirection = rotationDirectionRaw > Mathf.Epsilon ? RotationDirection.Rigth : RotationDirection.Left;       
-        if (startPlaying)
+        if (startEngine)
         {
-            OnStartRotating?.Invoke(this, rotationDirection);            
+            OnStartRotating?.Invoke(rotationDirection);            
         }
         else
         {
-            OnStopRotating?.Invoke(this, RotationDirection.Rigth);
-            OnStopRotating?.Invoke(this, RotationDirection.Left);
+            OnStopRotating?.Invoke(RotationDirection.Rigth);
+            OnStopRotating?.Invoke(RotationDirection.Left);
         }
         
     }
