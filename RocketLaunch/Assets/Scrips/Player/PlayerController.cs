@@ -5,9 +5,12 @@ using System;
 
 public class PlayerController : MonoBehaviour
 {
-    [Header("Player Controller")]
-    [SerializeField] private int maxLifesAmount = 3;    
+    private const int maximunLifesAmount = 10;
 
+    [Header("Player Controller")]
+    [SerializeField] private int maxLifesAmount = 3;
+
+    public event Action<int> OnCurrentLifesChange;
     public event EventHandler OnLifeRemove;
     public event EventHandler OnDie;
     public event EventHandler OnPlayerReset;
@@ -21,14 +24,15 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         playerInmune = GetComponent<PlayerInmune>();
-        playerCollisionHandler = GetComponent<PlayerCollisionHandler>();
-        currentLifesAmount = maxLifesAmount;
+        playerCollisionHandler = GetComponent<PlayerCollisionHandler>();       
         IsAlive = true;
         OnLifeRemove += PlayerReset;
     }
 
     private void Start()
     {
+        currentLifesAmount = maxLifesAmount;
+        OnCurrentLifesChange?.Invoke(currentLifesAmount);
         SetStartPlatform();
         playerCollisionHandler.OnCollisionEnterWithObject += PlayerCollisionHandler_OnCollisionEnterWithObject;
     }
@@ -65,7 +69,7 @@ public class PlayerController : MonoBehaviour
             Die();
             IsAlive = false;
         }
-
+        OnCurrentLifesChange?.Invoke(currentLifesAmount);
         OnLifeRemove?.Invoke(this, EventArgs.Empty);
     }
 
