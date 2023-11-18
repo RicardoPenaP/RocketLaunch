@@ -6,56 +6,48 @@ using System;
 public class MainEngineVFXController : MonoBehaviour
 {
     private ParticleSystem[] mainEngineParticleSystems;
-    private PlayerMovement playerMovement;
+    private EngineController engineController;
 
     private void Awake()
     {
-        mainEngineParticleSystems = GetComponentsInChildren<ParticleSystem>();
-        playerMovement = GetComponentInParent<PlayerMovement>();
+        mainEngineParticleSystems = GetComponentsInChildren<ParticleSystem>();       
+        engineController = GetComponent<EngineController>();
     }
 
     private void Start()
     {
-        if (playerMovement)
+        if (engineController)
         {
-            playerMovement.OnStartMovingUpwards += PlayerMovement_OnStartMovingUpwars;
-            playerMovement.OnStopMovingUpwards += PlayerMovement_OnStopMovingUpwars;
+            engineController.OnIsEngineOnChange += EngineController_OnIsEngineOnChange;
         }
-       
     }
 
     private void OnDestroy()
     {
-        if (playerMovement)
+        if (engineController)
         {
-            playerMovement.OnStartMovingUpwards -= PlayerMovement_OnStartMovingUpwars;
-            playerMovement.OnStopMovingUpwards -= PlayerMovement_OnStopMovingUpwars;
+            engineController.OnIsEngineOnChange -= EngineController_OnIsEngineOnChange;
         }
     }
 
-    private void TurnOnEngineVFX()
+    private void ToggleEngineVFX(bool isEngineOn)
     {
         foreach (ParticleSystem particleSystem in mainEngineParticleSystems)
         {
-            particleSystem.Play();
+            if (isEngineOn)
+            {
+                particleSystem.Play();
+            }
+            else
+            {
+                particleSystem.Stop();
+            }            
         }
     }
 
-    private void TurnOffEngineVFX()
+
+    private void EngineController_OnIsEngineOnChange(bool isEngineOn)
     {
-        foreach (ParticleSystem particleSystem in mainEngineParticleSystems)
-        {
-            particleSystem.Stop();
-        }
-    }
-
-    private void PlayerMovement_OnStartMovingUpwars(object sender, EventArgs e)
-    {       
-        TurnOnEngineVFX();
-    }
-
-    private void PlayerMovement_OnStopMovingUpwars(object sender, EventArgs e)
-    {       
-        TurnOffEngineVFX();        
+        ToggleEngineVFX(isEngineOn);
     }
 }

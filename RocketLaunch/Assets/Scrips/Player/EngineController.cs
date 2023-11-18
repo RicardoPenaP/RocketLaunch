@@ -24,6 +24,7 @@ public class EngineController : MonoBehaviour
     public event Action<float, float> OnEnginePowerChange;
     public event Action<float, float> OnEngineTemperatureChange;
     public event Action<float, float> OnFuelChange;
+    public event Action<bool> OnIsEngineOnChange;
 
     private PlayerMovement playerMovement;
 
@@ -136,11 +137,13 @@ public class EngineController : MonoBehaviour
     private void PlayerMovement_OnStartMovingUpwards(object sender, EventArgs e)
     {
         isEngineOn = true;
+        OnIsEngineOnChange?.Invoke(isEngineOn);
     }
 
     private void PlayerMovement_OnStopMovingUpwards(object sender, EventArgs e)
     {
         isEngineOn = false;
+        OnIsEngineOnChange?.Invoke(isEngineOn);
     }
 
     private IEnumerator OverHeatRestRoutine()

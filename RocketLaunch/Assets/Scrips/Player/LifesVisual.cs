@@ -9,7 +9,20 @@ public class LifesVisual : MonoBehaviour
     private void Awake()
     {
         playerController = FindObjectOfType<PlayerController>();
-        playerController.OnCurrentLifesChange += PlayerController_OnCurrentLifesChange;
+
+        if (playerController)
+        {
+            playerController.OnCurrentLifesChange += PlayerController_OnCurrentLifesChange;
+        }
+        
+    }
+
+    private void OnDestroy()
+    {
+        if (playerController)
+        {
+            playerController.OnCurrentLifesChange += PlayerController_OnCurrentLifesChange;
+        }
     }
 
     private void PlayerController_OnCurrentLifesChange(int currentLifesAmount)
