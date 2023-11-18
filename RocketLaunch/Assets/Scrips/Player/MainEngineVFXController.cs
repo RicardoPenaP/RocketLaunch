@@ -18,7 +18,7 @@ public class MainEngineVFXController : MonoBehaviour
     {
         if (engineController)
         {
-            engineController.OnMainEngineOn += EngineController_OnMainEngineOn;
+            engineController.OnMainEngineStateChange += EngineController_OnMainEngineStateChange;
         }
     }
 
@@ -26,7 +26,7 @@ public class MainEngineVFXController : MonoBehaviour
     {
         if (engineController)
         {
-            engineController.OnMainEngineOn -= EngineController_OnMainEngineOn;
+            engineController.OnMainEngineStateChange -= EngineController_OnMainEngineStateChange;
         }
     }
 
@@ -46,9 +46,9 @@ public class MainEngineVFXController : MonoBehaviour
     }
 
 
-    private void EngineController_OnMainEngineOn(bool isEngineOn)
+    private void EngineController_OnMainEngineStateChange(bool engineState)
     {
-        ToggleEngineVFX(isEngineOn);
+        ToggleEngineVFX(engineState);
     }
 
 }

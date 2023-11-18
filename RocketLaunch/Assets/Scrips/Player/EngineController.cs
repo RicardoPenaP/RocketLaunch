@@ -4,7 +4,7 @@ using UnityEngine;
 using System;
 
 public class EngineController : MonoBehaviour
-{
+{    
     [Header("Engine Controller")]
     [Header("Fuel settings")]
     [SerializeField] private float maxFuelAmount;
@@ -24,8 +24,8 @@ public class EngineController : MonoBehaviour
     public event Action<float, float> OnEnginePowerChange;
     public event Action<float, float> OnEngineTemperatureChange;
     public event Action<float, float> OnFuelChange;
-    public event Action<bool> OnMainEngineOn;
-    public event Action<PlayerMovement.RotationDirection,bool> OnSideEngineOn;
+    public event Action<bool> OnMainEngineStateChange;
+    public event Action<PlayerMovement.RotationDirection,bool> OnSideEngineStateChange;
 
     private PlayerMovement playerMovement;
 
@@ -33,14 +33,13 @@ public class EngineController : MonoBehaviour
     private float currentEngineTemperature;
     private float currentFuelAmount;
 
-    private bool isMainEngineOn = false;
-
+    private bool isMainEngineOn = false;  
     public bool IsOverHeated { get; private set; }
     public bool HasFuel { get; private set; }
 
     private void Awake()
-    {
-        playerMovement = GetComponent<PlayerMovement>();
+    {        
+        playerMovement = GetComponentInParent<PlayerMovement>();
         IsOverHeated = false;
         HasFuel = true;
     }
@@ -77,25 +76,21 @@ public class EngineController : MonoBehaviour
     }
 
     private void UpdateEngineState()
-    {
-        if (isMainEngineOn)
-        {
-            MainEngineOn();
-        }
-        else
+    {        
+        if (!isMainEngineOn && !IsOverHeated)
         {
             CoolTheEngine();
-        }
+        }        
     }
 
     private void MainEngineOn()
     {
         if (IsOverHeated || !HasFuel)
         {
-            OnMainEngineOn?.Invoke(false);
             return;
         }
 
+        UpdateMainEngineState(true);
         currentEnginePower = Mathf.Clamp(currentEnginePower+ powerSpeed * Time.deltaTime, 0 ,maxEnginePower);
 
         float powerPercentageMultiplier = currentEnginePower * powerHeatRateMultiplierPercentage;
@@ -105,26 +100,26 @@ public class EngineController : MonoBehaviour
 
         if (currentEngineTemperature >= maxEngineTemperature)
         {
+            UpdateMainEngineState(false);
             IsOverHeated = true;
             StartCoroutine(OverHeatRestRoutine());
         }
 
         if (currentFuelAmount <= 0)
         {
+            UpdateMainEngineState(false);
             HasFuel = false;
         }
 
         OnEnginePowerChange?.Invoke(currentEnginePower, maxEnginePower);
         OnEngineTemperatureChange?.Invoke(currentEngineTemperature, maxEngineTemperature);
-        OnFuelChange?.Invoke(currentFuelAmount, maxFuelAmount);
-        OnMainEngineOn?.Invoke(true);
+        OnFuelChange?.Invoke(currentFuelAmount, maxFuelAmount);       
     }
 
     private void CoolTheEngine()
     {
         currentEnginePower = Mathf.Clamp(currentEnginePower - powerSpeed * Time.deltaTime, 0, maxEnginePower);
-        OnEnginePowerChange?.Invoke(currentEnginePower, maxEnginePower);
-        OnMainEngineOn?.Invoke(false);
+        OnEnginePowerChange?.Invoke(currentEnginePower, maxEnginePower);        
 
         if (IsOverHeated)
         {
@@ -135,24 +130,33 @@ public class EngineController : MonoBehaviour
         OnEngineTemperatureChange?.Invoke(currentEngineTemperature, maxEngineTemperature);
     }
 
-    private void PlayerMovement_OnStartMovingUpwards(object sender, EventArgs e)
+    private void UpdateMainEngineState(bool state)
     {
-        isMainEngineOn = true;
+        if (isMainEngineOn != state)
+        {
+            isMainEngineOn = state;
+            OnMainEngineStateChange?.Invoke(isMainEngineOn);
+        }
+    }
+
+    private void PlayerMovement_OnStartMovingUpwards(object sender, EventArgs e)
+    {       
+        MainEngineOn();        
     }
 
     private void PlayerMovement_OnStopMovingUpwards(object sender, EventArgs e)
     {
-        isMainEngineOn = false;
+        UpdateMainEngineState(false);
     }
 
     private void PlayerMovement_OnStartRotating(PlayerMovement.RotationDirection rotationDirection)
     {
-        OnSideEngineOn?.Invoke(rotationDirection, true);
+        OnSideEngineStateChange?.Invoke(rotationDirection, true);
     }
 
     private void PlayerMovement_OnStopRotating(PlayerMovement.RotationDirection rotationDirection)
     {
-        OnSideEngineOn?.Invoke(rotationDirection, false);
+        OnSideEngineStateChange?.Invoke(rotationDirection, false);
     }
 
     private IEnumerator OverHeatRestRoutine()

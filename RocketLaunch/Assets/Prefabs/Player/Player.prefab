@@ -9656,7 +9656,7 @@ MonoBehaviour:
   fuelConsuptionSpeed: 5
   maxEnginePower: 100
   powerSpeed: 50
-  powerHeatRateMultiplierPercentage: 0.1
+  powerHeatRateMultiplierPercentage: 1
   maxEngineTemperature: 100
   heatRate: 5
   overHeatRestTime: 2
@@ -9833,7 +9833,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4085077601729981102}
   m_Layer: 0
-  m_Name: PlayerVFX
+  m_Name: EngineVFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

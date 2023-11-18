@@ -21,7 +21,7 @@ public class SideEngineVFXController : MonoBehaviour
     {
         if (engineController)
         {
-            engineController.OnSideEngineOn += EngineController_OnSideEngineStateChange;            
+            engineController.OnSideEngineStateChange += EngineController_OnSideEngineStateChange;            
         }
     }
 
@@ -29,7 +29,7 @@ public class SideEngineVFXController : MonoBehaviour
     {
         if (engineController)
         {          
-            engineController.OnSideEngineOn -= EngineController_OnSideEngineStateChange;
+            engineController.OnSideEngineStateChange -= EngineController_OnSideEngineStateChange;
         }
     }
 
