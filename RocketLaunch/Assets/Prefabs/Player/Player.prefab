@@ -9655,12 +9655,13 @@ MonoBehaviour:
   maxFuelAmount: 100
   fuelConsuptionSpeed: 5
   maxEnginePower: 100
-  powerSpeed: 50
-  powerHeatRateMultiplierPercentage: 1
+  powerSpeed: 40
+  powerHeatRateMultiplierPercentage: 0.15
   maxEngineTemperature: 100
   heatRate: 5
   overHeatRestTime: 2
   coolingRate: 7
+  sideEngineComsuptionPercentage: 0.5
 --- !u!1 &4090625583501126721
 GameObject:
   m_ObjectHideFlags: 0
