@@ -70,7 +70,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 MoveUpwards();
                 OnStartMovingUpwards?.Invoke(this, EventArgs.Empty);
-            }
+            }           
         }
 
         if (InputMananger.Instance.GetMoveUpwardsInputWasReleasedThisFrame())
