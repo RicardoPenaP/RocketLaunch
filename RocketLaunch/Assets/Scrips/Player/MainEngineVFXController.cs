@@ -7,11 +7,13 @@ public class MainEngineVFXController : MonoBehaviour
 {
     private ParticleSystem[] mainEngineParticleSystems;
     private EngineController engineController;
+    private PlayerLandingController playerLandingController;
 
     private void Awake()
     {
         mainEngineParticleSystems = GetComponentsInChildren<ParticleSystem>();       
         engineController = GetComponentInParent<EngineController>();
+        playerLandingController = GetComponentInParent<PlayerLandingController>();
     }
 
     private void Start()
@@ -20,6 +22,12 @@ public class MainEngineVFXController : MonoBehaviour
         {
             engineController.OnMainEngineStateChange += EngineController_OnMainEngineStateChange;
         }
+
+        if (playerLandingController)
+        {
+            playerLandingController.OnPreLandingStart += PlayerLandingController_OnPreLandingStart;
+            playerLandingController.OnLandingFinished += PlayerLandingController_OnLandingFinished;
+        }
     }
 
     private void OnDestroy()
@@ -27,6 +35,12 @@ public class MainEngineVFXController : MonoBehaviour
         if (engineController)
         {
             engineController.OnMainEngineStateChange -= EngineController_OnMainEngineStateChange;
+        }
+
+        if (playerLandingController)
+        {
+            playerLandingController.OnPreLandingStart -= PlayerLandingController_OnPreLandingStart;
+            playerLandingController.OnLandingFinished -= PlayerLandingController_OnLandingFinished;
         }
     }
 
@@ -51,4 +65,13 @@ public class MainEngineVFXController : MonoBehaviour
         ToggleEngineVFX(engineState);
     }
 
+    private void PlayerLandingController_OnPreLandingStart(object sender, EventArgs e)
+    {
+        ToggleEngineVFX(true);
+    }
+
+    private void PlayerLandingController_OnLandingFinished(object sender, EventArgs e)
+    {
+        ToggleEngineVFX(false);
+    }
 }

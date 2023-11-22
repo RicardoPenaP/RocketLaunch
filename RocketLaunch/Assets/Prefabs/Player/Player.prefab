@@ -9773,7 +9773,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e34ffee8f309cf547a2b361228b280ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  landingMinDistance: 2
+  landingMinDistance: 3
   preLandingDuration: 1
   landingDuration: 5
   rotationSensibility: 1
@@ -9781,10 +9781,9 @@ MonoBehaviour:
   platformsLayerMask:
     serializedVersion: 2
     m_Bits: 64
-  showGizmos: 0
+  showGizmos: 1
   maxSpeedToStartLanding: 4
   maxAngleDirfereceToSuccessLanding: 10
-  euler: 0
 --- !u!136 &4090625583501126733
 CapsuleCollider:
   m_ObjectHideFlags: 0

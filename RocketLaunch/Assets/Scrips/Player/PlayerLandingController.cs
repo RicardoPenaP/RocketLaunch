@@ -16,11 +16,13 @@ public class PlayerLandingController : MonoBehaviour
     [SerializeField] private bool showGizmos = true;
     [SerializeField, Min(0)] private float maxSpeedToStartLanding = 2f;
     [SerializeField, Range(1f,360f)] private float maxAngleDirfereceToSuccessLanding = 10f;
-    [SerializeField] private float euler;
+    
 
     public event EventHandler OnPreLandingStart;
     public event EventHandler OnLandingStart;
     public event EventHandler OnLandingFinished;
+    public event Action<PlayerMovement.RotationDirection> OnSideEngineStarted;
+    public event Action<PlayerMovement.RotationDirection> OnSideEngineStoped;
 
     private PlayerCollisionHandler playerCollisionHandler;
 
@@ -59,8 +61,7 @@ public class PlayerLandingController : MonoBehaviour
     }
 
     private void Update()
-    {
-        euler = Vector3.Angle(Vector3.right, transform.up);
+    {        
         if (TryFindLandingPlatform())
         {
             if (Mathf.Abs(rigidbody.velocity.x) <= maxSpeedToStartLanding)
@@ -131,6 +132,20 @@ public class PlayerLandingController : MonoBehaviour
         {
             Vector3 torqueAxis = Vector3.forward * rotationForce * rotationDirection * rotationSensibility * Time.deltaTime;
             rigidbody.AddTorque(torqueAxis, ForceMode.Impulse);
+            if (rotationDirection > 0f)
+            {
+                OnSideEngineStarted?.Invoke(PlayerMovement.RotationDirection.Rigth);
+            }
+            else
+            {
+                OnSideEngineStarted?.Invoke(PlayerMovement.RotationDirection.Left);
+            }
+        }
+
+        if (InputMananger.Instance.GetRotationDirectionInputWasReleasedThisFrame())
+        {
+            OnSideEngineStoped?.Invoke(PlayerMovement.RotationDirection.Rigth);
+            OnSideEngineStoped?.Invoke(PlayerMovement.RotationDirection.Left);
         }
     }
 

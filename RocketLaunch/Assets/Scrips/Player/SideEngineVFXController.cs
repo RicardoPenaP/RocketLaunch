@@ -7,14 +7,15 @@ public class SideEngineVFXController : MonoBehaviour
     [Header("Side Engine VFX Controller")]
     [SerializeField] PlayerMovement.RotationDirection engineSide;
 
-    private ParticleSystem[] sideEngineParticleSystems;
-    private PlayerMovement playerMovement;
+    private ParticleSystem[] sideEngineParticleSystems;    
     private EngineController engineController;
+    private PlayerLandingController playerLandingController;
 
     private void Awake()
     {
         sideEngineParticleSystems = GetComponentsInChildren<ParticleSystem>();
         engineController = GetComponentInParent<EngineController>();
+        playerLandingController = GetComponentInParent<PlayerLandingController>();
     }
 
     private void Start()
@@ -23,6 +24,12 @@ public class SideEngineVFXController : MonoBehaviour
         {
             engineController.OnSideEngineStateChange += EngineController_OnSideEngineStateChange;            
         }
+
+        if (playerLandingController)
+        {
+            playerLandingController.OnSideEngineStarted += PlayerLandingController_OnSideEngineStarted;
+            playerLandingController.OnSideEngineStoped += PlayerLandingController_OnSideEngineStoped;
+        }
     }
 
     private void OnDestroy()
@@ -30,6 +37,12 @@ public class SideEngineVFXController : MonoBehaviour
         if (engineController)
         {          
             engineController.OnSideEngineStateChange -= EngineController_OnSideEngineStateChange;
+        }
+
+        if (playerLandingController)
+        {
+            playerLandingController.OnSideEngineStarted -= PlayerLandingController_OnSideEngineStarted;
+            playerLandingController.OnSideEngineStoped -= PlayerLandingController_OnSideEngineStoped;
         }
     }
 
@@ -64,6 +77,26 @@ public class SideEngineVFXController : MonoBehaviour
         {
             TurnOffEngineVFX();
         }       
+    }
+
+    private void PlayerLandingController_OnSideEngineStarted(PlayerMovement.RotationDirection rotationDirection)
+    {
+        if (engineSide != rotationDirection)
+        {
+            return;
+        }
+
+        TurnOnEngineVFX();
+    }
+
+    private void PlayerLandingController_OnSideEngineStoped(PlayerMovement.RotationDirection rotationDirection)
+    {
+        if (engineSide != rotationDirection)
+        {
+            return;
+        }
+
+        TurnOffEngineVFX();
     }
 
 
