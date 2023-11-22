@@ -11,12 +11,12 @@ public class PlayerInmune : MonoBehaviour
     [SerializeField] private float blinkSpeed = 10f;
     [SerializeField] private int amountOfBlinks = 8;
 
-    private MeshRenderer[] meshRenderers;
-    private List<Material> materials;
+    [Header("Materials Reference")]    
+    [SerializeField] private Material rocketTransparentMaterial;
+    [SerializeField] private Material rocketDefaultMaterial;
 
+    private MeshRenderer[] meshRenderers; 
     private PlayerController playerController;
-    private Material bodyMaterial;
-    private Material glassMaterial;
    
     public bool IsInmune { get; private set; }
 
@@ -25,12 +25,6 @@ public class PlayerInmune : MonoBehaviour
         IsInmune = false;
         playerController = GetComponent<PlayerController>();
         meshRenderers = GetComponentsInChildren<MeshRenderer>();
-        materials = new List<Material>();
-        foreach (MeshRenderer meshRenderer in meshRenderers)
-        {
-            materials.Add(meshRenderer.material);
-        }
-        
     }
 
     private void Start()
@@ -48,6 +42,26 @@ public class PlayerInmune : MonoBehaviour
         StartCoroutine(InmuneRoutine());
     }
 
+    private void SetMeshRendererMaterial(Material material)
+    {
+        foreach (MeshRenderer meshRenderer in meshRenderers)
+        {
+            meshRenderer.material = material;
+        }
+    }
+
+    private List<Material> GetAllMeshRenderersMaterialsList()
+    {
+        List<Material> materialsList = new List<Material>();
+
+        foreach (MeshRenderer meshRenderer in meshRenderers)
+        {
+            materialsList.Add(meshRenderer.material);
+        }
+
+        return materialsList;
+    }
+
     private IEnumerator InmuneRoutine()
     {
         IsInmune = true;
@@ -55,6 +69,9 @@ public class PlayerInmune : MonoBehaviour
         float blinkDirectionTimer = 0f;
         float blinkDirection = -1f;
         float blinkDirectionChangeTime = inmuneTime / amountOfBlinks;
+
+        SetMeshRendererMaterial(rocketTransparentMaterial);
+        List<Material> materials = GetAllMeshRenderersMaterialsList();
 
         while (timer < inmuneTime)
         {
@@ -82,6 +99,8 @@ public class PlayerInmune : MonoBehaviour
             color.a = 1;
             material.color = color;
         }
+
+        SetMeshRendererMaterial(rocketDefaultMaterial);
 
         IsInmune = false;
     }

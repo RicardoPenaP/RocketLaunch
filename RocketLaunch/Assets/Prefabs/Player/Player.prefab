@@ -9757,6 +9757,10 @@ MonoBehaviour:
   inmuneTime: 1.5
   blinkSpeed: 5
   amountOfBlinks: 8
+  rocketTransparentMaterial: {fileID: 2100000, guid: 9c2813c2ceb51c2408ac091bd41bbf27,
+    type: 2}
+  rocketDefaultMaterial: {fileID: 2100000, guid: 77cf325d522ac9040a380314cd5500cd,
+    type: 2}
 --- !u!114 &8078815222774770507
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24580,8 +24584,13 @@ PrefabInstance:
     - target: {fileID: 6292654871758200830, guid: b4ebfe3d8ab4def429989cd25349eb90,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6292654871760191796, guid: b4ebfe3d8ab4def429989cd25349eb90,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 77cf325d522ac9040a380314cd5500cd, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b4ebfe3d8ab4def429989cd25349eb90, type: 3}
 --- !u!4 &2471518858188212390 stripped
