@@ -5,7 +5,7 @@ using System;
 
 public class LevelPlatform : MonoBehaviour
 {
-    public enum PlatformType { Takeoff, SavePoint, Landing, Fuel}
+    public enum PlatformType { Takeoff, CheckPoint, Landing}
    
     [Header("Level Platform")]
     [SerializeField] private PlatformType platformType;

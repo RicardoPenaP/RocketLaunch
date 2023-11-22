@@ -101,7 +101,7 @@ public class PlayerController : MonoBehaviour
                 break;
 
             case PlayerCollisionHandler.CollisionInfo<LevelPlatform> collisionInfo:
-                if (collisionInfo.collisionObject.GetPlatformType() == LevelPlatform.PlatformType.SavePoint)
+                if (collisionInfo.collisionObject.GetPlatformType() == LevelPlatform.PlatformType.CheckPoint)
                 {
                     SetLastPlatformReached(collisionInfo.collisionObject);
                 }
