@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2117021540563749899}
   - component: {fileID: 6003475831370782823}
   - component: {fileID: 550368535216282732}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Pickup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70,7 +70,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7731889418326716891}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
