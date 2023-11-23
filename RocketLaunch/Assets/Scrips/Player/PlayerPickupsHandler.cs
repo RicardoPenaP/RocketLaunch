@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class PickupsController : MonoBehaviour
+public class PlayerPickupsHandler : MonoBehaviour
 {
     private PlayerCollisionHandler playerCollisionHandler;
     public Action<Pickup> OnPickupPiked;
