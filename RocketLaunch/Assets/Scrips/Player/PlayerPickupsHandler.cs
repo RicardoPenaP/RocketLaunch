@@ -34,6 +34,7 @@ public class PlayerPickupsHandler : MonoBehaviour
         if (e is PlayerCollisionHandler.CollisionInfo<Pickup> collisionInfo)
         {
             OnPickupPiked?.Invoke(collisionInfo.collisionObject);
+            collisionInfo.collisionObject.PickPickup();
         }
     }
 }
