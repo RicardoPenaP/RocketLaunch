@@ -13,6 +13,14 @@ public class PauseMenu : Menu<PauseMenu>
 
     bool menuState = false;
 
+    protected override void Awake()
+    {
+        base.Awake();
+        resumeButton.onClick.AddListener(ResumeButton_OnClick);
+        settingsButton.onClick.AddListener(SettingsButton_OnClick);
+        mainMenuButton.onClick.AddListener(MainMenuButton_OnClick);
+    }
+
     private void Start()
     {
         if (InputMananger.Instance)
@@ -46,16 +54,19 @@ public class PauseMenu : Menu<PauseMenu>
 
     private void ResumeButton_OnClick()
     {
-        //Resume the pause
+        //Resume behaviour
+        CloseMenu();
     }
 
     private void SettingsButton_OnClick()
     {
         //Open settings menu
+        Debug.Log("Still working on that");
     }
 
     private void MainMenuButton_OnClick()
     {
         //Go back to main menu scene
+        Debug.Log("Still working on that");
     }
 }
