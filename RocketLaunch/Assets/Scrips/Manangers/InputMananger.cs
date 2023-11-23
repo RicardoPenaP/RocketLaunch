@@ -78,8 +78,9 @@ public class InputMananger : MonoBehaviour
     private void InputUpdate()
     {
         if (inputActions.Player.Pause.triggered)
-        {
+        {            
             OnPauseInputTriggered?.Invoke();
         }
+        
     }
 }
