@@ -23,6 +23,7 @@ public abstract class Menu : MonoBehaviour
 
     protected virtual void OpenMenu(Action onOpenAnimationEndedActions = null)
     {
+        gameObject.SetActive(true);
         OnMenuOpened?.Invoke();
         animator.SetTrigger(OPEN_MENU_ANIMATION_HASH);
         this.onOpenAnimationEndedActions = onOpenAnimationEndedActions;
@@ -33,6 +34,7 @@ public abstract class Menu : MonoBehaviour
         OnMenuClosed?.Invoke();
         animator.SetTrigger(CLOSE_MENU_ANIMATION_HASH);
         this.onCloseAnimationEndedActions = onCloseAnimationEndedActions;
+        this.onCloseAnimationEndedActions += () => { gameObject.SetActive(false); };
     }
 
     private void Animator_OpenMenuAnimationFinished()

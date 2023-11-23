@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
+using System;
 
 public class InputMananger : MonoBehaviour
 {
     public static InputMananger Instance { get; private set; }
+
+    public event Action OnPauseInputTriggered;
 
     private PlayerInputActions inputActions;
 
@@ -22,6 +24,11 @@ public class InputMananger : MonoBehaviour
         }
 
         inputActions = new PlayerInputActions();
+    }
+
+    private void Update()
+    {
+        InputUpdate();
     }
 
     private void OnEnable()
@@ -68,5 +75,11 @@ public class InputMananger : MonoBehaviour
         return inputActions.Player.Interact.triggered;
     }
 
-
+    private void InputUpdate()
+    {
+        if (inputActions.Player.Pause.triggered)
+        {
+            OnPauseInputTriggered?.Invoke();
+        }
+    }
 }
