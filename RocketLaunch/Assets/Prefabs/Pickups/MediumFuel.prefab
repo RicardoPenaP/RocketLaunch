@@ -84,6 +84,11 @@ PrefabInstance:
       propertyPath: m_Center.y
       value: 0.2
       objectReference: {fileID: 0}
+    - target: {fileID: 1025880232590566058, guid: f6d8d55b5019d4a4d92e9faf27437a3a,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 68b0aaae566142244af753fb349b4899, type: 2}
     - target: {fileID: 2117021540563749899, guid: f6d8d55b5019d4a4d92e9faf27437a3a,
         type: 3}
       propertyPath: m_RootOrder
@@ -92,12 +97,12 @@ PrefabInstance:
     - target: {fileID: 2117021540563749899, guid: f6d8d55b5019d4a4d92e9faf27437a3a,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 9.787
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2117021540563749899, guid: f6d8d55b5019d4a4d92e9faf27437a3a,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.091
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2117021540563749899, guid: f6d8d55b5019d4a4d92e9faf27437a3a,
         type: 3}
@@ -143,6 +148,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: MediumFuel
+      objectReference: {fileID: 0}
+    - target: {fileID: 5654839309156950902, guid: f6d8d55b5019d4a4d92e9faf27437a3a,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5654839309156950902, guid: f6d8d55b5019d4a4d92e9faf27437a3a,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5654839309156950902, guid: f6d8d55b5019d4a4d92e9faf27437a3a,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6003475831370782823, guid: f6d8d55b5019d4a4d92e9faf27437a3a,
         type: 3}
