@@ -6,6 +6,7 @@ public class FloatingEffect : MonoBehaviour
 {
     [Header("Floating Effect")]
     [SerializeField] private float rotationSpeed;
+    [SerializeField] private float movementSpeed;
     [SerializeField] private float maxYOffset;
 
     private  float maxY, minY, yMovementDirection;    
@@ -28,7 +29,7 @@ public class FloatingEffect : MonoBehaviour
         Vector3 rotation = Vector3.up * rotationSpeed * Time.deltaTime;
         transform.Rotate(rotation);
 
-        Vector3 newPosition = transform.position + Vector3.up * yMovementDirection * rotationSpeed * Time.deltaTime;
+        Vector3 newPosition = transform.position + Vector3.up * yMovementDirection * movementSpeed * Time.deltaTime;
         newPosition.y = Mathf.Clamp(newPosition.y,minY,maxY);
 
         if (newPosition.y >= maxY || newPosition.y <= minY)
