@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2117021540563749899}
   - component: {fileID: 6003475831370782823}
+  - component: {fileID: 218150721361741379}
   - component: {fileID: 550368535216282732}
   m_Layer: 7
   m_Name: Pickup
@@ -51,6 +52,18 @@ MonoBehaviour:
   effectivePercentage: 0
   defaultMovementSpeed: 1
   movementSpeedAugmentCoeficient: 0.2
+--- !u!114 &218150721361741379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4535362204642102621}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bb772eaec8a1a2429e3d2f2365dbcd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!65 &550368535216282732
 BoxCollider:
   m_ObjectHideFlags: 0
