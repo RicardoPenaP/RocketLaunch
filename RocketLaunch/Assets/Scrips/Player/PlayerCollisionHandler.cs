@@ -16,6 +16,7 @@ public class PlayerCollisionHandler : MonoBehaviour
     }
 
     public event EventHandler OnCollisionEnterWithObject;
+    public event EventHandler OnTriggerEnterWithObject;
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -29,6 +30,14 @@ public class PlayerCollisionHandler : MonoBehaviour
             OnCollisionEnterWithObject?.Invoke(this, new CollisionInfo<ObstacleController>(obstacleController));
         }
         
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.TryGetComponent<Pickup>(out Pickup pickup))
+        {
+            OnTriggerEnterWithObject?.Invoke(this, new CollisionInfo<Pickup>(pickup));
+        }
     }
 
 
