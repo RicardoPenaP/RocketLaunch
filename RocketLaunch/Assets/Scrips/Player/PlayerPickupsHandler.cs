@@ -21,6 +21,14 @@ public class PlayerPickupsHandler : MonoBehaviour
         }
     }
 
+    private void OnDestroy()
+    {
+        if (playerCollisionHandler)
+        {
+            playerCollisionHandler.OnTriggerEnterWithObject -= PlayerCollisionHandler_OnTriggerEnterWithObject;
+        }
+    }
+
     private void PlayerCollisionHandler_OnTriggerEnterWithObject(object sender, EventArgs e)
     {
         if (e is PlayerCollisionHandler.CollisionInfo<Pickup> collisionInfo)
