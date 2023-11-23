@@ -31,6 +31,7 @@ public class EngineController : MonoBehaviour
     public event Action<PlayerMovement.RotationDirection,bool> OnSideEngineStateChange;
 
     private PlayerMovement playerMovement;
+    private PlayerPickupsHandler playerPickupsHandler;
 
     private float currentEnginePower;
     private float currentEngineTemperature;
@@ -44,6 +45,7 @@ public class EngineController : MonoBehaviour
     private void Awake()
     {        
         playerMovement = GetComponentInParent<PlayerMovement>();
+        playerPickupsHandler = transform.parent.GetComponentInChildren<PlayerPickupsHandler>();
         IsOverHeated = false;
         HasFuel = true;
     }
@@ -56,6 +58,11 @@ public class EngineController : MonoBehaviour
             playerMovement.OnStopMovingUpwards += PlayerMovement_OnStopMovingUpwards;
             playerMovement.OnStartRotating += PlayerMovement_OnStartRotating;
             playerMovement.OnStopRotating += PlayerMovement_OnStopRotating;
+        }
+
+        if (playerPickupsHandler)
+        {
+            playerPickupsHandler.OnPickupPiked += PlayerPickupsHandler_OnPickupPicked;
         }
         currentEnginePower = 0;
         currentEngineTemperature = 0;
@@ -71,6 +78,13 @@ public class EngineController : MonoBehaviour
         {
             playerMovement.OnStartMovingUpwards -= PlayerMovement_OnStartMovingUpwards;
             playerMovement.OnStopMovingUpwards -= PlayerMovement_OnStopMovingUpwards;
+            playerMovement.OnStartRotating -= PlayerMovement_OnStartRotating;
+            playerMovement.OnStopRotating -= PlayerMovement_OnStopRotating;
+        }
+
+        if (playerPickupsHandler)
+        {
+            playerPickupsHandler.OnPickupPiked -= PlayerPickupsHandler_OnPickupPicked;
         }
     }
 
@@ -142,6 +156,7 @@ public class EngineController : MonoBehaviour
             OnMainEngineStateChange?.Invoke(isMainEngineOn);
         }
     }
+
     private void UpdateSideEngineState(bool state, PlayerMovement.RotationDirection rotationDirection)
     {        
         isSideEngineOn = state;
@@ -202,11 +217,63 @@ public class EngineController : MonoBehaviour
         UpdateSideEngineState(false, rotationDirection);
     }
 
+    private void PlayerPickupsHandler_OnPickupPicked(Pickup pickup)
+    {
+        switch (pickup.GetPickupType())
+        {
+            case Pickup.PickupType.Cooland:
+                if (IsOverHeated)
+                {
+                    IsOverHeated = false;
+                }
+                InstanlyCoolTheEngine(pickup.GetEffectivePercentage());
+                break;
+            case Pickup.PickupType.Fuel:
+                RefillFuel(pickup.GetEffectivePercentage());
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void InstanlyCoolTheEngine(int percentage)
+    {
+        float coolAmount = maxEngineTemperature * CalculateNormalizedPercentage(percentage);
+        if (currentEngineTemperature > coolAmount)
+        {
+            currentEngineTemperature -= coolAmount;
+        }
+        else
+        {
+            currentEngineTemperature = 0;
+        }
+        OnEngineTemperatureChange?.Invoke(currentEngineTemperature, maxEngineTemperature);
+    }
+
+    private void RefillFuel(int percentage)
+    {
+        float fuelAmount = maxFuelAmount * CalculateNormalizedPercentage(percentage);
+        if (maxFuelAmount - currentFuelAmount > fuelAmount)
+        {
+            currentFuelAmount += fuelAmount;
+        }
+        else
+        {
+            currentFuelAmount = maxFuelAmount;
+        }
+        OnFuelChange(currentFuelAmount, maxFuelAmount);
+    }
+
+    private float CalculateNormalizedPercentage(int percentage)
+    {
+        return (float)percentage / 100;
+    }
+
     private IEnumerator OverHeatRestRoutine()
     {
         float timer = 0;
 
-        while (timer < overHeatRestTime)
+        while (timer < overHeatRestTime && IsOverHeated)
         {
             timer += Time.deltaTime;
             float progress = timer / overHeatRestTime;
