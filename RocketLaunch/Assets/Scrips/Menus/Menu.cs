@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public abstract class Menu : MonoBehaviour
+public abstract class Menu<T> : MonoBehaviour where T : Menu<T>
 {
     private readonly int OPEN_MENU_ANIMATION_HASH = Animator.StringToHash("OpenMenu");
     private readonly int CLOSE_MENU_ANIMATION_HASH = Animator.StringToHash("CloseMenu");
+
+    public static T Instance { get; private set; }
 
     public event Action OnMenuOpened;
     public event Action OnMenuClosed;
@@ -18,8 +20,16 @@ public abstract class Menu : MonoBehaviour
 
     protected virtual void Awake()
     {
+        if (!Instance)
+        {
+            Instance = (T)this;
+        }
+        else
+        {
+            Destroy(this);
+        }
         animator = GetComponent<Animator>();
-    }
+    }    
 
     protected virtual void OpenMenu(Action onOpenAnimationEndedActions = null)
     {

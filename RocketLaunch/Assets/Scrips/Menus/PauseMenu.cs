@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PauseMenu : Menu
+public class PauseMenu : Menu<PauseMenu>
 {
     [Header("Pause Menu")]
     [SerializeField] private Button resumeButton;
@@ -19,6 +19,8 @@ public class PauseMenu : Menu
         {
             InputMananger.Instance.OnPauseInputTriggered += InputMananger_OnPauseInputTriggered;
         }
+
+        gameObject.SetActive(false);
     }
 
     private void OnDestroy()
