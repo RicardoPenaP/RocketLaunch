@@ -69,4 +69,5 @@ public class PauseMenu : Menu<PauseMenu>
         //Go back to main menu scene
         Debug.Log("Still working on that");
     }
+
 }

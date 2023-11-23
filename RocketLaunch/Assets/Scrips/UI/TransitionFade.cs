@@ -13,8 +13,7 @@ public class TransitionFade : MonoBehaviour
     [Header("Transition Fade")]
     [SerializeField,Min(0f)] private float fadeDuration = 1f;
 
-    private Image fadeImage;
-
+    private Image fadeImage;    
 
     private void Awake()
     {
@@ -29,6 +28,8 @@ public class TransitionFade : MonoBehaviour
         }
 
         fadeImage = GetComponent<Image>();
+
+        
     }
 
     private void Start()
@@ -36,19 +37,26 @@ public class TransitionFade : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public void FadeIn()
+    public void FadeIn(Action onFadeInEnded = null)
     {
         gameObject.SetActive(true);
-        StartCoroutine(FadeRoutine(transparentAlphaValue, opaqueAlphaValue));
+        
+        StartCoroutine(FadeRoutine(transparentAlphaValue, opaqueAlphaValue, onFadeInEnded));
     }
 
-    public void FadeOut()
+    public void FadeOut(Action onFadeOutEnded = null)
+    {        
+        onFadeOutEnded += DesactivateGameObject;
+        
+        StartCoroutine(FadeRoutine(opaqueAlphaValue, transparentAlphaValue, onFadeOutEnded));
+    }
+
+    private void DesactivateGameObject()
     {
-        gameObject.SetActive(true);
-        StartCoroutine(FadeRoutine(opaqueAlphaValue,transparentAlphaValue));
+        gameObject.SetActive(false);
     }
 
-    private IEnumerator FadeRoutine(float startingAlpha, float targetAlpha)
+    private IEnumerator FadeRoutine(float startingAlpha, float targetAlpha, Action onFadeRoutineEnded)
     {        
         float timer = 0f;
         Color imageColor = fadeImage.color;
@@ -61,5 +69,7 @@ public class TransitionFade : MonoBehaviour
             fadeImage.color = imageColor;
             yield return null;
         }
+
+        onFadeRoutineEnded?.Invoke();
     }
 }
