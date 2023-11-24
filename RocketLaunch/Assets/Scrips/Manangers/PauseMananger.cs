@@ -4,15 +4,33 @@ using UnityEngine;
 
 public class PauseMananger : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private const float defaultTimeScale = 1;
+    private const float pausedTimeScale = 0;
+    private void Start()
     {
-        
+        if (PauseMenu.Instance)
+        {
+            PauseMenu.Instance.OnMenuOpened += PauseMenu_OnMenuOpened;
+            PauseMenu.Instance.OnMenuClosed += PauseMenu_OnMenuClosed;
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnDestroy()
     {
-        
+        if (PauseMenu.Instance)
+        {
+            PauseMenu.Instance.OnMenuOpened -= PauseMenu_OnMenuOpened;
+            PauseMenu.Instance.OnMenuClosed -= PauseMenu_OnMenuClosed;
+        }
+    }
+
+    private void PauseMenu_OnMenuOpened()
+    {
+        Time.timeScale = pausedTimeScale;
+    }
+
+    private void PauseMenu_OnMenuClosed()
+    {
+        Time.timeScale = defaultTimeScale;
     }
 }

@@ -17,6 +17,7 @@ public abstract class Menu<T> : MonoBehaviour where T : Menu<T>
     private Action onCloseAnimationEndedActions;
 
     private Animator animator;
+    protected bool menuOpened = false;
 
     protected virtual void Awake()
     {
@@ -33,18 +34,20 @@ public abstract class Menu<T> : MonoBehaviour where T : Menu<T>
 
     protected virtual void OpenMenu(Action onOpenAnimationEndedActions = null)
     {
+        menuOpened = true;
         gameObject.SetActive(true);
-        OnMenuOpened?.Invoke();
         animator.SetTrigger(OPEN_MENU_ANIMATION_HASH);
+        OnMenuOpened?.Invoke();       
         this.onOpenAnimationEndedActions = onOpenAnimationEndedActions;
     }
 
     protected virtual void CloseMenu(Action onCloseAnimationEndedActions = null)
     {
-        OnMenuClosed?.Invoke();
+        menuOpened = false;
         animator.SetTrigger(CLOSE_MENU_ANIMATION_HASH);
         this.onCloseAnimationEndedActions = onCloseAnimationEndedActions;
         this.onCloseAnimationEndedActions += () => { gameObject.SetActive(false); };
+        this.onCloseAnimationEndedActions += () => { OnMenuClosed?.Invoke(); };        
     }
 
     private void Animator_OpenMenuAnimationFinished()

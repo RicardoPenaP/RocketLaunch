@@ -11,8 +11,6 @@ public class PauseMenu : Menu<PauseMenu>
     [SerializeField] private Button settingsButton;
     [SerializeField] private Button mainMenuButton;
 
-    bool menuState = false;
-
     protected override void Awake()
     {
         base.Awake();
@@ -29,6 +27,7 @@ public class PauseMenu : Menu<PauseMenu>
         }
 
         gameObject.SetActive(false);
+        menuOpened = false;
     }
 
     private void OnDestroy()
@@ -40,9 +39,8 @@ public class PauseMenu : Menu<PauseMenu>
     }
 
     private void InputMananger_OnPauseInputTriggered()
-    {
-        menuState = !menuState;
-        if (menuState)
+    {        
+        if (!menuOpened)
         {
             OpenMenu();
         }
@@ -54,7 +52,7 @@ public class PauseMenu : Menu<PauseMenu>
 
     private void ResumeButton_OnClick()
     {
-        //Resume behaviour
+        //Resume behaviour        
         CloseMenu();
     }
 
