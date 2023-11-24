@@ -13,6 +13,12 @@ public class PauseMananger : MonoBehaviour
             PauseMenu.Instance.OnMenuOpened += PauseMenu_OnMenuOpened;
             PauseMenu.Instance.OnMenuClosed += PauseMenu_OnMenuClosed;
         }
+
+        if (GameOverMenu.Instance)
+        {
+            GameOverMenu.Instance.OnMenuOpened += GameOver_OnMenuOpened;
+            GameOverMenu.Instance.OnMenuClosed += GameOver_OnMenuClosed;
+        }
     }
 
     private void OnDestroy()
@@ -22,6 +28,12 @@ public class PauseMananger : MonoBehaviour
             PauseMenu.Instance.OnMenuOpened -= PauseMenu_OnMenuOpened;
             PauseMenu.Instance.OnMenuClosed -= PauseMenu_OnMenuClosed;
         }
+
+        if (GameOverMenu.Instance)
+        {
+            GameOverMenu.Instance.OnMenuOpened -= GameOver_OnMenuOpened;
+            GameOverMenu.Instance.OnMenuClosed -= GameOver_OnMenuClosed;
+        }
     }
 
     private void PauseMenu_OnMenuOpened()
@@ -30,6 +42,16 @@ public class PauseMananger : MonoBehaviour
     }
 
     private void PauseMenu_OnMenuClosed()
+    {
+        Time.timeScale = defaultTimeScale;
+    }
+
+    private void GameOver_OnMenuOpened()
+    {
+        Time.timeScale = pausedTimeScale;
+    }
+
+    private void GameOver_OnMenuClosed()
     {
         Time.timeScale = defaultTimeScale;
     }

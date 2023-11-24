@@ -10,6 +10,8 @@ public class LevelMananger : MonoBehaviour
     [SerializeField] private GameScene nextLevel;
     public static LevelMananger Instance { get; private set; }
 
+    public event Action OnGameOver;
+
     private PlayerController playerController;
     private PlayerLandingController playerLandingController;
 
@@ -29,29 +31,35 @@ public class LevelMananger : MonoBehaviour
     private void Start()
     {
         Application.targetFrameRate = 60;
-
+        
         playerController = FindAnyObjectByType<PlayerController>();
         playerLandingController = playerController.GetComponent<PlayerLandingController>();
-        playerController.OnDie += PlayerController_OnPlayerDie;
-        playerLandingController.OnLandingFinished += PlayerLandingController_OnLandingFinished;
-    }
 
-    private void OnDestroy()
-    {
         if (playerController)
         {
-            playerController.OnDie -= PlayerController_OnPlayerDie;
+            playerController.OnDie += PlayerController_OnDie;
         }
-
         if (playerLandingController)
         {
             playerLandingController.OnLandingFinished += PlayerLandingController_OnLandingFinished;
         }
     }
 
-    private void PlayerController_OnPlayerDie(object sender, EventArgs e)
+    private void OnDestroy()
     {
-        SceneManagement.ReloadCurrentScene();
+        if (playerController)
+        {
+            playerController.OnDie -= PlayerController_OnDie;
+        }
+        if (playerLandingController)
+        {
+            playerLandingController.OnLandingFinished += PlayerLandingController_OnLandingFinished;
+        }
+    }
+
+    private void PlayerController_OnDie(object sender, EventArgs e)
+    {
+        OnGameOver?.Invoke();
     }
 
     private void PlayerLandingController_OnLandingFinished(object sender, EventArgs e)
@@ -59,7 +67,5 @@ public class LevelMananger : MonoBehaviour
         //level finished behaviour
         Debug.Log("Level finished");
     }
-
-   
 
 }
