@@ -50,6 +50,8 @@ public class PlayerLandingController : MonoBehaviour
     {
         playerCollisionHandler = GetComponent<PlayerCollisionHandler>();
         rigidbody = GetComponent<Rigidbody>();
+        OnPreLandingStart += (object sender, EventArgs e) => { rigidbody.useGravity = false; };
+        OnLandingFinished += (object sender, EventArgs e) => { rigidbody.useGravity = true; };
     }
 
     private void Start()
@@ -84,6 +86,8 @@ public class PlayerLandingController : MonoBehaviour
 
     private void OnDestroy()
     {
+        OnPreLandingStart -= (object sender, EventArgs e) => { rigidbody.useGravity = false; };
+        OnLandingFinished -= (object sender, EventArgs e) => { rigidbody.useGravity = true; };
         if (playerCollisionHandler)
         {
             playerCollisionHandler.OnCollisionEnterWithObject -= PlayerCollisionHandler_OnCollisionWithObject;

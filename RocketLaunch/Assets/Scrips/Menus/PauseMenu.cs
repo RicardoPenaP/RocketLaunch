@@ -51,8 +51,7 @@ public class PauseMenu : Menu<PauseMenu>
     }
 
     private void ResumeButton_OnClick()
-    {
-        //Resume behaviour        
+    {             
         CloseMenu();
     }
 
