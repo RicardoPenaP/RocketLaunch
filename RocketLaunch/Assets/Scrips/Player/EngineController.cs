@@ -4,7 +4,9 @@ using UnityEngine;
 using System;
 
 public class EngineController : MonoBehaviour
-{    
+{
+    private const int FULL_PERCENTAGE = 100;
+
     [Header("Engine Controller")]
     [Header("Fuel settings")]
     [SerializeField] private float maxFuelAmount;
@@ -32,6 +34,7 @@ public class EngineController : MonoBehaviour
 
     private PlayerMovement playerMovement;
     private PlayerPickupsHandler playerPickupsHandler;
+    private PlayerController playerController;
 
     private float currentEnginePower;
     private float currentEngineTemperature;
@@ -46,6 +49,7 @@ public class EngineController : MonoBehaviour
     {        
         playerMovement = GetComponentInParent<PlayerMovement>();
         playerPickupsHandler = transform.parent.GetComponentInChildren<PlayerPickupsHandler>();
+        playerController = GetComponentInParent<PlayerController>();
         IsOverHeated = false;
         HasFuel = true;
     }
@@ -63,6 +67,11 @@ public class EngineController : MonoBehaviour
         if (playerPickupsHandler)
         {
             playerPickupsHandler.OnPickupPiked += PlayerPickupsHandler_OnPickupPicked;
+        }
+
+        if (playerController)
+        {
+            playerController.OnPlayerReset += PlayerController_OnPlayerReset;
         }
         currentEnginePower = 0;
         currentEngineTemperature = 0;
@@ -85,6 +94,11 @@ public class EngineController : MonoBehaviour
         if (playerPickupsHandler)
         {
             playerPickupsHandler.OnPickupPiked -= PlayerPickupsHandler_OnPickupPicked;
+        }
+
+        if (playerController)
+        {
+            playerController.OnPlayerReset -= PlayerController_OnPlayerReset;
         }
     }
 
@@ -236,6 +250,11 @@ public class EngineController : MonoBehaviour
         }
     }
 
+    private void PlayerController_OnPlayerReset(object sender, EventArgs e)
+    {
+        ResetEngine();
+    }
+
     private void InstanlyCoolTheEngine(int percentage)
     {
         float coolAmount = maxEngineTemperature * CalculateNormalizedPercentage(percentage);
@@ -267,6 +286,15 @@ public class EngineController : MonoBehaviour
     private float CalculateNormalizedPercentage(int percentage)
     {
         return (float)percentage / 100;
+    }
+
+    private void ResetEngine()
+    {
+        StopAllCoroutines();
+        InstanlyCoolTheEngine(FULL_PERCENTAGE);
+        RefillFuel(FULL_PERCENTAGE);
+        currentEnginePower = 0f;
+        OnEnginePowerChange?.Invoke(currentEnginePower, maxEnginePower);
     }
 
     private IEnumerator OverHeatRestRoutine()
