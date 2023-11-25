@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class PauseMananger : MonoBehaviour
 {
@@ -22,7 +23,7 @@ public class PauseMananger : MonoBehaviour
     }
 
     private void OnDestroy()
-    {
+    {        
         if (PauseMenu.Instance)
         {
             PauseMenu.Instance.OnMenuOpened -= PauseMenu_OnMenuOpened;
@@ -55,4 +56,14 @@ public class PauseMananger : MonoBehaviour
     {
         Time.timeScale = defaultTimeScale;
     }
+
+    //private void Menu_OnAnyMenuOpened(object sender, EventArgs e)
+    //{
+    //    Time.timeScale = pausedTimeScale;
+    //}
+
+    //private void Menu_OnAnyMenuClosed(object sender, EventArgs e)
+    //{
+    //    Time.timeScale = defaultTimeScale;
+    //}
 }

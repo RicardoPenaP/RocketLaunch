@@ -8,6 +8,8 @@ public abstract class Menu<T> : MonoBehaviour where T : Menu<T>
     private readonly int OPEN_MENU_ANIMATION_HASH = Animator.StringToHash("OpenMenu");
     private readonly int CLOSE_MENU_ANIMATION_HASH = Animator.StringToHash("CloseMenu");
 
+    public static event EventHandler OnAnyMenuOpened;
+    public static event EventHandler OnAnyMenuClosed;
     public static T Instance { get; private set; }
 
     public event Action OnMenuOpened;
@@ -37,7 +39,8 @@ public abstract class Menu<T> : MonoBehaviour where T : Menu<T>
         menuOpened = true;
         gameObject.SetActive(true);
         animator.SetTrigger(OPEN_MENU_ANIMATION_HASH);
-        OnMenuOpened?.Invoke();       
+        OnMenuOpened?.Invoke();
+        OnAnyMenuOpened?.Invoke(this, EventArgs.Empty);
         this.onOpenAnimationEndedActions = onOpenAnimationEndedActions;
     }
 
@@ -47,7 +50,8 @@ public abstract class Menu<T> : MonoBehaviour where T : Menu<T>
         animator.SetTrigger(CLOSE_MENU_ANIMATION_HASH);
         this.onCloseAnimationEndedActions = onCloseAnimationEndedActions;
         this.onCloseAnimationEndedActions += () => { gameObject.SetActive(false); };
-        this.onCloseAnimationEndedActions += () => { OnMenuClosed?.Invoke(); };        
+        this.onCloseAnimationEndedActions += () => { OnMenuClosed?.Invoke(); };
+        this.onCloseAnimationEndedActions += () => { OnAnyMenuClosed?.Invoke(this, EventArgs.Empty); };
     }
 
     private void Animator_OpenMenuAnimationFinished()
