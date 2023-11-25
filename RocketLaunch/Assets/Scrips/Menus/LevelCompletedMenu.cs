@@ -35,7 +35,7 @@ public class LevelCompletedMenu : Menu<LevelCompletedMenu>
     {
         if (LevelMananger.Instance)
         {
-            LevelMananger.Instance.OnGameOver += LevelMananger_OnGameOver;
+            LevelMananger.Instance.OnLevelCompleted += LevelMananger_OnLevelCompleted;
         }
 
         gameObject.SetActive(false);
@@ -46,7 +46,7 @@ public class LevelCompletedMenu : Menu<LevelCompletedMenu>
     {
         if (LevelMananger.Instance)
         {
-            LevelMananger.Instance.OnGameOver -= LevelMananger_OnGameOver;
+            LevelMananger.Instance.OnGameOver -= LevelMananger_OnLevelCompleted;
         }
 
         if (playAgainButton)
@@ -87,7 +87,7 @@ public class LevelCompletedMenu : Menu<LevelCompletedMenu>
         SceneManagement.ReloadCurrentScene();
     }
 
-    private void LevelMananger_OnGameOver()
+    private void LevelMananger_OnLevelCompleted()
     {
         OpenMenu();
     }

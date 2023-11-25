@@ -11,6 +11,7 @@ public class LevelMananger : MonoBehaviour
     public static LevelMananger Instance { get; private set; }
 
     public event Action OnGameOver;
+    public event Action OnLevelCompleted;
 
     private PlayerController playerController;
     private PlayerLandingController playerLandingController;
@@ -64,8 +65,7 @@ public class LevelMananger : MonoBehaviour
 
     private void PlayerLandingController_OnLandingFinished(object sender, EventArgs e)
     {
-        //level finished behaviour
-        Debug.Log("Level finished");
+        OnLevelCompleted?.Invoke();
     }
 
 }
