@@ -28,8 +28,7 @@ public class PlayerController : MonoBehaviour
     {
         playerInmune = GetComponent<PlayerInmune>();
         playerCollisionHandler = GetComponent<PlayerCollisionHandler>();        
-        IsAlive = true;
-        OnLifeRemove += PlayerReset;
+        IsAlive = true;        
     }
 
     private void Start()
@@ -41,8 +40,7 @@ public class PlayerController : MonoBehaviour
     }
 
     private void OnDestroy()
-    {
-        OnLifeRemove -= PlayerReset;
+    {       
         playerCollisionHandler.OnCollisionEnterWithObject -= PlayerCollisionHandler_OnCollisionEnterWithObject;
     }
 
@@ -74,7 +72,8 @@ public class PlayerController : MonoBehaviour
             Die();
             IsAlive = false;
         }
-       
+
+        PlayerReset();
     }
 
     private void Die()
@@ -82,14 +81,14 @@ public class PlayerController : MonoBehaviour
         OnDie?.Invoke(this, EventArgs.Empty);
     }
 
-    private void PlayerReset(object sender,EventArgs e)
+    private void PlayerReset()
     {
         if (!IsAlive)
         {
             return;
         }
         transform.position = lastPlatformReached.GetSpawnPoint().position;
-        OnPlayerReset?.Invoke(sender, e);
+        OnPlayerReset?.Invoke(this, EventArgs.Empty);
     }
 
     private void PlayerCollisionHandler_OnCollisionEnterWithObject(object sender, EventArgs e)
@@ -127,7 +126,7 @@ public class PlayerController : MonoBehaviour
     {
         OnPlayerCrash?.Invoke();        
         yield return new WaitForSeconds(crashRoutineWait);
-        RemoveOneLife();
+        RemoveOneLife();        
     }
     
 }
