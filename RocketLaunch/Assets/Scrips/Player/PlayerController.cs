@@ -9,11 +9,12 @@ public class PlayerController : MonoBehaviour
 
     [Header("Player Controller")]
     [SerializeField] private int maxLifesAmount = 3;
+    [SerializeField] private float crashRoutineWait = 2f;
 
     public event Action<int> OnCurrentLifesChange;
     public event EventHandler OnLifeRemove;
     public event EventHandler OnDie;
-    public event EventHandler OnPlayerReset;
+    public event EventHandler OnPlayerReset; 
 
     private PlayerInmune playerInmune;
     private LevelPlatform lastPlatformReached;
@@ -119,5 +120,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private IEnumerator CrashRoutine(Action onCrashRoutineStartActions = null, Action onCrashRoutineEndsActions = null)
+    {
+        onCrashRoutineStartActions?.Invoke();
+        yield return new WaitForSeconds(crashRoutineWait);
+        onCrashRoutineEndsActions?.Invoke();
+    }
     
 }

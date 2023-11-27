@@ -4,15 +4,12 @@ using UnityEngine;
 
 public class PlayerDeathVFX : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private new ParticleSystem particleSystem;
+
+    private void Awake()
     {
-        
+        particleSystem = GetComponentInChildren<ParticleSystem>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
 }
