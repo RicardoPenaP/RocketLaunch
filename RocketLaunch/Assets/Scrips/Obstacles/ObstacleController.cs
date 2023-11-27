@@ -28,11 +28,16 @@ public class ObstacleController : MonoBehaviour
     [SerializeField, Min(0f)] private float expansionSpeed = 0f;
     [SerializeField] private Vector3 expansionDirection;
 
+    [Header("Rotation Settings")]
+    [SerializeField] private bool rotationActive = false;
+    [SerializeField] private float rotationSpeed = 20;
+
     public event EventHandler OnTimerStop;
 
     private float timer;
     private Vector3 maxPosition;
-    private Vector3 startingPosition;   
+    private Vector3 startingPosition;
+    private Vector3 rotationDirection;
 
     private void Awake()
     {        
@@ -43,7 +48,7 @@ public class ObstacleController : MonoBehaviour
         timer = 0;
         startingPosition = transform.position;
         maxPosition = startingPosition + maxPositionDistance;
-        
+        rotationDirection = UnityEngine.Random.insideUnitSphere;
     }
 
 
@@ -101,6 +106,16 @@ public class ObstacleController : MonoBehaviour
     {
         UpdateMovement();
         UpdateTimer();
+        UpdateRotation();
+    }
+
+    private void UpdateRotation()
+    {
+        if (!rotationActive)
+        {
+            return;
+        }
+        transform.Rotate(rotationDirection * rotationSpeed * Time.deltaTime);
     }
 
     private void OnDestroy()
