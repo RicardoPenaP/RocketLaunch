@@ -14,7 +14,8 @@ public class PlayerController : MonoBehaviour
     public event Action<int> OnCurrentLifesChange;
     public event EventHandler OnLifeRemove;
     public event EventHandler OnDie;
-    public event EventHandler OnPlayerReset; 
+    public event EventHandler OnPlayerReset;
+    public event Action OnPlayerCrash;
 
     private PlayerInmune playerInmune;
     private LevelPlatform lastPlatformReached;
@@ -62,7 +63,9 @@ public class PlayerController : MonoBehaviour
 
     private void RemoveOneLife()
     {
-        currentLifesAmount--;  
+        currentLifesAmount--;
+        OnCurrentLifesChange?.Invoke(currentLifesAmount);
+        OnLifeRemove?.Invoke(this, EventArgs.Empty);
 
         if (currentLifesAmount <= 0)
         {
@@ -70,8 +73,7 @@ public class PlayerController : MonoBehaviour
             Die();
             IsAlive = false;
         }
-        OnCurrentLifesChange?.Invoke(currentLifesAmount);
-        OnLifeRemove?.Invoke(this, EventArgs.Empty);
+       
     }
 
     private void Die()
@@ -98,7 +100,7 @@ public class PlayerController : MonoBehaviour
                 {
                     break;
                 }
-                RemoveOneLife();
+                StartCoroutine(PlayerCrashRoutine());               
                 break;
 
             case PlayerCollisionHandler.CollisionInfo<LevelPlatform> collisionInfo:
@@ -120,11 +122,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private IEnumerator CrashRoutine(Action onCrashRoutineStartActions = null, Action onCrashRoutineEndsActions = null)
+    private IEnumerator PlayerCrashRoutine()
     {
-        onCrashRoutineStartActions?.Invoke();
+        OnPlayerCrash?.Invoke();
         yield return new WaitForSeconds(crashRoutineWait);
-        onCrashRoutineEndsActions?.Invoke();
+        RemoveOneLife();
     }
     
 }
