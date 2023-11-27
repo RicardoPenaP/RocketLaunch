@@ -19,14 +19,15 @@ public class PlayerController : MonoBehaviour
 
     private PlayerInmune playerInmune;
     private LevelPlatform lastPlatformReached;
-    private PlayerCollisionHandler playerCollisionHandler;
+    private PlayerCollisionHandler playerCollisionHandler;    
+
     private int currentLifesAmount;
     public bool IsAlive { get; private set; }
 
     private void Awake()
     {
         playerInmune = GetComponent<PlayerInmune>();
-        playerCollisionHandler = GetComponent<PlayerCollisionHandler>();       
+        playerCollisionHandler = GetComponent<PlayerCollisionHandler>();        
         IsAlive = true;
         OnLifeRemove += PlayerReset;
     }
@@ -124,7 +125,7 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator PlayerCrashRoutine()
     {
-        OnPlayerCrash?.Invoke();
+        OnPlayerCrash?.Invoke();        
         yield return new WaitForSeconds(crashRoutineWait);
         RemoveOneLife();
     }

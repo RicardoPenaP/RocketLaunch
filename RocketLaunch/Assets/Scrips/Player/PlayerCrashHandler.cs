@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerDeathVFX : MonoBehaviour
+public class PlayerCrashHandler : MonoBehaviour
 {
     private PlayerController playerController;
     private new ParticleSystem particleSystem;
