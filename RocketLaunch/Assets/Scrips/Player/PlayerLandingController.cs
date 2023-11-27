@@ -34,6 +34,7 @@ public class PlayerLandingController : MonoBehaviour
 
     private bool isPreLanding = false;
     private bool isLanding = false;
+    private int landingTries = 0;
 
     private void OnDrawGizmos()
     {
@@ -125,6 +126,7 @@ public class PlayerLandingController : MonoBehaviour
 
     private void StartLanding()
     {
+        landingTries++;
         isLanding = true;
         OnLandingStart?.Invoke(this, EventArgs.Empty);
         StartCoroutine(LandingRoutine());
@@ -156,7 +158,9 @@ public class PlayerLandingController : MonoBehaviour
     private void LandingFinished()
     {
         float currentAngle = Vector3.Angle(Vector3.right, transform.up);
-        if (currentAngle < 90 - maxAngleDirfereceToSuccessLanding || currentAngle > 90 + maxAngleDirfereceToSuccessLanding)
+        float desiredAngle = landingPlatform.GetLandingAngle();
+
+        if (currentAngle < desiredAngle - maxAngleDirfereceToSuccessLanding || currentAngle > desiredAngle + maxAngleDirfereceToSuccessLanding)
         {
             //Reset the landing process
             ResetLanding();
