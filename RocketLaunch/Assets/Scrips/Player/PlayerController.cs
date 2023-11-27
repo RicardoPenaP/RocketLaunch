@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
     private PlayerCollisionHandler playerCollisionHandler;    
 
     private int currentLifesAmount;
+    private bool playerCrahsed = false;
     public bool IsAlive { get; private set; }
 
     private void Awake()
@@ -61,7 +62,7 @@ public class PlayerController : MonoBehaviour
     }
 
     private void RemoveOneLife()
-    {
+    {             
         currentLifesAmount--;
         OnCurrentLifesChange?.Invoke(currentLifesAmount);
         OnLifeRemove?.Invoke(this, EventArgs.Empty);
@@ -88,7 +89,8 @@ public class PlayerController : MonoBehaviour
             return;
         }
         transform.position = lastPlatformReached.GetSpawnPoint().position;
-        OnPlayerReset?.Invoke(this, EventArgs.Empty);
+        playerCrahsed = false;
+        OnPlayerReset?.Invoke(this, EventArgs.Empty);        
     }
 
     private void PlayerCollisionHandler_OnCollisionEnterWithObject(object sender, EventArgs e)
@@ -97,6 +99,10 @@ public class PlayerController : MonoBehaviour
         {
             case PlayerCollisionHandler.CollisionInfo<ObstacleController> collisionInfo:
                 if (playerInmune.IsInmune)
+                {
+                    break;
+                }
+                if (playerCrahsed)
                 {
                     break;
                 }
@@ -124,8 +130,9 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator PlayerCrashRoutine()
     {
+        playerCrahsed = true;
         OnPlayerCrash?.Invoke();        
-        yield return new WaitForSeconds(crashRoutineWait);
+        yield return new WaitForSeconds(crashRoutineWait);        
         RemoveOneLife();        
     }
     

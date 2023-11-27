@@ -9,6 +9,8 @@ public class PlayerCrashHandler : MonoBehaviour
     private new ParticleSystem particleSystem;
     private new Rigidbody rigidbody;
     private MeshRenderer[] meshRenderers;
+    private Collider[] colliders;
+    private PlayerMovement playerMovement;
 
     private void Awake()
     {
@@ -16,6 +18,8 @@ public class PlayerCrashHandler : MonoBehaviour
         particleSystem = GetComponentInChildren<ParticleSystem>();
         rigidbody = GetComponentInParent<Rigidbody>();
         meshRenderers = transform.parent.GetComponentsInChildren<MeshRenderer>();
+        colliders = GetComponentsInParent<Collider>();
+        playerMovement = GetComponentInParent<PlayerMovement>();
     }
 
     private void Start()
@@ -50,20 +54,33 @@ public class PlayerCrashHandler : MonoBehaviour
     {
         particleSystem.Play();
         rigidbody.useGravity = false;
-        SetMeshRenderers(false);
+        rigidbody.Sleep();
+        SetMeshRenderersEnabled(false);
+        SetCollidersEnabled(false);
+        playerMovement.enabled = false;
     }
 
     private void PlayerReset()
     {
         rigidbody.useGravity = true;
-        SetMeshRenderers(true);
+        SetMeshRenderersEnabled(true);
+        SetCollidersEnabled(true);
+        playerMovement.enabled = true;
     }
 
-    private void SetMeshRenderers(bool state)
+    private void SetMeshRenderersEnabled(bool state)
     {
         foreach (MeshRenderer meshRenderer in meshRenderers)
         {
             meshRenderer.enabled = state;
+        }
+    }
+
+    private void SetCollidersEnabled(bool state)
+    {
+        foreach (Collider collider in colliders)
+        {
+            collider.enabled = state;
         }
     }
 }
