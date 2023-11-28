@@ -9786,7 +9786,9 @@ MonoBehaviour:
     m_Bits: 64
   showGizmos: 0
   maxSpeedToStartLanding: 4
-  maxAngleDirfereceToSuccessLanding: 25
+  greenAreaPercentage: 0.1
+  yellowAreaPercentage: 0.3
+  playerPlatformDistanceOffset: 0
 --- !u!136 &4090625583501126733
 CapsuleCollider:
   m_ObjectHideFlags: 0

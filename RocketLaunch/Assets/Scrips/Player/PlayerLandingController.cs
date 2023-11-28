@@ -9,8 +9,8 @@ public class PlayerLandingController : MonoBehaviour
     {
         public float currentAngle;
         public float targetAngle;
-        public float greenAreaPercentage;
-        public float yellowAreaPercentage;
+        public float normalizedGreenAreaPercentage;
+        public float normalizedYellowAreaPercentage; 
     }
 
     [Header("Player Landing Controller")]
@@ -24,8 +24,7 @@ public class PlayerLandingController : MonoBehaviour
     [SerializeField] private bool showGizmos = true;
     [SerializeField, Min(0)] private float maxSpeedToStartLanding = 2f;    
     [SerializeField, Range(0f, 1f)] private float greenAreaPercentage = 0.15f;
-    [SerializeField, Range(0f, 1f)] private float yellowAreaPercentage = 0.4f;
-    
+    [SerializeField, Range(0f, 1f)] private float yellowAreaPercentage = 0.4f; 
 
     public event EventHandler OnPreLandingStart;
     public event EventHandler OnLandingStart;
@@ -45,6 +44,7 @@ public class PlayerLandingController : MonoBehaviour
     private bool isPreLanding = false;
     private bool isLanding = false;
     private int landingTries = 0;
+    private float maxLandingYDistance;    
 
     private void OnDrawGizmos()
     {
@@ -99,8 +99,8 @@ public class PlayerLandingController : MonoBehaviour
             LandingData landingData = new LandingData();
             landingData.currentAngle = Vector3.Angle(Vector3.right, transform.up);
             landingData.targetAngle = landingPlatform.GetLandingAngle();
-            landingData.greenAreaPercentage = greenAreaPercentage;
-            landingData.yellowAreaPercentage = yellowAreaPercentage;
+            landingData.normalizedGreenAreaPercentage = greenAreaPercentage;
+            landingData.normalizedYellowAreaPercentage = yellowAreaPercentage;            
             OnLandingUpdated?.Invoke(this, landingData);
         }
     }

@@ -48,16 +48,17 @@ public class LandingVisuals : MonoBehaviour
     private void PlayerLandingController_OnLandingUpdate(object sender, EventArgs e)
     {
         PlayerLandingController.LandingData landingData = (e as PlayerLandingController.LandingData);
-        yellowAreaImage.fillAmount = landingData.yellowAreaPercentage;
-        greenAreaImage.fillAmount = landingData.greenAreaPercentage;
+        yellowAreaImage.fillAmount = landingData.normalizedYellowAreaPercentage;
+        greenAreaImage.fillAmount = landingData.normalizedGreenAreaPercentage;
         RotateAreasImages(landingData);
         RotateRotationIndicatorImage(landingData.currentAngle);
+        
     }
 
     private void RotateAreasImages(PlayerLandingController.LandingData landingData)
     {
-        float yellowAreaZRotation = landingData.targetAngle + ((TOTAL_ANGLE_DEGREES * landingData.yellowAreaPercentage) / 2);
-        float greenAreaZRotation = landingData.targetAngle + ((TOTAL_ANGLE_DEGREES * landingData.greenAreaPercentage) / 2);
+        float yellowAreaZRotation = landingData.targetAngle + ((TOTAL_ANGLE_DEGREES * landingData.normalizedYellowAreaPercentage) / 2);
+        float greenAreaZRotation = landingData.targetAngle + ((TOTAL_ANGLE_DEGREES * landingData.normalizedGreenAreaPercentage) / 2);
 
         Vector3 newRotation = yellowAreaImage.transform.eulerAngles;
         newRotation.z = yellowAreaZRotation;
