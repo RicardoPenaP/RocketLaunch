@@ -3,13 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using GameSceneManagement;
+using TMPro;
 
 public class LevelCompletedMenu : Menu<LevelCompletedMenu>
 {
     [Header("Level Completed Menu")]
+    [Header("Buttons references")]
     [SerializeField] private Button playAgainButton;
     [SerializeField] private Button nextLevelButton;
     [SerializeField] private Button mainMenuButton;
+    [Header("Text references")]
+    [SerializeField] private TextMeshProUGUI expecienceAmountText;
+    [SerializeField] private TextMeshProUGUI lifesRemainingAmountText;
+    [SerializeField] private TextMeshProUGUI landingTriesAmountText;
+    [SerializeField] private TextMeshProUGUI landingScoreAmountText;
+    [SerializeField] private TextMeshProUGUI totalAmountText;
+
 
     protected override void Awake()
     {
@@ -46,7 +55,7 @@ public class LevelCompletedMenu : Menu<LevelCompletedMenu>
     {
         if (LevelMananger.Instance)
         {
-            LevelMananger.Instance.OnGameOver -= LevelMananger_OnLevelCompleted;
+            LevelMananger.Instance.OnLevelCompleted -= LevelMananger_OnLevelCompleted;
         }
 
         if (playAgainButton)
@@ -87,8 +96,18 @@ public class LevelCompletedMenu : Menu<LevelCompletedMenu>
         SceneManagement.ReloadCurrentScene();
     }
 
-    private void LevelMananger_OnLevelCompleted()
+    private void LevelMananger_OnLevelCompleted(LevelMananger.RewardsData rewardsData)
     {
+        SetLevelRewards(rewardsData);
         OpenMenu();
+    }
+
+    private void SetLevelRewards(LevelMananger.RewardsData rewardsData)
+    {
+        expecienceAmountText.text = $"{ rewardsData.partialExperiece}";
+        lifesRemainingAmountText.text = $"x{ rewardsData.lifesMultiplier.ToString("0.00")}";
+        landingTriesAmountText.text = $"x{ rewardsData.landingTriesMultiplier.ToString("0.00")}";
+        landingScoreAmountText.text = $"x{ rewardsData.landingScoreMultiplier.ToString("0.00")}";
+        totalAmountText.text = $"{rewardsData.totalExperience}";
     }
 }

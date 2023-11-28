@@ -4,9 +4,7 @@ using UnityEngine;
 using System;
 
 public class PlayerController : MonoBehaviour
-{
-    private const int maximunLifesAmount = 10;
-
+{  
     [Header("Player Controller")]
     [SerializeField] private int maxLifesAmount = 3;
     [SerializeField] private float crashRoutineWait = 2f;
@@ -128,6 +126,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public float GetNormalizedAmountOfRemaningLifes()
+    {
+        return (float)currentLifesAmount / (float)maxLifesAmount;
+    }
+
     private IEnumerator PlayerCrashRoutine()
     {
         playerCrahsed = true;
@@ -135,5 +138,7 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(crashRoutineWait);        
         RemoveOneLife();        
     }
+
+
     
 }

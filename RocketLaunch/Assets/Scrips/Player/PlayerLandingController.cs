@@ -13,6 +13,13 @@ public class PlayerLandingController : MonoBehaviour
         public float normalizedYellowAreaPercentage; 
     }
 
+    public class LandingCompleteData : EventArgs
+    {
+        public int landingTries;
+        public float normalizedAmountOfRemaningLifes;
+        public float normalizedLandingScore;        
+    }
+
     [Header("Player Landing Controller")]
     [Header("Landing Settings")]
     [SerializeField] private float landingMinDistance = 1f;
@@ -43,8 +50,7 @@ public class PlayerLandingController : MonoBehaviour
 
     private bool isPreLanding = false;
     private bool isLanding = false;
-    private int landingTries = 0;
-    private float maxLandingYDistance;    
+    private int landingTries = 0;   
 
     private void OnDrawGizmos()
     {
@@ -182,18 +188,17 @@ public class PlayerLandingController : MonoBehaviour
         float desiredAngle = landingPlatform.GetLandingAngle();
         float greenAreaOffset = (TOTAL_ANGLE_DEGREES * greenAreaPercentage) / 2;
         float yellowAreaOffset = (TOTAL_ANGLE_DEGREES * yellowAreaPercentage) / 2;
+        float normalizedLandingScore = 0f;
 
         if (currentAngle >= desiredAngle - greenAreaOffset && currentAngle <= desiredAngle + greenAreaOffset)
         {
-            //Landing with green score
-          
+            normalizedLandingScore = 1f;
         }
         else
         {
             if (currentAngle >= desiredAngle - yellowAreaOffset && currentAngle <= desiredAngle + yellowAreaOffset)
             {
-                //Landing with yellow score
-
+                normalizedLandingScore = 0.5f;
             }
             else
             {
@@ -205,8 +210,11 @@ public class PlayerLandingController : MonoBehaviour
 
         isLanding = false;
         rigidbody.isKinematic = true;
-        rigidbody.Sleep();        
-        OnLandingFinished?.Invoke(this, EventArgs.Empty);
+        rigidbody.Sleep();
+        LandingCompleteData landingCompleteData = new LandingCompleteData();
+        landingCompleteData.normalizedLandingScore = normalizedLandingScore;
+        landingCompleteData.normalizedAmountOfRemaningLifes = GetComponent<PlayerController>().GetNormalizedAmountOfRemaningLifes();
+        OnLandingFinished?.Invoke(this, landingCompleteData);
         //Implement landing score system
     }
 
