@@ -5,6 +5,14 @@ using System;
 
 public class PlayerLandingController : MonoBehaviour
 {
+    public class LandingData : EventArgs
+    {
+        public float currentAngle;
+        public float targetAngle;
+        public float greenAreaPercentage;
+        public float yellowAreaPercentage;
+    }
+
     [Header("Player Landing Controller")]
     [Header("Landing Settings")]
     [SerializeField] private float landingMinDistance = 1f;
@@ -14,12 +22,14 @@ public class PlayerLandingController : MonoBehaviour
     [SerializeField] private float rotationForce = 100f;
     [SerializeField] private LayerMask platformsLayerMask;
     [SerializeField] private bool showGizmos = true;
-    [SerializeField, Min(0)] private float maxSpeedToStartLanding = 2f;
-    [SerializeField, Range(1f,360f)] private float maxAngleDirfereceToSuccessLanding = 10f;
+    [SerializeField, Min(0)] private float maxSpeedToStartLanding = 2f;    
+    [SerializeField, Range(0f, 1f)] private float greenAreaPercentage = 0.15f;
+    [SerializeField, Range(0f, 1f)] private float yellowAreaPercentage = 0.4f;
     
 
     public event EventHandler OnPreLandingStart;
     public event EventHandler OnLandingStart;
+    public event EventHandler OnLandingUpdated;
     public event EventHandler OnLandingFinished;
     public event Action<PlayerMovement.RotationDirection> OnSideEngineStarted;
     public event Action<PlayerMovement.RotationDirection> OnSideEngineStoped;
@@ -65,23 +75,33 @@ public class PlayerLandingController : MonoBehaviour
 
     private void Update()
     {        
-        if (TryFindLandingPlatform())
+        if (!isPreLanding && !isLanding)
         {
-            if (Mathf.Abs(rigidbody.velocity.x) <= maxSpeedToStartLanding)
+            if (TryFindLandingPlatform())
             {
-                if (InputMananger.Instance.GetInteractInputWasTriggered())
+                if (Mathf.Abs(rigidbody.velocity.x) <= maxSpeedToStartLanding)
                 {
-                    if (!isPreLanding && !isLanding)
+                    if (InputMananger.Instance.GetInteractInputWasTriggered())
                     {
                         StartPreLanding();
                     }
                 }
-            }            
-        }
+            }                       
+        }        
 
         if (isLanding)
         {
             LandingUpdate();
+        }
+
+        if (isLanding || isPreLanding)
+        {
+            LandingData landingData = new LandingData();
+            landingData.currentAngle = Vector3.Angle(Vector3.right, transform.up);
+            landingData.targetAngle = landingPlatform.GetLandingAngle();
+            landingData.greenAreaPercentage = greenAreaPercentage;
+            landingData.yellowAreaPercentage = yellowAreaPercentage;
+            OnLandingUpdated?.Invoke(this, landingData);
         }
     }
 
@@ -152,25 +172,42 @@ public class PlayerLandingController : MonoBehaviour
         {
             OnSideEngineStoped?.Invoke(PlayerMovement.RotationDirection.Rigth);
             OnSideEngineStoped?.Invoke(PlayerMovement.RotationDirection.Left);
-        }
+        }       
     }
 
     private void LandingFinished()
     {
+        const float TOTAL_ANGLE_DEGREES = 360f;
         float currentAngle = Vector3.Angle(Vector3.right, transform.up);
         float desiredAngle = landingPlatform.GetLandingAngle();
+        float greenAreaOffset = (TOTAL_ANGLE_DEGREES * greenAreaPercentage) / 2;
+        float yellowAreaOffset = (TOTAL_ANGLE_DEGREES * yellowAreaPercentage) / 2;
 
-        if (currentAngle < desiredAngle - maxAngleDirfereceToSuccessLanding || currentAngle > desiredAngle + maxAngleDirfereceToSuccessLanding)
+        if (currentAngle >= desiredAngle - greenAreaOffset && currentAngle <= desiredAngle + greenAreaOffset)
         {
-            //Reset the landing process
-            ResetLanding();
-            return;
+            //Landing with green score
+          
+        }
+        else
+        {
+            if (currentAngle >= desiredAngle - yellowAreaOffset && currentAngle <= desiredAngle + yellowAreaOffset)
+            {
+                //Landing with yellow score
+
+            }
+            else
+            {
+                //Reset the landing process
+                ResetLanding();
+                return;
+            }
         }
 
         isLanding = false;
         rigidbody.isKinematic = true;
         rigidbody.Sleep();        
         OnLandingFinished?.Invoke(this, EventArgs.Empty);
+        //Implement landing score system
     }
 
     private void ResetLanding()
