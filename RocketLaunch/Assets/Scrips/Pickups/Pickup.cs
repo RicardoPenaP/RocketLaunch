@@ -43,8 +43,10 @@ public class Pickup : MonoBehaviour
     {
         if (Vector3.Distance(transform.position,playerTransform.position) >= pickupRange)
         {
+            IsBeenAtractedToThePlayer = false;
             return;
         }
+        IsBeenAtractedToThePlayer = true;
         Vector3 movementDirection = (playerTransform.position - transform.position).normalized;
         transform.position += movementDirection * currentMovementSpeed * Time.deltaTime;
         currentMovementSpeed += currentMovementSpeed * movementSpeedAugmentCoeficient * Time.deltaTime;

@@ -9,7 +9,13 @@ public class FloatingEffect : MonoBehaviour
     [SerializeField] private float movementSpeed;
     [SerializeField] private float maxYOffset;
 
-    private  float maxY, minY, yMovementDirection;    
+    private Pickup pickup;
+    private  float maxY, minY, yMovementDirection;
+
+    private void Awake()
+    {
+        pickup = GetComponentInParent<Pickup>();
+    }
 
     private void Start()
     {
@@ -26,6 +32,10 @@ public class FloatingEffect : MonoBehaviour
 
     private void Move()
     {
+        if (pickup.IsBeenAtractedToThePlayer)
+        {
+            return;
+        }
         Vector3 rotation = Vector3.up * rotationSpeed * Time.deltaTime;
         transform.Rotate(rotation);
 
