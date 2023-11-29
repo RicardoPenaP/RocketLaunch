@@ -39,6 +39,8 @@ public class PlayerLandingController : MonoBehaviour
     public event EventHandler OnLandingFinished;
     public event Action<PlayerMovement.RotationDirection> OnSideEngineStarted;
     public event Action<PlayerMovement.RotationDirection> OnSideEngineStoped;
+    public event Action<Vector3> OnAbleToLand;
+    public event Action OnUnableToLand;
 
     private PlayerCollisionHandler playerCollisionHandler;
 
@@ -85,15 +87,28 @@ public class PlayerLandingController : MonoBehaviour
         {
             if (TryFindLandingPlatform())
             {
-                if (Mathf.Abs(rigidbody.velocity.x) <= maxSpeedToStartLanding)
+                if (Mathf.Abs(rigidbody.velocity.magnitude) <= maxSpeedToStartLanding)
                 {
+                    OnAbleToLand?.Invoke(landingPlatform.GetPreLandingPosition());
                     if (InputMananger.Instance.GetInteractInputWasTriggered())
                     {
                         StartPreLanding();
                     }
                 }
-            }                       
-        }        
+                else
+                {
+                    OnUnableToLand?.Invoke();
+                }
+            }
+            else
+            {
+                OnUnableToLand?.Invoke();
+            }
+        }
+        else
+        {
+            OnUnableToLand?.Invoke();
+        }
 
         if (isLanding)
         {
