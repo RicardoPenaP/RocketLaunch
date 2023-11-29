@@ -13,6 +13,6 @@ public class LandingPlatform : MonoBehaviour
 
     public float GetLandingAngle()
     {
-        return Vector3.Angle(Vector3.right, transform.up);
+        return Vector3.Angle(transform.up,Vector3.right);
     }
 }

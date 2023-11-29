@@ -4,10 +4,10 @@ using UnityEngine.SceneManagement;
 
 namespace GameSceneManagement 
 {
-    public enum GameScene { MainMenu,TestLevel, TestLevel1 }
+    public enum GameScene { MainMenu,TestLevel, Level1 }
     public static class SceneManagement
     {
-        private static GameScene currentGameScene = GameScene.TestLevel;
+        private static GameScene currentGameScene = GameScene.Level1;
         public static void LoadScene(GameScene gameScene)
         {
             currentGameScene = gameScene;

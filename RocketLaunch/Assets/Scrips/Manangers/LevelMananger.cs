@@ -84,7 +84,7 @@ public class LevelMananger : MonoBehaviour
         RewardsData rewardsData = new RewardsData();
         rewardsData.partialExperiece = levelExperienceReward;
         rewardsData.lifesMultiplier = maxRemainingLifesMultiplier * landingCompleteData.normalizedAmountOfRemaningLifes;
-        rewardsData.landingTriesMultiplier = maxLandingTriesMultiplier - (eachLandingTryCost * landingCompleteData.landingTries) > 1f ? maxLandingTriesMultiplier - (eachLandingTryCost * landingCompleteData.landingTries) : 1f;
+        rewardsData.landingTriesMultiplier = maxLandingTriesMultiplier - (eachLandingTryCost * (landingCompleteData.landingTries - 1)) > 1f ? maxLandingTriesMultiplier - (eachLandingTryCost * (landingCompleteData.landingTries-1)) : 1f;
         rewardsData.landingScoreMultiplier = maxLandingScoreMultiplier * landingCompleteData.normalizedLandingScore;
         rewardsData.totalExperience = CalculateTotalExperience(rewardsData);
         OnLevelCompleted?.Invoke(rewardsData);

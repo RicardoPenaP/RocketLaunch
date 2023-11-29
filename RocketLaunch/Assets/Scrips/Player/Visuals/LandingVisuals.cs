@@ -72,7 +72,7 @@ public class LandingVisuals : MonoBehaviour
     private void RotateRotationIndicatorImage(float currentAngle)
     {
         Vector3 newRotation = rotationIndicatorImage.transform.eulerAngles;
-        newRotation.z = currentAngle - 90f;
+        newRotation.z = currentAngle - 90;
         rotationIndicatorImage.transform.eulerAngles = newRotation;
     }
 }

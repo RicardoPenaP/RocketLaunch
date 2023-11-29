@@ -103,7 +103,8 @@ public class PlayerLandingController : MonoBehaviour
         if (isLanding || isPreLanding)
         {
             LandingData landingData = new LandingData();
-            landingData.currentAngle = Vector3.Angle(Vector3.right, transform.up);
+            //landingData.currentAngle = Vector3.Angle(Vector3.right, transform.up);
+            landingData.currentAngle = Vector3.SignedAngle(Vector3.right, transform.up, Vector3.forward);
             landingData.targetAngle = landingPlatform.GetLandingAngle();
             landingData.normalizedGreenAreaPercentage = greenAreaPercentage;
             landingData.normalizedYellowAreaPercentage = yellowAreaPercentage;            
@@ -184,7 +185,7 @@ public class PlayerLandingController : MonoBehaviour
     private void LandingFinished()
     {
         const float TOTAL_ANGLE_DEGREES = 360f;
-        float currentAngle = Vector3.Angle(Vector3.right, transform.up);
+        float currentAngle = Vector3.SignedAngle(Vector3.right,transform.up,Vector3.forward);
         float desiredAngle = landingPlatform.GetLandingAngle();
         float greenAreaOffset = (TOTAL_ANGLE_DEGREES * greenAreaPercentage) / 2;
         float yellowAreaOffset = (TOTAL_ANGLE_DEGREES * yellowAreaPercentage) / 2;
@@ -214,6 +215,7 @@ public class PlayerLandingController : MonoBehaviour
         LandingCompleteData landingCompleteData = new LandingCompleteData();
         landingCompleteData.normalizedLandingScore = normalizedLandingScore;
         landingCompleteData.normalizedAmountOfRemaningLifes = GetComponent<PlayerController>().GetNormalizedAmountOfRemaningLifes();
+        landingCompleteData.landingTries = landingTries;
         OnLandingFinished?.Invoke(this, landingCompleteData);
         //Implement landing score system
     }
@@ -256,16 +258,14 @@ public class PlayerLandingController : MonoBehaviour
     private IEnumerator LandingRoutine()
     {
         float timer = 0;
-        float startYPosition = transform.position.y;
+        //float startYPosition = transform.position.y;
+        Vector3 startPosition = transform.position;
 
         while (timer < landingDuration && isLanding)
         {
             timer += Time.deltaTime;
             float progress = timer / landingDuration;
-            float yPosition = Mathf.Lerp(startYPosition, landingPosition.y, progress);
-            Vector3 newPosition = transform.position;
-            newPosition.y = yPosition;
-            transform.position = newPosition;
+            transform.position = Vector3.Lerp(startPosition, landingPosition, progress);
 
             yield return null;
         }
