@@ -17,7 +17,12 @@ namespace GameSceneManagement
         public static void ReloadCurrentScene()
         {
             LoadScene(currentGameScene);
-        }        
+        }     
+        
+        public static GameScene GetCurrentScene()
+        {
+            return currentGameScene;
+        }
     }
 }
 

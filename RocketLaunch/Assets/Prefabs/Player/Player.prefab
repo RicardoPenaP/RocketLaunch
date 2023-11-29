@@ -9653,7 +9653,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxFuelAmount: 100
-  fuelConsuptionSpeed: 5
+  fuelConsuptionSpeed: 25
   maxEnginePower: 100
   powerSpeed: 40
   powerHeatRateMultiplierPercentage: 0.15
@@ -9788,7 +9788,6 @@ MonoBehaviour:
   maxSpeedToStartLanding: 4
   greenAreaPercentage: 0.1
   yellowAreaPercentage: 0.3
-  playerPlatformDistanceOffset: 0
 --- !u!136 &4090625583501126733
 CapsuleCollider:
   m_ObjectHideFlags: 0

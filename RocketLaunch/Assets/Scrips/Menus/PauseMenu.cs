@@ -16,7 +16,7 @@ public class PauseMenu : Menu<PauseMenu>
         base.Awake();
         resumeButton.onClick.AddListener(ResumeButton_OnClick);
         settingsButton.onClick.AddListener(SettingsButton_OnClick);
-        mainMenuButton.onClick.AddListener(MainMenuButton_OnClick);
+        mainMenuButton.onClick.AddListener(MainMenuButton_OnClick);        
     }
 
     private void Start()
