@@ -87,7 +87,7 @@ public class PlayerController : MonoBehaviour
             return;
         }
         transform.position = lastPlatformReached.GetSpawnPoint().position;
-        playerCrahsed = false;
+        playerCrahsed = false;        
         OnPlayerReset?.Invoke(this, EventArgs.Empty);        
     }
 
