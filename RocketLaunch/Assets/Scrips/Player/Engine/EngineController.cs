@@ -294,6 +294,7 @@ public class EngineController : MonoBehaviour
         InstanlyCoolTheEngine(FULL_PERCENTAGE);
         RefillFuel(FULL_PERCENTAGE);
         currentEnginePower = 0f;
+        HasFuel = true;
         OnEnginePowerChange?.Invoke(currentEnginePower, maxEnginePower);
     }
 

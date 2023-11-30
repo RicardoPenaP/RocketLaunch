@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class SideEngineVFXController : MonoBehaviour
 {
@@ -10,12 +11,14 @@ public class SideEngineVFXController : MonoBehaviour
     private ParticleSystem[] sideEngineParticleSystems;    
     private EngineController engineController;
     private PlayerLandingController playerLandingController;
+    private PlayerController playerController;
 
     private void Awake()
     {
         sideEngineParticleSystems = GetComponentsInChildren<ParticleSystem>();
         engineController = GetComponentInParent<EngineController>();
         playerLandingController = GetComponentInParent<PlayerLandingController>();
+        playerController = GetComponentInParent<PlayerController>();
     }
 
     private void Start()
@@ -30,6 +33,11 @@ public class SideEngineVFXController : MonoBehaviour
             playerLandingController.OnSideEngineStarted += PlayerLandingController_OnSideEngineStarted;
             playerLandingController.OnSideEngineStoped += PlayerLandingController_OnSideEngineStoped;
         }
+
+        if (playerController)
+        {
+            playerController.OnPlayerCrash += PlayerController_OnPlayerCrash;
+        }
     }
 
     private void OnDestroy()
@@ -43,6 +51,11 @@ public class SideEngineVFXController : MonoBehaviour
         {
             playerLandingController.OnSideEngineStarted -= PlayerLandingController_OnSideEngineStarted;
             playerLandingController.OnSideEngineStoped -= PlayerLandingController_OnSideEngineStoped;
+        }
+
+        if (playerController)
+        {
+            playerController.OnPlayerCrash -= PlayerController_OnPlayerCrash;
         }
     }
 
@@ -99,5 +112,9 @@ public class SideEngineVFXController : MonoBehaviour
         TurnOffEngineVFX();
     }
 
+    private void PlayerController_OnPlayerCrash()
+    {
+        TurnOffEngineVFX();
+    }
 
 }
