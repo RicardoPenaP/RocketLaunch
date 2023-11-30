@@ -19,7 +19,6 @@ public class MainMenu : Menu<MainMenu>
     public event Action OnSettingsButtonPressed;
     public event Action OnCreditsButtonPressed;
 
-
     protected override void Awake()
     {
         base.Awake();
@@ -51,6 +50,14 @@ public class MainMenu : Menu<MainMenu>
         
     }
 
+    private void Start()
+    {
+        if (CreditsMenu.Instance)
+        {
+            CreditsMenu.Instance.OnMainMenuButtonPressed += CreditsMenu_OnMainMenuButtonPressed;
+        }
+    }
+
     private void OnDestroy()
     {
         if (playButton)
@@ -76,6 +83,11 @@ public class MainMenu : Menu<MainMenu>
         if (exitButton)
         {
             exitButton.onClick.RemoveListener(ExitButton_OnClick);
+        }
+
+        if (CreditsMenu.Instance)
+        {
+            CreditsMenu.Instance.OnMainMenuButtonPressed -= CreditsMenu_OnMainMenuButtonPressed;
         }
     }
 
@@ -106,5 +118,10 @@ public class MainMenu : Menu<MainMenu>
     private void ExitButton_OnClick()
     {
         Application.Quit();
+    }
+
+    private void CreditsMenu_OnMainMenuButtonPressed()
+    {
+        OpenMenu();
     }
 }
