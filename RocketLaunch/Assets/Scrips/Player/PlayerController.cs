@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
     private PlayerCollisionHandler playerCollisionHandler;    
 
     private int currentLifesAmount;
-    private bool playerCrahsed = false;
+    private bool playerCrahsed = false;    
     public bool IsAlive { get; private set; }
 
     private void Awake()
@@ -36,6 +36,14 @@ public class PlayerController : MonoBehaviour
         OnCurrentLifesChange?.Invoke(currentLifesAmount);
         SetStartPlatform();
         playerCollisionHandler.OnCollisionEnterWithObject += PlayerCollisionHandler_OnCollisionEnterWithObject;
+    }
+
+    private void Update()
+    {
+        if (InputMananger.Instance.GetResetInputWasTriggered())
+        {
+            Crash();
+        }            
     }
 
     private void OnDestroy()
@@ -60,7 +68,7 @@ public class PlayerController : MonoBehaviour
     }
 
     private void RemoveOneLife()
-    {             
+    {       
         currentLifesAmount--;
         OnCurrentLifesChange?.Invoke(currentLifesAmount);
         OnLifeRemove?.Invoke(this, EventArgs.Empty);
@@ -69,7 +77,7 @@ public class PlayerController : MonoBehaviour
         {
             currentLifesAmount = 0;
             Die();
-            IsAlive = false;
+            IsAlive = false;            
         }
 
         PlayerReset();
@@ -86,9 +94,19 @@ public class PlayerController : MonoBehaviour
         {
             return;
         }
+        
         transform.position = lastPlatformReached.GetSpawnPoint().position;
         playerCrahsed = false;        
         OnPlayerReset?.Invoke(this, EventArgs.Empty);        
+    }
+
+    private void Crash()
+    {
+        if (playerCrahsed)
+        {
+            return;
+        }
+        StartCoroutine(PlayerCrashRoutine());
     }
 
     private void PlayerCollisionHandler_OnCollisionEnterWithObject(object sender, EventArgs e)
@@ -100,11 +118,9 @@ public class PlayerController : MonoBehaviour
                 {
                     break;
                 }
-                if (playerCrahsed)
-                {
-                    break;
-                }
-                StartCoroutine(PlayerCrashRoutine());               
+                Crash();
+
+
                 break;
 
             case PlayerCollisionHandler.CollisionInfo<LevelPlatform> collisionInfo:

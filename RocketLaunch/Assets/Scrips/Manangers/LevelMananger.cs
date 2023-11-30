@@ -26,7 +26,7 @@ public class LevelMananger : MonoBehaviour
     public static LevelMananger Instance { get; private set; }
 
     public event Action OnGameOver;
-    public event Action<RewardsData> OnLevelCompleted;
+    public event Action<RewardsData> OnLevelCompleted;    
 
     private PlayerController playerController;
     private PlayerLandingController playerLandingController;
@@ -39,8 +39,11 @@ public class LevelMananger : MonoBehaviour
         }
         else
         {
-            Destroy(this);
-            return;
+            if (Instance != this)
+            {
+                Destroy(this);
+                return;
+            }
         }
     }
 

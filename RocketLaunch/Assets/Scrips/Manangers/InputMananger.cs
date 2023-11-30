@@ -19,8 +19,11 @@ public class InputMananger : MonoBehaviour
         }
         else
         {
-            Destroy(this);
-            return;
+            if (Instance != this)
+            {
+                Destroy(this);
+                return;
+            }           
         }
 
         inputActions = new PlayerInputActions();
@@ -39,6 +42,14 @@ public class InputMananger : MonoBehaviour
     private void OnDisable()
     {
         inputActions.Disable();
+    }
+    private void InputUpdate()
+    {
+        if (inputActions.Player.Pause.triggered)
+        {
+            OnPauseInputTriggered?.Invoke();
+        }
+
     }
 
     public bool TryGetRotationDirectionInput(out float rotationDirection)
@@ -75,12 +86,10 @@ public class InputMananger : MonoBehaviour
         return inputActions.Player.Interact.triggered;
     }
 
-    private void InputUpdate()
+    public bool GetResetInputWasTriggered()
     {
-        if (inputActions.Player.Pause.triggered)
-        {            
-            OnPauseInputTriggered?.Invoke();
-        }
-        
+        return inputActions.Player.Reset.triggered;
     }
+
+   
 }
