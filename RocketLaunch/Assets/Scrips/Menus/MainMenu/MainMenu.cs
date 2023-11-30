@@ -1,18 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class MainMenu : MonoBehaviour
+public class MainMenu : Menu<MainMenu>
 {
-    // Start is called before the first frame update
-    void Start()
+    [Header("Main Menu")]
+    [Header("Buttons references")]
+    [SerializeField] private Button playButton;
+    [SerializeField] private Button instrucctionsButton;
+    [SerializeField] private Button settingsButton;
+    [SerializeField] private Button creditsButton;
+    [SerializeField] private Button exitButton;
+
+
+    protected override void Awake()
     {
-        
+        base.Awake();
+
+        exitButton.onClick.AddListener(ExitButton_OnClick);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void ExitButton_OnClick()
     {
-        
+        Application.Quit();
     }
 }
