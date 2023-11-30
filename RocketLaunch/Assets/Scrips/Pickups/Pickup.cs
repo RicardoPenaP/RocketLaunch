@@ -1,12 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Pickup : MonoBehaviour
 {
     public enum PickupType { Cooland, Fuel}
-
-    private static Transform playerTransform;
+    
     [Header("Pickup")]
     [SerializeField] private PickupType pickupType;
     [SerializeField] private float pickupRange = 4f;
@@ -14,20 +14,29 @@ public class Pickup : MonoBehaviour
     [SerializeField] private float defaultMovementSpeed = 3f;
     [SerializeField, Range(0f, 1f)] private float movementSpeedAugmentCoeficient = 0.2f;
 
+    private PlayerController playerController;
+    private Transform playerTransform;
+
+    private Vector3 startingPos;
+
     private float currentMovementSpeed;
 
     public bool IsBeenAtractedToThePlayer { get; private set; }
 
     private void Awake()
     {
+        playerController = FindObjectOfType<PlayerController>();
+        playerTransform = playerController.transform;
+       
         currentMovementSpeed = defaultMovementSpeed;
+        startingPos = transform.position;        
     }
 
     private void Start()
     {
-        if (!playerTransform)
+        if (playerController)
         {
-            playerTransform = FindObjectOfType<PlayerController>().transform;
+            playerController.OnPlayerReset += PlayerController_OnPlayerReset;
         }
     }
 
@@ -52,6 +61,13 @@ public class Pickup : MonoBehaviour
         currentMovementSpeed += currentMovementSpeed * movementSpeedAugmentCoeficient * Time.deltaTime;
     }
 
+    private void ResetPickup()
+    {
+        transform.position = startingPos;
+        IsBeenAtractedToThePlayer = false;
+        gameObject.SetActive(true);
+    }
+
     public PickupType GetPickupType()
     {
         return pickupType;
@@ -64,6 +80,11 @@ public class Pickup : MonoBehaviour
     
     public void PickPickup()
     {
-        Destroy(gameObject);
+        gameObject.SetActive(false);
+    }
+
+    private void PlayerController_OnPlayerReset(object sender, EventArgs e)
+    {
+        ResetPickup();
     }
 }
