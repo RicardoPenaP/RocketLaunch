@@ -30,6 +30,7 @@ public class LevelMananger : MonoBehaviour
 
     private PlayerController playerController;
     private PlayerLandingController playerLandingController;
+    
 
     private void Awake()
     {
@@ -61,7 +62,7 @@ public class LevelMananger : MonoBehaviour
         if (playerLandingController)
         {
             playerLandingController.OnLandingFinished += PlayerLandingController_OnLandingFinished;
-        }
+        }       
     }
 
     private void OnDestroy()
@@ -72,8 +73,8 @@ public class LevelMananger : MonoBehaviour
         }
         if (playerLandingController)
         {
-            playerLandingController.OnLandingFinished += PlayerLandingController_OnLandingFinished;
-        }
+            playerLandingController.OnLandingFinished -= PlayerLandingController_OnLandingFinished;
+        }       
     }
 
     private void PlayerController_OnDie(object sender, EventArgs e)
