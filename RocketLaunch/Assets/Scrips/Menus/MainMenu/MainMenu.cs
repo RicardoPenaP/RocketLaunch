@@ -56,6 +56,11 @@ public class MainMenu : Menu<MainMenu>
         {
             CreditsMenu.Instance.OnMainMenuButtonPressed += CreditsMenu_OnMainMenuButtonPressed;
         }
+
+        if (InstructionsMenu.Instance)
+        {
+            InstructionsMenu.Instance.OnMainMenuButtonPressed += InstructionsMenu_OnMainMenuButtonPressed;
+        }
     }
 
     private void OnDestroy()
@@ -89,6 +94,11 @@ public class MainMenu : Menu<MainMenu>
         {
             CreditsMenu.Instance.OnMainMenuButtonPressed -= CreditsMenu_OnMainMenuButtonPressed;
         }
+
+        if (InstructionsMenu.Instance)
+        {
+            InstructionsMenu.Instance.OnMainMenuButtonPressed -= InstructionsMenu_OnMainMenuButtonPressed;
+        }
     }
 
     private void PlayButton_OnClick()
@@ -121,6 +131,11 @@ public class MainMenu : Menu<MainMenu>
     }
 
     private void CreditsMenu_OnMainMenuButtonPressed()
+    {
+        OpenMenu();
+    }
+
+    private void InstructionsMenu_OnMainMenuButtonPressed()
     {
         OpenMenu();
     }
