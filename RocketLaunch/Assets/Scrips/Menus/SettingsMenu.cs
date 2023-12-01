@@ -4,9 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 
-public class InstructionsMenu : Menu<InstructionsMenu>
+public class SettingsMenu : Menu<SettingsMenu>
 {
-    [Header("Instructions Menu")]
+    [Header("Settings Menu")]
     [SerializeField] private Button mainMenuButton;
 
     public event Action OnMainMenuButtonPressed;
@@ -24,7 +24,7 @@ public class InstructionsMenu : Menu<InstructionsMenu>
     {
         if (MainMenu.Instance)
         {
-            MainMenu.Instance.OnInstructionsButtonPressed += MainMenu_OnInstructionsButtonPressed;
+            MainMenu.Instance.OnSettingsButtonPressed += MainMenu_OnSettingsButtonPressed;
         }
         gameObject.SetActive(false);
         menuOpened = false;
@@ -39,7 +39,7 @@ public class InstructionsMenu : Menu<InstructionsMenu>
 
         if (MainMenu.Instance)
         {
-            MainMenu.Instance.OnInstructionsButtonPressed -= MainMenu_OnInstructionsButtonPressed;
+            MainMenu.Instance.OnSettingsButtonPressed -= MainMenu_OnSettingsButtonPressed;
         }
     }
 
@@ -49,7 +49,7 @@ public class InstructionsMenu : Menu<InstructionsMenu>
         CloseMenu();
     }
 
-    private void MainMenu_OnInstructionsButtonPressed()
+    private void MainMenu_OnSettingsButtonPressed()
     {
         OpenMenu();
     }
