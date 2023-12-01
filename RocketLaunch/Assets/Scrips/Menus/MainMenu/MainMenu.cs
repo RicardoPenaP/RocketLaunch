@@ -111,6 +111,18 @@ public class MainMenu : Menu<MainMenu>
         }
     }
 
+    protected override void OpenMenu(Action onOpenAnimationEndedActions = null)
+    {
+        base.OpenMenu(onOpenAnimationEndedActions);
+        this.onOpenAnimationEndedActions += () => { SetButtonsInteractable(true); };
+    }
+
+    protected override void CloseMenu(Action onCloseAnimationEndedActions = null)
+    {
+        base.CloseMenu(onCloseAnimationEndedActions);
+        SetButtonsInteractable(false);
+    }
+
     private void PlayButton_OnClick()
     {
         OnPlayButtonPressed?.Invoke();
@@ -153,5 +165,14 @@ public class MainMenu : Menu<MainMenu>
     private void SettingsMenu_OnMainMenuButtonPressed()
     {
         OpenMenu();
+    }
+
+    private void SetButtonsInteractable(bool state)
+    {
+        playButton.interactable = state;
+        instrucctionsButton.interactable = state;
+        settingsButton.interactable = state;
+        creditsButton.interactable = state;
+        exitButton.interactable = state;
     }
 }

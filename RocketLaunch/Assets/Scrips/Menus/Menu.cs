@@ -15,8 +15,8 @@ public abstract class Menu<T> : MonoBehaviour where T : Menu<T>
     public event Action OnMenuOpened;
     public event Action OnMenuClosed;
 
-    private Action onOpenAnimationEndedActions;
-    private Action onCloseAnimationEndedActions;
+    protected Action onOpenAnimationEndedActions;
+    protected Action onCloseAnimationEndedActions;
 
     private Animator animator;
     protected bool menuOpened = false;
