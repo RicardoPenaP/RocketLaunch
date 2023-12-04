@@ -47,6 +47,22 @@ public class PlayMenu : Menu<PlayMenu>
 
     private void OnDestroy()
     {
+
+        if (selectMissionButton)
+        {
+            selectMissionButton.onClick.RemoveListener(SelectMissionButton_OnClick);
+        }
+
+        if (upgradeRocketButton)
+        {
+            upgradeRocketButton.onClick.RemoveListener(UpgradeRocketButton_OnClick);
+        }
+
+        if (mainMenuButton)
+        {
+            mainMenuButton.onClick.RemoveListener(MainMenuButton_OnClick);
+        }
+
         if (mainMenuButton)
         {
             mainMenuButton.onClick.RemoveListener(MainMenuButton_OnClick);
