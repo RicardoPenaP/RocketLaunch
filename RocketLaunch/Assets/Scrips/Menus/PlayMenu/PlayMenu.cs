@@ -1,18 +1,58 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using System;
 
-public class PlayMenu : MonoBehaviour
+public class PlayMenu : Menu<PlayMenu>
 {
-    // Start is called before the first frame update
-    void Start()
+    [Header("Play Menu")]
+    [SerializeField] private Button selectMissionButton;
+    [SerializeField] private Button upgradeRocketButton;
+    [SerializeField] private Button mainMenuButton;
+
+    public event Action OnMainMenuButtonPressed;
+
+    protected override void Awake()
     {
-        
+        base.Awake();
+        if (mainMenuButton)
+        {
+            mainMenuButton.onClick.AddListener(MainMenuButton_OnClick);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        
+        if (MainMenu.Instance)
+        {
+            MainMenu.Instance.OnPlayButtonPressed += MainMenu_OnPlayButtonPressed;
+        }
+        gameObject.SetActive(false);
+        menuOpened = false;
+    }
+
+    private void OnDestroy()
+    {
+        if (mainMenuButton)
+        {
+            mainMenuButton.onClick.RemoveListener(MainMenuButton_OnClick);
+        }
+
+        if (MainMenu.Instance)
+        {
+            MainMenu.Instance.OnPlayButtonPressed -= MainMenu_OnPlayButtonPressed;
+        }
+    }
+
+    private void MainMenuButton_OnClick()
+    {
+        OnMainMenuButtonPressed?.Invoke();
+        CloseMenu();
+    }
+
+    private void MainMenu_OnPlayButtonPressed()
+    {
+        OpenMenu();
     }
 }

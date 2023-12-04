@@ -160,8 +160,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 348}
-  m_SizeDelta: {x: 500, y: 540}
+  m_AnchoredPosition: {x: 0, y: 580}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &36592848
 MonoBehaviour:
@@ -180,11 +180,11 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 0
+  m_ChildAlignment: 4
   m_Spacing: 0
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
-  m_ChildControlWidth: 1
+  m_ChildControlWidth: 0
   m_ChildControlHeight: 0
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
@@ -1568,9 +1568,9 @@ RectTransform:
   m_Father: {fileID: 36592847}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 250, y: -230}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 500, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &547087206
@@ -2156,9 +2156,9 @@ RectTransform:
   m_Father: {fileID: 36592847}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 250, y: -410}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 500, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &953167130
@@ -3114,7 +3114,7 @@ GameObject:
   - component: {fileID: 1404737337}
   - component: {fileID: 1404737336}
   m_Layer: 5
-  m_Name: SelecMisionButton
+  m_Name: SelecMissionButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3136,9 +3136,9 @@ RectTransform:
   m_Father: {fileID: 36592847}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 250, y: -50}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 500, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1404737336
@@ -4302,7 +4302,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Select Mision
+  m_text: Select Mission
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5f777763f7128934492ae69b29528076, type: 2}
   m_sharedMaterial: {fileID: 2464487202482598312, guid: 5f777763f7128934492ae69b29528076,
@@ -4330,7 +4330,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36.25
+  m_fontSize: 32.85
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -5318,7 +5318,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2102468397
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5388,7 +5388,7 @@ Animator:
   m_GameObject: {fileID: 2102468396}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: c8a1f79f24e6dcb4aaefc431bf0017eb, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -5408,14 +5408,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2102468396}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 189f03085473e1b4484adf7c97bd5765, type: 3}
+  m_Script: {fileID: 11500000, guid: dd7987d7ebe523848a7f74c7f3fc0129, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playButton: {fileID: 1404737336}
-  instrucctionsButton: {fileID: 547087206}
-  settingsButton: {fileID: 953167130}
-  creditsButton: {fileID: 0}
-  exitButton: {fileID: 0}
+  selectMissionButton: {fileID: 0}
+  upgradeRocketButton: {fileID: 0}
+  mainMenuButton: {fileID: 0}
 --- !u!1 &2109377886
 GameObject:
   m_ObjectHideFlags: 0

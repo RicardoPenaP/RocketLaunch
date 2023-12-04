@@ -52,6 +52,11 @@ public class MainMenu : Menu<MainMenu>
 
     private void Start()
     {
+        if (PlayMenu.Instance)
+        {
+            PlayMenu.Instance.OnMainMenuButtonPressed += PlayMenu_OnMainMenuButtonPressed;
+        }
+
         if (CreditsMenu.Instance)
         {
             CreditsMenu.Instance.OnMainMenuButtonPressed += CreditsMenu_OnMainMenuButtonPressed;
@@ -93,6 +98,11 @@ public class MainMenu : Menu<MainMenu>
         if (exitButton)
         {
             exitButton.onClick.RemoveListener(ExitButton_OnClick);
+        }
+
+        if (PlayMenu.Instance)
+        {
+            PlayMenu.Instance.OnMainMenuButtonPressed -= PlayMenu_OnMainMenuButtonPressed;
         }
 
         if (CreditsMenu.Instance)
@@ -150,6 +160,11 @@ public class MainMenu : Menu<MainMenu>
     private void ExitButton_OnClick()
     {
         Application.Quit();
+    }
+
+    private void PlayMenu_OnMainMenuButtonPressed()
+    {
+        OpenMenu();
     }
 
     private void CreditsMenu_OnMainMenuButtonPressed()
