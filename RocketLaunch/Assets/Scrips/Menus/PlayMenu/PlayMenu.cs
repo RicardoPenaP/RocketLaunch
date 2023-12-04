@@ -45,6 +45,18 @@ public class PlayMenu : Menu<PlayMenu>
         }
     }
 
+    protected override void OpenMenu(Action onOpenAnimationEndedActions = null)
+    {
+        base.OpenMenu(onOpenAnimationEndedActions);
+        this.onOpenAnimationEndedActions += () => { SetButtonsInteractable(true); };
+    }
+
+    protected override void CloseMenu(Action onCloseAnimationEndedActions = null)
+    {
+        base.CloseMenu(onCloseAnimationEndedActions);
+        SetButtonsInteractable(false);
+    }
+
     private void MainMenuButton_OnClick()
     {
         OnMainMenuButtonPressed?.Invoke();
@@ -54,5 +66,12 @@ public class PlayMenu : Menu<PlayMenu>
     private void MainMenu_OnPlayButtonPressed()
     {
         OpenMenu();
+    }
+
+    private void SetButtonsInteractable(bool state)
+    {
+        selectMissionButton.interactable = state;
+        upgradeRocketButton.interactable = state;
+        mainMenuButton.interactable = state;        
     }
 }

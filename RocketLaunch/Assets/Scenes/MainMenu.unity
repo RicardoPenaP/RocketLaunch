@@ -5388,7 +5388,7 @@ Animator:
   m_GameObject: {fileID: 2102468396}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c8a1f79f24e6dcb4aaefc431bf0017eb, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -5411,9 +5411,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd7987d7ebe523848a7f74c7f3fc0129, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectMissionButton: {fileID: 0}
-  upgradeRocketButton: {fileID: 0}
-  mainMenuButton: {fileID: 0}
+  selectMissionButton: {fileID: 1404737336}
+  upgradeRocketButton: {fileID: 547087206}
+  mainMenuButton: {fileID: 953167130}
 --- !u!1 &2109377886
 GameObject:
   m_ObjectHideFlags: 0
