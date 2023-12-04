@@ -9,11 +9,11 @@ public class PlayMenu : Menu<PlayMenu>
     [Header("Play Menu")]
     [SerializeField] private Button selectMissionButton;
     [SerializeField] private Button upgradeRocketButton;
-    [SerializeField] private Button mainMenuButton;
+    [SerializeField] private Button goBackButton;
 
     public event Action OnSelectMissionButtonPressed;
     public event Action OnUpgradeRocketButtonPressed;
-    public event Action OnMainMenuButtonPressed;
+    public event Action OnGoBackButtonPressed;
 
     protected override void Awake()
     {
@@ -29,9 +29,9 @@ public class PlayMenu : Menu<PlayMenu>
             upgradeRocketButton.onClick.AddListener(UpgradeRocketButton_OnClick);
         }
 
-        if (mainMenuButton)
+        if (goBackButton)
         {
-            mainMenuButton.onClick.AddListener(MainMenuButton_OnClick);
+            goBackButton.onClick.AddListener(GoBackButton_OnClick);
         }
     }
 
@@ -64,14 +64,14 @@ public class PlayMenu : Menu<PlayMenu>
             upgradeRocketButton.onClick.RemoveListener(UpgradeRocketButton_OnClick);
         }
 
-        if (mainMenuButton)
+        if (goBackButton)
         {
-            mainMenuButton.onClick.RemoveListener(MainMenuButton_OnClick);
+            goBackButton.onClick.RemoveListener(GoBackButton_OnClick);
         }
 
-        if (mainMenuButton)
+        if (goBackButton)
         {
-            mainMenuButton.onClick.RemoveListener(MainMenuButton_OnClick);
+            goBackButton.onClick.RemoveListener(GoBackButton_OnClick);
         }
 
         if (MainMenu.Instance)
@@ -109,9 +109,9 @@ public class PlayMenu : Menu<PlayMenu>
         CloseMenu();
     }
 
-    private void MainMenuButton_OnClick()
+    private void GoBackButton_OnClick()
     {
-        OnMainMenuButtonPressed?.Invoke();
+        OnGoBackButtonPressed?.Invoke();
         CloseMenu();
     }
 
@@ -129,6 +129,6 @@ public class PlayMenu : Menu<PlayMenu>
     {
         selectMissionButton.interactable = state;
         upgradeRocketButton.interactable = state;
-        mainMenuButton.interactable = state;        
+        goBackButton.interactable = state;        
     }
 }

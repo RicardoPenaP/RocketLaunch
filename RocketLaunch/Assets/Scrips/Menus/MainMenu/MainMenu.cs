@@ -54,7 +54,7 @@ public class MainMenu : Menu<MainMenu>
     {
         if (PlayMenu.Instance)
         {
-            PlayMenu.Instance.OnMainMenuButtonPressed += PlayMenu_OnMainMenuButtonPressed;
+            PlayMenu.Instance.OnGoBackButtonPressed += PlayMenu_OnMainMenuButtonPressed;
         }
 
         if (CreditsMenu.Instance)
@@ -102,7 +102,7 @@ public class MainMenu : Menu<MainMenu>
 
         if (PlayMenu.Instance)
         {
-            PlayMenu.Instance.OnMainMenuButtonPressed -= PlayMenu_OnMainMenuButtonPressed;
+            PlayMenu.Instance.OnGoBackButtonPressed -= PlayMenu_OnMainMenuButtonPressed;
         }
 
         if (CreditsMenu.Instance)
