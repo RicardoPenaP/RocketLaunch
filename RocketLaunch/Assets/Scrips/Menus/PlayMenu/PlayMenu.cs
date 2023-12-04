@@ -11,11 +11,24 @@ public class PlayMenu : Menu<PlayMenu>
     [SerializeField] private Button upgradeRocketButton;
     [SerializeField] private Button mainMenuButton;
 
+    public event Action OnSelectMissionButtonPressed;
+    public event Action OnUpgradeRocketButtonPressed;
     public event Action OnMainMenuButtonPressed;
 
     protected override void Awake()
     {
         base.Awake();
+
+        if (selectMissionButton)
+        {
+            selectMissionButton.onClick.AddListener(SelectMissionButton_OnClick);
+        }
+
+        if (upgradeRocketButton)
+        {
+            upgradeRocketButton.onClick.AddListener(UpgradeRocketButton_OnClick);
+        }
+
         if (mainMenuButton)
         {
             mainMenuButton.onClick.AddListener(MainMenuButton_OnClick);
@@ -55,6 +68,16 @@ public class PlayMenu : Menu<PlayMenu>
     {
         base.CloseMenu(onCloseAnimationEndedActions);
         SetButtonsInteractable(false);
+    }
+
+    private void SelectMissionButton_OnClick()
+    {
+        OnSelectMissionButtonPressed?.Invoke();
+    }
+
+    private void UpgradeRocketButton_OnClick()
+    {
+        OnUpgradeRocketButtonPressed?.Invoke();
     }
 
     private void MainMenuButton_OnClick()
