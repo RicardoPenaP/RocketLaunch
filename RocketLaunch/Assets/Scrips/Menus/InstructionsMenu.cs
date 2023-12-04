@@ -7,16 +7,16 @@ using System;
 public class InstructionsMenu : Menu<InstructionsMenu>
 {
     [Header("Instructions Menu")]
-    [SerializeField] private Button mainMenuButton;
+    [SerializeField] private Button goBackButton;
 
-    public event Action OnMainMenuButtonPressed;
+    public event Action OnGoBackButtonPressed;
 
     protected override void Awake()
     {
         base.Awake();
-        if (mainMenuButton)
+        if (goBackButton)
         {
-            mainMenuButton.onClick.AddListener(MainMenuButton_OnClick);
+            goBackButton.onClick.AddListener(GoBackButton_OnClick);
         }
     }
 
@@ -32,9 +32,9 @@ public class InstructionsMenu : Menu<InstructionsMenu>
 
     private void OnDestroy()
     {
-        if (mainMenuButton)
+        if (goBackButton)
         {
-            mainMenuButton.onClick.RemoveListener(MainMenuButton_OnClick);
+            goBackButton.onClick.RemoveListener(GoBackButton_OnClick);
         }
 
         if (MainMenu.Instance)
@@ -43,9 +43,9 @@ public class InstructionsMenu : Menu<InstructionsMenu>
         }
     }
 
-    private void MainMenuButton_OnClick()
+    private void GoBackButton_OnClick()
     {
-        OnMainMenuButtonPressed?.Invoke();
+        OnGoBackButtonPressed?.Invoke();
         CloseMenu();
     }
 
