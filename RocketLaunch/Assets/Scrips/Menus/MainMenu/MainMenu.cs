@@ -54,22 +54,22 @@ public class MainMenu : Menu<MainMenu>
     {
         if (PlayMenu.Instance)
         {
-            PlayMenu.Instance.OnGoBackButtonPressed += PlayMenu_OnMainMenuButtonPressed;
+            PlayMenu.Instance.OnGoBackButtonPressed += PlayMenu_OnGoBackButtonPressed;
         }
 
         if (CreditsMenu.Instance)
         {
-            CreditsMenu.Instance.OnGoBackButtonPressed += CreditsMenu_OnMainMenuButtonPressed;
+            CreditsMenu.Instance.OnGoBackButtonPressed += CreditsMenu_OnGoBackButtonPressed;
         }
 
         if (InstructionsMenu.Instance)
         {
-            InstructionsMenu.Instance.OnGoBackButtonPressed += InstructionsMenu_OnMainMenuButtonPressed;
+            InstructionsMenu.Instance.OnGoBackButtonPressed += InstructionsMenu_OnGoBackButtonPressed;
         }
 
         if (SettingsMenu.Instance)
         {
-            SettingsMenu.Instance.OnGoBackButtonPressed += SettingsMenu_OnMainMenuButtonPressed;
+            SettingsMenu.Instance.OnGoBackButtonPressed += SettingsMenu_OnGoBackButtonPressed;
         }
     }
 
@@ -102,22 +102,22 @@ public class MainMenu : Menu<MainMenu>
 
         if (PlayMenu.Instance)
         {
-            PlayMenu.Instance.OnGoBackButtonPressed -= PlayMenu_OnMainMenuButtonPressed;
+            PlayMenu.Instance.OnGoBackButtonPressed -= PlayMenu_OnGoBackButtonPressed;
         }
 
         if (CreditsMenu.Instance)
         {
-            CreditsMenu.Instance.OnGoBackButtonPressed -= CreditsMenu_OnMainMenuButtonPressed;
+            CreditsMenu.Instance.OnGoBackButtonPressed -= CreditsMenu_OnGoBackButtonPressed;
         }
 
         if (InstructionsMenu.Instance)
         {
-            InstructionsMenu.Instance.OnGoBackButtonPressed -= InstructionsMenu_OnMainMenuButtonPressed;
+            InstructionsMenu.Instance.OnGoBackButtonPressed -= InstructionsMenu_OnGoBackButtonPressed;
         }
 
         if (SettingsMenu.Instance)
         {
-            SettingsMenu.Instance.OnGoBackButtonPressed -= SettingsMenu_OnMainMenuButtonPressed;
+            SettingsMenu.Instance.OnGoBackButtonPressed -= SettingsMenu_OnGoBackButtonPressed;
         }
     }
 
@@ -162,22 +162,22 @@ public class MainMenu : Menu<MainMenu>
         Application.Quit();
     }
 
-    private void PlayMenu_OnMainMenuButtonPressed()
+    private void PlayMenu_OnGoBackButtonPressed()
     {
         OpenMenu();
     }
 
-    private void CreditsMenu_OnMainMenuButtonPressed()
+    private void CreditsMenu_OnGoBackButtonPressed()
     {
         OpenMenu();
     }
 
-    private void InstructionsMenu_OnMainMenuButtonPressed()
+    private void InstructionsMenu_OnGoBackButtonPressed()
     {
         OpenMenu();
     }
 
-    private void SettingsMenu_OnMainMenuButtonPressed()
+    private void SettingsMenu_OnGoBackButtonPressed()
     {
         OpenMenu();
     }
