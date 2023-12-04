@@ -59,7 +59,7 @@ public class MainMenu : Menu<MainMenu>
 
         if (CreditsMenu.Instance)
         {
-            CreditsMenu.Instance.OnMainMenuButtonPressed += CreditsMenu_OnMainMenuButtonPressed;
+            CreditsMenu.Instance.OnGoBackButtonPressed += CreditsMenu_OnMainMenuButtonPressed;
         }
 
         if (InstructionsMenu.Instance)
@@ -107,7 +107,7 @@ public class MainMenu : Menu<MainMenu>
 
         if (CreditsMenu.Instance)
         {
-            CreditsMenu.Instance.OnMainMenuButtonPressed -= CreditsMenu_OnMainMenuButtonPressed;
+            CreditsMenu.Instance.OnGoBackButtonPressed -= CreditsMenu_OnMainMenuButtonPressed;
         }
 
         if (InstructionsMenu.Instance)
