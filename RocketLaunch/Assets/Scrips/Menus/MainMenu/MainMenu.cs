@@ -69,7 +69,7 @@ public class MainMenu : Menu<MainMenu>
 
         if (SettingsMenu.Instance)
         {
-            SettingsMenu.Instance.OnMainMenuButtonPressed += SettingsMenu_OnMainMenuButtonPressed;
+            SettingsMenu.Instance.OnGoBackButtonPressed += SettingsMenu_OnMainMenuButtonPressed;
         }
     }
 
@@ -117,7 +117,7 @@ public class MainMenu : Menu<MainMenu>
 
         if (SettingsMenu.Instance)
         {
-            SettingsMenu.Instance.OnMainMenuButtonPressed -= SettingsMenu_OnMainMenuButtonPressed;
+            SettingsMenu.Instance.OnGoBackButtonPressed -= SettingsMenu_OnMainMenuButtonPressed;
         }
     }
 
