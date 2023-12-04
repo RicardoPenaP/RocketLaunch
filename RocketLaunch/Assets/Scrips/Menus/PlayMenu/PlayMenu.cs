@@ -41,6 +41,12 @@ public class PlayMenu : Menu<PlayMenu>
         {
             MainMenu.Instance.OnPlayButtonPressed += MainMenu_OnPlayButtonPressed;
         }
+
+        if (UpgradeRocketMenu.Instance)
+        {
+            UpgradeRocketMenu.Instance.OnGoBackButtonPressed += UpgradeRocketMenu_OnGoBackButtonPressed;
+        }
+
         gameObject.SetActive(false);
         menuOpened = false;
     }
@@ -72,6 +78,11 @@ public class PlayMenu : Menu<PlayMenu>
         {
             MainMenu.Instance.OnPlayButtonPressed -= MainMenu_OnPlayButtonPressed;
         }
+
+        if (UpgradeRocketMenu.Instance)
+        {
+            UpgradeRocketMenu.Instance.OnGoBackButtonPressed -= UpgradeRocketMenu_OnGoBackButtonPressed;
+        }
     }
 
     protected override void OpenMenu(Action onOpenAnimationEndedActions = null)
@@ -89,11 +100,13 @@ public class PlayMenu : Menu<PlayMenu>
     private void SelectMissionButton_OnClick()
     {
         OnSelectMissionButtonPressed?.Invoke();
+        CloseMenu();
     }
 
     private void UpgradeRocketButton_OnClick()
     {
         OnUpgradeRocketButtonPressed?.Invoke();
+        CloseMenu();
     }
 
     private void MainMenuButton_OnClick()
@@ -103,6 +116,11 @@ public class PlayMenu : Menu<PlayMenu>
     }
 
     private void MainMenu_OnPlayButtonPressed()
+    {
+        OpenMenu();
+    }
+
+    private void UpgradeRocketMenu_OnGoBackButtonPressed()
     {
         OpenMenu();
     }
