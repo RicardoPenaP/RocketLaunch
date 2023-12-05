@@ -1,18 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class MissionButton : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private TextMeshProUGUI buttonText;
+
+    private void Awake()
     {
-        
+        buttonText = GetComponentInChildren<TextMeshProUGUI>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SetMissionButtonIndex(StelarSystemID stelarSystemID, int missionIndex)
     {
-        
+        buttonText.text = $"Mission {(int)stelarSystemID}- {missionIndex}";
     }
 }

@@ -22,7 +22,7 @@ PrefabInstance:
     - target: {fileID: 6323804430231591696, guid: 4487ab8404f79a541aff1db07d6a6db9,
         type: 3}
       propertyPath: m_Name
-      value: MissionButton
+      value: MissionButton Variant
       objectReference: {fileID: 0}
     - target: {fileID: 7172057291192464645, guid: 4487ab8404f79a541aff1db07d6a6db9,
         type: 3}
@@ -131,3 +131,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4487ab8404f79a541aff1db07d6a6db9, type: 3}
+--- !u!1 &4198332496161029720 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6323804430231591696, guid: 4487ab8404f79a541aff1db07d6a6db9,
+    type: 3}
+  m_PrefabInstance: {fileID: 7890820803155387720}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1651231383596944393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4198332496161029720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e40018946cf728345903f618c23eda69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

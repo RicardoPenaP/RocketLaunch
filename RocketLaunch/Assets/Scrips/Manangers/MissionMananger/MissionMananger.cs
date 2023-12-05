@@ -9,9 +9,6 @@ public class MissionMananger : MonoBehaviour
     [Header("Mission Mananger")]
     [SerializeField] StelarSystem[] stelarSystems;
 
-
-    private int selectedMission;
-
     private void Awake()
     {
         if (Instance && Instance != this)
@@ -24,4 +21,17 @@ public class MissionMananger : MonoBehaviour
             DontDestroyOnLoad(this);
         }
     }
+
+    public StelarSystem GetStelarSystem(StelarSystemID stelarSystemID)
+    {
+        foreach (StelarSystem stelarSystem in stelarSystems)
+        {
+            if (stelarSystem.GetStelarSystemID() == stelarSystemID)
+            {
+                return stelarSystem;
+            }
+        }
+        return null;
+    }
+
 }

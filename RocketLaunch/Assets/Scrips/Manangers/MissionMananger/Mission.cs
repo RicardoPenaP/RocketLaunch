@@ -12,7 +12,6 @@ public class Mission
     [SerializeField] private bool unlocked = false;
     [SerializeField] private bool completed = false;
 
-    
     public GameScene GetGameScene()
     {
         return gameScene;
