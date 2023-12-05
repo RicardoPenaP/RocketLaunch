@@ -4,15 +4,31 @@ using UnityEngine;
 
 public class StelarSystemPanel : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private StelarSystemButton[] stelarSystemButtons;
+
+    private void Awake()
     {
-        
+        stelarSystemButtons = GetComponentsInChildren<StelarSystemButton>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        
+        if (SelectMissionMenu.Instance)
+        {
+            SelectMissionMenu.Instance.OnLoadStelarSystemsData += SelectMissionMenu_OnLoadStelarSystemsData;
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (SelectMissionMenu.Instance)
+        {
+            SelectMissionMenu.Instance.OnLoadStelarSystemsData -= SelectMissionMenu_OnLoadStelarSystemsData;
+        }
+    }
+
+    private void SelectMissionMenu_OnLoadStelarSystemsData(StelarSystem[] stelarSystems)
+    {
+
     }
 }
