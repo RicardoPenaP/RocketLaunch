@@ -1,18 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class MissionsPanel : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [Header("Missions Panel")]
+    //[SerializeField] private 
+    [SerializeField] private TextMeshProUGUI titleText;
+    [SerializeField] private Transform missionsButtonsLayout;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
 }
