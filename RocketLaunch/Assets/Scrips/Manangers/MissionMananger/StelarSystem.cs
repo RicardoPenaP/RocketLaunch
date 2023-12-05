@@ -10,17 +10,17 @@ public class StelarSystem
     [SerializeField] private StelarSystemID stelarSystemID;
     [SerializeField] private string systemName;
     [SerializeField] private Mission[] missions;
-    [SerializeField] private bool unlocked = false;
+    [SerializeField] private bool locked = true;
     [SerializeField] private bool completed = false;
 
-    public void SetUnlocked(bool state)
+    public void SetLocked(bool state)
     {
-        unlocked = state;
+        locked = state;
     }
 
-    public bool GetUnlocked()
+    public bool GetLocked()
     {
-        return unlocked;
+        return locked;
     }
 
     public void SetCompleted(bool state)

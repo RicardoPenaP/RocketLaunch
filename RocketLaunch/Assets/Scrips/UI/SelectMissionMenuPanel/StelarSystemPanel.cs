@@ -29,6 +29,20 @@ public class StelarSystemPanel : MonoBehaviour
 
     private void SelectMissionMenu_OnLoadStelarSystemsData(StelarSystem[] stelarSystems)
     {
-
+        for (int i = 0; i < stelarSystems.Length; i++)
+        {
+            if (stelarSystems[i].GetLocked())
+            {
+                stelarSystemButtons[i].SetStellarSystemLocked(true);
+            }
+            else
+            {
+                stelarSystemButtons[i].SetStellarSystemLocked(false);
+                stelarSystemButtons[i].SetStellarSystemNameText(stelarSystems[i].GetSystemName());
+                stelarSystemButtons[i].SetStelarSystemID(stelarSystems[i].GetStelarSystemID());
+            }
+           
+           
+        }
     }
 }

@@ -8,13 +8,13 @@ using TMPro;
 public class StelarSystemButton : MonoBehaviour
 {
     static public event EventHandler<StelarSystemID> OnAnyStelarSystemButtonPressed;
-    [Header("Stelar System Button")]
-    [SerializeField] private StelarSystemID stelarSystemID;
+    [Header("Stelar System Button")]   
     [SerializeField] private TextMeshProUGUI stellarSystemNameText;
     [SerializeField] private Button button;
     [SerializeField] private Image selectedImage;
     [SerializeField] private Image lockedImage;
 
+    private StelarSystemID stelarSystemID;
 
     private void Awake()
     {
@@ -22,13 +22,6 @@ public class StelarSystemButton : MonoBehaviour
         {
             button.onClick.AddListener(Button_OnClick);
         }
-
-        if (lockedImage)
-        {
-            lockedImage = button.image;
-            lockedImage.color = Color.black;
-        }
-
         OnAnyStelarSystemButtonPressed += StelarSystemButton_OnAnyStelarSystemButtonPressed;
     }
 
@@ -63,6 +56,16 @@ public class StelarSystemButton : MonoBehaviour
 
     public void SetStellarSystemLocked(bool state)
     {
+        if (state)
+        {
+            SetStellarSystemNameText("???");
+        }        
+        button.interactable = !state;
         lockedImage.gameObject.SetActive(state);
+    }
+
+    public void SetStelarSystemID(StelarSystemID stelarSystemID)
+    {
+        this.stelarSystemID = stelarSystemID;
     }
 }
