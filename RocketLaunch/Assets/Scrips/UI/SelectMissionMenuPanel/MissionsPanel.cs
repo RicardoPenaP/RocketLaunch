@@ -48,6 +48,10 @@ public class MissionsPanel : MonoBehaviour
         {
             MissionButton missionButton = Instantiate(missionButtonPrefab, missionsButtonsLayout);
             missionButton.SetMissionButtonIndex(stelarSystem.GetStelarSystemID(),mission.GetMissionIndex());
+            if (mission.GetLocked())
+            {
+                missionButton.SetLocked(true);  
+            }
         }
 
     }
