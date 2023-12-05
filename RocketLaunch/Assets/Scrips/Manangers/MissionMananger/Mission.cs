@@ -9,7 +9,7 @@ public class Mission
     [Header("Mission")]
     [SerializeField] private GameScene gameScene;
     [SerializeField] private int missionIndex;
-    [SerializeField] private bool unlocked = false;
+    [SerializeField] private bool locked = false;
     [SerializeField] private bool completed = false;
 
     public GameScene GetGameScene()
@@ -22,14 +22,14 @@ public class Mission
         return missionIndex;
     }
 
-    public void SetUnlocked(bool state)
+    public void SetLocked(bool state)
     {
-        unlocked = state;
+        locked = state;
     }
 
-    public bool GetUnlocked()
+    public bool GetLocked()
     {
-        return unlocked;
+        return locked;
     }
 
     public void SetCompleted(bool state)
