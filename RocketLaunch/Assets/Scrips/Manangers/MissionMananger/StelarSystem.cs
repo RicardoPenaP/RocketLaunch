@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum StelarSystemID { StelarSystem1, StelarSystem2, StelarSystem3}
 [System.Serializable]
 public class StelarSystem
 {

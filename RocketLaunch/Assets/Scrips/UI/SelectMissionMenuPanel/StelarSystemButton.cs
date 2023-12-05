@@ -6,8 +6,9 @@ using System;
 
 public class StelarSystemButton : MonoBehaviour
 {
-    static public event EventHandler OnAnyStelarSystemButtonPressed;
+    static public event EventHandler<StelarSystemID> OnAnyStelarSystemButtonPressed;
     [Header("Stelar System Button")]
+    [SerializeField] private StelarSystemID stelarSystemID;
     [SerializeField] private Button button;
     [SerializeField] private Image selectedImage;
 
@@ -34,13 +35,13 @@ public class StelarSystemButton : MonoBehaviour
 
     private void Button_OnClick()
     {
-        OnAnyStelarSystemButtonPressed?.Invoke(this, EventArgs.Empty);
+        OnAnyStelarSystemButtonPressed?.Invoke(this, stelarSystemID);
     }
 
-    private void StelarSystemButton_OnAnyStelarSystemButtonPressed(object sender, EventArgs e)
+    private void StelarSystemButton_OnAnyStelarSystemButtonPressed(object sender, StelarSystemID stelarSystemID)
     {
         selectedImage.gameObject.SetActive(false);
-        if ((sender as StelarSystemButton) == this)
+        if (stelarSystemID == this.stelarSystemID)
         {
             selectedImage.gameObject.SetActive(true);
         }
