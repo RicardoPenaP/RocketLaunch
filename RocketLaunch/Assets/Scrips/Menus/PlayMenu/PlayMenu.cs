@@ -42,6 +42,11 @@ public class PlayMenu : Menu<PlayMenu>
             MainMenu.Instance.OnPlayButtonPressed += MainMenu_OnPlayButtonPressed;
         }
 
+        if (SelectMissionMenu.Instance)
+        {
+            SelectMissionMenu.Instance.OnGoBackButtonPressed += SelectMissionMenu_OnGoBackButtonPressed;
+        }
+
         if (UpgradeRocketMenu.Instance)
         {
             UpgradeRocketMenu.Instance.OnGoBackButtonPressed += UpgradeRocketMenu_OnGoBackButtonPressed;
@@ -77,6 +82,11 @@ public class PlayMenu : Menu<PlayMenu>
         if (MainMenu.Instance)
         {
             MainMenu.Instance.OnPlayButtonPressed -= MainMenu_OnPlayButtonPressed;
+        }
+
+        if (SelectMissionMenu.Instance)
+        {
+            SelectMissionMenu.Instance.OnGoBackButtonPressed -= SelectMissionMenu_OnGoBackButtonPressed;
         }
 
         if (UpgradeRocketMenu.Instance)
@@ -116,6 +126,11 @@ public class PlayMenu : Menu<PlayMenu>
     }
 
     private void MainMenu_OnPlayButtonPressed()
+    {
+        OpenMenu();
+    }
+
+    private void SelectMissionMenu_OnGoBackButtonPressed()
     {
         OpenMenu();
     }
