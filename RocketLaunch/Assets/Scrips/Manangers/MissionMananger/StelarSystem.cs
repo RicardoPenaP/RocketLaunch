@@ -1,27 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using GameSceneManagement;
 
 [System.Serializable]
-public class Mission 
+public class StelarSystem
 {
-    [Header("Mission")]
-    [SerializeField] private GameScene gameScene;
-    [SerializeField] private int missionIndex;
+    [Header("Estelar System")]
+    [SerializeField] private Mission[] missions;
     [SerializeField] private bool unlocked = false;
     [SerializeField] private bool completed = false;
-
-    
-    public GameScene GetGameScene()
-    {
-        return gameScene;
-    }
-
-    public int GetMissionIndex()
-    {
-        return missionIndex;
-    }
 
     public void SetUnlocked(bool state)
     {
