@@ -10,6 +10,7 @@ public class SelectMissionMenu : Menu<SelectMissionMenu>
     [SerializeField] private Button goBackButton;
 
     public event Action OnGoBackButtonPressed;
+    public event Action<StelarSystem[]> OnLoadStelarSystemData;
 
     protected override void Awake()
     {
@@ -52,6 +53,11 @@ public class SelectMissionMenu : Menu<SelectMissionMenu>
 
     private void PlayMenu_OnSelectMissionButtonPressed()
     {
+        if (MissionMananger.Instance)
+        {
+            OnLoadStelarSystemData?.Invoke(MissionMananger.Instance.GetStelarSystems());
+        }
+        
         OpenMenu();
     }
 }

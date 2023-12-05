@@ -34,4 +34,9 @@ public class MissionMananger : MonoBehaviour
         return null;
     }
 
+    public StelarSystem[] GetStelarSystems()
+    {
+        return stelarSystems;
+    }
+
 }
