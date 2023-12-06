@@ -14,7 +14,7 @@ public class LevelMananger : MonoBehaviour
         public float landingTriesMultiplier;
         public float landingScoreMultiplier;
     }
-
+    public static event Action OnAnyLevelCompleted;
     [Header("Level Mananger")]
     [SerializeField] private GameScene nextLevel;
     [SerializeField,Min(0)] private float levelExperienceReward = 100f;
@@ -92,6 +92,7 @@ public class LevelMananger : MonoBehaviour
         rewardsData.landingScoreMultiplier = maxLandingScoreMultiplier * landingCompleteData.normalizedLandingScore;
         rewardsData.totalExperience = CalculateTotalExperience(rewardsData);
         OnLevelCompleted?.Invoke(rewardsData);
+        OnAnyLevelCompleted?.Invoke();
     }
 
     private float CalculateTotalExperience(RewardsData rewardsData)

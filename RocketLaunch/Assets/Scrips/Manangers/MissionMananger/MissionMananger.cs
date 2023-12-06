@@ -28,11 +28,13 @@ public class MissionMananger : MonoBehaviour
     private void Start()
     {
         MissionButton.OnAnyMissionButtonPressed += MissionButton_OnAnyMissionButtonPressed;
+        LevelMananger.OnAnyLevelCompleted += LevelMananger_OnAnyLevelCompleted;
     }
 
     private void OnDestroy()
     {
         MissionButton.OnAnyMissionButtonPressed -= MissionButton_OnAnyMissionButtonPressed;
+        LevelMananger.OnAnyLevelCompleted += LevelMananger_OnAnyLevelCompleted;
     }
 
     private void MissionButton_OnAnyMissionButtonPressed(StelarSystemID stelarSystemID, int missionIndex)
@@ -58,6 +60,12 @@ public class MissionMananger : MonoBehaviour
         SceneManagement.LoadScene(mission.GetGameScene());
     }
 
+    private void LevelMananger_OnAnyLevelCompleted()
+    {
+        SetCurrentMissionCompleted();
+        UnlockNextMission();
+    }
+
     public StelarSystem GetStelarSystem(StelarSystemID stelarSystemID)
     {
         foreach (StelarSystem stelarSystem in stelarSystems)
@@ -75,8 +83,34 @@ public class MissionMananger : MonoBehaviour
         return stelarSystems;
     }
 
-    public void SetCurrentMissionCompleted()
+    private void SetCurrentMissionCompleted()
     {
         currentMission.SetCompleted(true);
+    }
+
+    private void UnlockNextMission()
+    {
+        for (int i = 0; i < stelarSystems.Length; i++)
+        {
+            Mission[] missions = stelarSystems[i].GetMissions();
+            for (int j = 0; j < missions.Length; j++)
+            {
+                if (missions[j] == currentMission)
+                {
+                    if (j < missions.Length - 1)
+                    {
+                        missions[j + 1].SetLocked(false);
+                    }
+
+                    if (j == missions.Length - 1 && i < stelarSystems.Length - 1)
+                    {
+                        stelarSystems[i + 1].SetLocked(false);
+                        stelarSystems[i + 1].GetMissions()[0].SetLocked(false);
+                    }
+
+                    return;
+                }
+            }
+        }
     }
 }

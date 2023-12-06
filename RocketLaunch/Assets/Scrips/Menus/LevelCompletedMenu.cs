@@ -87,8 +87,12 @@ public class LevelCompletedMenu : Menu<LevelCompletedMenu>
 
     private void MainMenuButton_OnClick()
     {
-        //Go back to main menu scene
-        Debug.Log("Still working on that");
+        CloseMenu(LoadMainMenuScene);
+    }
+
+    private void LoadMainMenuScene()
+    {
+        SceneManagement.LoadScene(GameScene.MainMenu);
     }
 
     private void PlayAgain()
