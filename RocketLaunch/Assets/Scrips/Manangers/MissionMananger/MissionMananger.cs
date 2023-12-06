@@ -58,7 +58,12 @@ public class MissionMananger : MonoBehaviour
     }
 
     private void UnlockNextMission()
-    {
+    {       
+        if (IsTheLastMission(currentMission))
+        {
+            return;
+        }
+
         for (int i = 0; i < stelarSystems.Length; i++)
         {
             Mission[] missions = stelarSystems[i].GetMissions();
@@ -84,6 +89,13 @@ public class MissionMananger : MonoBehaviour
                 }
             }
         }
+    }
+
+    private bool IsTheLastMission(Mission currentMission)
+    {
+        Mission[] missions = stelarSystems[stelarSystems.Length - 1].GetMissions();
+        Mission lastMission = missions[missions.Length - 1];
+        return currentMission == lastMission;
     }
 
     private void MissionButton_OnAnyMissionButtonPressed(StelarSystemID stelarSystemID, int missionIndex)

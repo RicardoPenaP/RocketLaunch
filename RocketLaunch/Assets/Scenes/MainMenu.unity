@@ -457,55 +457,23 @@ MonoBehaviour:
       missionIndex: 1
       locked: 0
       completed: 0
-    - gameScene: 3
-      missionIndex: 2
-      locked: 1
-      completed: 0
-    - gameScene: 4
-      missionIndex: 3
-      locked: 1
-      completed: 0
-    - gameScene: 5
-      missionIndex: 4
-      locked: 1
-      completed: 0
-    - gameScene: 6
-      missionIndex: 5
-      locked: 1
-      completed: 0
     locked: 0
     completed: 0
   - stelarSystemID: 2
     systemName: Bull'Kratos System
     missions:
-    - gameScene: 0
+    - gameScene: 3
       missionIndex: 1
-      locked: 0
-      completed: 0
-    - gameScene: 0
-      missionIndex: 2
-      locked: 0
-      completed: 0
-    - gameScene: 0
-      missionIndex: 3
-      locked: 0
+      locked: 1
       completed: 0
     locked: 1
     completed: 0
   - stelarSystemID: 3
     systemName: Trixion System
     missions:
-    - gameScene: 0
+    - gameScene: 4
       missionIndex: 1
-      locked: 0
-      completed: 0
-    - gameScene: 0
-      missionIndex: 2
-      locked: 0
-      completed: 0
-    - gameScene: 0
-      missionIndex: 3
-      locked: 0
+      locked: 1
       completed: 0
     locked: 1
     completed: 0
