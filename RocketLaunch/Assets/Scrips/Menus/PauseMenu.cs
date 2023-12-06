@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using GameSceneManagement;
 
 public class PauseMenu : Menu<PauseMenu>
 {
@@ -63,8 +64,12 @@ public class PauseMenu : Menu<PauseMenu>
 
     private void MainMenuButton_OnClick()
     {
-        //Go back to main menu scene
-        Debug.Log("Still working on that");
+        CloseMenu(LoadMainMenuScene);
     }
 
+    private void LoadMainMenuScene()
+    {
+        SceneManagement.LoadScene(GameScene.MainMenu);
+    }
+    
 }
