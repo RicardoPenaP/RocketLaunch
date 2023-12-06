@@ -11,6 +11,7 @@ public class MissionMananger : MonoBehaviour
     [SerializeField] StelarSystem[] stelarSystems;
 
     private Mission currentMission;
+    private Mission nextMission;
 
     private void Awake()
     {
@@ -29,12 +30,60 @@ public class MissionMananger : MonoBehaviour
     {
         MissionButton.OnAnyMissionButtonPressed += MissionButton_OnAnyMissionButtonPressed;
         LevelMananger.OnAnyLevelCompleted += LevelMananger_OnAnyLevelCompleted;
+        LevelMananger.OnGoToNextLevel += LevelMananager_OnGoToNextLevel;
     }
 
     private void OnDestroy()
     {
         MissionButton.OnAnyMissionButtonPressed -= MissionButton_OnAnyMissionButtonPressed;
-        LevelMananger.OnAnyLevelCompleted += LevelMananger_OnAnyLevelCompleted;
+        LevelMananger.OnAnyLevelCompleted -= LevelMananger_OnAnyLevelCompleted;
+        LevelMananger.OnGoToNextLevel -= LevelMananager_OnGoToNextLevel;
+    }
+
+    private void LoadMission(Mission mission)
+    {
+        currentMission = mission;
+        SceneManagement.LoadScene(mission.GetGameScene());
+    }
+
+    private void LoadNextMission()
+    {
+        LoadMission(nextMission);
+        nextMission = null;
+    }
+
+    private void SetCurrentMissionCompleted()
+    {
+        currentMission.SetCompleted(true);
+    }
+
+    private void UnlockNextMission()
+    {
+        for (int i = 0; i < stelarSystems.Length; i++)
+        {
+            Mission[] missions = stelarSystems[i].GetMissions();
+            for (int j = 0; j < missions.Length; j++)
+            {
+                if (missions[j] == currentMission)
+                {
+                    if (j < missions.Length - 1)
+                    {
+                        nextMission = missions[j + 1];
+                        nextMission.SetLocked(false);
+                    }
+                    else
+                    {
+                        if (j == missions.Length - 1 && i < stelarSystems.Length - 1)
+                        {
+                            stelarSystems[i + 1].SetLocked(false);                            
+                            nextMission = stelarSystems[i + 1].GetMissions()[0];
+                            nextMission.SetLocked(false);
+                        }
+                    }
+                    return;
+                }
+            }
+        }
     }
 
     private void MissionButton_OnAnyMissionButtonPressed(StelarSystemID stelarSystemID, int missionIndex)
@@ -54,16 +103,15 @@ public class MissionMananger : MonoBehaviour
         }
     }
 
-    private void LoadMission(Mission mission)
-    {
-        currentMission = mission;
-        SceneManagement.LoadScene(mission.GetGameScene());
-    }
-
     private void LevelMananger_OnAnyLevelCompleted()
     {
         SetCurrentMissionCompleted();
         UnlockNextMission();
+    }
+
+    private void LevelMananager_OnGoToNextLevel()
+    {
+        LoadNextMission();
     }
 
     public StelarSystem GetStelarSystem(StelarSystemID stelarSystemID)
@@ -83,34 +131,5 @@ public class MissionMananger : MonoBehaviour
         return stelarSystems;
     }
 
-    private void SetCurrentMissionCompleted()
-    {
-        currentMission.SetCompleted(true);
-    }
-
-    private void UnlockNextMission()
-    {
-        for (int i = 0; i < stelarSystems.Length; i++)
-        {
-            Mission[] missions = stelarSystems[i].GetMissions();
-            for (int j = 0; j < missions.Length; j++)
-            {
-                if (missions[j] == currentMission)
-                {
-                    if (j < missions.Length - 1)
-                    {
-                        missions[j + 1].SetLocked(false);
-                    }
-
-                    if (j == missions.Length - 1 && i < stelarSystems.Length - 1)
-                    {
-                        stelarSystems[i + 1].SetLocked(false);
-                        stelarSystems[i + 1].GetMissions()[0].SetLocked(false);
-                    }
-
-                    return;
-                }
-            }
-        }
-    }
+  
 }

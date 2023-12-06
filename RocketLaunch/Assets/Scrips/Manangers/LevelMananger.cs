@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-using GameSceneManagement;
 
 public class LevelMananger : MonoBehaviour
 {
@@ -15,8 +14,8 @@ public class LevelMananger : MonoBehaviour
         public float landingScoreMultiplier;
     }
     public static event Action OnAnyLevelCompleted;
-    [Header("Level Mananger")]
-    [SerializeField] private GameScene nextLevel;
+    public static event Action OnGoToNextLevel;
+    [Header("Level Mananger")]    
     [SerializeField,Min(0)] private float levelExperienceReward = 100f;
     [SerializeField,Range(0f, 10f)] private float maxRemainingLifesMultiplier = 3f;
     [SerializeField, Range(0f, 10f)] private float maxLandingTriesMultiplier = 3f;
@@ -62,7 +61,11 @@ public class LevelMananger : MonoBehaviour
         if (playerLandingController)
         {
             playerLandingController.OnLandingFinished += PlayerLandingController_OnLandingFinished;
-        }       
+        }
+        if (LevelCompletedMenu.Instance)
+        {
+            LevelCompletedMenu.Instance.OnNextLevelButtonPressed += LevelCompletedMenu_OnNextLevelButtonPressed;
+        }
     }
 
     private void OnDestroy()
@@ -74,7 +77,11 @@ public class LevelMananger : MonoBehaviour
         if (playerLandingController)
         {
             playerLandingController.OnLandingFinished -= PlayerLandingController_OnLandingFinished;
-        }       
+        }
+        if (LevelCompletedMenu.Instance)
+        {
+            LevelCompletedMenu.Instance.OnNextLevelButtonPressed -= LevelCompletedMenu_OnNextLevelButtonPressed;
+        }
     }
 
     private void PlayerController_OnDie(object sender, EventArgs e)
@@ -102,6 +109,11 @@ public class LevelMananger : MonoBehaviour
         total += rewardsData.partialExperiece * rewardsData.landingTriesMultiplier;
         total += rewardsData.partialExperiece * rewardsData.landingScoreMultiplier;
         return total;
+    }
+
+    private void LevelCompletedMenu_OnNextLevelButtonPressed()
+    {
+        OnGoToNextLevel?.Invoke();
     }
 
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using GameSceneManagement;
 using TMPro;
+using System;
 
 public class LevelCompletedMenu : Menu<LevelCompletedMenu>
 {
@@ -19,6 +20,7 @@ public class LevelCompletedMenu : Menu<LevelCompletedMenu>
     [SerializeField] private TextMeshProUGUI landingScoreAmountText;
     [SerializeField] private TextMeshProUGUI totalAmountText;
 
+    public event Action OnNextLevelButtonPressed;
 
     protected override void Awake()
     {
@@ -81,8 +83,7 @@ public class LevelCompletedMenu : Menu<LevelCompletedMenu>
 
     private void NextLevelButton_OnClick()
     {
-        //Go to next level scene
-        Debug.Log("Still working on that");
+        OnNextLevelButtonPressed?.Invoke();
     }
 
     private void MainMenuButton_OnClick()
