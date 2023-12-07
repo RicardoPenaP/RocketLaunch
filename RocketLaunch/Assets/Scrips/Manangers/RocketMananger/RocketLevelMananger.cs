@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class RocketLevelMananger : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class RocketLevelMananger : MonoBehaviour
     [SerializeField] private int maxLevel = 100;
     [SerializeField] private float baseExperienceForNextLevel = 1000f;
     [SerializeField,Range(1f,10f)] private float experienceAugmentCoeficient = 2f;
+
+    public event Action OnRocketLevelUp;
 
     private int currentLevel = 1;
     private float currentExperience = 0;
@@ -71,7 +74,9 @@ public class RocketLevelMananger : MonoBehaviour
             currentLevel++;
             maxExperience *= experienceAugmentCoeficient;
             currentExperience = 0;
+            OnRocketLevelUp?.Invoke();            
         }
     }
 
+    
 }
