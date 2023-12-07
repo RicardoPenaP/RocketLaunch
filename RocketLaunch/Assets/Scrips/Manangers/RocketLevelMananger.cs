@@ -11,6 +11,8 @@ public class RocketLevelMananger : MonoBehaviour
     [SerializeField] private float baseExperienceForNextLevel = 1000f;
     [SerializeField,Range(1f,10f)] private float experienceAugmentCoeficient = 2f;
 
+    private int currentLevel = 1;
+
     private void Awake()
     {
         if (Instance && Instance != this)
@@ -23,4 +25,6 @@ public class RocketLevelMananger : MonoBehaviour
             DontDestroyOnLoad(this);
         }
     }
+
+    
 }

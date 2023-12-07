@@ -15,6 +15,8 @@ public class LevelMananger : MonoBehaviour
     }
     public static event Action OnAnyLevelCompleted;
     public static event Action OnGoToNextLevel;
+    public static event Action<RewardsData> OnLevelCompleted;
+
     [Header("Level Mananger")]    
     [SerializeField,Min(0)] private float levelExperienceReward = 100f;
     [SerializeField,Range(0f, 10f)] private float maxRemainingLifesMultiplier = 3f;
@@ -25,7 +27,7 @@ public class LevelMananger : MonoBehaviour
     public static LevelMananger Instance { get; private set; }
 
     public event Action OnGameOver;
-    public event Action<RewardsData> OnLevelCompleted;    
+      
 
     private PlayerController playerController;
     private PlayerLandingController playerLandingController;

@@ -46,7 +46,7 @@ public class LevelCompletedMenu : Menu<LevelCompletedMenu>
     {
         if (LevelMananger.Instance)
         {
-            LevelMananger.Instance.OnLevelCompleted += LevelMananger_OnLevelCompleted;
+            LevelMananger.OnLevelCompleted += LevelMananger_OnLevelCompleted;
         }
 
         gameObject.SetActive(false);
@@ -57,7 +57,7 @@ public class LevelCompletedMenu : Menu<LevelCompletedMenu>
     {
         if (LevelMananger.Instance)
         {
-            LevelMananger.Instance.OnLevelCompleted -= LevelMananger_OnLevelCompleted;
+            LevelMananger.OnLevelCompleted -= LevelMananger_OnLevelCompleted;
         }
 
         if (playAgainButton)
