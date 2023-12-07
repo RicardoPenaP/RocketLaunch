@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ExperienceMananger : MonoBehaviour
+public class RocketLevelMananger : MonoBehaviour
 {
-    public ExperienceMananger Instance { get; private set; }
+    public static RocketLevelMananger Instance { get; private set; }
 
     [Header("Experience Mananger")]
     [SerializeField] private int maxLevel = 100;
