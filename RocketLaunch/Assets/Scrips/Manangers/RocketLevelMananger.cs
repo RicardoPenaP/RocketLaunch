@@ -12,12 +12,14 @@ public class RocketLevelMananger : MonoBehaviour
     [SerializeField,Range(1f,10f)] private float experienceAugmentCoeficient = 2f;
 
     private int currentLevel = 1;
+    private float currentExperience = 0;
 
     private void Awake()
     {
         if (Instance && Instance != this)
         {
             Destroy(this);
+            return;
         }
         else
         {
@@ -26,5 +28,24 @@ public class RocketLevelMananger : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        LevelMananger.OnLevelCompleted += LevelMananger_OnLevelCompleted;
+    }
+
+    private void OnDestroy()
+    {
+        LevelMananger.OnLevelCompleted -= LevelMananger_OnLevelCompleted;
+    }
+
+    private void LevelMananger_OnLevelCompleted(LevelMananger.RewardsData rewardsData)
+    {
+        SaveExperience(rewardsData.totalExperience);
+    }
     
+    private void SaveExperience(float amount)
+    {
+
+    }
+
 }
