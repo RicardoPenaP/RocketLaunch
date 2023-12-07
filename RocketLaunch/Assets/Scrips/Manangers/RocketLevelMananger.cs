@@ -13,6 +13,7 @@ public class RocketLevelMananger : MonoBehaviour
 
     private int currentLevel = 1;
     private float currentExperience = 0;
+    private float maxExperience;
 
     private void Awake()
     {
@@ -26,6 +27,8 @@ public class RocketLevelMananger : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(this);
         }
+
+        maxExperience = baseExperienceForNextLevel;
     }
 
     private void Start()
@@ -45,7 +48,27 @@ public class RocketLevelMananger : MonoBehaviour
     
     private void SaveExperience(float amount)
     {
+        currentExperience += amount;
 
+        if (currentExperience > maxExperience)
+        {
+            float remainingExp = currentExperience - maxExperience;
+            LevelUp();
+            SaveExperience(remainingExp);
+            return;
+        }
+
+        if (currentExperience == maxExperience)
+        {
+            LevelUp();
+        }
+    }
+
+    private void LevelUp()
+    {
+        currentLevel++;
+        maxExperience *= experienceAugmentCoeficient;
+        currentExperience = 0;
     }
 
 }
