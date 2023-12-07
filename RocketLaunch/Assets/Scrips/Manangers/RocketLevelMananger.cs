@@ -66,9 +66,12 @@ public class RocketLevelMananger : MonoBehaviour
 
     private void LevelUp()
     {
-        currentLevel++;
-        maxExperience *= experienceAugmentCoeficient;
-        currentExperience = 0;
+        if (currentLevel < maxLevel)
+        {
+            currentLevel++;
+            maxExperience *= experienceAugmentCoeficient;
+            currentExperience = 0;
+        }
     }
 
 }
