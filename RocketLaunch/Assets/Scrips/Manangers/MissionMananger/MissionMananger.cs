@@ -29,14 +29,14 @@ public class MissionMananger : MonoBehaviour
     private void Start()
     {
         MissionButton.OnAnyMissionButtonPressed += MissionButton_OnAnyMissionButtonPressed;
-        LevelMananger.OnAnyLevelCompleted += LevelMananger_OnAnyLevelCompleted;
+        LevelMananger.OnLevelCompleted += LevelMananger_OnLevelCompleted;
         LevelMananger.OnGoToNextLevel += LevelMananager_OnGoToNextLevel;
     }
 
     private void OnDestroy()
     {
         MissionButton.OnAnyMissionButtonPressed -= MissionButton_OnAnyMissionButtonPressed;
-        LevelMananger.OnAnyLevelCompleted -= LevelMananger_OnAnyLevelCompleted;
+        LevelMananger.OnLevelCompleted -= LevelMananger_OnLevelCompleted;
         LevelMananger.OnGoToNextLevel -= LevelMananager_OnGoToNextLevel;
     }
 
@@ -115,7 +115,7 @@ public class MissionMananger : MonoBehaviour
         }
     }
 
-    private void LevelMananger_OnAnyLevelCompleted()
+    private void LevelMananger_OnLevelCompleted(LevelMananger.RewardsData rewardsData)
     {
         SetCurrentMissionCompleted();
         UnlockNextMission();

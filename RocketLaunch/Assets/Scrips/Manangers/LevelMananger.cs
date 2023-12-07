@@ -13,7 +13,7 @@ public class LevelMananger : MonoBehaviour
         public float landingTriesMultiplier;
         public float landingScoreMultiplier;
     }
-    public static event Action OnAnyLevelCompleted;
+    
     public static event Action OnGoToNextLevel;
     public static event Action<RewardsData> OnLevelCompleted;
 
@@ -100,8 +100,7 @@ public class LevelMananger : MonoBehaviour
         rewardsData.landingTriesMultiplier = maxLandingTriesMultiplier - (eachLandingTryCost * (landingCompleteData.landingTries - 1)) > 1f ? maxLandingTriesMultiplier - (eachLandingTryCost * (landingCompleteData.landingTries-1)) : 1f;
         rewardsData.landingScoreMultiplier = maxLandingScoreMultiplier * landingCompleteData.normalizedLandingScore;
         rewardsData.totalExperience = CalculateTotalExperience(rewardsData);
-        OnLevelCompleted?.Invoke(rewardsData);
-        OnAnyLevelCompleted?.Invoke();
+        OnLevelCompleted?.Invoke(rewardsData);        
     }
 
     private float CalculateTotalExperience(RewardsData rewardsData)
