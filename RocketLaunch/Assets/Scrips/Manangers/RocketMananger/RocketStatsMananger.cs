@@ -15,7 +15,7 @@ public class RocketStatsMananger : MonoBehaviour
 
     public event Action<int> OnCurrentStatPointsChanged;   
     
-    private int currentStatPoints = 12;
+    private int currentStatPoints = 0;
 
     private RocketStat[] rocketStats;
 
@@ -32,12 +32,11 @@ public class RocketStatsMananger : MonoBehaviour
             DontDestroyOnLoad(this);
         }
 
-        rocketStats = new RocketStat[6];
+        rocketStats = new RocketStat[STATS_AMOUNT];
 
         for (int i = 0; i < rocketStats.Length; i++)
         {
             rocketStats[i] = new RocketStat((StatType)i);
-            
         }
     }
 
