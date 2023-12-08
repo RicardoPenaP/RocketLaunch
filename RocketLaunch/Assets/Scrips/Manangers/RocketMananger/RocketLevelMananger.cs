@@ -14,7 +14,7 @@ public class RocketLevelMananger : MonoBehaviour
 
     public event Action OnRocketLevelUp;
 
-    private int currentLevel = 1;
+    private int currentLevel = 3;
     private float currentExperience = 0;
     private float maxExperience;
 
@@ -78,5 +78,8 @@ public class RocketLevelMananger : MonoBehaviour
         }
     }
 
-    
+    public int GetCurrentLevel()
+    {
+        return currentLevel;
+    }
 }

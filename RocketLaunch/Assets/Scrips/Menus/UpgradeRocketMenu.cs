@@ -10,7 +10,7 @@ public class UpgradeRocketMenu : Menu<UpgradeRocketMenu>
 {
     [Header("Upgrade Rocket Menu")]
     [SerializeField] private TextMeshProUGUI levelText;
-    [SerializeField] private TextMeshProUGUI remainingPointsText;
+    [SerializeField] private TextMeshProUGUI remaningStatPointsText;
     [SerializeField] private Button goBackButton;
 
     public event Action OnGoBackButtonPressed;
@@ -32,6 +32,11 @@ public class UpgradeRocketMenu : Menu<UpgradeRocketMenu>
             PlayMenu.Instance.OnUpgradeRocketButtonPressed += PlayMenu_OnUpgradeRocketButtonPressed;
         }
 
+        if (RocketStatsMananger.Instance)
+        {
+            RocketStatsMananger.Instance.OnCurrentStatPointsChanged += RocketStatMananger_OnCurrentStatPointsChanged;
+        }
+
         gameObject.SetActive(false);
         menuOpened = false;
     }
@@ -47,6 +52,11 @@ public class UpgradeRocketMenu : Menu<UpgradeRocketMenu>
         {
             PlayMenu.Instance.OnUpgradeRocketButtonPressed -= PlayMenu_OnUpgradeRocketButtonPressed;
         }
+
+        if (RocketStatsMananger.Instance)
+        {
+            RocketStatsMananger.Instance.OnCurrentStatPointsChanged -= RocketStatMananger_OnCurrentStatPointsChanged;
+        }
     }
 
     private void GoBackButton_OnClick()
@@ -56,8 +66,23 @@ public class UpgradeRocketMenu : Menu<UpgradeRocketMenu>
     }
 
     private void PlayMenu_OnUpgradeRocketButtonPressed()
-    {        
+    {
+        if (RocketLevelMananger.Instance)
+        {
+            levelText.text = $"Level: {RocketLevelMananger.Instance.GetCurrentLevel()}";
+        }
+
+        if (RocketStatsMananger.Instance)
+        {
+            remaningStatPointsText.text = $"Remaining Points: {RocketStatsMananger.Instance.GetCurrentStatPoints()}";
+        }
         OpenMenu();
     }
-   
+
+    private void RocketStatMananger_OnCurrentStatPointsChanged(int currentStatPoints)
+    {
+        remaningStatPointsText.text = $"Remaining Points: {currentStatPoints}";
+    }
+
+
 }

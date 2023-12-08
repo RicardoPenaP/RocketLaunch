@@ -73,6 +73,7 @@ public class RocketStatPanel : MonoBehaviour
     {
         OnAnyLevelUpButtonPressed?.Invoke();
         rocketStat.LevelUp();
+        UpdateCurrentLevelText();
         SetLevelDownButtonActiveState(true);
     }
 
@@ -80,6 +81,7 @@ public class RocketStatPanel : MonoBehaviour
     {
         OnAnyLevelDownButtonPressed?.Invoke();
         rocketStat.LevelDown();
+        UpdateCurrentLevelText();
         if (rocketStat.GetStatLevel() <= 1)
         {
             SetLevelDownButtonActiveState(false);
@@ -90,8 +92,18 @@ public class RocketStatPanel : MonoBehaviour
     {
         if (RocketStatsMananger.Instance)
         {
-            rocketStat = RocketStatsMananger.Instance.GetRocketStat(statToControl);           
+            if (rocketStat == null)
+            {
+                rocketStat = RocketStatsMananger.Instance.GetRocketStat(statToControl);
+            }                      
             UpdateCurrentLevelText();
+
+            if (rocketStat.GetStatLevel() <= 1)
+            {
+                SetLevelDownButtonActiveState(false);
+            }
+
+            SetLevelUpButtonActiveState(RocketStatsMananger.Instance.GetCurrentStatPoints() > 0);
         }
     }
 
@@ -110,8 +122,7 @@ public class RocketStatPanel : MonoBehaviour
         if (state != levelUpButton.gameObject.activeInHierarchy)
         {
             levelUpButton.gameObject.SetActive(state);
-        }
-       
+        }       
     }
 
     private void SetLevelDownButtonActiveState(bool state)

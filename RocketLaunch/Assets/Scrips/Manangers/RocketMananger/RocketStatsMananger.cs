@@ -14,11 +14,10 @@ public class RocketStatsMananger : MonoBehaviour
     [SerializeField] private int statsPointsGivenPerLevelUp = 6;
 
     public event Action<int> OnCurrentStatPointsChanged;   
+    
+    private int currentStatPoints = 12;
 
-    private int totalStatPoints = 0;
-    private int currentStatPoints = 0;
-
-    private RocketStat[] rocketStats = new RocketStat[STATS_AMOUNT];
+    private RocketStat[] rocketStats;
 
     private void Awake()
     {
@@ -33,9 +32,12 @@ public class RocketStatsMananger : MonoBehaviour
             DontDestroyOnLoad(this);
         }
 
+        rocketStats = new RocketStat[6];
+
         for (int i = 0; i < rocketStats.Length; i++)
         {
-            rocketStats[i].SetStatType((StatType)i);
+            rocketStats[i] = new RocketStat((StatType)i);
+            
         }
     }
 
@@ -85,13 +87,17 @@ public class RocketStatsMananger : MonoBehaviour
     }
 
     private void AddStatPoints()
-    {
-        totalStatPoints += statsPointsGivenPerLevelUp;
+    {       
         currentStatPoints += statsPointsGivenPerLevelUp;
     }
 
     public RocketStat GetRocketStat(StatType statType)
     {
         return rocketStats[(int)statType];
+    }
+
+    public int GetCurrentStatPoints()
+    {
+        return currentStatPoints;
     }
 }

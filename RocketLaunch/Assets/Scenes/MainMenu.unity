@@ -1004,6 +1004,11 @@ PrefabInstance:
       propertyPath: m_fontSize
       value: 36.2
       objectReference: {fileID: 0}
+    - target: {fileID: 9202211509878234953, guid: 4a867992fe7960f43a48c146489caeb8,
+        type: 3}
+      propertyPath: statToControl
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4a867992fe7960f43a48c146489caeb8, type: 3}
 --- !u!224 &181036803 stripped
@@ -1308,6 +1313,11 @@ PrefabInstance:
       propertyPath: m_fontSize
       value: 27.55
       objectReference: {fileID: 0}
+    - target: {fileID: 9202211509878234953, guid: 4a867992fe7960f43a48c146489caeb8,
+        type: 3}
+      propertyPath: statToControl
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4a867992fe7960f43a48c146489caeb8, type: 3}
 --- !u!224 &278502301 stripped
@@ -1445,6 +1455,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_fontSize
       value: 27.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 9202211509878234953, guid: 4a867992fe7960f43a48c146489caeb8,
+        type: 3}
+      propertyPath: statToControl
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4a867992fe7960f43a48c146489caeb8, type: 3}
@@ -3944,6 +3959,11 @@ PrefabInstance:
       propertyPath: m_fontSize
       value: 28.35
       objectReference: {fileID: 0}
+    - target: {fileID: 9202211509878234953, guid: 4a867992fe7960f43a48c146489caeb8,
+        type: 3}
+      propertyPath: statToControl
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4a867992fe7960f43a48c146489caeb8, type: 3}
 --- !u!224 &963934123 stripped
@@ -4081,6 +4101,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_fontSize
       value: 30.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 9202211509878234953, guid: 4a867992fe7960f43a48c146489caeb8,
+        type: 3}
+      propertyPath: statToControl
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4a867992fe7960f43a48c146489caeb8, type: 3}
@@ -6296,6 +6321,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e79ce003a9973e4e87beced7818990c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  statsPointsGivenPerLevelUp: 0
 --- !u!4 &1613984501
 Transform:
   m_ObjectHideFlags: 0
@@ -7235,7 +7261,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelText: {fileID: 48576834}
-  remainingPointsText: {fileID: 1340646238}
+  remaningStatPointsText: {fileID: 1340646238}
   goBackButton: {fileID: 703400205}
 --- !u!1 &1915550685
 GameObject:
