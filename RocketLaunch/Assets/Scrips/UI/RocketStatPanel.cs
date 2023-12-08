@@ -39,6 +39,11 @@ public class RocketStatPanel : MonoBehaviour
         {
             UpgradeRocketMenu.Instance.OnMenuOpened += UpgradeRocketMenu_OnMenuOpened;
         }
+
+        if (RocketStatsMananger.Instance)
+        {
+            RocketStatsMananger.Instance.OnCurrentStatPointsChanged += RocketStatMananger_OnCurrentStatPointsChanged;
+        }
     }
 
     private void OnDestroy()
@@ -57,18 +62,28 @@ public class RocketStatPanel : MonoBehaviour
         {
             UpgradeRocketMenu.Instance.OnMenuOpened -= UpgradeRocketMenu_OnMenuOpened;
         }
+
+        if (RocketStatsMananger.Instance)
+        {
+            RocketStatsMananger.Instance.OnCurrentStatPointsChanged -= RocketStatMananger_OnCurrentStatPointsChanged;
+        }
     }
 
     private void LevelUpButton_OnClick()
     {
         OnAnyLevelUpButtonPressed?.Invoke();
         rocketStat.LevelUp();
+        SetLevelDownButtonActiveState(true);
     }
 
     private void LevelDownButton_OnClick()
     {
         OnAnyLevelDownButtonPressed?.Invoke();
         rocketStat.LevelDown();
+        if (rocketStat.GetStatLevel() <= 1)
+        {
+            SetLevelDownButtonActiveState(false);
+        }
     }
 
     private void UpgradeRocketMenu_OnMenuOpened()
@@ -80,8 +95,30 @@ public class RocketStatPanel : MonoBehaviour
         }
     }
 
+    private void RocketStatMananger_OnCurrentStatPointsChanged(int currentStatPoints)
+    {
+        SetLevelUpButtonActiveState(currentStatPoints > 0);
+    }
+
     private void UpdateCurrentLevelText()
     {
         currentLevelText.text = $"Level: {rocketStat.GetStatLevel()}";
+    }
+
+    private void SetLevelUpButtonActiveState(bool state)
+    {
+        if (state != levelUpButton.gameObject.activeInHierarchy)
+        {
+            levelUpButton.gameObject.SetActive(state);
+        }
+       
+    }
+
+    private void SetLevelDownButtonActiveState(bool state)
+    {
+        if (state != levelDownButton.gameObject.activeInHierarchy)
+        {
+            levelDownButton.gameObject.SetActive(state);
+        }       
     }
 }

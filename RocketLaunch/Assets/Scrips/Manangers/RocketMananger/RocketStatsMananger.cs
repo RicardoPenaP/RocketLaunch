@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public enum StatType { MainEngine, SideEngine, CoolingSystem, LandingSystem, PickupSystem, ShieldSystem }
 public class RocketStatsMananger : MonoBehaviour
@@ -11,6 +12,8 @@ public class RocketStatsMananger : MonoBehaviour
 
     [Header("Rocket Stats Mananger")]
     [SerializeField] private int statsPointsGivenPerLevelUp = 6;
+
+    public event Action<int> OnCurrentStatPointsChanged;   
 
     private int totalStatPoints = 0;
     private int currentStatPoints = 0;
@@ -39,6 +42,7 @@ public class RocketStatsMananger : MonoBehaviour
     private void Start()
     {
         RocketStatPanel.OnAnyLevelUpButtonPressed += RocketStatPanel_OnAnyLevelUpButtonPressed;
+        RocketStatPanel.OnAnyLevelDownButtonPressed += RocketStatPanel_OnAnyLevelDownButtonPressed;
 
         if (RocketLevelMananger.Instance)
         {
@@ -49,6 +53,7 @@ public class RocketStatsMananger : MonoBehaviour
     private void OnDestroy()
     {
         RocketStatPanel.OnAnyLevelUpButtonPressed -= RocketStatPanel_OnAnyLevelUpButtonPressed;
+        RocketStatPanel.OnAnyLevelDownButtonPressed -= RocketStatPanel_OnAnyLevelDownButtonPressed;
 
         if (RocketLevelMananger.Instance)
         {
@@ -63,15 +68,20 @@ public class RocketStatsMananger : MonoBehaviour
 
     private void RocketStatPanel_OnAnyLevelUpButtonPressed()
     {
-        if (currentStatPoints > 1)
+        if (currentStatPoints == 0)
         {
-            currentStatPoints--;
+            return;
         }
+
+        currentStatPoints--;
+        OnCurrentStatPointsChanged?.Invoke(currentStatPoints);
+
     }
 
     private void RocketStatPanel_OnAnyLevelDownButtonPressed()
-    {
+    {        
         currentStatPoints++;
+        OnCurrentStatPointsChanged?.Invoke(currentStatPoints);
     }
 
     private void AddStatPoints()
