@@ -21,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
     private new Rigidbody rigidbody;
 
     private bool canMove = true;
+    private float mainEngineSpeedMultiplier;
 
     private void Awake()
     {
@@ -64,15 +65,15 @@ public class PlayerMovement : MonoBehaviour
 
     private void Initialize()
     {
+        mainEngineSpeedMultiplier = 1f;
         if (RocketStatsMananger.Instance)
         {
             int rocketStatLevel = RocketStatsMananger.Instance.GetRocketStat(StatType.MainEngine).GetStatLevel();
-           
+            float rocketStatMultiplierAugmentCoeficient = RocketStatsMananger.Instance.GetMainEngineSpeedMultiplierAugmentCoeficient();
+
+            mainEngineSpeedMultiplier += rocketStatMultiplierAugmentCoeficient * rocketStatLevel;
         }
-        else
-        {
-            
-        }
+       
     }
 
     private void UpdatePlayerMovement()
@@ -113,7 +114,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void MoveUpwards()
     {
-        Vector3 forceDirection = transform.up * engineForce * Time.deltaTime;
+        Vector3 forceDirection = transform.up * engineForce * mainEngineSpeedMultiplier * Time.deltaTime;
         rigidbody.AddForce(forceDirection,ForceMode.Acceleration);
     }
 

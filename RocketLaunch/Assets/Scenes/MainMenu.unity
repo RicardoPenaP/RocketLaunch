@@ -6321,7 +6321,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e79ce003a9973e4e87beced7818990c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  statsPointsGivenPerLevelUp: 0
+  rocketStatsData: {fileID: 11400000, guid: 6f3b943d6192ed244b7f38b457410ab0, type: 2}
+  statsPointsGivenPerLevelUp: 6
 --- !u!4 &1613984501
 Transform:
   m_ObjectHideFlags: 0

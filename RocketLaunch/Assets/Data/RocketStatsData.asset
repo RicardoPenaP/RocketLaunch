@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1c6152af513dc64fbf23112f231f6c1, type: 3}
+  m_Name: RocketStatsData
+  m_EditorClassIdentifier: 
+  mainEngineSpeedMultiplierAugmentCoeficient: 0.1
+  mainEngineTemperatureMultiplierAugmentCoeficient: 0.1
+  mainEngineFuelConsumptionMultiplierAugmentCoeficient: 0.1
+  sideEngineTurningSpeedMultiplierAugmentCoeficient: 0.1
+  sideEngineTemperatureMultiplierAugmentCoeficient: 0.1
+  sideEngineFuelConsumptionMultiplierAugmentCoeficient: 0.1
+  maxTemperatureMultiplierAugmentCoeficient: 0.1
+  coolingSpeedMultiplierAugmentCoeficient: 0.1
+  overheatTimeMultiplierAugmentCoeficient: 0.1
+  angularDragMultiplierAugmentCoeficient: 0.1
+  greenAreaMultiplierAugmentCoeficient: 0.1
+  yellowAreaMultiplierAugmentCoeficient: 0.1
+  effectivePercentageMultiplierAugmentCoeficient: 0.1
+  pullDistanceMultiplierAugmentCoeficient: 0.1
+  experienceMultiplierAugmentCoeficient: 0.1
+  fuelCapacityMultiplierAugmentCoeficient: 0.1
