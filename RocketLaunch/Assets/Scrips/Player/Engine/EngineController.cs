@@ -18,7 +18,7 @@ public class EngineController : MonoBehaviour
     [SerializeField,Range(0f,1f)] private float powerHeatRateMultiplierPercentage = 0.2f;
 
     [Header("Temperature settings")]
-    [SerializeField] private float maxEngineTemperature;
+    [SerializeField] private float maxEngineTemperature;    
     [SerializeField] private float heatRate;
     [SerializeField] private float overHeatRestTime;    
     [SerializeField] private int coolingRate;

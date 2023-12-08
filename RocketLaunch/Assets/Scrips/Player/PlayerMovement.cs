@@ -6,10 +6,8 @@ using System;
 public class PlayerMovement : MonoBehaviour
 {
     public enum RotationDirection { Rigth, Left}
-    [Header("Player Movement")]
-    [SerializeField] private float minEngineForce = 1000f;
-    [SerializeField] private float maxEngineForce = 3000f;
-    [SerializeField] private float engineForce = 10f;
+    [Header("Player Movement")]    
+    [SerializeField] private float engineForce = 1000f;
     [SerializeField] private float rotationForce = 5f;
 
     public event EventHandler OnStartMovingUpwards;
@@ -22,7 +20,7 @@ public class PlayerMovement : MonoBehaviour
     private EngineController engineController;
     private new Rigidbody rigidbody;
 
-    private bool canMove = true; 
+    private bool canMove = true;
 
     private void Awake()
     {
@@ -69,11 +67,11 @@ public class PlayerMovement : MonoBehaviour
         if (RocketStatsMananger.Instance)
         {
             int rocketStatLevel = RocketStatsMananger.Instance.GetRocketStat(StatType.MainEngine).GetStatLevel();
-            engineForce = ((maxEngineForce - minEngineForce) / (RocketStat.MAX_STAT_LEVEL - RocketStat.MIN_STAT_LEVEL)) * rocketStatLevel;
+           
         }
         else
         {
-            engineForce = minEngineForce;
+            
         }
     }
 
