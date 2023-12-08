@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4092151710113512125}
+  - component: {fileID: 9202211509878234953}
   - component: {fileID: 4092151710113512115}
   - component: {fileID: 4092151710113512114}
-  - component: {fileID: 9202211509878234953}
   m_Layer: 5
   m_Name: RocketStatsPanel
   m_TagString: Untagged
@@ -43,6 +43,22 @@ RectTransform:
   m_AnchoredPosition: {x: -538, y: 145.00177}
   m_SizeDelta: {x: 348.8563, y: 194.1464}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &9202211509878234953
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4092151710113512124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65edafac358584047a260c73ab90b699, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statToControl: 0
+  currentLevelText: {fileID: 4092151710289839277}
+  levelUpButton: {fileID: 4092151711602933709}
+  levelDownButton: {fileID: 4092151711331003941}
 --- !u!222 &4092151710113512115
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -81,18 +97,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &9202211509878234953
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4092151710113512124}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65edafac358584047a260c73ab90b699, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &4092151710257985455
 GameObject:
   m_ObjectHideFlags: 0

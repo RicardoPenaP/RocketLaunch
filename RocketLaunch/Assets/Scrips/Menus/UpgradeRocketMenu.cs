@@ -56,7 +56,7 @@ public class UpgradeRocketMenu : Menu<UpgradeRocketMenu>
     }
 
     private void PlayMenu_OnUpgradeRocketButtonPressed()
-    {
+    {        
         OpenMenu();
     }
    

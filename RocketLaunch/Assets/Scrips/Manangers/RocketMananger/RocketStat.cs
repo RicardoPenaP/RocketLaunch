@@ -7,8 +7,8 @@ public class RocketStat
     private const int MAX_STAT_LEVEL = 100;
     private const int MIN_STAT_LEVEL = 1;
 
-    public StatType statType;
-    public int statLevel;
+    private StatType statType;
+    private int statLevel;
 
     public RocketStat(StatType statType)
     {
@@ -44,6 +44,11 @@ public class RocketStat
     public StatType GetStatType()
     {
         return statType;
+    }
+
+    public int GetStatLevel()
+    {
+        return statLevel;
     }
 
     

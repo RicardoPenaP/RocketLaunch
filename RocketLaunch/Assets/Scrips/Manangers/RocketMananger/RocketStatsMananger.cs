@@ -38,6 +38,8 @@ public class RocketStatsMananger : MonoBehaviour
 
     private void Start()
     {
+        RocketStatPanel.OnAnyLevelUpButtonPressed += RocketStatPanel_OnAnyLevelUpButtonPressed;
+
         if (RocketLevelMananger.Instance)
         {
             RocketLevelMananger.Instance.OnRocketLevelUp += RocketLevelMananger_OnRocketLevelUp;
@@ -46,6 +48,8 @@ public class RocketStatsMananger : MonoBehaviour
 
     private void OnDestroy()
     {
+        RocketStatPanel.OnAnyLevelUpButtonPressed -= RocketStatPanel_OnAnyLevelUpButtonPressed;
+
         if (RocketLevelMananger.Instance)
         {
             RocketLevelMananger.Instance.OnRocketLevelUp -= RocketLevelMananger_OnRocketLevelUp;
@@ -57,9 +61,27 @@ public class RocketStatsMananger : MonoBehaviour
         AddStatPoints();
     }
 
+    private void RocketStatPanel_OnAnyLevelUpButtonPressed()
+    {
+        if (currentStatPoints > 1)
+        {
+            currentStatPoints--;
+        }
+    }
+
+    private void RocketStatPanel_OnAnyLevelDownButtonPressed()
+    {
+        currentStatPoints++;
+    }
+
     private void AddStatPoints()
     {
         totalStatPoints += statsPointsGivenPerLevelUp;
         currentStatPoints += statsPointsGivenPerLevelUp;
+    }
+
+    public RocketStat GetRocketStat(StatType statType)
+    {
+        return rocketStats[(int)statType];
     }
 }
