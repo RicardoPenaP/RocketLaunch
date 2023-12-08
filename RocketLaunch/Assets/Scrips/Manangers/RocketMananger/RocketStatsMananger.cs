@@ -2,37 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum StatType { MainEngine, SideEngine, CoolingSystem, LandingSystem, PickupSystem, ShieldSystem }
 public class RocketStatsMananger : MonoBehaviour
 {
     public const int STATS_AMOUNT = 6;
-    public enum StatType { MainEngine, SideEngine, CoolingSystem, LandingSystem, PickupSystem, ShieldSystem}
-    public struct Stat
-    {
-        public StatType statType;
-        public int statLevel;
-
-        public Stat(StatType statType)
-        {
-            this.statType = statType;
-            statLevel = 1;
-        }
-
-        public void LevelUp()
-        {
-
-        }
-
-        public void LevelDown()
-        {
-           
-        }
-    }
+   
     public static RocketStatsMananger Instance { get; private set; }
 
     [Header("Rocket Stats Mananger")]
     [SerializeField] private int statsPointsGivenPerLevelUp = 6;
 
-    private Stat[] stats = new Stat[STATS_AMOUNT];
+    private int totalStatPoints = 0;
+    private int currentStatPoints = 0;
+
+    private RocketStat[] rocketStats = new RocketStat[STATS_AMOUNT];
 
     private void Awake()
     {
@@ -47,9 +30,9 @@ public class RocketStatsMananger : MonoBehaviour
             DontDestroyOnLoad(this);
         }
 
-        for (int i = 0; i < stats.Length; i++)
+        for (int i = 0; i < rocketStats.Length; i++)
         {
-            
+            rocketStats[i].SetStatType((StatType)i);
         }
     }
 
@@ -71,6 +54,12 @@ public class RocketStatsMananger : MonoBehaviour
 
     private void RocketLevelMananger_OnRocketLevelUp()
     {
+        AddStatPoints();
+    }
 
+    private void AddStatPoints()
+    {
+        totalStatPoints += statsPointsGivenPerLevelUp;
+        currentStatPoints += statsPointsGivenPerLevelUp;
     }
 }
