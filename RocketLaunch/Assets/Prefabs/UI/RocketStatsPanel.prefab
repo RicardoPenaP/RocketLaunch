@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4092151710113512115}
   - component: {fileID: 4092151710113512114}
   m_Layer: 5
-  m_Name: StatsPanel
+  m_Name: RocketStatsPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
