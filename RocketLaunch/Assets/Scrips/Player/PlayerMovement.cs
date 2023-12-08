@@ -7,6 +7,8 @@ public class PlayerMovement : MonoBehaviour
 {
     public enum RotationDirection { Rigth, Left}
     [Header("Player Movement")]
+    [SerializeField] private float minEngineForce = 1000f;
+    [SerializeField] private float maxEngineForce = 3000f;
     [SerializeField] private float engineForce = 10f;
     [SerializeField] private float rotationForce = 5f;
 
@@ -41,7 +43,7 @@ public class PlayerMovement : MonoBehaviour
         {
             playerLandingController.OnPreLandingStart += PlayerLandingController_OnPreLandingStart;
         }
-
+        Initialize();
     }
 
     private void Update()
@@ -59,6 +61,19 @@ public class PlayerMovement : MonoBehaviour
         if (playerLandingController)
         {
             playerLandingController.OnPreLandingStart -= PlayerLandingController_OnPreLandingStart;
+        }
+    }
+
+    private void Initialize()
+    {
+        if (RocketStatsMananger.Instance)
+        {
+            int rocketStatLevel = RocketStatsMananger.Instance.GetRocketStat(StatType.MainEngine).GetStatLevel();
+            engineForce = ((maxEngineForce - minEngineForce) / (RocketStat.MAX_STAT_LEVEL - RocketStat.MIN_STAT_LEVEL)) * rocketStatLevel;
+        }
+        else
+        {
+            engineForce = minEngineForce;
         }
     }
 
