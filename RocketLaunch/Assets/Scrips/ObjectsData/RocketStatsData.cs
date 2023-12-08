@@ -1,31 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+public enum RocketStatData { MainEngineSpeed, MainEngineHeatRate, MainEngineFuelConsumption, SideEngineTurningSpeed, SideEngineHeatRate,
+                            SideEngineFuelConsumptionRate, MaxTemperature, EngineCoolingSpeed, OverheatRestTime, LandingAngularDrag, 
+                            LandingGreenAreaPercentage, LandingYellowAreaPercentage }
 public static class RocketStatsData
 {
     //Main Engine Stats
-    public static float mainEngineSpeed;
-    public static float mainEngineHeatRate;
-    public static float mainEnginefuelConsumptionRate;
+    private static float mainEngineSpeed;
+    private static float mainEngineHeatRate;
+    private static float mainEngineFuelConsumptionRate;
     //Side Engine Stats
-    public static float sideEngineTurningSpeed;
-    public static float sideEngineHeatRate;
-    public static float sideEnginefuelConsumptionRate;
+    private static float sideEngineTurningSpeed;
+    private static float sideEngineHeatRate;
+    private static float sideEngineFuelConsumptionRate;
     //Cooling System Stats
-    public static float maxTemperature;
-    public static float engineCoolingSpeed;
-    public static float overheatRestTime;
+    private static float maxTemperature;
+    private static float engineCoolingSpeed;
+    private static float overheatRestTime;
     //Landing System Stats
-    public static float landingAngularDrag;
-    public static float landingGreenAreaPercentage;
-    public static float landingYellowAreaPercentage;
+    private static float landingAngularDrag;
+    private static float landingGreenAreaPercentage;
+    private static float landingYellowAreaPercentage;
     //Pickup System Stats
-    public static float pickupsEffectPercentage;
-    public static float pickupsDistanceFromThePlayer;
-    public static float experienceMultiplier;
+    private static float pickupsEffectPercentage;
+    private static float pickupsDistanceFromThePlayer;
+    private static float experienceMultiplier;
     //Fuel System Stats
-    public static float fuelMaxCapacity;
+    private static float fuelMaxCapacity;
     
+
+
 
 }

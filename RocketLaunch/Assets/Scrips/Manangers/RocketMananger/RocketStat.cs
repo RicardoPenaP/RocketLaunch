@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class RocketStat 
 {
-    private const int MAX_STAT_LEVEL = 100;
-    private const int MIN_STAT_LEVEL = 1;
+    public const int MAX_STAT_LEVEL = 100;
+    public const int MIN_STAT_LEVEL = 1;
 
     private StatType statType;
     private int statLevel;

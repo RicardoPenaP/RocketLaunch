@@ -6,7 +6,7 @@ using System;
 public enum StatType { MainEngine, SideEngine, CoolingSystem, LandingSystem, PickupSystem, ShieldSystem }
 public class RocketStatsMananger : MonoBehaviour
 {
-    public const int STATS_AMOUNT = 6;
+    public const int STATS_AMOUNT = 6;   
    
     public static RocketStatsMananger Instance { get; private set; }
 

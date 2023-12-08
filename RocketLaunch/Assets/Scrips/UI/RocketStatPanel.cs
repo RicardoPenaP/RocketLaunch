@@ -75,6 +75,10 @@ public class RocketStatPanel : MonoBehaviour
         rocketStat.LevelUp();
         UpdateCurrentLevelText();
         SetLevelDownButtonActiveState(true);
+        if (rocketStat.GetStatLevel() >= RocketStat.MAX_STAT_LEVEL)
+        {
+            SetLevelUpButtonActiveState(false);
+        }
     }
 
     private void LevelDownButton_OnClick()
@@ -82,7 +86,7 @@ public class RocketStatPanel : MonoBehaviour
         OnAnyLevelDownButtonPressed?.Invoke();
         rocketStat.LevelDown();
         UpdateCurrentLevelText();
-        if (rocketStat.GetStatLevel() <= 1)
+        if (rocketStat.GetStatLevel() <= RocketStat.MIN_STAT_LEVEL)
         {
             SetLevelDownButtonActiveState(false);
         }
@@ -98,7 +102,12 @@ public class RocketStatPanel : MonoBehaviour
             }                      
             UpdateCurrentLevelText();
 
-            if (rocketStat.GetStatLevel() <= 1)
+            if (rocketStat.GetStatLevel() >= RocketStat.MAX_STAT_LEVEL)
+            {
+                SetLevelUpButtonActiveState(false);
+            }
+
+            if (rocketStat.GetStatLevel() <= RocketStat.MIN_STAT_LEVEL)
             {
                 SetLevelDownButtonActiveState(false);
             }
