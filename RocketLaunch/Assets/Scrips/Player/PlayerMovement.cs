@@ -22,6 +22,7 @@ public class PlayerMovement : MonoBehaviour
 
     private bool canMove = true;
     private float mainEngineSpeedMultiplier;
+    private float sideEngineTurningSpeedMultiplier;
 
     private void Awake()
     {
@@ -66,12 +67,17 @@ public class PlayerMovement : MonoBehaviour
     private void Initialize()
     {
         mainEngineSpeedMultiplier = 1f;
+        sideEngineTurningSpeedMultiplier = 1f;
         if (RocketStatsMananger.Instance)
         {
             int rocketStatLevel = RocketStatsMananger.Instance.GetRocketStat(StatType.MainEngine).GetStatLevel();
             float rocketStatMultiplierAugmentCoeficient = RocketStatsMananger.Instance.GetMainEngineSpeedMultiplierAugmentCoeficient();
 
             mainEngineSpeedMultiplier += rocketStatMultiplierAugmentCoeficient * rocketStatLevel;
+
+            rocketStatLevel = RocketStatsMananger.Instance.GetRocketStat(StatType.SideEngine).GetStatLevel();
+            rocketStatMultiplierAugmentCoeficient = RocketStatsMananger.Instance.GetSideEngineTurningSpeedMultiplierAugmentCoeficient();
+            sideEngineTurningSpeedMultiplier += rocketStatMultiplierAugmentCoeficient * rocketStatLevel;
         }
        
     }
@@ -120,7 +126,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Rotate(float rotationDirection)
     {
-        Vector3 rotationVector = Vector3.forward * rotationDirection * rotationForce * Time.deltaTime;
+        Vector3 rotationVector = Vector3.forward * rotationDirection * rotationForce * sideEngineTurningSpeedMultiplier * Time.deltaTime;
         transform.Rotate(rotationVector);         
     }
 
