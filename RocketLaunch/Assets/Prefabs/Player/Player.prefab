@@ -9659,7 +9659,7 @@ MonoBehaviour:
   powerHeatRateMultiplierPercentage: 0.15
   maxEngineTemperature: 100
   heatRate: 5
-  overHeatRestTime: 2
+  overheatRestTime: 0
   coolingRate: 7
   sideEngineComsuptionPercentage: 0.5
 --- !u!1 &4090625583501126721
@@ -24413,7 +24413,7 @@ GameObject:
   - component: {fileID: 772612767534176789}
   - component: {fileID: 6263850625312467996}
   m_Layer: 0
-  m_Name: PickupsController
+  m_Name: PickupsHandler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -47,6 +47,7 @@ public class EngineController : MonoBehaviour
     private float maxEngineTemperatureMultiplier;
     private float coolingRateMultiplier;
     private float overheatTimeMultiplier;
+    
 
     private bool isMainEngineOn = false;
     private bool isSideEngineOn = false;
@@ -153,7 +154,6 @@ public class EngineController : MonoBehaviour
             coolingRateMultiplier += rocketStatMultiplierAugmentCoeficient * rocketStatLevel;
             rocketStatMultiplierAugmentCoeficient = RocketStatsMananger.Instance.GetOverheatTimeMultiplierAugmentCoeficient();
             overheatTimeMultiplier -= rocketStatMultiplierAugmentCoeficient * rocketStatLevel;
-
         }
 
         maxEngineTemperature *= maxEngineTemperatureMultiplier;

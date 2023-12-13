@@ -21,6 +21,9 @@ public class Pickup : MonoBehaviour
 
     private float currentMovementSpeed;
 
+    private float pickupPercentageOfActionMultiplier;
+    private float pickupRangeMultiplier;
+
     public bool IsBeenAtractedToThePlayer { get; private set; }
 
     private void Awake()
@@ -38,6 +41,7 @@ public class Pickup : MonoBehaviour
         {
             playerController.OnPlayerReset += PlayerController_OnPlayerReset;
         }
+        Initialize();
     }
 
     private void Update()
@@ -46,6 +50,23 @@ public class Pickup : MonoBehaviour
         {
             MoveTowardsThePlayer();
         }        
+    }
+
+    private void Initialize()
+    {
+        pickupPercentageOfActionMultiplier = 1f;
+        pickupRangeMultiplier = 1f;
+        if (RocketStatsMananger.Instance)
+        {            
+            int rocketStatLevel = RocketStatsMananger.Instance.GetRocketStat(StatType.PickupSystem).GetStatLevel();
+            float rocketStatMultiplierAugmentCoeficient = RocketStatsMananger.Instance.GetEffectivePercentageMultiplierAugmentCoeficient();
+            pickupPercentageOfActionMultiplier += rocketStatMultiplierAugmentCoeficient * rocketStatLevel;
+            rocketStatMultiplierAugmentCoeficient = RocketStatsMananger.Instance.GetPullDistanceMultiplierAugmentCoeficient();
+            pickupRangeMultiplier += rocketStatMultiplierAugmentCoeficient * rocketStatLevel;
+        }
+
+        effectivePercentage = Mathf.RoundToInt(effectivePercentage * pickupPercentageOfActionMultiplier);
+        pickupRange *= pickupRangeMultiplier;
     }
 
     private void MoveTowardsThePlayer()

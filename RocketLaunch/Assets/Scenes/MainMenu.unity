@@ -3839,7 +3839,7 @@ PrefabInstance:
     - target: {fileID: 4092151710113512124, guid: 4a867992fe7960f43a48c146489caeb8,
         type: 3}
       propertyPath: m_Name
-      value: ShieldSystemPanel
+      value: FuelSystemPanel
       objectReference: {fileID: 0}
     - target: {fileID: 4092151710113512125, guid: 4a867992fe7960f43a48c146489caeb8,
         type: 3}
@@ -3949,7 +3949,7 @@ PrefabInstance:
     - target: {fileID: 4092151710257985453, guid: 4a867992fe7960f43a48c146489caeb8,
         type: 3}
       propertyPath: m_text
-      value: 'Shield System
+      value: 'Fuel System
 
 
 '
@@ -3957,7 +3957,7 @@ PrefabInstance:
     - target: {fileID: 4092151710257985453, guid: 4a867992fe7960f43a48c146489caeb8,
         type: 3}
       propertyPath: m_fontSize
-      value: 28.35
+      value: 32.65
       objectReference: {fileID: 0}
     - target: {fileID: 9202211509878234953, guid: 4a867992fe7960f43a48c146489caeb8,
         type: 3}
