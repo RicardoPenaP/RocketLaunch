@@ -27,11 +27,11 @@ public class LevelMananger : MonoBehaviour
     public static LevelMananger Instance { get; private set; }
 
     public event Action OnGameOver;
-      
 
     private PlayerController playerController;
     private PlayerLandingController playerLandingController;
-    
+
+    private float levelExperienceRewardMultiplier;
 
     private void Awake()
     {
@@ -51,6 +51,7 @@ public class LevelMananger : MonoBehaviour
 
     private void Start()
     {
+        //For testing only
         Application.targetFrameRate = 60;
         
         playerController = FindAnyObjectByType<PlayerController>();
@@ -68,6 +69,8 @@ public class LevelMananger : MonoBehaviour
         {
             LevelCompletedMenu.Instance.OnNextLevelButtonPressed += LevelCompletedMenu_OnNextLevelButtonPressed;
         }
+
+        Initialize();
     }
 
     private void OnDestroy()
@@ -84,6 +87,18 @@ public class LevelMananger : MonoBehaviour
         {
             LevelCompletedMenu.Instance.OnNextLevelButtonPressed -= LevelCompletedMenu_OnNextLevelButtonPressed;
         }
+    }
+
+    private void Initialize()
+    {
+        levelExperienceRewardMultiplier = 1f;
+        if (RocketStatsMananger.Instance)
+        {
+            int rocketStatLevel = RocketStatsMananger.Instance.GetRocketStat(StatType.PickupSystem).GetStatLevel();
+            float rocketStatMultiplierAugmentCoeficient = RocketStatsMananger.Instance.GetExperienceMultiplierAugmentCoeficient();
+            levelExperienceRewardMultiplier += rocketStatMultiplierAugmentCoeficient * rocketStatLevel;            
+        }
+        levelExperienceReward *= levelExperienceRewardMultiplier;
     }
 
     private void PlayerController_OnDie(object sender, EventArgs e)

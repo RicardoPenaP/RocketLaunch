@@ -47,6 +47,7 @@ public class EngineController : MonoBehaviour
     private float maxEngineTemperatureMultiplier;
     private float coolingRateMultiplier;
     private float overheatTimeMultiplier;
+    private float fuelCapacityMultiplier;
     
 
     private bool isMainEngineOn = false;
@@ -113,13 +114,6 @@ public class EngineController : MonoBehaviour
 
     private void Initialize()
     {
-        currentEnginePower = 0;
-        currentEngineTemperature = 0;
-        currentFuelAmount = maxFuelAmount;
-        OnEnginePowerChange?.Invoke(currentEnginePower, maxEnginePower);
-        OnEngineTemperatureChange?.Invoke(currentEngineTemperature, maxEngineTemperature);
-        OnFuelChange?.Invoke(currentFuelAmount, maxFuelAmount);
-
         mainEngineTemperatureMultiplier = 1f;
         mainEngineFuelConsumptionMultiplier = 1f;
 
@@ -129,6 +123,8 @@ public class EngineController : MonoBehaviour
         maxEngineTemperatureMultiplier = 1f;
         coolingRateMultiplier = 1f;
         overheatTimeMultiplier = 1f;
+
+        fuelCapacityMultiplier = 1f;
 
         if (RocketStatsMananger.Instance)
         {
@@ -154,10 +150,24 @@ public class EngineController : MonoBehaviour
             coolingRateMultiplier += rocketStatMultiplierAugmentCoeficient * rocketStatLevel;
             rocketStatMultiplierAugmentCoeficient = RocketStatsMananger.Instance.GetOverheatTimeMultiplierAugmentCoeficient();
             overheatTimeMultiplier -= rocketStatMultiplierAugmentCoeficient * rocketStatLevel;
+
+            //Fuel system multiplier settings
+            rocketStatLevel = RocketStatsMananger.Instance.GetRocketStat(StatType.FuelSystem).GetStatLevel();
+            rocketStatMultiplierAugmentCoeficient = RocketStatsMananger.Instance.GetFuelCapacityMultiplierAugmentCoeficient();
+            fuelCapacityMultiplier += rocketStatMultiplierAugmentCoeficient * rocketStatLevel;
+
         }
 
         maxEngineTemperature *= maxEngineTemperatureMultiplier;
         overheatRestTime *= overheatTimeMultiplier;
+        maxFuelAmount *= fuelCapacityMultiplier;
+
+        currentEnginePower = 0;
+        currentEngineTemperature = 0;
+        currentFuelAmount = maxFuelAmount;
+        OnEnginePowerChange?.Invoke(currentEnginePower, maxEnginePower);
+        OnEngineTemperatureChange?.Invoke(currentEngineTemperature, maxEngineTemperature);
+        OnFuelChange?.Invoke(currentFuelAmount, maxFuelAmount);
     }
 
     private void UpdateEngineCooling()
