@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public enum StatType { MainEngine, SideEngine, CoolingSystem, LandingSystem, PickupSystem, ShieldSystem }
+public enum StatType { MainEngine, SideEngine, CoolingSystem, LandingSystem, PickupSystem, FuelSystem }
 public class RocketStatsMananger : MonoBehaviour
 {
     public const int STATS_AMOUNT = 6;   
