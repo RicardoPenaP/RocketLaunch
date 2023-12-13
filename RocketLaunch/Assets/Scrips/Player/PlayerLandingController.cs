@@ -52,7 +52,11 @@ public class PlayerLandingController : MonoBehaviour
 
     private bool isPreLanding = false;
     private bool isLanding = false;
-    private int landingTries = 0;   
+    private int landingTries = 0;
+
+    private float angularDragMultiplier;
+    private float yellowAreaMultiplier;
+    private float greenAreaMultiplier;
 
     private void OnDrawGizmos()
     {
@@ -79,6 +83,8 @@ public class PlayerLandingController : MonoBehaviour
         {
             playerCollisionHandler.OnCollisionEnterWithObject += PlayerCollisionHandler_OnCollisionWithObject;
         }
+
+        Initialize();
     }
 
     private void Update()
@@ -135,6 +141,32 @@ public class PlayerLandingController : MonoBehaviour
         {
             playerCollisionHandler.OnCollisionEnterWithObject -= PlayerCollisionHandler_OnCollisionWithObject;
         }
+    }
+
+    private void Initialize()
+    {
+        angularDragMultiplier = 1f;
+        yellowAreaMultiplier = 1f;
+        greenAreaMultiplier = 1f;
+
+        if (RocketStatsMananger.Instance)
+        {
+            int rocketStatLevel = RocketStatsMananger.Instance.GetRocketStat(StatType.LandingSystem).GetStatLevel();
+            float rocketStatMultiplierAugmentCoeficient = RocketStatsMananger.Instance.GetAngularDragMultiplierAugmentCoeficient();
+            angularDragMultiplier += rocketStatMultiplierAugmentCoeficient * rocketStatLevel;
+            rocketStatMultiplierAugmentCoeficient = RocketStatsMananger.Instance.GetYellowAreaMultiplierAugmentCoeficient();
+            yellowAreaMultiplier += rocketStatMultiplierAugmentCoeficient * rocketStatLevel;
+            rocketStatMultiplierAugmentCoeficient = RocketStatsMananger.Instance.GetGreenAreaMultiplierAugmentCoeficient();
+            greenAreaMultiplier += rocketStatMultiplierAugmentCoeficient * rocketStatLevel;
+        }
+
+        float currentAngularDrag = rigidbody.angularDrag;
+        currentAngularDrag *= angularDragMultiplier;
+        rigidbody.angularDrag = currentAngularDrag;
+
+        yellowAreaPercentage *= yellowAreaMultiplier;
+        greenAreaPercentage *= greenAreaMultiplier;
+
     }
 
     private bool TryFindLandingPlatform()
