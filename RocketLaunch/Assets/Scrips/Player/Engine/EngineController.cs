@@ -42,6 +42,8 @@ public class EngineController : MonoBehaviour
 
     private float mainEngineTemperatureMultiplier;
     private float mainEngineFuelConsumptionMultiplier;
+    private float sideEngineTemperatureMultiplier;
+    private float sideEngineFuelConsumptionMultiplier;
 
     private bool isMainEngineOn = false;
     private bool isSideEngineOn = false;
@@ -117,14 +119,24 @@ public class EngineController : MonoBehaviour
         mainEngineTemperatureMultiplier = 1f;
         mainEngineFuelConsumptionMultiplier = 1f;
 
+        sideEngineTemperatureMultiplier = 1f;
+        sideEngineFuelConsumptionMultiplier = 1f;
+
         if (RocketStatsMananger.Instance)
         {
+            //Main engine stat multiplier settings
             int rocketStatLevel = RocketStatsMananger.Instance.GetRocketStat(StatType.MainEngine).GetStatLevel();
-            float rocketStatMultiplierAugmentCoeficient = RocketStatsMananger.Instance.GetMainEngineTemperatureMultiplierAugmentCoeficient();
-
+            float rocketStatMultiplierAugmentCoeficient = RocketStatsMananger.Instance.GetMainEngineTemperatureMultiplierAugmentCoeficient();            
             mainEngineTemperatureMultiplier += rocketStatMultiplierAugmentCoeficient * rocketStatLevel;
             rocketStatMultiplierAugmentCoeficient = RocketStatsMananger.Instance.GetMainEngineFuelConsumptionMultiplierAugmentCoeficient();
             mainEngineFuelConsumptionMultiplier += rocketStatMultiplierAugmentCoeficient * rocketStatLevel;
+
+            //Side engine stat multiplier settings
+            rocketStatLevel = RocketStatsMananger.Instance.GetRocketStat(StatType.SideEngine).GetStatLevel();
+            rocketStatMultiplierAugmentCoeficient = RocketStatsMananger.Instance.GetSideEngineTemperatureMultiplierAugmentCoeficient();
+            sideEngineTemperatureMultiplier += rocketStatMultiplierAugmentCoeficient * rocketStatLevel;
+            rocketStatMultiplierAugmentCoeficient = RocketStatsMananger.Instance.GetSideEngineFuelConsumptionMultiplierAugmentCoeficient();
+            sideEngineFuelConsumptionMultiplier += rocketStatMultiplierAugmentCoeficient * rocketStatLevel;
         }
     }
 
@@ -209,9 +221,9 @@ public class EngineController : MonoBehaviour
         currentEnginePower = Mathf.Clamp(currentEnginePower + (powerSpeed * sideEngineComsuptionPercentage) * Time.deltaTime, 0, maxEnginePower);
 
         float powerPercentageMultiplier = currentEnginePower * powerHeatRateMultiplierPercentage;
-        currentEngineTemperature = Mathf.Clamp(currentEngineTemperature + (heatRate * sideEngineComsuptionPercentage) * powerPercentageMultiplier * Time.deltaTime, 0, maxEngineTemperature);
+        currentEngineTemperature = Mathf.Clamp(currentEngineTemperature + (heatRate * sideEngineComsuptionPercentage)* sideEngineTemperatureMultiplier * powerPercentageMultiplier * Time.deltaTime, 0, maxEngineTemperature);
 
-        currentFuelAmount = Mathf.Clamp(currentFuelAmount - (fuelConsuptionSpeed * sideEngineComsuptionPercentage) * Time.deltaTime, 0, maxFuelAmount);
+        currentFuelAmount = Mathf.Clamp(currentFuelAmount - (fuelConsuptionSpeed * sideEngineComsuptionPercentage)* sideEngineFuelConsumptionMultiplier * Time.deltaTime, 0, maxFuelAmount);
 
         if (currentEngineTemperature >= maxEngineTemperature)
         {
