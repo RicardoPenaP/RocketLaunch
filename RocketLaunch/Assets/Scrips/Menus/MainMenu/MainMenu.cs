@@ -71,6 +71,7 @@ public class MainMenu : Menu<MainMenu>
         {
             SettingsMenu.Instance.OnGoBackButtonPressed += SettingsMenu_OnGoBackButtonPressed;
         }
+        menuOpened = true;
     }
 
     protected override void OnDestroy()
