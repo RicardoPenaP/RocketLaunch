@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1c6152af513dc64fbf23112f231f6c1, type: 3}
   m_Name: RocketStatsData
   m_EditorClassIdentifier: 
-  mainEngineSpeedMultiplierAugmentCoeficient: 0.1
-  mainEngineTemperatureMultiplierAugmentCoeficient: 0
-  mainEngineFuelConsumptionMultiplierAugmentCoeficient: 0
-  sideEngineTurningSpeedMultiplierAugmentCoeficient: 0
-  sideEngineTemperatureMultiplierAugmentCoeficient: 0
-  sideEngineFuelConsumptionMultiplierAugmentCoeficient: 0
+  mainEngineSpeedMultiplierAugmentCoeficient: 0.03
+  mainEngineTemperatureMultiplierAugmentCoeficient: 0.03
+  mainEngineFuelConsumptionMultiplierAugmentCoeficient: 0.03
+  sideEngineTurningSpeedMultiplierAugmentCoeficient: 0.04
+  sideEngineTemperatureMultiplierAugmentCoeficient: 0.02
+  sideEngineFuelConsumptionMultiplierAugmentCoeficient: 0.02
   maxTemperatureMultiplierAugmentCoeficient: 0
   coolingSpeedMultiplierAugmentCoeficient: 0
   overheatTimeMultiplierAugmentCoeficient: 0

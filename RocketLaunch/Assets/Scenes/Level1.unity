@@ -972,6 +972,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6603820508358471649, guid: 713df64e545f154439e526863ad10a3a,
+        type: 3}
+      propertyPath: rocketStats.Array.data[0].statLevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6603820508358471649, guid: 713df64e545f154439e526863ad10a3a,
+        type: 3}
+      propertyPath: rocketStats.Array.data[1].statLevel
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6603820508358471654, guid: 713df64e545f154439e526863ad10a3a,
         type: 3}
       propertyPath: m_Name
@@ -1966,6 +1976,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4090625583501126735, guid: d9861a88f1a55904bb6f971de7fa0b02,
+        type: 3}
+      propertyPath: engineForce
+      value: 750
+      objectReference: {fileID: 0}
+    - target: {fileID: 4090625583501126735, guid: d9861a88f1a55904bb6f971de7fa0b02,
+        type: 3}
+      propertyPath: rotationForce
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 8078815222774770507, guid: d9861a88f1a55904bb6f971de7fa0b02,
         type: 3}
