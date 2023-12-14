@@ -37,8 +37,9 @@ public class GameOverMenu : Menu<GameOverMenu>
         menuOpened = false;
     }
 
-    private void OnDestroy()
+    protected override void OnDestroy()
     {
+        base.OnDestroy();
         if (LevelMananger.Instance)
         {
             LevelMananger.Instance.OnGameOver -= LevelMananger_OnGameOver;

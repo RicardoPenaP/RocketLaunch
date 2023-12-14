@@ -28,7 +28,7 @@ public class PlayerLandingController : MonoBehaviour
     [SerializeField] private float rotationForce = 100f;
     [SerializeField] private LayerMask platformsLayerMask;
     [SerializeField] private bool showGizmos = true;
-    [SerializeField, Min(0)] private float maxSpeedToStartLanding = 2f;    
+    //[SerializeField, Min(0)] private float maxSpeedToStartLanding = 2f;    
     [SerializeField, Range(0f, 1f)] private float greenAreaPercentage = 0.15f;
     [SerializeField, Range(0f, 1f)] private float yellowAreaPercentage = 0.4f; 
 

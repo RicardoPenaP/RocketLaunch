@@ -72,7 +72,7 @@ public class RocketStatsData: ScriptableObject
 
     public float GetCoolingSpeedMultiplierAugmentCoeficient()
     {
-        return maxTemperatureMultiplierAugmentCoeficient;
+        return coolingSpeedMultiplierAugmentCoeficient;
     }
 
     public float GetOverheatTimeMultiplierAugmentCoeficient()
@@ -97,7 +97,7 @@ public class RocketStatsData: ScriptableObject
 
     public float GetEffectivePercentageMultiplierAugmentCoeficient()
     {
-        return yellowAreaMultiplierAugmentCoeficient;
+        return effectivePercentageMultiplierAugmentCoeficient;
     }
 
     public float GetPullDistanceMultiplierAugmentCoeficient()

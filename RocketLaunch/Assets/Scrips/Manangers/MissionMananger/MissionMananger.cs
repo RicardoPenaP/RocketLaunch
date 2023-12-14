@@ -94,7 +94,15 @@ public class MissionMananger : MonoBehaviour
     private bool IsTheLastMission(Mission currentMission)
     {
         Mission[] missions = stelarSystems[stelarSystems.Length - 1].GetMissions();
+        if (missions.Length < 1)
+        {
+            return false;
+        }
         Mission lastMission = missions[missions.Length - 1];
+        if (lastMission == null)
+        {
+            return false;
+        }
         return currentMission == lastMission;
     }
 

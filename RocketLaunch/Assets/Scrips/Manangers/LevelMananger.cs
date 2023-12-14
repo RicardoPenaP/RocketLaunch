@@ -35,17 +35,14 @@ public class LevelMananger : MonoBehaviour
 
     private void Awake()
     {
-        if (!Instance)
+        if (Instance && Instance != this)
         {
-            Instance = this;
+            Destroy(this);
+           
         }
         else
         {
-            if (Instance != this)
-            {
-                Destroy(this);
-                return;
-            }
+            Instance = this;
         }
     }
 

@@ -30,8 +30,9 @@ public class SettingsMenu : Menu<SettingsMenu>
         menuOpened = false;
     }
 
-    private void OnDestroy()
+    protected override void OnDestroy()
     {
+        base.OnDestroy();
         if (goBackButton)
         {
             goBackButton.onClick.RemoveListener(GoBackButton_OnClick);

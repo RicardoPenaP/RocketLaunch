@@ -53,8 +53,9 @@ public class LevelCompletedMenu : Menu<LevelCompletedMenu>
         menuOpened = false;
     }
 
-    private void OnDestroy()
+    protected override void OnDestroy()
     {
+        base.OnDestroy();
         if (LevelMananger.Instance)
         {
             LevelMananger.OnLevelCompleted -= LevelMananger_OnLevelCompleted;

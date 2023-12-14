@@ -56,8 +56,9 @@ public class PlayMenu : Menu<PlayMenu>
         menuOpened = false;
     }
 
-    private void OnDestroy()
+    protected override void OnDestroy()
     {
+        base.OnDestroy();
 
         if (selectMissionButton)
         {

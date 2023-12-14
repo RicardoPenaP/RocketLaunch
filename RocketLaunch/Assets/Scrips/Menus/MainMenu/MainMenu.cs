@@ -73,8 +73,9 @@ public class MainMenu : Menu<MainMenu>
         }
     }
 
-    private void OnDestroy()
+    protected override void OnDestroy()
     {
+        base.OnDestroy();
         if (playButton)
         {
             playButton.onClick.RemoveListener(PlayButton_OnClick);

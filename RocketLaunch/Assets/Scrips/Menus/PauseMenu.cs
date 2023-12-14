@@ -31,8 +31,9 @@ public class PauseMenu : Menu<PauseMenu>
         menuOpened = false;
     }
 
-    private void OnDestroy()
+    protected override void OnDestroy()
     {
+        base.OnDestroy();
         if (InputMananger.Instance)
         {
             InputMananger.Instance.OnPauseInputTriggered -= InputMananger_OnPauseInputTriggered;

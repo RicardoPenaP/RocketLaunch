@@ -41,8 +41,9 @@ public class UpgradeRocketMenu : Menu<UpgradeRocketMenu>
         menuOpened = false;
     }
 
-    private void OnDestroy()
+    protected override void OnDestroy()
     {
+        base.OnDestroy();
         if (goBackButton)
         {
             goBackButton.onClick.RemoveListener(GoBackButton_OnClick);

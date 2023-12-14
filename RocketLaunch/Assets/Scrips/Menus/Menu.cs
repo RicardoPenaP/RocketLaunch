@@ -23,19 +23,32 @@ public abstract class Menu<T> : MonoBehaviour where T : Menu<T>
 
     protected virtual void Awake()
     {
-        if (!Instance)
-        {
-            Instance = (T)this;
-        }
-        else
+        if (Instance && Instance != this)
         {
             Destroy(this);
         }
+        else
+        {
+            Instance = (T)this;
+        }
+        
         animator = GetComponent<Animator>();
-    }    
+    }   
+    
+    protected virtual void OnDestroy()
+    {
+        if (Instance == this)
+        {
+            Instance = null;
+        }
+    }
 
     protected virtual void OpenMenu(Action onOpenAnimationEndedActions = null)
     {
+        if (menuOpened)
+        {
+            return;
+        }
         menuOpened = true;
         gameObject.SetActive(true);
         animator.SetTrigger(OPEN_MENU_ANIMATION_HASH);
@@ -46,6 +59,10 @@ public abstract class Menu<T> : MonoBehaviour where T : Menu<T>
 
     protected virtual void CloseMenu(Action onCloseAnimationEndedActions = null)
     {
+        if (!menuOpened)
+        {
+            return;
+        }
         menuOpened = false;
         animator.SetTrigger(CLOSE_MENU_ANIMATION_HASH);
         this.onCloseAnimationEndedActions = onCloseAnimationEndedActions;
