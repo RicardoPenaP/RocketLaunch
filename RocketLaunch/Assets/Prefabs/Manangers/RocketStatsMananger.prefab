@@ -46,3 +46,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rocketStatsData: {fileID: 11400000, guid: 6f3b943d6192ed244b7f38b457410ab0, type: 2}
   statsPointsGivenPerLevelUp: 6
+  rocketStats:
+  - statType: 0
+    statLevel: 1
+  - statType: 1
+    statLevel: 1
+  - statType: 2
+    statLevel: 1
+  - statType: 3
+    statLevel: 1
+  - statType: 4
+    statLevel: 1
+  - statType: 5
+    statLevel: 1

@@ -13,18 +13,18 @@ MonoBehaviour:
   m_Name: RocketStatsData
   m_EditorClassIdentifier: 
   mainEngineSpeedMultiplierAugmentCoeficient: 0.1
-  mainEngineTemperatureMultiplierAugmentCoeficient: 0.1
-  mainEngineFuelConsumptionMultiplierAugmentCoeficient: 0.1
-  sideEngineTurningSpeedMultiplierAugmentCoeficient: 0.1
-  sideEngineTemperatureMultiplierAugmentCoeficient: 0.1
-  sideEngineFuelConsumptionMultiplierAugmentCoeficient: 0.1
-  maxTemperatureMultiplierAugmentCoeficient: 0.1
-  coolingSpeedMultiplierAugmentCoeficient: 0.1
-  overheatTimeMultiplierAugmentCoeficient: 0.1
-  angularDragMultiplierAugmentCoeficient: 0.1
-  greenAreaMultiplierAugmentCoeficient: 0.1
-  yellowAreaMultiplierAugmentCoeficient: 0.1
-  effectivePercentageMultiplierAugmentCoeficient: 0.1
-  pullDistanceMultiplierAugmentCoeficient: 0.1
-  experienceMultiplierAugmentCoeficient: 0.1
-  fuelCapacityMultiplierAugmentCoeficient: 0.1
+  mainEngineTemperatureMultiplierAugmentCoeficient: 0
+  mainEngineFuelConsumptionMultiplierAugmentCoeficient: 0
+  sideEngineTurningSpeedMultiplierAugmentCoeficient: 0
+  sideEngineTemperatureMultiplierAugmentCoeficient: 0
+  sideEngineFuelConsumptionMultiplierAugmentCoeficient: 0
+  maxTemperatureMultiplierAugmentCoeficient: 0
+  coolingSpeedMultiplierAugmentCoeficient: 0
+  overheatTimeMultiplierAugmentCoeficient: 0
+  angularDragMultiplierAugmentCoeficient: 0
+  greenAreaMultiplierAugmentCoeficient: 0
+  yellowAreaMultiplierAugmentCoeficient: 0
+  effectivePercentageMultiplierAugmentCoeficient: 0
+  pullDistanceMultiplierAugmentCoeficient: 0
+  experienceMultiplierAugmentCoeficient: 0
+  fuelCapacityMultiplierAugmentCoeficient: 0

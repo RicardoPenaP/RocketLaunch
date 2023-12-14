@@ -17,8 +17,8 @@ public class RocketStatsMananger : MonoBehaviour
     public event Action<int> OnCurrentStatPointsChanged;   
     
     private int currentStatPoints = 0;
-
-    private RocketStat[] rocketStats;
+    //For Testing
+    [SerializeField]private RocketStat[] rocketStats;
 
     private void Awake()
     {
@@ -32,13 +32,13 @@ public class RocketStatsMananger : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(this);
         }
+        //Deleted for testing
+        //rocketStats = new RocketStat[STATS_AMOUNT];
 
-        rocketStats = new RocketStat[STATS_AMOUNT];
-
-        for (int i = 0; i < rocketStats.Length; i++)
-        {
-            rocketStats[i] = new RocketStat((StatType)i);
-        }
+        //for (int i = 0; i < rocketStats.Length; i++)
+        //{
+        //    rocketStats[i] = new RocketStat((StatType)i);
+        //}
     }
 
     private void Start()

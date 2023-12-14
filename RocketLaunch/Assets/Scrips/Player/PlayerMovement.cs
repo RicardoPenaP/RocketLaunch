@@ -79,7 +79,9 @@ public class PlayerMovement : MonoBehaviour
             rocketStatMultiplierAugmentCoeficient = RocketStatsMananger.Instance.GetSideEngineTurningSpeedMultiplierAugmentCoeficient();
             sideEngineTurningSpeedMultiplier += rocketStatMultiplierAugmentCoeficient * rocketStatLevel;
         }
-       
+
+        engineForce *= mainEngineSpeedMultiplier;
+        rotationForce *= sideEngineTurningSpeedMultiplier;
     }
 
     private void UpdatePlayerMovement()
@@ -120,13 +122,13 @@ public class PlayerMovement : MonoBehaviour
 
     private void MoveUpwards()
     {
-        Vector3 forceDirection = transform.up * engineForce * mainEngineSpeedMultiplier * Time.deltaTime;
+        Vector3 forceDirection = transform.up * engineForce * Time.deltaTime;
         rigidbody.AddForce(forceDirection,ForceMode.Acceleration);
     }
 
     private void Rotate(float rotationDirection)
     {
-        Vector3 rotationVector = Vector3.forward * rotationDirection * rotationForce * sideEngineTurningSpeedMultiplier * Time.deltaTime;
+        Vector3 rotationVector = Vector3.forward * rotationDirection * rotationForce * Time.deltaTime;
         transform.Rotate(rotationVector);         
     }
 

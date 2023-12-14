@@ -1,14 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+[System.Serializable]
 public class RocketStat 
 {
     public const int MAX_STAT_LEVEL = 100;
     public const int MIN_STAT_LEVEL = 1;
-
-    private StatType statType;
-    private int statLevel;
+    //for testing
+    [SerializeField]private StatType statType;
+    [SerializeField]private int statLevel;
 
     public RocketStat(StatType statType)
     {
