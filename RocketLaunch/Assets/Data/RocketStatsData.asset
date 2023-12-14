@@ -16,15 +16,15 @@ MonoBehaviour:
   mainEngineTemperatureMultiplierAugmentCoeficient: 0.06
   mainEngineFuelConsumptionMultiplierAugmentCoeficient: 0.06
   sideEngineTurningSpeedMultiplierAugmentCoeficient: 0.04
-  sideEngineTemperatureMultiplierAugmentCoeficient: 0.08
-  sideEngineFuelConsumptionMultiplierAugmentCoeficient: 0.08
+  sideEngineTemperatureMultiplierAugmentCoeficient: 0.04
+  sideEngineFuelConsumptionMultiplierAugmentCoeficient: 0
   maxTemperatureMultiplierAugmentCoeficient: 0.01
   coolingSpeedMultiplierAugmentCoeficient: 0.001
   overheatTimeMultiplierAugmentCoeficient: 0.005
   angularDragMultiplierAugmentCoeficient: 0.0075
   greenAreaMultiplierAugmentCoeficient: 0.01
   yellowAreaMultiplierAugmentCoeficient: 0.01
-  effectivePercentageMultiplierAugmentCoeficient: 0
-  pullDistanceMultiplierAugmentCoeficient: 0
-  experienceMultiplierAugmentCoeficient: 0
-  fuelCapacityMultiplierAugmentCoeficient: 0
+  effectivePercentageMultiplierAugmentCoeficient: 0.03
+  pullDistanceMultiplierAugmentCoeficient: 0.03
+  experienceMultiplierAugmentCoeficient: 0.05
+  fuelCapacityMultiplierAugmentCoeficient: 0.05

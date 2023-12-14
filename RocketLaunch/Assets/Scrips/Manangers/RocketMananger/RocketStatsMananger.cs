@@ -32,13 +32,13 @@ public class RocketStatsMananger : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(this);
         }
-        //Deleted for testing
-        //rocketStats = new RocketStat[STATS_AMOUNT];
+        
+        rocketStats = new RocketStat[STATS_AMOUNT];
 
-        //for (int i = 0; i < rocketStats.Length; i++)
-        //{
-        //    rocketStats[i] = new RocketStat((StatType)i);
-        //}
+        for (int i = 0; i < rocketStats.Length; i++)
+        {
+            rocketStats[i] = new RocketStat((StatType)i);
+        }
     }
 
     private void Start()

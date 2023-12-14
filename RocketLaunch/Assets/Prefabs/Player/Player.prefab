@@ -9779,15 +9779,14 @@ MonoBehaviour:
   landingMinDistance: 3
   preLandingDuration: 1
   landingDuration: 5
-  rotationSensibility: 1
   rotationForce: 100
   platformsLayerMask:
     serializedVersion: 2
     m_Bits: 64
   showGizmos: 0
   maxSpeedToStartLanding: 4
-  greenAreaPercentage: 0.1
-  yellowAreaPercentage: 0.3
+  greenAreaPercentage: 0.05
+  yellowAreaPercentage: 0.15
 --- !u!136 &4090625583501126733
 CapsuleCollider:
   m_ObjectHideFlags: 0

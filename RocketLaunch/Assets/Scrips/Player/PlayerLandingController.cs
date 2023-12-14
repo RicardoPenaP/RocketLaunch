@@ -92,17 +92,10 @@ public class PlayerLandingController : MonoBehaviour
         {
             if (TryFindLandingPlatform())
             {
-                if (Mathf.Abs(rigidbody.velocity.magnitude) <= maxSpeedToStartLanding)
+                OnAbleToLand?.Invoke(landingPlatform.GetPreLandingPosition());
+                if (InputMananger.Instance.GetInteractInputWasTriggered())
                 {
-                    OnAbleToLand?.Invoke(landingPlatform.GetPreLandingPosition());
-                    if (InputMananger.Instance.GetInteractInputWasTriggered())
-                    {
-                        StartPreLanding();
-                    }
-                }
-                else
-                {
-                    OnUnableToLand?.Invoke();
+                    StartPreLanding();
                 }
             }
             else
