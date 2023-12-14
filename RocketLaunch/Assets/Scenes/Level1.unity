@@ -987,6 +987,11 @@ PrefabInstance:
       propertyPath: rocketStats.Array.data[2].statLevel
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 6603820508358471649, guid: 713df64e545f154439e526863ad10a3a,
+        type: 3}
+      propertyPath: rocketStats.Array.data[3].statLevel
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 6603820508358471654, guid: 713df64e545f154439e526863ad10a3a,
         type: 3}
       propertyPath: m_Name
@@ -1971,6 +1976,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8078815222774770507, guid: d9861a88f1a55904bb6f971de7fa0b02,
+        type: 3}
+      propertyPath: rotationForce
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 8078815222774770507, guid: d9861a88f1a55904bb6f971de7fa0b02,
+        type: 3}
+      propertyPath: greenAreaPercentage
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 8078815222774770507, guid: d9861a88f1a55904bb6f971de7fa0b02,
+        type: 3}
+      propertyPath: yellowAreaPercentage
+      value: 0.15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d9861a88f1a55904bb6f971de7fa0b02, type: 3}

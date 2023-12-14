@@ -25,7 +25,6 @@ public class PlayerLandingController : MonoBehaviour
     [SerializeField] private float landingMinDistance = 1f;
     [SerializeField] private float preLandingDuration = 1f;
     [SerializeField] private float landingDuration = 5f;
-    [SerializeField] private float rotationSensibility = 1f;
     [SerializeField] private float rotationForce = 100f;
     [SerializeField] private LayerMask platformsLayerMask;
     [SerializeField] private bool showGizmos = true;
@@ -153,16 +152,14 @@ public class PlayerLandingController : MonoBehaviour
         {
             int rocketStatLevel = RocketStatsMananger.Instance.GetRocketStat(StatType.LandingSystem).GetStatLevel();
             float rocketStatMultiplierAugmentCoeficient = RocketStatsMananger.Instance.GetAngularDragMultiplierAugmentCoeficient();
-            angularDragMultiplier += rocketStatMultiplierAugmentCoeficient * rocketStatLevel;
+            angularDragMultiplier -= rocketStatMultiplierAugmentCoeficient * rocketStatLevel;
             rocketStatMultiplierAugmentCoeficient = RocketStatsMananger.Instance.GetYellowAreaMultiplierAugmentCoeficient();
             yellowAreaMultiplier += rocketStatMultiplierAugmentCoeficient * rocketStatLevel;
             rocketStatMultiplierAugmentCoeficient = RocketStatsMananger.Instance.GetGreenAreaMultiplierAugmentCoeficient();
             greenAreaMultiplier += rocketStatMultiplierAugmentCoeficient * rocketStatLevel;
         }
 
-        float currentAngularDrag = rigidbody.angularDrag;
-        currentAngularDrag *= angularDragMultiplier;
-        rigidbody.angularDrag = currentAngularDrag;
+        rotationForce *= angularDragMultiplier;
 
         yellowAreaPercentage *= yellowAreaMultiplier;
         greenAreaPercentage *= greenAreaMultiplier;
@@ -210,7 +207,7 @@ public class PlayerLandingController : MonoBehaviour
     {
         if (InputMananger.Instance.TryGetRotationDirectionInput(out float rotationDirection))
         {
-            Vector3 torqueAxis = Vector3.forward * rotationForce * rotationDirection * rotationSensibility * Time.deltaTime;
+            Vector3 torqueAxis = Vector3.forward * rotationForce * rotationDirection * Time.deltaTime;
             rigidbody.AddTorque(torqueAxis, ForceMode.Impulse);
             if (rotationDirection > 0f)
             {
