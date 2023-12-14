@@ -8,32 +8,32 @@ public class RocketStatsData: ScriptableObject
     [Header("Rocket Stats Data")]
 
     [Header("Main Engine Stat")]
-    [SerializeField, Range(0f, 10f)] private float mainEngineSpeedMultiplierAugmentCoeficient= 0.1f;
-    [SerializeField, Range(0f, 10f)] private float mainEngineTemperatureMultiplierAugmentCoeficient = 0.1f;
-    [SerializeField, Range(0f, 10f)] private float mainEngineFuelConsumptionMultiplierAugmentCoeficient = 0.1f;
+    [SerializeField, Range(0f, 1f)] private float mainEngineSpeedMultiplierAugmentCoeficient= 0.1f;
+    [SerializeField, Range(0f, 1f)] private float mainEngineTemperatureMultiplierAugmentCoeficient = 0.1f;
+    [SerializeField, Range(0f, 1f)] private float mainEngineFuelConsumptionMultiplierAugmentCoeficient = 0.1f;
 
     [Header("Side Engine Stat")]
-    [SerializeField, Range(0f, 10f)] private float sideEngineTurningSpeedMultiplierAugmentCoeficient = 0.1f;
-    [SerializeField, Range(0f, 10f)] private float sideEngineTemperatureMultiplierAugmentCoeficient = 0.1f;
-    [SerializeField, Range(0f, 10f)] private float sideEngineFuelConsumptionMultiplierAugmentCoeficient = 0.1f;
+    [SerializeField, Range(0f, 1f)] private float sideEngineTurningSpeedMultiplierAugmentCoeficient = 0.1f;
+    [SerializeField, Range(0f, 1f)] private float sideEngineTemperatureMultiplierAugmentCoeficient = 0.1f;
+    [SerializeField, Range(0f, 1f)] private float sideEngineFuelConsumptionMultiplierAugmentCoeficient = 0.1f;
 
     [Header("Cooling System Stat")]
-    [SerializeField, Range(0f, 10f)] private float maxTemperatureMultiplierAugmentCoeficient = 0.1f;
-    [SerializeField, Range(0f, 10f)] private float coolingSpeedMultiplierAugmentCoeficient = 0.1f;
-    [SerializeField, Range(0f, 10f)] private float overheatTimeMultiplierAugmentCoeficient = 0.1f;
+    [SerializeField, Range(0f, 1f)] private float maxTemperatureMultiplierAugmentCoeficient = 0.1f;
+    [SerializeField, Range(0f, 1f)] private float coolingSpeedMultiplierAugmentCoeficient = 0.1f;
+    [SerializeField, Range(0f, 1f)] private float overheatTimeMultiplierAugmentCoeficient = 0.1f;
 
     [Header("Landing System Stat")]
-    [SerializeField, Range(0f, 10f)] private float angularDragMultiplierAugmentCoeficient = 0.1f;
-    [SerializeField, Range(0f, 10f)] private float greenAreaMultiplierAugmentCoeficient = 0.1f;
-    [SerializeField, Range(0f, 10f)] private float yellowAreaMultiplierAugmentCoeficient = 0.1f;
+    [SerializeField, Range(0f, 1f)] private float angularDragMultiplierAugmentCoeficient = 0.1f;
+    [SerializeField, Range(0f, 1f)] private float greenAreaMultiplierAugmentCoeficient = 0.1f;
+    [SerializeField, Range(0f, 1f)] private float yellowAreaMultiplierAugmentCoeficient = 0.1f;
 
     [Header("Pickup System Stat")]
-    [SerializeField, Range(0f, 10f)] private float effectivePercentageMultiplierAugmentCoeficient = 0.1f;
-    [SerializeField, Range(0f, 10f)] private float pullDistanceMultiplierAugmentCoeficient = 0.1f;
-    [SerializeField, Range(0f, 10f)] private float experienceMultiplierAugmentCoeficient = 0.1f;
+    [SerializeField, Range(0f, 1f)] private float effectivePercentageMultiplierAugmentCoeficient = 0.1f;
+    [SerializeField, Range(0f, 1f)] private float pullDistanceMultiplierAugmentCoeficient = 0.1f;
+    [SerializeField, Range(0f, 1f)] private float experienceMultiplierAugmentCoeficient = 0.1f;
 
     [Header("Fuel System Stat")]
-    [SerializeField, Range(0f, 10f)] private float fuelCapacityMultiplierAugmentCoeficient = 0.1f; 
+    [SerializeField, Range(0f, 1f)] private float fuelCapacityMultiplierAugmentCoeficient = 0.1f; 
 
     public float GetMainEngineSpeedMultiplierAugmentCoeficient()
     {

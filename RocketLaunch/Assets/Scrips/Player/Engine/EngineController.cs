@@ -158,6 +158,9 @@ public class EngineController : MonoBehaviour
 
         }
 
+        heatRate *= mainEngineTemperatureMultiplier;
+        fuelConsuptionSpeed *= mainEngineFuelConsumptionMultiplier;
+
         maxEngineTemperature *= maxEngineTemperatureMultiplier;
         overheatRestTime *= overheatTimeMultiplier;
         maxFuelAmount *= fuelCapacityMultiplier;
@@ -189,9 +192,9 @@ public class EngineController : MonoBehaviour
         currentEnginePower = Mathf.Clamp(currentEnginePower+ powerSpeed * Time.deltaTime, 0 ,maxEnginePower);
 
         float powerPercentageMultiplier = currentEnginePower * powerHeatRateMultiplierPercentage;
-        currentEngineTemperature = Mathf.Clamp(currentEngineTemperature + heatRate * powerPercentageMultiplier * mainEngineTemperatureMultiplier * Time.deltaTime, 0, maxEngineTemperature);
+        currentEngineTemperature = Mathf.Clamp(currentEngineTemperature + heatRate * powerPercentageMultiplier * Time.deltaTime, 0, maxEngineTemperature);
 
-        currentFuelAmount = Mathf.Clamp(currentFuelAmount - fuelConsuptionSpeed * mainEngineFuelConsumptionMultiplier * Time.deltaTime, 0, maxFuelAmount);
+        currentFuelAmount = Mathf.Clamp(currentFuelAmount - fuelConsuptionSpeed * Time.deltaTime, 0, maxFuelAmount);
 
         if (currentEngineTemperature >= maxEngineTemperature)
         {
