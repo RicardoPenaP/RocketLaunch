@@ -1211,6 +1211,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 949086605}
     m_Modifications:
+    - target: {fileID: 1308150199226745440, guid: 8faa768033952f842aecef3cad3aef91,
+        type: 3}
+      propertyPath: rotationActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1308150199226745440, guid: 8faa768033952f842aecef3cad3aef91,
+        type: 3}
+      propertyPath: rotationAxis.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2709073278567809249, guid: 8faa768033952f842aecef3cad3aef91,
         type: 3}
       propertyPath: m_Name
