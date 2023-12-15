@@ -97,12 +97,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1168811761037870098, guid: 779527226348a414293c6fef88a7e3c7,
         type: 3}
+      propertyPath: movementType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1168811761037870098, guid: 779527226348a414293c6fef88a7e3c7,
+        type: 3}
+      propertyPath: movementSpeed
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1168811761037870098, guid: 779527226348a414293c6fef88a7e3c7,
+        type: 3}
       propertyPath: expansionSpeed
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1168811761037870098, guid: 779527226348a414293c6fef88a7e3c7,
         type: 3}
       propertyPath: expansionActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1168811761037870098, guid: 779527226348a414293c6fef88a7e3c7,
+        type: 3}
+      propertyPath: movementDirection.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1168811761037870098, guid: 779527226348a414293c6fef88a7e3c7,
@@ -118,17 +133,17 @@ PrefabInstance:
     - target: {fileID: 1168811761037870101, guid: 779527226348a414293c6fef88a7e3c7,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.5
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 1168811761037870101, guid: 779527226348a414293c6fef88a7e3c7,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.5
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 1168811761037870101, guid: 779527226348a414293c6fef88a7e3c7,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.5
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 1168811761037870101, guid: 779527226348a414293c6fef88a7e3c7,
         type: 3}
@@ -189,7 +204,6 @@ PrefabInstance:
     - {fileID: 1168811761268368091, guid: 779527226348a414293c6fef88a7e3c7, type: 3}
     - {fileID: 1168811761268368090, guid: 779527226348a414293c6fef88a7e3c7, type: 3}
     - {fileID: 1168811761037870099, guid: 779527226348a414293c6fef88a7e3c7, type: 3}
-    - {fileID: 1168811761037870098, guid: 779527226348a414293c6fef88a7e3c7, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 779527226348a414293c6fef88a7e3c7, type: 3}
 --- !u!1 &4345050384660868441 stripped
 GameObject:
@@ -223,6 +237,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db2ce407ae213b74195eadeffb60b1ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movementSpeed: 10
+  maxTravelDistance: 50
 --- !u!4 &4345050384757656464 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1168811761268368088, guid: 779527226348a414293c6fef88a7e3c7,
