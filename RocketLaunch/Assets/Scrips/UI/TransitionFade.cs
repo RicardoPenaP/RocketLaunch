@@ -17,19 +17,17 @@ public class TransitionFade : MonoBehaviour
 
     private void Awake()
     {
-        if (!Instance)
-        {
-            Instance = this;
-        }
-        else
+        if (Instance&& Instance!= this)
         {
             Destroy(this);
             return;
         }
+        else
+        {
+            Instance = this;
+        }
 
         fadeImage = GetComponent<Image>();
-
-        
     }
 
     private void Start()
