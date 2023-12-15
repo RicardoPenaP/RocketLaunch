@@ -212,8 +212,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2848386565434754704, guid: 779527226348a414293c6fef88a7e3c7,
         type: 3}
+      propertyPath: yAxis
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2848386565434754704, guid: 779527226348a414293c6fef88a7e3c7,
+        type: 3}
       propertyPath: rotationSpeed
       value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 2848386565434754704, guid: 779527226348a414293c6fef88a7e3c7,
+        type: 3}
+      propertyPath: rotationActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2848386565434754704, guid: 779527226348a414293c6fef88a7e3c7,
         type: 3}

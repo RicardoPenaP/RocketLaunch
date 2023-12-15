@@ -37,6 +37,6 @@ public class ObstacleRotator : MonoBehaviour
         {
             return;
         }
-        transform.localEulerAngles += rotationAxis * rotationSpeed * Time.deltaTime;
+        transform.Rotate(rotationAxis * rotationSpeed * Time.deltaTime);
     }
 }

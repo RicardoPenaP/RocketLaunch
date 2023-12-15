@@ -9,6 +9,7 @@ public class ObstacleAmmo : MonoBehaviour
     [SerializeField] private float maxTravelDistance;
 
     private Vector3 startPosition;
+    private Vector3 movementDirection;
 
     private void Awake()
     {
@@ -22,7 +23,7 @@ public class ObstacleAmmo : MonoBehaviour
 
     private void Move()
     {
-        transform.position += transform.up * movementSpeed * Time.deltaTime;
+        transform.position += movementDirection * movementSpeed * Time.deltaTime;
         if (Vector3.Distance(startPosition,transform.position) >= maxTravelDistance)
         {
             SelfDestroy();
@@ -32,5 +33,10 @@ public class ObstacleAmmo : MonoBehaviour
     private void SelfDestroy()
     {
         Destroy(gameObject);
+    }
+
+    public void SetMovementDirection(Vector3 movementDirection)
+    {
+        this.movementDirection = movementDirection;
     }
 }
