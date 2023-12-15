@@ -4,15 +4,33 @@ using UnityEngine;
 
 public class ObstacleAmmo : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [Header("Obstacle Ammo")]
+    [SerializeField] private float movementSpeed;
+    [SerializeField] private float maxTravelDistance;
+
+    private Vector3 startPosition;
+
+    private void Awake()
     {
-        
+        startPosition = transform.position;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        Move();
+    }
+
+    private void Move()
+    {
+        transform.position += transform.up * movementSpeed * Time.deltaTime;
+        if (Vector3.Distance(startPosition,transform.position) >= maxTravelDistance)
+        {
+            SelfDestroy();
+        }
+    }
+
+    private void SelfDestroy()
+    {
+        Destroy(gameObject);
     }
 }
