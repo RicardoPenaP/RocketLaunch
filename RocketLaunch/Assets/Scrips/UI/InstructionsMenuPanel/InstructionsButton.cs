@@ -1,18 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using System;
 
 public class InstructionsButton : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public static event Action<string> OnAnyInstructionsButtonPressed;
+    [Header("Instructions Button")]
+    [SerializeField, TextArea(minLines: 2, maxLines: 5)] private string instructionsText;
+    [SerializeField] private Button instructionsButton;
+
+
+    private void Awake()
     {
-        
+        if (instructionsButton)
+        {
+            instructionsButton.onClick.AddListener(InstructionsButton_OnClick);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnDestroy()
     {
-        
+        if (instructionsButton)
+        {
+            instructionsButton.onClick.RemoveListener(InstructionsButton_OnClick);
+        }
+    }
+
+    private void InstructionsButton_OnClick()
+    {
+        OnAnyInstructionsButtonPressed?.Invoke(instructionsText);
     }
 }
