@@ -254,6 +254,18 @@ MonoBehaviour:
   shootPositions: []
   shootRate: 1
   shootFromAllShootPositionsAtTheSameTime: 0
+--- !u!114 &4067823619042298144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2709073278567809249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 552f67f24a58214479b5925e07a0ecb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &2709073278567809253 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4345050384660868445, guid: 63cf15981b2fc224b9c4118fbc0dc7c9,
