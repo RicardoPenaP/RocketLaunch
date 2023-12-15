@@ -82,5 +82,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: VerticalLimit
       objectReference: {fileID: 0}
+    - target: {fileID: 7448342811069119206, guid: b88ce16f26d7ce1409da163b44aec7a1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b88ce16f26d7ce1409da163b44aec7a1, type: 3}
