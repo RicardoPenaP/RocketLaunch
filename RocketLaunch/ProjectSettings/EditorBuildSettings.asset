@@ -26,4 +26,34 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Galaxy1/Level1-5.unity
     guid: 9c867ae484619044b91de853e1c4c58c
+  - enabled: 1
+    path: Assets/Scenes/Galaxy2/Level2-1.unity
+    guid: b232e8053fe4bbd41ab1e0d47f4eb3e1
+  - enabled: 1
+    path: Assets/Scenes/Galaxy2/Level2-2.unity
+    guid: 72832f4816c5fe84a86528b9d980d8c4
+  - enabled: 1
+    path: Assets/Scenes/Galaxy2/Level2-3.unity
+    guid: 32ff8833068f6614283726475aa1c51e
+  - enabled: 1
+    path: Assets/Scenes/Galaxy2/Level2-4.unity
+    guid: 1e9f1e8a20609ac40875c408465f33c8
+  - enabled: 1
+    path: Assets/Scenes/Galaxy2/Level2-5.unity
+    guid: 07300edc7b6a4f34784a211e47d35e43
+  - enabled: 1
+    path: Assets/Scenes/Galaxy3/Level3-1.unity
+    guid: 22d3492e30c139a4a976bd8f783ba53a
+  - enabled: 1
+    path: Assets/Scenes/Galaxy3/Level3-2.unity
+    guid: 49bb8cdfd54d8944687f459088f29ab7
+  - enabled: 1
+    path: Assets/Scenes/Galaxy3/Level3-3.unity
+    guid: 3a02667e1a8f36e48b780672a3371398
+  - enabled: 1
+    path: Assets/Scenes/Galaxy3/Level3-4.unity
+    guid: 10db935209b65e749b8a19059818a7f3
+  - enabled: 1
+    path: Assets/Scenes/Galaxy3/Level3-5.unity
+    guid: 5a4f804d5ee4abe4ab799c45869b65a5
   m_configObjects: {}
