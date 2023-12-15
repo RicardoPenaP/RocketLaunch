@@ -28,11 +28,7 @@ public class TransitionFade : MonoBehaviour
         }
 
         fadeImage = GetComponent<Image>();
-    }
 
-    private void Start()
-    {
-        gameObject.SetActive(false);
     }
 
     public void FadeIn(Action onFadeInEnded = null)

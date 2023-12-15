@@ -72,6 +72,10 @@ public class MainMenu : Menu<MainMenu>
             SettingsMenu.Instance.OnGoBackButtonPressed += SettingsMenu_OnGoBackButtonPressed;
         }
         menuOpened = true;
+        if (TransitionFade.Instance)
+        {
+            TransitionFade.Instance.gameObject.SetActive(false);
+        }
     }
 
     protected override void OnDestroy()

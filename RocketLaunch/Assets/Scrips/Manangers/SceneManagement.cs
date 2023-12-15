@@ -13,12 +13,26 @@ namespace GameSceneManagement
         public static void LoadScene(GameScene gameScene)
         {
             currentGameScene = gameScene;
-            SceneManager.LoadScene((int)currentGameScene);
+            if (TransitionFade.Instance)
+            {
+                TransitionFade.Instance.FadeIn(() => SceneManager.LoadScene((int)currentGameScene));
+            }
+            else
+            {
+                SceneManager.LoadScene((int)currentGameScene);
+            }
         }
 
         public static void ReloadCurrentScene()
         {
-            LoadScene(currentGameScene);
+            if (TransitionFade.Instance)
+            {
+                TransitionFade.Instance.FadeIn(()=>LoadScene(currentGameScene));
+            }
+            else
+            {
+                LoadScene(currentGameScene);
+            }
         }     
         
         public static GameScene GetCurrentScene()

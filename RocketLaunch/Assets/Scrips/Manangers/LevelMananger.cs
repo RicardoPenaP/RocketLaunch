@@ -15,7 +15,7 @@ public class LevelMananger : MonoBehaviour
     }
     
     public static event Action OnGoToNextLevel;
-    public static event Action<RewardsData> OnLevelCompleted;
+    public static event Action<RewardsData> OnLevelCompleted;   
 
     [Header("Level Mananger")]    
     [SerializeField,Min(0)] private float levelExperienceReward = 100f;
@@ -65,6 +65,10 @@ public class LevelMananger : MonoBehaviour
         }
 
         Initialize();
+        if (TransitionFade.Instance)
+        {
+            TransitionFade.Instance.FadeOut();
+        }
     }
 
     private void OnDestroy()
