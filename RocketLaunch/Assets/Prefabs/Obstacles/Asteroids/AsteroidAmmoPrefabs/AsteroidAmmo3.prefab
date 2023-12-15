@@ -107,7 +107,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1168811761037870098, guid: 779527226348a414293c6fef88a7e3c7,
         type: 3}
+      propertyPath: rotationSpeed
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 1168811761037870098, guid: 779527226348a414293c6fef88a7e3c7,
+        type: 3}
       propertyPath: expansionSpeed
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1168811761037870098, guid: 779527226348a414293c6fef88a7e3c7,
+        type: 3}
+      propertyPath: rotationActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1168811761037870098, guid: 779527226348a414293c6fef88a7e3c7,

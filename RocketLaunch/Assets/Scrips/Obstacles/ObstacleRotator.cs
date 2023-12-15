@@ -4,15 +4,39 @@ using UnityEngine;
 
 public class ObstacleRotator : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [Header("Obstacle Rotator")]
+    [SerializeField] private bool rotationActive = false;
+    [SerializeField] private bool randomRotationAxis = false;
+    [SerializeField] private Vector3 rotationAxis;
+    [SerializeField] private float rotationSpeed = 20;
+
+    private void OnValidate()
     {
-        
+        if (randomRotationAxis)
+        {
+            rotationAxis = Vector3.zero;
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        
+        if (randomRotationAxis)
+        {
+            rotationAxis = Random.insideUnitSphere;
+        }
+    }
+
+    private void Update()
+    {
+        UpdateRotation();
+    }
+
+    private void UpdateRotation()
+    {
+        if (!rotationActive)
+        {
+            return;
+        }
+        transform.Rotate(rotationAxis * rotationSpeed * Time.deltaTime);
     }
 }
