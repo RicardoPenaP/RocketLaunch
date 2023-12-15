@@ -7,15 +7,14 @@ public class LandingPlatformIndicator : MonoBehaviour
     [Header("Landing Platform Indicator")]
     [SerializeField] private float indicatorOffsetInPixelsFromTheMiddleOfTheScreen;
 
-    private RectTransform rectTransform;
 
     private LandingPlatform landingPlatform;
-    private Vector3 platformPosition;
+    private PlayerController playerController;
 
     private void Awake()
-    {
-        rectTransform = GetComponent<RectTransform>();
+    {       
         landingPlatform = FindObjectOfType<LandingPlatform>();
+        playerController = FindObjectOfType<PlayerController>();
     }
 
     private void Start()
@@ -39,10 +38,12 @@ public class LandingPlatformIndicator : MonoBehaviour
 
     private void UpdateLandingPlatformIndicator()
     {
+
         Vector3 centerOfTheScreen = new Vector3(Screen.width/2,Screen.height/2,0f);
-        Vector3 platformDirection = (Camera.main.WorldToScreenPoint(platformPosition)- centerOfTheScreen).normalized;
+        Vector3 platformDirection = (landingPlatform.transform.position - playerController.transform.position).normalized;
+        platformDirection.z = 0;
         transform.right = platformDirection;
-        transform.position = centerOfTheScreen + platformDirection * indicatorOffsetInPixelsFromTheMiddleOfTheScreen; 
+        transform.position = centerOfTheScreen + (platformDirection * indicatorOffsetInPixelsFromTheMiddleOfTheScreen); 
     }
 
     private void LandingPlatform_OnPlatformInsideScreen()
@@ -51,8 +52,7 @@ public class LandingPlatformIndicator : MonoBehaviour
     }
     private void LandingPlatform_OnPlatformOutsideScreen(Vector3 platformPosition)
     {
-        gameObject.SetActive(true);
-        this.platformPosition = platformPosition;
+        gameObject.SetActive(true);        
         UpdateLandingPlatformIndicator();
     }
 }
