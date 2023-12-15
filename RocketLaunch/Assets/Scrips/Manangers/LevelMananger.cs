@@ -47,10 +47,7 @@ public class LevelMananger : MonoBehaviour
     }
 
     private void Start()
-    {
-        //For testing only
-        Application.targetFrameRate = 60;
-        
+    {        
         playerController = FindAnyObjectByType<PlayerController>();
         playerLandingController = playerController.GetComponent<PlayerLandingController>();
 
