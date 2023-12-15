@@ -93,7 +93,7 @@ PrefabInstance:
     - target: {fileID: 1168811761037870097, guid: 779527226348a414293c6fef88a7e3c7,
         type: 3}
       propertyPath: m_Name
-      value: Asteroid3
+      value: AsteroidAmmo3
       objectReference: {fileID: 0}
     - target: {fileID: 1168811761037870098, guid: 779527226348a414293c6fef88a7e3c7,
         type: 3}
@@ -114,6 +114,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1168811761037870101, guid: 779527226348a414293c6fef88a7e3c7,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1168811761037870101, guid: 779527226348a414293c6fef88a7e3c7,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1168811761037870101, guid: 779527226348a414293c6fef88a7e3c7,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1168811761037870101, guid: 779527226348a414293c6fef88a7e3c7,
         type: 3}
@@ -165,10 +180,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1168811761037870101, guid: 779527226348a414293c6fef88a7e3c7,
+        type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1168811761268368091, guid: 779527226348a414293c6fef88a7e3c7, type: 3}
     - {fileID: 1168811761268368090, guid: 779527226348a414293c6fef88a7e3c7, type: 3}
     - {fileID: 1168811761037870099, guid: 779527226348a414293c6fef88a7e3c7, type: 3}
+    - {fileID: 1168811761037870098, guid: 779527226348a414293c6fef88a7e3c7, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 779527226348a414293c6fef88a7e3c7, type: 3}
 --- !u!1 &4345050384660868441 stripped
 GameObject:
@@ -190,6 +211,18 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: c8e5dbd0279404f47898113147f8f42f, type: 3}
+--- !u!114 &-3627794338678247829
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4345050384660868441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db2ce407ae213b74195eadeffb60b1ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &4345050384757656464 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1168811761268368088, guid: 779527226348a414293c6fef88a7e3c7,

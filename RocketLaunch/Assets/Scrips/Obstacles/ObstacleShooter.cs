@@ -42,13 +42,13 @@ public class ObstacleShooter : MonoBehaviour
             foreach (Transform shootPosTranform in shootPositions)
             {
                 int ammoIndex = Random.Range(0, obstacleAmmoPrefabs.Length);
-                Instantiate(obstacleAmmoPrefabs[ammoIndex], shootPosTranform.position, transform.rotation);
+                Instantiate(obstacleAmmoPrefabs[ammoIndex], shootPosTranform.position, shootPosTranform.rotation, transform.parent);
             }
         }
         else
         {
             int ammoIndex = Random.Range(0, obstacleAmmoPrefabs.Length);
-            Instantiate(obstacleAmmoPrefabs[ammoIndex], shootPositions[shootPositionIndex].position, transform.rotation);
+            Instantiate(obstacleAmmoPrefabs[ammoIndex], shootPositions[shootPositionIndex].position, shootPositions[shootPositionIndex].rotation,transform.parent);
             shootPositionIndex = shootPositionIndex < shootPositions.Length - 1 ? shootPositionIndex + 1 : 0;
         }
 
