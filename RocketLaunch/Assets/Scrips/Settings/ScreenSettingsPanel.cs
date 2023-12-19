@@ -4,10 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using Settings;
+using System;
 
 
 public class ScreenSettingsPanel : MonoBehaviour
-{
+{   
     [Header("Screen Settings Controller")]
     [SerializeField] private TMP_Dropdown qualityDropdown;
     [SerializeField] private TMP_Dropdown maxFPSDropdown;
@@ -84,7 +85,9 @@ public class ScreenSettingsPanel : MonoBehaviour
 
     private void FPSCounterButton_OnClick()
     {
-
+        fpsCounterButtonSelected = !fpsCounterButtonSelected;
+        fpsCounterButton.transform.GetChild(0).gameObject.SetActive(fullScreenButtonSelected);
+        SettingsController.SetFPSCounterState(fpsCounterButtonSelected);
     }
 
 

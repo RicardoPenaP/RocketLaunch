@@ -6,8 +6,11 @@ namespace Settings
     public static class SettingsController
     {
         public static event Action OnTargetFPSChange;
+        public static event Action OnFPSCounterStateChange;
         public static int CurrentTargetFPS { get; private set; } = SettingsData.DEFAULT_TARGET_FPS;
         public static QualityOptions CurrentQualityOption { get; private set; } = SettingsData.DEFAULT_QUALITY;
+
+        public static bool FPSCounterIsActive { get; private set; } = false;
 
         public static void SetQuality(QualityOptions qualityOption)
         {
@@ -46,6 +49,12 @@ namespace Settings
             {
                 Screen.fullScreen = state;
             }
+        }
+
+        public static void SetFPSCounterState(bool state)
+        {
+            FPSCounterIsActive = state;
+            OnFPSCounterStateChange?.Invoke();
         }
     }
 }
