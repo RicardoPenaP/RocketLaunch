@@ -7,10 +7,15 @@ namespace Settings
     {
         public static event Action OnTargetFPSChange;
         public static event Action OnFPSCounterStateChange;
+        public static event Action OnMusicVolumeChange;
+        public static event Action OnSFXVolumeChange;
         public static int CurrentTargetFPS { get; private set; } = SettingsData.DEFAULT_TARGET_FPS;
         public static QualityOptions CurrentQualityOption { get; private set; } = SettingsData.DEFAULT_QUALITY;
 
         public static bool FPSCounterIsActive { get; private set; } = false;
+
+        public static float MusicVolume { get; private set; } = 0.5f;
+        public static float SFXVolume { get; private set; } = 0.5f;
 
         public static void SetQuality(QualityOptions qualityOption)
         {
@@ -55,6 +60,18 @@ namespace Settings
         {
             FPSCounterIsActive = state;
             OnFPSCounterStateChange?.Invoke();
+        }
+
+        public static void SetMusicVolume(float volume)
+        {
+            MusicVolume = Mathf.Clamp(volume,0f,1f);
+            OnMusicVolumeChange?.Invoke();
+        }
+
+        public static void SetSFXVolume(float volume)
+        {
+            SFXVolume = Mathf.Clamp(volume, 0f, 1f);
+            OnSFXVolumeChange?.Invoke();
         }
     }
 }
