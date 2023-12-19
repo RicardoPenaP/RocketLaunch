@@ -1,8 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
-public static class SettingsData 
+namespace Settings
 {
-    
+    public enum GraficQualityOptions { Ultra, High, Mid, Low}
+    public static class SettingsData
+    {
+
+    }
 }
+
+
