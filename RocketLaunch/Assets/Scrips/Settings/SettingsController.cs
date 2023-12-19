@@ -1,16 +1,43 @@
 using UnityEngine;
+using System;
 
 namespace Settings
 {    
     public static class SettingsController
     {
-        private const QualityOptions DEFAULT_QUALITY = QualityOptions.Ultra;
-
-        public static float FpsTarget { get; private set; }
+        public static event Action OnTargetFPSChange;
+        public static int CurrentTargetFPS { get; private set; } = SettingsData.DEFAULT_TARGET_FPS;
+        public static QualityOptions CurrentQualityOption { get; private set; } = SettingsData.DEFAULT_QUALITY;
 
         public static void ChangeQuality(QualityOptions qualityOption)
         {
+            CurrentQualityOption = qualityOption;
             QualitySettings.SetQualityLevel((int)qualityOption, false);
+        }
+
+        public static void SetTargetFPS(TargetFPSOptions targetFPS)
+        {
+            switch (targetFPS)
+            {
+                case TargetFPSOptions.Low:
+                    CurrentTargetFPS = 30;
+                    break;
+                case TargetFPSOptions.Mid:
+                    CurrentTargetFPS = 60;
+                    break;
+                case TargetFPSOptions.High:
+                    CurrentTargetFPS = 120;
+                    break;
+                case TargetFPSOptions.Ultra:
+                    CurrentTargetFPS = 240;
+                    break;
+                case TargetFPSOptions.Unlimited:
+                    CurrentTargetFPS = -1;
+                    break;
+                default:
+                    break;
+            }            
+            OnTargetFPSChange?.Invoke();
         }
     }
 }

@@ -1,14 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Settings;
 
 public class FPSLimiter : MonoBehaviour
 {
-    public enum FPSTarget { Low = 30, Mid = 60, High = 120,Ultra = 240, Unlimited = -1}
-
     public static FPSLimiter Instance { get; private set; }
-
-    private FPSTarget currentFPSTarget = FPSTarget.Mid;
 
     private void Awake()
     {
@@ -23,8 +20,19 @@ public class FPSLimiter : MonoBehaviour
             DontDestroyOnLoad(this.gameObject);
         }
 
-        Application.targetFrameRate = (int)currentFPSTarget;
+        SettingsController.OnTargetFPSChange += SettingsController_OnTargetFPSChange;
+
+        Application.targetFrameRate = SettingsController.CurrentTargetFPS;
     }
 
+    private void OnDestroy()
+    {
+        SettingsController.OnTargetFPSChange -= SettingsController_OnTargetFPSChange;
+    }
+
+    private void SettingsController_OnTargetFPSChange()
+    {
+        Application.targetFrameRate = SettingsController.CurrentTargetFPS;
+    }
 
 }

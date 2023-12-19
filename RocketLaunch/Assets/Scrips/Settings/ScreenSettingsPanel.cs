@@ -69,7 +69,7 @@ public class ScreenSettingsPanel : MonoBehaviour
 
     private void MaxFPSDropdown_OnValueChanged(int value)
     {
-
+        SettingsController.SetTargetFPS((TargetFPSOptions)value);
     }
 
     private void FullScreenButton_OnClick()
