@@ -1,10 +1,11 @@
 
 namespace Settings
 {
-    public enum GraficQualityOptions { Ultra, High, Mid, Low}
+    public enum QualityOptions { Ultra, High, Mid, Low}
+    
     public static class SettingsData
     {
-
+        private const QualityOptions DEFAULT_QUALITY = QualityOptions.Ultra;
     }
 }
 
