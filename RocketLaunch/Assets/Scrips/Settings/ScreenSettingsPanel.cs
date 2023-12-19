@@ -11,5 +11,8 @@ public class ScreenSettingsPanel : MonoBehaviour
     [SerializeField] private Dropdown maxFPSDropdown;
     [SerializeField] private Button fullScreenButton;
     [SerializeField] private Button fpsCounterButton;
+
+
+
    
 }
