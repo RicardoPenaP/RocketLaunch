@@ -23,6 +23,14 @@ public class AudioSettingsPanel : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        if (SettingsMenu.Instance)
+        {
+            SettingsMenu.Instance.OnMenuOpened += SettingsMenu_OnMenuOpened;
+        }
+    }
+
     private void OnDestroy()
     {
         if (musicVolumeSlider)
@@ -34,6 +42,11 @@ public class AudioSettingsPanel : MonoBehaviour
         {
             sfxVolumeSlider.onValueChanged.RemoveListener(SFXVolumeSlider_OnValueChange);
         }
+
+        if (SettingsMenu.Instance)
+        {
+            SettingsMenu.Instance.OnMenuOpened -= SettingsMenu_OnMenuOpened;
+        }
     }
 
     private void MusicVolumeSlider_OnValueChange(float value)
@@ -44,5 +57,11 @@ public class AudioSettingsPanel : MonoBehaviour
     private void SFXVolumeSlider_OnValueChange(float value)
     {
         SettingsController.SetSFXVolume(value);
+    }
+
+    private void SettingsMenu_OnMenuOpened()
+    {
+        musicVolumeSlider.value = SettingsController.MusicVolume;
+        sfxVolumeSlider.value = SettingsController.SFXVolume;
     }
 }
