@@ -2,15 +2,22 @@ using UnityEngine;
 using System;
 
 namespace Settings
-{    
+{
+    public enum QualityOptions { Ultra, High, Mid, Low }
+    public enum TargetFPSOptions { Low, Mid, High, Ultra, Unlimited }
+
     public static class SettingsController
     {
+        public const QualityOptions DEFAULT_QUALITY = QualityOptions.Ultra;
+        public const int DEFAULT_TARGET_FPS = 60;
+        public const bool DEFAULT_FULLSCREEN_MODE_STATE = true;
+
         public static event Action OnTargetFPSChange;
         public static event Action OnFPSCounterStateChange;
         public static event Action OnMusicVolumeChange;
         public static event Action OnSFXVolumeChange;
-        public static int CurrentTargetFPS { get; private set; } = SettingsData.DEFAULT_TARGET_FPS;
-        public static QualityOptions CurrentQualityOption { get; private set; } = SettingsData.DEFAULT_QUALITY;
+        public static int CurrentTargetFPS { get; private set; } = DEFAULT_TARGET_FPS;
+        public static QualityOptions CurrentQualityOption { get; private set; } = DEFAULT_QUALITY;
 
         public static bool FPSCounterIsActive { get; private set; } = false;
 
