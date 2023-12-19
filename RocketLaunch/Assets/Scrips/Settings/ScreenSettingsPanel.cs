@@ -14,6 +14,9 @@ public class ScreenSettingsPanel : MonoBehaviour
     [SerializeField] private Button fullScreenButton;
     [SerializeField] private Button fpsCounterButton;
 
+    private bool fullScreenButtonSelected = true;
+    private bool fpsCounterButtonSelected = false;
+
     private void Awake()
     {
         if (qualityDropdown)
@@ -64,7 +67,7 @@ public class ScreenSettingsPanel : MonoBehaviour
 
     private void QualityDropdown_OnValueChanged(int value)
     {
-        SettingsController.ChangeQuality((QualityOptions)value);
+        SettingsController.SetQuality((QualityOptions)value);
     }
 
     private void MaxFPSDropdown_OnValueChanged(int value)
@@ -74,7 +77,9 @@ public class ScreenSettingsPanel : MonoBehaviour
 
     private void FullScreenButton_OnClick()
     {
-        
+        fullScreenButtonSelected = !fullScreenButtonSelected;
+        fullScreenButton.transform.GetChild(0).gameObject.SetActive(fullScreenButtonSelected);
+        SettingsController.SetFullScreen(fullScreenButtonSelected);
     }
 
     private void FPSCounterButton_OnClick()

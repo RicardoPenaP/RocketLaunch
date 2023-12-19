@@ -9,7 +9,7 @@ namespace Settings
         public static int CurrentTargetFPS { get; private set; } = SettingsData.DEFAULT_TARGET_FPS;
         public static QualityOptions CurrentQualityOption { get; private set; } = SettingsData.DEFAULT_QUALITY;
 
-        public static void ChangeQuality(QualityOptions qualityOption)
+        public static void SetQuality(QualityOptions qualityOption)
         {
             CurrentQualityOption = qualityOption;
             QualitySettings.SetQualityLevel((int)qualityOption, false);
@@ -38,6 +38,14 @@ namespace Settings
                     break;
             }            
             OnTargetFPSChange?.Invoke();
+        }
+
+        public static void SetFullScreen(bool state)
+        {
+            if (state != Screen.fullScreen)
+            {
+                Screen.fullScreen = state;
+            }
         }
     }
 }
