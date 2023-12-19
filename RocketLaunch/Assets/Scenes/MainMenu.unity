@@ -2409,8 +2409,7 @@ MonoBehaviour:
     -Pickup System: +percentage of effectivenes, +distance
     for pulling and +experience per mission completed.
 
-    -Fuel System: +fuel
-    capacity.'
+    -Fuel System: +fuel capacity.'
   instructionsButton: {fileID: 421519158}
 --- !u!1 &446607704
 GameObject:
@@ -3244,7 +3243,7 @@ PrefabInstance:
     - target: {fileID: 7839412844977240167, guid: 63c9e435e9a9d184fb6ed16a371f8c94,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7839412844977240168, guid: 63c9e435e9a9d184fb6ed16a371f8c94,
         type: 3}
@@ -6363,13 +6362,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 40
-  m_fontSizeBase: 40
+  m_fontSize: 18
+  m_fontSizeBase: 18
   m_fontWeight: 400
-  m_enableAutoSizing: 1
+  m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 3
+  m_fontStyle: 1
   m_HorizontalAlignment: 8
   m_VerticalAlignment: 256
   m_textAlignment: 65535
