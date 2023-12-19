@@ -42,6 +42,14 @@ public class ScreenSettingsPanel : MonoBehaviour
 
     }
 
+    private void Start()
+    {
+        if (SettingsMenu.Instance)
+        {
+            SettingsMenu.Instance.OnMenuOpened += SettingsMenu_OnMenuOpened;
+        }
+    }
+
     private void OnDestroy()
     {
         if (qualityDropdown)
@@ -62,6 +70,11 @@ public class ScreenSettingsPanel : MonoBehaviour
         if (fpsCounterButton)
         {
             fpsCounterButton.onClick.RemoveListener(FPSCounterButton_OnClick);
+        }
+
+        if (SettingsMenu.Instance)
+        {
+            SettingsMenu.Instance.OnMenuOpened -= SettingsMenu_OnMenuOpened;
         }
 
     }
@@ -88,6 +101,40 @@ public class ScreenSettingsPanel : MonoBehaviour
         fpsCounterButtonSelected = !fpsCounterButtonSelected;
         fpsCounterButton.transform.GetChild(0).gameObject.SetActive(fullScreenButtonSelected);
         SettingsController.SetFPSCounterState(fpsCounterButtonSelected);
+    }
+
+    private void SettingsMenu_OnMenuOpened()
+    {
+        qualityDropdown.value = (int)SettingsController.CurrentQualityOption;
+        maxFPSDropdown.value = (int)GetTargetFPSOption();
+
+        fullScreenButtonSelected = Screen.fullScreen;
+        fullScreenButton.transform.GetChild(0).gameObject.SetActive(fullScreenButtonSelected);
+
+        fpsCounterButtonSelected = SettingsController.FPSCounterIsActive;
+        fpsCounterButton.transform.GetChild(0).gameObject.SetActive(fullScreenButtonSelected);
+
+    }
+
+    private TargetFPSOptions GetTargetFPSOption()
+    {
+        switch (SettingsController.CurrentTargetFPS)
+        {
+            case 30:
+                return TargetFPSOptions.Low;                
+            case 60:
+                return TargetFPSOptions.Mid;
+            case 120:
+                return TargetFPSOptions.High;
+            case 240:
+                return TargetFPSOptions.Ultra;
+            case -1:
+                return TargetFPSOptions.Unlimited;
+            default:
+                break;
+        }
+
+        return TargetFPSOptions.Low;
     }
 
 

@@ -52,7 +52,7 @@ namespace Settings
         {
             if (state != Screen.fullScreen)
             {
-                Screen.fullScreen = state;
+                Screen.fullScreen = state;               
             }
         }
 
