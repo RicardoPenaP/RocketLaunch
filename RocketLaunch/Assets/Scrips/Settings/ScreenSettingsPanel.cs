@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using Settings;
-using System;
 
 
 public class ScreenSettingsPanel : MonoBehaviour
@@ -39,7 +38,6 @@ public class ScreenSettingsPanel : MonoBehaviour
         {
             fpsCounterButton.onClick.AddListener(FPSCounterButton_OnClick);
         }
-
     }
 
     private void Start()
@@ -99,7 +97,7 @@ public class ScreenSettingsPanel : MonoBehaviour
     private void FPSCounterButton_OnClick()
     {
         fpsCounterButtonSelected = !fpsCounterButtonSelected;
-        fpsCounterButton.transform.GetChild(0).gameObject.SetActive(fullScreenButtonSelected);
+        fpsCounterButton.transform.GetChild(0).gameObject.SetActive(fpsCounterButtonSelected);
         SettingsController.SetFPSCounterState(fpsCounterButtonSelected);
     }
 
@@ -112,8 +110,7 @@ public class ScreenSettingsPanel : MonoBehaviour
         fullScreenButton.transform.GetChild(0).gameObject.SetActive(fullScreenButtonSelected);
 
         fpsCounterButtonSelected = SettingsController.FPSCounterIsActive;
-        fpsCounterButton.transform.GetChild(0).gameObject.SetActive(fullScreenButtonSelected);
-
+        fpsCounterButton.transform.GetChild(0).gameObject.SetActive(fpsCounterButtonSelected);
     }
 
     private TargetFPSOptions GetTargetFPSOption()
