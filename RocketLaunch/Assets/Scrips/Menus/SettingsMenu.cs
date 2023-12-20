@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using Settings;
 
 public class SettingsMenu : Menu<SettingsMenu>
 {
@@ -42,6 +43,13 @@ public class SettingsMenu : Menu<SettingsMenu>
         {
             MainMenu.Instance.OnSettingsButtonPressed -= MainMenu_OnSettingsButtonPressed;
         }
+    }
+
+    protected override void CloseMenu(Action onCloseAnimationEndedActions = null)
+    {
+        SettingsDataLoader.SaveSettingsData();
+        base.CloseMenu(onCloseAnimationEndedActions);
+
     }
 
     private void GoBackButton_OnClick()
