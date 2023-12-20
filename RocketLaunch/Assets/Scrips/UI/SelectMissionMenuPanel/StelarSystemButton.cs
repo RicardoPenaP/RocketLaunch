@@ -45,8 +45,13 @@ public class StelarSystemButton : MonoBehaviour
         selectedImage.gameObject.SetActive(false);
         if (stelarSystemID == this.stelarSystemID)
         {
-            selectedImage.gameObject.SetActive(true);
+            SetStelarSystemButtonSelected(true);
         }
+    }
+
+    public void SetStelarSystemButtonSelected(bool state)
+    {
+        selectedImage.gameObject.SetActive(state);
     }
 
     public void SetStellarSystemNameText(string text)

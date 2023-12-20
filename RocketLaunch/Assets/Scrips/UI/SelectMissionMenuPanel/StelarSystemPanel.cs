@@ -45,4 +45,12 @@ public class StelarSystemPanel : MonoBehaviour
            
         }
     }
+
+    private void SelectMissionMenu_OnBackButtonPressed()
+    {
+        for (int i = 0; i < stelarSystemButtons.Length; i++)
+        {
+            stelarSystemButtons[i].SetStellarSystemLocked(false);
+        }
+    }
 }
