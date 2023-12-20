@@ -45,6 +45,7 @@ public class ScreenSettingsPanel : MonoBehaviour
         if (SettingsMenu.Instance)
         {
             SettingsMenu.Instance.OnMenuOpened += SettingsMenu_OnMenuOpened;
+            SettingsMenu.Instance.OnResetButtonPressed += SettingsMenu_OnResetButtonPressed;
         }
     }
 
@@ -73,6 +74,7 @@ public class ScreenSettingsPanel : MonoBehaviour
         if (SettingsMenu.Instance)
         {
             SettingsMenu.Instance.OnMenuOpened -= SettingsMenu_OnMenuOpened;
+            SettingsMenu.Instance.OnResetButtonPressed -= SettingsMenu_OnResetButtonPressed;
         }
 
     }
@@ -111,6 +113,21 @@ public class ScreenSettingsPanel : MonoBehaviour
 
         fpsCounterButtonSelected = SettingsController.FPSCounterIsActive;
         fpsCounterButton.transform.GetChild(0).gameObject.SetActive(fpsCounterButtonSelected);
+    }
+
+    private void SettingsMenu_OnResetButtonPressed()
+    {
+        qualityDropdown.value = (int)SettingsController.DEFAULT_QUALITY;
+        SettingsController.SetTargetFPS(SettingsController.DEFAULT_TARGET_FPS);
+        maxFPSDropdown.value = (int)GetTargetFPSOption();
+
+        fullScreenButtonSelected = true;
+        fullScreenButton.transform.GetChild(0).gameObject.SetActive(fullScreenButtonSelected);
+        SettingsController.SetFullScreen(fullScreenButtonSelected);
+
+        fpsCounterButtonSelected = false;
+        fpsCounterButton.transform.GetChild(0).gameObject.SetActive(fpsCounterButtonSelected);
+        SettingsController.SetFPSCounterState(fpsCounterButtonSelected);
     }
 
     private TargetFPSOptions GetTargetFPSOption()

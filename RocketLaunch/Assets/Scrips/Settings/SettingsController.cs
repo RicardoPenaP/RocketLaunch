@@ -11,6 +11,8 @@ namespace Settings
         public const QualityOptions DEFAULT_QUALITY = QualityOptions.Ultra;
         public const int DEFAULT_TARGET_FPS = 60;
         public const bool DEFAULT_FULLSCREEN_MODE_STATE = true;
+        public const float DEFAULT_MUSIC_VOLUME = 0.5f;
+        public const float DEFAULT_SFX_VOLUME = 0.5f;
 
         public static event Action OnTargetFPSChange;
         public static event Action OnFPSCounterStateChange;
@@ -22,8 +24,8 @@ namespace Settings
 
         public static bool FPSCounterIsActive { get; private set; } = false;
 
-        public static float MusicVolume { get; private set; } = 0.5f;
-        public static float SFXVolume { get; private set; } = 0.5f;
+        public static float MusicVolume { get; private set; } = DEFAULT_MUSIC_VOLUME;
+        public static float SFXVolume { get; private set; } = DEFAULT_SFX_VOLUME;
 
         public static void SetQuality(QualityOptions qualityOption)
         {

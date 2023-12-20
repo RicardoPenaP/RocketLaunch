@@ -9,8 +9,10 @@ public class SettingsMenu : Menu<SettingsMenu>
 {
     [Header("Settings Menu")]
     [SerializeField] private Button goBackButton;
+    [SerializeField] private Button resetButton;
 
     public event Action OnGoBackButtonPressed;
+    public event Action OnResetButtonPressed;
 
     protected override void Awake()
     {
@@ -18,6 +20,10 @@ public class SettingsMenu : Menu<SettingsMenu>
         if (goBackButton)
         {
             goBackButton.onClick.AddListener(GoBackButton_OnClick);
+        }
+        if (resetButton)
+        {
+            resetButton.onClick.AddListener(ResetButton_OnClick);
         }
     }
 
@@ -39,10 +45,17 @@ public class SettingsMenu : Menu<SettingsMenu>
             goBackButton.onClick.RemoveListener(GoBackButton_OnClick);
         }
 
+        if (resetButton)
+        {
+            resetButton.onClick.RemoveListener(ResetButton_OnClick);
+        }
+
         if (MainMenu.Instance)
         {
             MainMenu.Instance.OnSettingsButtonPressed -= MainMenu_OnSettingsButtonPressed;
         }
+
+
     }
 
     protected override void CloseMenu(Action onCloseAnimationEndedActions = null)
@@ -56,6 +69,11 @@ public class SettingsMenu : Menu<SettingsMenu>
     {
         OnGoBackButtonPressed?.Invoke();
         CloseMenu();
+    }
+
+    private void ResetButton_OnClick()
+    {
+        OnResetButtonPressed?.Invoke();
     }
 
     private void MainMenu_OnSettingsButtonPressed()
