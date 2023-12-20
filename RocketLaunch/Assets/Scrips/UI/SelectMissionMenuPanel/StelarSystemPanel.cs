@@ -16,7 +16,7 @@ public class StelarSystemPanel : MonoBehaviour
         if (SelectMissionMenu.Instance)
         {
             SelectMissionMenu.Instance.OnLoadStelarSystemsData += SelectMissionMenu_OnLoadStelarSystemsData;
-            SelectMissionMenu.Instance.OnGoBackButtonPressed += SelectMissionMenu_OnBackButtonPressed;
+            SelectMissionMenu.Instance.OnMenuClosed += SelectMissionMenu_OnMenuClosed;
         }
     }
 
@@ -25,7 +25,7 @@ public class StelarSystemPanel : MonoBehaviour
         if (SelectMissionMenu.Instance)
         {
             SelectMissionMenu.Instance.OnLoadStelarSystemsData -= SelectMissionMenu_OnLoadStelarSystemsData;
-            SelectMissionMenu.Instance.OnGoBackButtonPressed -= SelectMissionMenu_OnBackButtonPressed;
+            SelectMissionMenu.Instance.OnMenuClosed -= SelectMissionMenu_OnMenuClosed;
         }
     }
 
@@ -46,7 +46,7 @@ public class StelarSystemPanel : MonoBehaviour
         }
     }
 
-    private void SelectMissionMenu_OnBackButtonPressed()
+    private void SelectMissionMenu_OnMenuClosed()
     {
         for (int i = 0; i < stelarSystemButtons.Length; i++)
         {

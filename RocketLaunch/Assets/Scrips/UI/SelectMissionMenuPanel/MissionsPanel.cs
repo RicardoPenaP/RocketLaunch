@@ -15,11 +15,19 @@ public class MissionsPanel : MonoBehaviour
     private void Start()
     {
         StelarSystemButton.OnAnyStelarSystemButtonPressed += StelarSystemButton_OnAnyStelarSystemButtonPressed;
+        if (SelectMissionMenu.Instance)
+        {
+            SelectMissionMenu.Instance.OnMenuClosed += SelectMissionMenu_OnMenuClosed;
+        }
     }
 
     private void OnDestroy()
     {
         StelarSystemButton.OnAnyStelarSystemButtonPressed -= StelarSystemButton_OnAnyStelarSystemButtonPressed;
+        if (SelectMissionMenu.Instance)
+        {
+            SelectMissionMenu.Instance.OnMenuClosed -= SelectMissionMenu_OnMenuClosed;
+        }
     }
 
     private void StelarSystemButton_OnAnyStelarSystemButtonPressed(object sender, StelarSystemID stelarSystemID)
@@ -56,6 +64,14 @@ public class MissionsPanel : MonoBehaviour
 
     }
 
+    private void SelectMissionMenu_OnMenuClosed()
+    {
+        titleText.text = "Select a stelar system";
+        foreach (Transform childs in missionsButtonsLayout)
+        {
+            Destroy(childs.gameObject);
+        }
+    }
 
-    
+
 }
