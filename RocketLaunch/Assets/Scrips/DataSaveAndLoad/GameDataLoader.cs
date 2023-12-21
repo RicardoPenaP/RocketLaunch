@@ -25,12 +25,20 @@ public class GameDataLoader : MonoBehaviour
         LoadPlayerData();
     }
 
+    private void Start()
+    {
+        if (RocketLevelMananger.Instance)
+        {
+            RocketLevelMananger.Instance.OnSavedExperience += RocketLevelMananger_OnSavedExperience;
+        }
+    }
+
     private void LoadPlayerData()
     {
         OnLoadPlayerData?.Invoke(SaveAndLoadSystem.LoadPlayerData());
     }
 
-    public void SavePlayerData()
+    private void SavePlayerData()
     {
         int level = RocketLevelMananger.Instance.GetCurrentLevel();
         float currentExperience = RocketLevelMananger.Instance.GetCurrentExperience();
@@ -39,5 +47,11 @@ public class GameDataLoader : MonoBehaviour
 
         SaveAndLoadSystem.SavePlayerData(playerData);
     }
-    
+
+    private void RocketLevelMananger_OnSavedExperience()
+    {
+        SavePlayerData();
+    }
+
+
 }

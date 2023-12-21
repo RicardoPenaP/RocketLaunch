@@ -13,6 +13,7 @@ public class RocketLevelMananger : MonoBehaviour
     [SerializeField,Range(1f,10f)] private float experienceAugmentCoeficient = 2f;
 
     public event Action OnRocketLevelUp;
+    public event Action OnSavedExperience;
 
     private int currentLevel = 1;
     private float currentExperience = 0;
@@ -85,6 +86,7 @@ public class RocketLevelMananger : MonoBehaviour
         {
             LevelUp();
         }
+        OnSavedExperience?.Invoke();
     }
 
     private void LevelUp()
