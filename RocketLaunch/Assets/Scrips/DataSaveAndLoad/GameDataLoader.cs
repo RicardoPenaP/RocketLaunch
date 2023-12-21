@@ -33,16 +33,9 @@ public class GameDataLoader : MonoBehaviour
     public void SavePlayerData()
     {
         int level = RocketLevelMananger.Instance.GetCurrentLevel();
-        int availableStatPoints = RocketStatsMananger.Instance.GetCurrentStatPoints();
-        RocketStat[] rocketStats = RocketStatsMananger.Instance.GetRocketStats();
-        int[] rocketStatsLevel = new int[rocketStats.Length];
+        float currentExperience = RocketLevelMananger.Instance.GetCurrentExperience();
 
-        for (int i = 0; i < rocketStats.Length; i++)
-        {
-            rocketStatsLevel[i] = rocketStats[i].GetStatLevel();
-        }
-
-        PlayerData playerData = new PlayerData(level,availableStatPoints,rocketStatsLevel);
+        PlayerData playerData = new PlayerData(level,currentExperience);
 
         SaveAndLoadSystem.SavePlayerData(playerData);
     }

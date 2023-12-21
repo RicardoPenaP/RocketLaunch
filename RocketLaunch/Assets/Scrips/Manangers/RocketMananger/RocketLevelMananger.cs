@@ -48,6 +48,11 @@ public class RocketLevelMananger : MonoBehaviour
     {
         SaveExperience(rewardsData.totalExperience);
     }
+
+    private void GameDataLoader_OnLoadPlayerPlayerData(PlayerData playerData)
+    {
+
+    }
     
     private void SaveExperience(float amount)
     {
@@ -81,5 +86,10 @@ public class RocketLevelMananger : MonoBehaviour
     public int GetCurrentLevel()
     {
         return currentLevel;
+    }
+
+    public float GetCurrentExperience()
+    {
+        return currentExperience;
     }
 }
