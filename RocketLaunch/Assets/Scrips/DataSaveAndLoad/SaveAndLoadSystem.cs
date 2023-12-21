@@ -4,5 +4,8 @@ using UnityEngine;
 
 public static class SaveAndLoadSystem
 {
-    
+    public static void SavePlayerData(PlayerData playerData)
+    {
+
+    }
 }

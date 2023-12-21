@@ -1,18 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
-public class PlayerData : MonoBehaviour
+[Serializable]
+public class PlayerData 
 {
-    // Start is called before the first frame update
-    void Start()
+    private int level;
+    private int availableSkillPoints;
+    private int[] eachStatLevel;
+
+    public PlayerData(int level, int availableSkillPoints, int[] eachStatLevel)
     {
-        
+        this.level = level;
+        this.availableSkillPoints = availableSkillPoints;
+        this.eachStatLevel = eachStatLevel;
     }
 
-    // Update is called once per frame
-    void Update()
+    public int GetLevel()
     {
-        
+        return level;
+    }
+
+    public int GetAvailableSkillPoints()
+    {
+        return availableSkillPoints;
+    }
+
+    public int[] GetEachStatLevel()
+    {
+        return eachStatLevel;
     }
 }
