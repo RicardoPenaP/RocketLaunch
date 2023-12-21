@@ -31,6 +31,7 @@ public class LevelMananger : MonoBehaviour
     private PlayerController playerController;
     private PlayerLandingController playerLandingController;
 
+    private bool levelCompleted = false;
     private float levelExperienceRewardMultiplier;
 
     private void Awake()
@@ -106,6 +107,11 @@ public class LevelMananger : MonoBehaviour
 
     private void PlayerLandingController_OnLandingFinished(object sender, EventArgs e)
     {
+        if (levelCompleted)
+        {
+            return;
+        }
+        levelCompleted = true;
         PlayerLandingController.LandingCompleteData landingCompleteData = (e as PlayerLandingController.LandingCompleteData);
         RewardsData rewardsData = new RewardsData();
         rewardsData.partialExperiece = levelExperienceReward;

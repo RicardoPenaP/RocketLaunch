@@ -20,7 +20,6 @@ public class PlayerCollisionHandler : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-
         if (collision.transform.TryGetComponent<LevelPlatform>(out LevelPlatform levelPlatform))
         {
             OnCollisionEnterWithObject?.Invoke(this, new CollisionInfo<LevelPlatform>(levelPlatform));
