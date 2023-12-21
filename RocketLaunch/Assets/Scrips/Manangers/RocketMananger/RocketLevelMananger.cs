@@ -29,14 +29,16 @@ public class RocketLevelMananger : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(this);
-        }
-
-        maxExperience = baseExperienceForNextLevel;
+        }       
     }
 
     private void Start()
     {
         LevelMananger.OnLevelCompleted += LevelMananger_OnLevelCompleted;
+        if (GameDataLoader.Instance)
+        {
+            GameDataLoader.Instance.OnLoadPlayerData += GameDataLoader_OnLoadPlayerPlayerData;
+        }
     }
 
     private void OnDestroy()
@@ -51,7 +53,20 @@ public class RocketLevelMananger : MonoBehaviour
 
     private void GameDataLoader_OnLoadPlayerPlayerData(PlayerData playerData)
     {
-
+        if (playerData != null)
+        {
+            currentLevel = playerData.GetLevel();
+            for (int i = 0; i < currentLevel; i++)
+            {
+                maxExperience *= experienceAugmentCoeficient;
+            }
+            currentExperience = playerData.GetCurrentExperience();
+        }
+        else
+        {
+            currentLevel = 1;
+            maxExperience = baseExperienceForNextLevel;
+        }
     }
     
     private void SaveExperience(float amount)
