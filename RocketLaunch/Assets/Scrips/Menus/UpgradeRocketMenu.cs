@@ -12,8 +12,10 @@ public class UpgradeRocketMenu : Menu<UpgradeRocketMenu>
     [SerializeField] private TextMeshProUGUI levelText;
     [SerializeField] private TextMeshProUGUI remaningStatPointsText;
     [SerializeField] private Button goBackButton;
+    [SerializeField] private Button resetStatsButton;
 
     public event Action OnGoBackButtonPressed;
+    public event Action OnResetStatsButtonPressed;
 
     protected override void Awake()
     {
@@ -22,6 +24,11 @@ public class UpgradeRocketMenu : Menu<UpgradeRocketMenu>
         if (goBackButton)
         {
             goBackButton.onClick.AddListener(GoBackButton_OnClick);
+        }
+
+        if (resetStatsButton)
+        {
+            resetStatsButton.onClick.AddListener(ResetStatsButton_OnClick);
         }
     }
 
@@ -64,6 +71,11 @@ public class UpgradeRocketMenu : Menu<UpgradeRocketMenu>
     {
         OnGoBackButtonPressed?.Invoke();
         CloseMenu();
+    }
+
+    private void ResetStatsButton_OnClick()
+    {
+        OnResetStatsButtonPressed?.Invoke();
     }
 
     private void PlayMenu_OnUpgradeRocketButtonPressed()

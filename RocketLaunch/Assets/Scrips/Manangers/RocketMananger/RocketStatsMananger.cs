@@ -14,7 +14,8 @@ public class RocketStatsMananger : MonoBehaviour
     [SerializeField] private RocketStatsData rocketStatsData;
     [SerializeField] private int statsPointsGivenPerLevelUp = 6;
 
-    public event Action<int> OnCurrentStatPointsChanged;   
+    public event Action<int> OnCurrentStatPointsChanged;
+    public event Action OnResetStatPoints;
     
     private int currentStatPoints = 0;
     //For Testing
@@ -50,6 +51,11 @@ public class RocketStatsMananger : MonoBehaviour
         {
             RocketLevelMananger.Instance.OnRocketLevelUp += RocketLevelMananger_OnRocketLevelUp;
         }
+
+        if (UpgradeRocketMenu.Instance)
+        {
+            UpgradeRocketMenu.Instance.OnResetStatsButtonPressed += UpgradeRocketMenu_OnResetStatsButtonPressed;
+        }
     }
 
     private void OnDestroy()
@@ -60,6 +66,11 @@ public class RocketStatsMananger : MonoBehaviour
         if (RocketLevelMananger.Instance)
         {
             RocketLevelMananger.Instance.OnRocketLevelUp -= RocketLevelMananger_OnRocketLevelUp;
+        }
+
+        if (UpgradeRocketMenu.Instance)
+        {
+            UpgradeRocketMenu.Instance.OnResetStatsButtonPressed -= UpgradeRocketMenu_OnResetStatsButtonPressed;
         }
     }
 
@@ -84,6 +95,16 @@ public class RocketStatsMananger : MonoBehaviour
     {        
         currentStatPoints++;
         OnCurrentStatPointsChanged?.Invoke(currentStatPoints);
+    }
+
+    private void UpgradeRocketMenu_OnResetStatsButtonPressed()
+    {
+        ResetStatPoints();
+    }
+
+    private void ResetStatPoints()
+    {
+        OnResetStatPoints?.Invoke();
     }
 
     private void AddStatPoints()
