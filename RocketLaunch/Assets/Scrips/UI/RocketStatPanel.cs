@@ -109,12 +109,22 @@ public class RocketStatPanel : MonoBehaviour
 
     private void Plus10Button_OnClick()
     {
-
+        for (int i = 0; i < 10 && rocketStat.GetStatLevel() < RocketStat.MAX_STAT_LEVEL; i++)
+        {
+            rocketStat.LevelUp();
+            OnAnyLevelUpButtonPressed?.Invoke();
+        }
+        UpdateCurrentLevelText();
     }
 
     private void Minus10Button_OnClick()
     {
-
+        for (int i = 0; i < 10 && rocketStat.GetStatLevel() > RocketStat.MIN_STAT_LEVEL; i++)
+        {
+            rocketStat.LevelDown();
+            OnAnyLevelDownButtonPressed?.Invoke();
+        }
+        UpdateCurrentLevelText();
     }
 
     private void UpgradeRocketMenu_OnMenuOpened()
@@ -129,8 +139,8 @@ public class RocketStatPanel : MonoBehaviour
 
             SetLevelUpButtonActiveState(RocketStatsMananger.Instance.GetCurrentStatPoints() > 0 && rocketStat.GetStatLevel() < RocketStat.MAX_STAT_LEVEL);
             SetLevelDownButtonActiveState(rocketStat.GetStatLevel() > RocketStat.MIN_STAT_LEVEL);
-
-            SetLevelUpButtonActiveState(RocketStatsMananger.Instance.GetCurrentStatPoints() > 0);
+            SetPlus10ButtonActiveState(RocketStatsMananger.Instance.GetCurrentStatPoints() > 9 && rocketStat.GetStatLevel() < RocketStat.MAX_STAT_LEVEL - 10);
+            SetMinus10ButtonActiveState(rocketStat.GetStatLevel() > RocketStat.MIN_STAT_LEVEL + 9);
         }
     }
 
@@ -138,6 +148,8 @@ public class RocketStatPanel : MonoBehaviour
     {
         SetLevelUpButtonActiveState(currentStatPoints > 0 && rocketStat.GetStatLevel() < RocketStat.MAX_STAT_LEVEL);
         SetLevelDownButtonActiveState(rocketStat.GetStatLevel() > RocketStat.MIN_STAT_LEVEL);
+        SetPlus10ButtonActiveState(currentStatPoints > 9 && rocketStat.GetStatLevel() < RocketStat.MAX_STAT_LEVEL - 10);
+        SetMinus10ButtonActiveState(rocketStat.GetStatLevel() > RocketStat.MIN_STAT_LEVEL + 9);
     }
 
     private void RocketStatMananger_OnResetStatPoints()
@@ -169,5 +181,15 @@ public class RocketStatPanel : MonoBehaviour
         {
             levelDownButton.gameObject.SetActive(state);
         }       
+    }
+
+    private void SetPlus10ButtonActiveState(bool state)
+    {
+        plus10Button.gameObject.SetActive(state);
+    }
+
+    private void SetMinus10ButtonActiveState(bool state)
+    {
+        minus10Button.gameObject.SetActive(state);
     }
 }

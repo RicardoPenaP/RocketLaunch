@@ -443,6 +443,8 @@ MonoBehaviour:
   currentLevelText: {fileID: 4092151710289839277}
   levelUpButton: {fileID: 4092151711602933709}
   levelDownButton: {fileID: 4092151711331003941}
+  plus10Button: {fileID: 5754607654891911417}
+  minus10Button: {fileID: 4726755039072567682}
 --- !u!222 &4092151710113512115
 CanvasRenderer:
   m_ObjectHideFlags: 0
