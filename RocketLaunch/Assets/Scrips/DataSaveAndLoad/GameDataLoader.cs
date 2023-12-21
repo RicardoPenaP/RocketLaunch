@@ -7,7 +7,7 @@ public class GameDataLoader : MonoBehaviour
 {
     public static GameDataLoader Instance { get; private set; }
 
-    public event Action<PlayerData> OnLoadPlayerData;
+    public static event Action<PlayerData> OnLoadPlayerData;
 
 
     private void Awake()
@@ -21,12 +21,11 @@ public class GameDataLoader : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(this.gameObject);
         }
-
-        LoadPlayerData();
     }
 
     private void Start()
     {
+        LoadPlayerData();
         if (RocketLevelMananger.Instance)
         {
             RocketLevelMananger.Instance.OnSavedExperience += RocketLevelMananger_OnSavedExperience;

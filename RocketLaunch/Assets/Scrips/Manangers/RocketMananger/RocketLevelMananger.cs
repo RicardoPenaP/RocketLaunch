@@ -30,21 +30,20 @@ public class RocketLevelMananger : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(this);
-        }       
+        }
+
+        GameDataLoader.OnLoadPlayerData += GameDataLoader_OnLoadPlayerPlayerData;
     }
 
     private void Start()
     {
-        LevelMananger.OnLevelCompleted += LevelMananger_OnLevelCompleted;
-        if (GameDataLoader.Instance)
-        {
-            GameDataLoader.Instance.OnLoadPlayerData += GameDataLoader_OnLoadPlayerPlayerData;
-        }
+        LevelMananger.OnLevelCompleted += LevelMananger_OnLevelCompleted;       
     }
 
     private void OnDestroy()
     {
         LevelMananger.OnLevelCompleted -= LevelMananger_OnLevelCompleted;
+        GameDataLoader.OnLoadPlayerData -= GameDataLoader_OnLoadPlayerPlayerData;
     }
 
     private void LevelMananger_OnLevelCompleted(LevelMananger.RewardsData rewardsData)
@@ -74,18 +73,15 @@ public class RocketLevelMananger : MonoBehaviour
     {
         currentExperience += amount;
 
-        if (currentExperience > maxExperience)
+        if (currentExperience >= maxExperience)
         {
             float remainingExp = currentExperience - maxExperience;
+            currentExperience = 0;
             LevelUp();
             SaveExperience(remainingExp);
             return;
         }
 
-        if (currentExperience == maxExperience)
-        {
-            LevelUp();
-        }
         OnSavedExperience?.Invoke();
     }
 
@@ -94,8 +90,7 @@ public class RocketLevelMananger : MonoBehaviour
         if (currentLevel < maxLevel)
         {
             currentLevel++;
-            maxExperience *= experienceAugmentCoeficient;
-            currentExperience = 0;
+            maxExperience *= experienceAugmentCoeficient;            
             OnRocketLevelUp?.Invoke();            
         }
     }
