@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class MissionButtonLayout : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        
+        StelarSystemButton.OnAnyStelarSystemButtonPressed += StelarSystemButton_OnAnyStelarSystemButtonPressed;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnDestroy()
     {
-        
+        StelarSystemButton.OnAnyStelarSystemButtonPressed -= StelarSystemButton_OnAnyStelarSystemButtonPressed;
+    }
+
+    private void StelarSystemButton_OnAnyStelarSystemButtonPressed(object sender, StelarSystemID stelarSystemID)
+    {
+        Vector3 position = transform.position;
+        position.y = 0;
+        transform.position = position;
     }
 }
