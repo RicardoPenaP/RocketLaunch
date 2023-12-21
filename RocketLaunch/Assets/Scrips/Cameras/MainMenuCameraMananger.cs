@@ -8,6 +8,7 @@ public class MainMenuCameraMananger : MonoBehaviour
     [Header("Main Menu Camera Mananager")]
     [SerializeField] private CinemachineVirtualCamera defaulVirtualCamera;
     [SerializeField] private CinemachineVirtualCamera upgradeRocketVirtualCamera;
+    [SerializeField] private CinemachineVirtualCamera selectMissionVirtualCamera;
 
     private void Start()
     {
@@ -15,6 +16,12 @@ public class MainMenuCameraMananger : MonoBehaviour
         {
             UpgradeRocketMenu.Instance.OnMenuOpened += UpgradeRocketMenu_OnMenuOpened;
             UpgradeRocketMenu.Instance.OnGoBackButtonPressed += UpgradeRocketMenu_OnGoBackButtonPressed;
+        }
+
+        if (SelectMissionMenu.Instance)
+        {
+            SelectMissionMenu.Instance.OnMenuOpened += SelectMissionMenu_OnMenuOpened;
+            SelectMissionMenu.Instance.OnGoBackButtonPressed += SelectMissionMenu_OnGoBackButtonPressed;
         }
     }
 
@@ -24,6 +31,12 @@ public class MainMenuCameraMananger : MonoBehaviour
         {
             UpgradeRocketMenu.Instance.OnMenuOpened -= UpgradeRocketMenu_OnMenuOpened;
             UpgradeRocketMenu.Instance.OnGoBackButtonPressed -= UpgradeRocketMenu_OnGoBackButtonPressed;
+        }
+
+        if (SelectMissionMenu.Instance)
+        {
+            SelectMissionMenu.Instance.OnMenuOpened -= SelectMissionMenu_OnMenuOpened;
+            SelectMissionMenu.Instance.OnGoBackButtonPressed -= SelectMissionMenu_OnGoBackButtonPressed;
         }
     }
 
@@ -37,5 +50,18 @@ public class MainMenuCameraMananger : MonoBehaviour
     {
         upgradeRocketVirtualCamera.gameObject.SetActive(false);
         defaulVirtualCamera.gameObject.SetActive(true);        
+    }
+
+    private void SelectMissionMenu_OnMenuOpened()
+    {
+        defaulVirtualCamera.gameObject.SetActive(false);
+        selectMissionVirtualCamera.gameObject.SetActive(true);
+    }
+
+    private void SelectMissionMenu_OnGoBackButtonPressed()
+    {
+        selectMissionVirtualCamera.gameObject.SetActive(false);
+        defaulVirtualCamera.gameObject.SetActive(true);
+        
     }
 }
