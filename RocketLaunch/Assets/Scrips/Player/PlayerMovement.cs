@@ -91,7 +91,7 @@ public class PlayerMovement : MonoBehaviour
             if (CanMoveCheck())
             {
                 MoveUpwards();
-                OnStartMovingUpwards?.Invoke(this, EventArgs.Empty);
+                OnStartMovingUpwards?.Invoke(this, EventArgs.Empty);                
             }           
         }
 
