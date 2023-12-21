@@ -17,6 +17,8 @@ public class RocketStatPanel : MonoBehaviour
     [SerializeField] private TextMeshProUGUI currentLevelText;
     [SerializeField] private Button levelUpButton;
     [SerializeField] private Button levelDownButton;
+    [SerializeField] private Button plus10Button;
+    [SerializeField] private Button minus10Button;
 
     private RocketStat rocketStat;
 
@@ -30,6 +32,16 @@ public class RocketStatPanel : MonoBehaviour
         if (levelDownButton)
         {
             levelDownButton.onClick.AddListener(LevelDownButton_OnClick);
+        }
+
+        if (plus10Button)
+        {
+            plus10Button.onClick.AddListener(Plus10Button_OnClick);
+        }
+
+        if (minus10Button)
+        {
+            minus10Button.onClick.AddListener(Minus10Button_OnClick);
         }
     }
 
@@ -59,6 +71,16 @@ public class RocketStatPanel : MonoBehaviour
             levelDownButton.onClick.RemoveListener(LevelDownButton_OnClick);
         }
 
+        if (plus10Button)
+        {
+            plus10Button.onClick.RemoveListener(Plus10Button_OnClick);
+        }
+
+        if (minus10Button)
+        {
+            minus10Button.onClick.RemoveListener(Minus10Button_OnClick);
+        }
+
         if (UpgradeRocketMenu.Instance)
         {
             UpgradeRocketMenu.Instance.OnMenuOpened -= UpgradeRocketMenu_OnMenuOpened;
@@ -83,6 +105,16 @@ public class RocketStatPanel : MonoBehaviour
         rocketStat.LevelDown();
         UpdateCurrentLevelText();
         OnAnyLevelDownButtonPressed?.Invoke();
+    }
+
+    private void Plus10Button_OnClick()
+    {
+
+    }
+
+    private void Minus10Button_OnClick()
+    {
+
     }
 
     private void UpgradeRocketMenu_OnMenuOpened()
