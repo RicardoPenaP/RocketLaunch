@@ -116,6 +116,11 @@ public class RocketStatsMananger : MonoBehaviour
         return rocketStats[(int)statType];
     }   
 
+    public RocketStat[] GetRocketStats()
+    {
+        return rocketStats;
+    }
+
     public int GetCurrentStatPoints()
     {
         return currentStatPoints;

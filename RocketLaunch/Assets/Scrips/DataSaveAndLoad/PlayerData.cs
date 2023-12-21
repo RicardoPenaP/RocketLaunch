@@ -7,14 +7,12 @@ using System;
 public class PlayerData 
 {
     private int level;
-    private int availableSkillPoints;
-    private int[] eachStatLevel;
+    private float currentExperience;
 
-    public PlayerData(int level, int availableSkillPoints, int[] eachStatLevel)
+    public PlayerData(int level, float currentExperience)
     {
         this.level = level;
-        this.availableSkillPoints = availableSkillPoints;
-        this.eachStatLevel = eachStatLevel;
+        this.currentExperience = currentExperience;      
     }
 
     public int GetLevel()
@@ -22,13 +20,9 @@ public class PlayerData
         return level;
     }
 
-    public int GetAvailableSkillPoints()
+    public float GetCurrentExperience()
     {
-        return availableSkillPoints;
+        return currentExperience;
     }
 
-    public int[] GetEachStatLevel()
-    {
-        return eachStatLevel;
-    }
 }
