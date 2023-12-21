@@ -88,7 +88,6 @@ public class RocketStatsMananger : MonoBehaviour
 
         currentStatPoints--;
         OnCurrentStatPointsChanged?.Invoke(currentStatPoints);
-
     }
 
     private void RocketStatPanel_OnAnyLevelDownButtonPressed()

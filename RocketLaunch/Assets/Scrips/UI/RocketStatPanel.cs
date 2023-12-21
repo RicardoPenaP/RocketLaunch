@@ -73,17 +73,16 @@ public class RocketStatPanel : MonoBehaviour
 
     private void LevelUpButton_OnClick()
     {
-        OnAnyLevelUpButtonPressed?.Invoke();
         rocketStat.LevelUp();
         UpdateCurrentLevelText();
-        SetLevelDownButtonActiveState(true);       
+        OnAnyLevelUpButtonPressed?.Invoke();
     }
 
     private void LevelDownButton_OnClick()
     {
-        OnAnyLevelDownButtonPressed?.Invoke();
         rocketStat.LevelDown();
         UpdateCurrentLevelText();
+        OnAnyLevelDownButtonPressed?.Invoke();
     }
 
     private void UpgradeRocketMenu_OnMenuOpened()
@@ -113,8 +112,8 @@ public class RocketStatPanel : MonoBehaviour
     {
         for (int i = rocketStat.GetStatLevel(); i > RocketStat.MIN_STAT_LEVEL; i--)
         {
-            OnAnyLevelDownButtonPressed?.Invoke();
-            rocketStat.LevelDown();            
+            rocketStat.LevelDown();
+            OnAnyLevelDownButtonPressed?.Invoke();                      
         }
         UpdateCurrentLevelText();
     }
