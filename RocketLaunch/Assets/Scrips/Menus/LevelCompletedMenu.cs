@@ -98,8 +98,7 @@ public class LevelCompletedMenu : Menu<LevelCompletedMenu>
 
     private void LevelMananger_OnLevelCompleted(LevelMananger.RewardsData rewardsData)
     {
-        SetLevelRewards(rewardsData);
-        Debug.Log(gameObject);
+        SetLevelRewards(rewardsData);        
         OpenMenu();
     }
 

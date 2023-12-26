@@ -21,6 +21,8 @@ public class GameDataLoader : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(this.gameObject);
         }
+
+        SaveAndLoadSystem.OnPlayerDataDeleted += SaveAndLoadSystem_OnPlayerDataDeleted;
     }
 
     private void Start()
@@ -30,6 +32,11 @@ public class GameDataLoader : MonoBehaviour
         {
             RocketLevelMananger.Instance.OnSavedExperience += RocketLevelMananger_OnSavedExperience;
         }
+    }
+
+    private void OnDestroy()
+    {
+        SaveAndLoadSystem.OnPlayerDataDeleted -= SaveAndLoadSystem_OnPlayerDataDeleted;
     }
 
     private void LoadPlayerData()
@@ -52,5 +59,8 @@ public class GameDataLoader : MonoBehaviour
         SavePlayerData();
     }
 
-
+    private void SaveAndLoadSystem_OnPlayerDataDeleted()
+    {
+        LoadPlayerData();
+    }
 }
