@@ -33,13 +33,8 @@ public class RocketStatsMananger : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(this);
         }
-        
-        rocketStats = new RocketStat[STATS_AMOUNT];
 
-        for (int i = 0; i < rocketStats.Length; i++)
-        {
-            rocketStats[i] = new RocketStat((StatType)i);
-        }
+        GameDataLoader.OnLoadStatsData += GameDataLoader_OnLoatStatsData;
     }
 
     private void Start()
@@ -62,6 +57,7 @@ public class RocketStatsMananger : MonoBehaviour
     {
         RocketStatPanel.OnAnyLevelUpButtonPressed -= RocketStatPanel_OnAnyLevelUpButtonPressed;
         RocketStatPanel.OnAnyLevelDownButtonPressed -= RocketStatPanel_OnAnyLevelDownButtonPressed;
+        GameDataLoader.OnLoadStatsData -= GameDataLoader_OnLoatStatsData;
 
         if (RocketLevelMananger.Instance)
         {
@@ -71,6 +67,24 @@ public class RocketStatsMananger : MonoBehaviour
         if (UpgradeRocketMenu.Instance)
         {
             UpgradeRocketMenu.Instance.OnResetStatsButtonPressed -= UpgradeRocketMenu_OnResetStatsButtonPressed;
+        }
+    }
+
+    private void GameDataLoader_OnLoatStatsData(StatsData statsData)
+    {
+        if (statsData == null)
+        {
+            rocketStats = new RocketStat[STATS_AMOUNT];
+
+            for (int i = 0; i < rocketStats.Length; i++)
+            {
+                rocketStats[i] = new RocketStat((StatType)i);
+            }
+        }
+        else
+        {
+            rocketStats = statsData.GetRocketStats();
+            currentStatPoints = statsData.GetCurrentStatsPoints();
         }
     }
 

@@ -7,6 +7,7 @@ public static class SaveAndLoadSystem
 {
     private const int DEFAULT_PLAYER_LEVEL = 1;
     private const float DEFAULT_CURRENT_EXPERIENCE = 0f;
+    private const int DEFAULT_STATS_AMOUNT = 6;
 
     private static readonly string playerDataPath = Application.persistentDataPath +"/player.data";
     private static readonly string statsDataPath = Application.persistentDataPath + "/stats.data";
@@ -84,13 +85,16 @@ public static class SaveAndLoadSystem
         }
     }
 
-
-
     private static void CreateNewStatDataSaveFile()
     {
         BinaryFormatter formatter = new BinaryFormatter();
         FileStream stream = new FileStream(statsDataPath, FileMode.Create);
-        StatsData statsData = new StatsData();
+        RocketStat[] rocketStats = new RocketStat[DEFAULT_STATS_AMOUNT];
+        for (int i = 0; i < rocketStats.Length; i++)
+        {
+            rocketStats[i] = new RocketStat((StatType)i);
+        }
+        StatsData statsData = new StatsData(0, rocketStats);
 
         formatter.Serialize(stream, statsData);
         stream.Close();

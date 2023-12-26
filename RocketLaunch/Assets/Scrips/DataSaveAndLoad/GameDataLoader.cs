@@ -30,6 +30,8 @@ public class GameDataLoader : MonoBehaviour
     private void Start()
     {
         LoadPlayerData();
+        LoadStatData();
+
         if (RocketLevelMananger.Instance)
         {
             RocketLevelMananger.Instance.OnSavedExperience += RocketLevelMananger_OnSavedExperience;
@@ -58,6 +60,21 @@ public class GameDataLoader : MonoBehaviour
         SaveAndLoadSystem.SavePlayerData(playerData);
     }
 
+    private void LoadStatData()
+    {
+        StatsData statsData = SaveAndLoadSystem.LoadStatsData();
+        OnLoadStatsData?.Invoke(statsData);
+    }
+
+    private void SaveStatData()
+    {
+        int currentStatsPoints = RocketStatsMananger.Instance.GetCurrentStatPoints();
+        RocketStat[] rocketStats = RocketStatsMananger.Instance.GetRocketStats();
+
+        StatsData statsData = new StatsData(currentStatsPoints, rocketStats);
+        SaveAndLoadSystem.SavePlayerStats(statsData);
+    }
+
     private void RocketLevelMananger_OnSavedExperience()
     {
         SavePlayerData();
@@ -75,11 +92,7 @@ public class GameDataLoader : MonoBehaviour
 
     private void UpgradeRocketMenu_OnSaveTheStatsData()
     {
-        int currentStatsPoints = RocketStatsMananger.Instance.GetCurrentStatPoints();
-        RocketStat[] rocketStats = RocketStatsMananger.Instance.GetRocketStats();
-
-        StatsData statsData = new StatsData(currentStatsPoints, rocketStats);
-        SaveAndLoadSystem.SavePlayerStats(statsData);
+        SaveStatData();
     }
 
 }
