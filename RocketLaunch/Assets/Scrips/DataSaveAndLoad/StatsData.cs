@@ -2,17 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StatsData : MonoBehaviour
+[System.Serializable]
+public class StatsData 
 {
-    // Start is called before the first frame update
-    void Start()
+    private int currentStatsPoints;
+    private RocketStat[] rocketStats;
+
+    public StatsData(int currentStatsPoints, RocketStat[] rocketStats)
     {
-        
+        this.currentStatsPoints = currentStatsPoints;
+        this.rocketStats = rocketStats;
     }
 
-    // Update is called once per frame
-    void Update()
+    public int GetCurrentStatsPoints()
     {
-        
+        return currentStatsPoints;
     }
+
+    public RocketStat[] GetRocketStats()
+    {
+        return rocketStats;
+    }
+
+    
 }

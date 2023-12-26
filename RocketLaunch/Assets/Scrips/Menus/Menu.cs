@@ -24,8 +24,7 @@ public abstract class Menu<T> : MonoBehaviour where T : Menu<T>
     protected virtual void Awake()
     {
         if (Instance && Instance != this)
-        {
-            Debug.Log(this + "not instance");
+        {           
             Destroy(gameObject);
         }
         else

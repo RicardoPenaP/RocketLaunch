@@ -8,6 +8,8 @@ using TMPro;
 
 public class UpgradeRocketMenu : Menu<UpgradeRocketMenu>
 {
+    public static event Action OnSaveTheStatsData;
+
     [Header("Upgrade Rocket Menu")]
     [SerializeField] private TextMeshProUGUI levelText;
     [SerializeField] private TextMeshProUGUI remaningStatPointsText;
@@ -65,6 +67,12 @@ public class UpgradeRocketMenu : Menu<UpgradeRocketMenu>
         {
             RocketStatsMananger.Instance.OnCurrentStatPointsChanged -= RocketStatMananger_OnCurrentStatPointsChanged;
         }
+    }
+
+    protected override void CloseMenu(Action onCloseAnimationEndedActions = null)
+    {
+        OnSaveTheStatsData?.Invoke();
+        base.CloseMenu(onCloseAnimationEndedActions);
     }
 
     private void GoBackButton_OnClick()

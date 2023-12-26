@@ -9,6 +9,7 @@ public static class SaveAndLoadSystem
     private const float DEFAULT_CURRENT_EXPERIENCE = 0f;
 
     private static readonly string playerDataPath = Application.persistentDataPath +"/player.data";
+    private static readonly string statsDataPath = Application.persistentDataPath + "/stats.data";
 
     public static event Action OnPlayerDataDeleted;
     public static void SavePlayerData(PlayerData playerData)
@@ -56,9 +57,43 @@ public static class SaveAndLoadSystem
         stream.Close();
     }
 
-    public static void SavePlayerStats()
+    public static void SavePlayerStats(StatsData statsData)
     {
+        BinaryFormatter formatter = new BinaryFormatter();
+        FileStream stream = new FileStream(statsDataPath, FileMode.Create); 
+        formatter.Serialize(stream, statsData);
+        stream.Close();
+    }
 
+    public static StatsData LoadStatsData()
+    {
+        if (File.Exists(statsDataPath))
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            FileStream stream = new FileStream(statsDataPath, FileMode.Open);
+
+            StatsData statsData = formatter.Deserialize(stream) as StatsData;
+            stream.Close();
+
+            return statsData;
+        }
+        else
+        {
+            CreateNewStatDataSaveFile();
+            return LoadStatsData();
+        }
+    }
+
+
+
+    private static void CreateNewStatDataSaveFile()
+    {
+        BinaryFormatter formatter = new BinaryFormatter();
+        FileStream stream = new FileStream(statsDataPath, FileMode.Create);
+        StatsData statsData = new StatsData();
+
+        formatter.Serialize(stream, statsData);
+        stream.Close();
     }
 
 }

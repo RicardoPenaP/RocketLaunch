@@ -8,7 +8,8 @@ public class GameDataLoader : MonoBehaviour
     public static GameDataLoader Instance { get; private set; }
 
     public static event Action<PlayerData> OnLoadPlayerData;
-
+    public static event Action<StatsData> OnLoadStatsData;
+    
     private void Awake()
     {
         if (Instance && Instance != this)
@@ -23,6 +24,7 @@ public class GameDataLoader : MonoBehaviour
 
         SaveAndLoadSystem.OnPlayerDataDeleted += SaveAndLoadSystem_OnPlayerDataDeleted;
         DeleteSavedDataPanel.OnDeleteAllButtonPressed += DeleteSavedDataPanel_OnDeleteAllButtonPressed;
+        UpgradeRocketMenu.OnSaveTheStatsData += UpgradeRocketMenu_OnSaveTheStatsData;
     }
 
     private void Start()
@@ -38,6 +40,7 @@ public class GameDataLoader : MonoBehaviour
     {
         SaveAndLoadSystem.OnPlayerDataDeleted -= SaveAndLoadSystem_OnPlayerDataDeleted;
         DeleteSavedDataPanel.OnDeleteAllButtonPressed -= DeleteSavedDataPanel_OnDeleteAllButtonPressed;
+        UpgradeRocketMenu.OnSaveTheStatsData -= UpgradeRocketMenu_OnSaveTheStatsData;
     }
 
     private void LoadPlayerData()
@@ -69,4 +72,14 @@ public class GameDataLoader : MonoBehaviour
     {       
         SaveAndLoadSystem.DeletePlayerData();
     }
+
+    private void UpgradeRocketMenu_OnSaveTheStatsData()
+    {
+        int currentStatsPoints = RocketStatsMananger.Instance.GetCurrentStatPoints();
+        RocketStat[] rocketStats = RocketStatsMananger.Instance.GetRocketStats();
+
+        StatsData statsData = new StatsData(currentStatsPoints, rocketStats);
+        SaveAndLoadSystem.SavePlayerStats(statsData);
+    }
+
 }
