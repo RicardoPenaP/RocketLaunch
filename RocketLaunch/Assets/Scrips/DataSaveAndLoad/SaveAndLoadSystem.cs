@@ -24,7 +24,9 @@ public static class SaveAndLoadSystem
             PlayerData playerData = formatter.Deserialize(stream) as PlayerData;
             stream.Close();
 
-            return playerData;
+            //return playerData;
+            //for testing only
+            return null;
         }
         else
         {            

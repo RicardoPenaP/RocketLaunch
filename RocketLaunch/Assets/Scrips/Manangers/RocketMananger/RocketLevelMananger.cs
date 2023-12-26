@@ -53,6 +53,8 @@ public class RocketLevelMananger : MonoBehaviour
 
     private void GameDataLoader_OnLoadPlayerPlayerData(PlayerData playerData)
     {
+        currentLevel = 1;
+        maxExperience = baseExperienceForNextLevel;
         if (playerData != null)
         {
             currentLevel = playerData.GetLevel();
@@ -61,11 +63,6 @@ public class RocketLevelMananger : MonoBehaviour
                 maxExperience *= experienceAugmentCoeficient;
             }
             currentExperience = playerData.GetCurrentExperience();
-        }
-        else
-        {
-            currentLevel = 1;
-            maxExperience = baseExperienceForNextLevel;
         }
     }
     

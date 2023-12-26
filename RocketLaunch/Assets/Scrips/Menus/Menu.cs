@@ -25,7 +25,8 @@ public abstract class Menu<T> : MonoBehaviour where T : Menu<T>
     {
         if (Instance && Instance != this)
         {
-            Destroy(this);
+            Debug.Log(this + "not instance");
+            Destroy(gameObject);
         }
         else
         {
@@ -49,11 +50,14 @@ public abstract class Menu<T> : MonoBehaviour where T : Menu<T>
         {
             return;
         }
-        menuOpened = true;
-        gameObject.SetActive(true);
+        menuOpened = true;        
+        if (gameObject)
+        {
+            gameObject.SetActive(true);
+        }       
         animator.SetTrigger(OPEN_MENU_ANIMATION_HASH);
         OnMenuOpened?.Invoke();
-        OnAnyMenuOpened?.Invoke(this, EventArgs.Empty);
+        OnAnyMenuOpened?.Invoke(this, EventArgs.Empty);        
         this.onOpenAnimationEndedActions = onOpenAnimationEndedActions;
     }
 

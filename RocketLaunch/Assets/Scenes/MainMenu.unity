@@ -39588,27 +39588,27 @@ PrefabInstance:
     - target: {fileID: 1848096659454255529, guid: c53689bb1186476479c7d1106bba373a,
         type: 3}
       propertyPath: stelarSystems.Array.data[1].locked
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1848096659454255529, guid: c53689bb1186476479c7d1106bba373a,
         type: 3}
       propertyPath: stelarSystems.Array.data[2].locked
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1848096659454255529, guid: c53689bb1186476479c7d1106bba373a,
         type: 3}
       propertyPath: stelarSystems.Array.data[0].missions.Array.size
-      value: 15
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1848096659454255529, guid: c53689bb1186476479c7d1106bba373a,
         type: 3}
       propertyPath: stelarSystems.Array.data[1].missions.Array.size
-      value: 22
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1848096659454255529, guid: c53689bb1186476479c7d1106bba373a,
         type: 3}
       propertyPath: stelarSystems.Array.data[2].missions.Array.size
-      value: 15
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1848096659454255529, guid: c53689bb1186476479c7d1106bba373a,
         type: 3}

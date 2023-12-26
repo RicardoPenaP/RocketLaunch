@@ -44,10 +44,7 @@ public class LevelCompletedMenu : Menu<LevelCompletedMenu>
 
     private void Start()
     {
-        if (LevelMananger.Instance)
-        {
-            LevelMananger.OnLevelCompleted += LevelMananger_OnLevelCompleted;
-        }
+        LevelMananger.OnLevelCompleted += LevelMananger_OnLevelCompleted;
 
         gameObject.SetActive(false);
         menuOpened = false;
@@ -55,11 +52,7 @@ public class LevelCompletedMenu : Menu<LevelCompletedMenu>
 
     protected override void OnDestroy()
     {
-        base.OnDestroy();
-        if (LevelMananger.Instance)
-        {
-            LevelMananger.OnLevelCompleted -= LevelMananger_OnLevelCompleted;
-        }
+        LevelMananger.OnLevelCompleted -= LevelMananger_OnLevelCompleted;
 
         if (playAgainButton)
         {
@@ -75,6 +68,7 @@ public class LevelCompletedMenu : Menu<LevelCompletedMenu>
         {
             mainMenuButton.onClick.RemoveListener(MainMenuButton_OnClick);
         }
+        base.OnDestroy();
     }
 
     private void PlayAgainButton_OnClick()
@@ -105,6 +99,7 @@ public class LevelCompletedMenu : Menu<LevelCompletedMenu>
     private void LevelMananger_OnLevelCompleted(LevelMananger.RewardsData rewardsData)
     {
         SetLevelRewards(rewardsData);
+        Debug.Log(gameObject);
         OpenMenu();
     }
 
