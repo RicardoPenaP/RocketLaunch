@@ -56,4 +56,9 @@ public static class SaveAndLoadSystem
         stream.Close();
     }
 
+    public static void SavePlayerStats()
+    {
+
+    }
+
 }
