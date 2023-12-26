@@ -54,4 +54,9 @@ public static class SaveAndLoadSystem
         formatter.Serialize(stream, playerData);
         stream.Close();
     }
+
+    public static bool HasAnySavedData()
+    {
+        return File.Exists(playerDataPath);
+    }
 }

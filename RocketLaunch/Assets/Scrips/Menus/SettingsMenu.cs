@@ -10,9 +10,11 @@ public class SettingsMenu : Menu<SettingsMenu>
     [Header("Settings Menu")]
     [SerializeField] private Button goBackButton;
     [SerializeField] private Button resetButton;
+    [SerializeField] private Button DeleteSavedDataButton;
 
     public event Action OnGoBackButtonPressed;
     public event Action OnResetButtonPressed;
+    public event Action OnDeleteSavedDataButtonPressed;
 
     protected override void Awake()
     {
@@ -24,6 +26,10 @@ public class SettingsMenu : Menu<SettingsMenu>
         if (resetButton)
         {
             resetButton.onClick.AddListener(ResetButton_OnClick);
+        }
+        if (DeleteSavedDataButton)
+        {
+            DeleteSavedDataButton.onClick.AddListener(DeleteSavedDataButton_OnClick);
         }
     }
 
@@ -50,6 +56,11 @@ public class SettingsMenu : Menu<SettingsMenu>
             resetButton.onClick.RemoveListener(ResetButton_OnClick);
         }
 
+        if (DeleteSavedDataButton)
+        {
+            DeleteSavedDataButton.onClick.RemoveListener(DeleteSavedDataButton_OnClick);
+        }
+
         if (MainMenu.Instance)
         {
             MainMenu.Instance.OnSettingsButtonPressed -= MainMenu_OnSettingsButtonPressed;
@@ -74,6 +85,11 @@ public class SettingsMenu : Menu<SettingsMenu>
     private void ResetButton_OnClick()
     {
         OnResetButtonPressed?.Invoke();
+    }
+
+    private void DeleteSavedDataButton_OnClick()
+    {
+        OnDeleteSavedDataButtonPressed?.Invoke();
     }
 
     private void MainMenu_OnSettingsButtonPressed()
