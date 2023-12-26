@@ -41,6 +41,7 @@ public static class SaveAndLoadSystem
 
     public static void DeletePlayerData()
     {
+        Debug.Log("Deleted data");
         CreateNewPlayerDataSaveFile();
         OnPlayerDataDeleted?.Invoke();
     }
@@ -55,8 +56,4 @@ public static class SaveAndLoadSystem
         stream.Close();
     }
 
-    public static bool HasAnySavedData()
-    {
-        return File.Exists(playerDataPath);
-    }
 }

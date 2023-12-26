@@ -9,7 +9,6 @@ public class GameDataLoader : MonoBehaviour
 
     public static event Action<PlayerData> OnLoadPlayerData;
 
-
     private void Awake()
     {
         if (Instance && Instance != this)
@@ -23,6 +22,7 @@ public class GameDataLoader : MonoBehaviour
         }
 
         SaveAndLoadSystem.OnPlayerDataDeleted += SaveAndLoadSystem_OnPlayerDataDeleted;
+        DeleteSavedDataPanel.OnDeleteAllButtonPressed += DeleteSavedDataPanel_OnDeleteAllButtonPressed;
     }
 
     private void Start()
@@ -37,6 +37,7 @@ public class GameDataLoader : MonoBehaviour
     private void OnDestroy()
     {
         SaveAndLoadSystem.OnPlayerDataDeleted -= SaveAndLoadSystem_OnPlayerDataDeleted;
+        DeleteSavedDataPanel.OnDeleteAllButtonPressed -= DeleteSavedDataPanel_OnDeleteAllButtonPressed;
     }
 
     private void LoadPlayerData()
@@ -62,5 +63,10 @@ public class GameDataLoader : MonoBehaviour
     private void SaveAndLoadSystem_OnPlayerDataDeleted()
     {
         LoadPlayerData();
+    }
+
+    private void DeleteSavedDataPanel_OnDeleteAllButtonPressed()
+    {       
+        SaveAndLoadSystem.DeletePlayerData();
     }
 }
