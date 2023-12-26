@@ -11,6 +11,15 @@ public static class SaveAndLoadSystem
 
     private static readonly string playerDataPath = Application.persistentDataPath +"/player.data";
     private static readonly string statsDataPath = Application.persistentDataPath + "/stats.data";
+    private static readonly string missionsDataPath = Application.persistentDataPath + "/missions.data";
+
+    public static void DeleteSavedData()
+    {
+        Debug.Log("Deleted data");
+        CreateNewPlayerDataSaveFile();
+        CreateNewStatDataSaveFile();
+
+    }
 
     public static void SavePlayerData(PlayerData playerData)
     {
@@ -38,24 +47,12 @@ public static class SaveAndLoadSystem
             CreateNewPlayerDataSaveFile();
             return LoadPlayerData();
         }
-    }
-
-    public static void DeleteSavedData()
-    {
-        Debug.Log("Deleted data");
-        CreateNewPlayerDataSaveFile();
-        CreateNewStatDataSaveFile();
-        
-    }
+    }    
 
     private static void CreateNewPlayerDataSaveFile()
     {
-        BinaryFormatter formatter = new BinaryFormatter();
-        FileStream stream = new FileStream(playerDataPath, FileMode.Create);
         PlayerData playerData = new PlayerData(DEFAULT_PLAYER_LEVEL, DEFAULT_CURRENT_EXPERIENCE);
-
-        formatter.Serialize(stream, playerData);
-        stream.Close();
+        SavePlayerData(playerData);
     }
 
     public static void SaveStatsData(StatsData statsData)
@@ -87,17 +84,62 @@ public static class SaveAndLoadSystem
 
     private static void CreateNewStatDataSaveFile()
     {
-        BinaryFormatter formatter = new BinaryFormatter();
-        FileStream stream = new FileStream(statsDataPath, FileMode.Create);
         RocketStat[] rocketStats = new RocketStat[DEFAULT_STATS_AMOUNT];
         for (int i = 0; i < rocketStats.Length; i++)
         {
             rocketStats[i] = new RocketStat((StatType)i);
         }
         StatsData statsData = new StatsData(0, rocketStats);
+        SaveStatsData(statsData);
+    }
 
-        formatter.Serialize(stream, statsData);
+    public static void SaveMissionData(MissionsData missionsData)
+    {
+        BinaryFormatter formatter = new BinaryFormatter();
+        FileStream stream = new FileStream(missionsDataPath, FileMode.Create);
+        formatter.Serialize(stream, missionsData);
         stream.Close();
+    }
+
+    public static MissionsData LoadMissionsData()
+    {
+        if (File.Exists(missionsDataPath))
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            FileStream stream = new FileStream(missionsDataPath, FileMode.Open);
+
+            MissionsData missionsData = formatter.Deserialize(stream) as MissionsData;
+            stream.Close();
+
+            return missionsData;
+        }
+        else
+        {
+            CreateNewMissionsDataSaveFile();
+            return LoadMissionsData();
+        }
+    }
+
+    private static void CreateNewMissionsDataSaveFile()
+    {
+        StelarSystem[] stelarSystems = MissionMananger.Instance.GetStelarSystems();
+
+        foreach (StelarSystem stelarSystem in stelarSystems)
+        {
+            foreach (Mission mission in stelarSystem.GetMissions())
+            {
+                mission.SetCompleted(false);
+                mission.SetLocked(true);
+            }
+            stelarSystem.SetCompleted(false);
+            stelarSystem.SetLocked(true);
+        }
+
+        stelarSystems[0].SetLocked(false);
+        stelarSystems[0].GetMissions()[0].SetLocked(false);
+
+        MissionsData missionsData = new MissionsData(stelarSystems);
+        SaveMissionData(missionsData);
     }
 
 }
