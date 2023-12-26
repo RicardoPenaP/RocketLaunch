@@ -12,7 +12,6 @@ public static class SaveAndLoadSystem
     private static readonly string playerDataPath = Application.persistentDataPath +"/player.data";
     private static readonly string statsDataPath = Application.persistentDataPath + "/stats.data";
 
-    public static event Action OnPlayerDataDeleted;
     public static void SavePlayerData(PlayerData playerData)
     {
         BinaryFormatter formatter = new BinaryFormatter();
@@ -41,11 +40,12 @@ public static class SaveAndLoadSystem
         }
     }
 
-    public static void DeletePlayerData()
+    public static void DeleteSavedData()
     {
         Debug.Log("Deleted data");
         CreateNewPlayerDataSaveFile();
-        OnPlayerDataDeleted?.Invoke();
+        CreateNewStatDataSaveFile();
+        
     }
 
     private static void CreateNewPlayerDataSaveFile()
@@ -58,7 +58,7 @@ public static class SaveAndLoadSystem
         stream.Close();
     }
 
-    public static void SavePlayerStats(StatsData statsData)
+    public static void SaveStatsData(StatsData statsData)
     {
         BinaryFormatter formatter = new BinaryFormatter();
         FileStream stream = new FileStream(statsDataPath, FileMode.Create); 

@@ -21,8 +21,6 @@ public class GameDataLoader : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(this.gameObject);
         }
-
-        SaveAndLoadSystem.OnPlayerDataDeleted += SaveAndLoadSystem_OnPlayerDataDeleted;
         DeleteSavedDataPanel.OnDeleteAllButtonPressed += DeleteSavedDataPanel_OnDeleteAllButtonPressed;
         UpgradeRocketMenu.OnSaveTheStatsData += UpgradeRocketMenu_OnSaveTheStatsData;
     }
@@ -40,7 +38,7 @@ public class GameDataLoader : MonoBehaviour
 
     private void OnDestroy()
     {
-        SaveAndLoadSystem.OnPlayerDataDeleted -= SaveAndLoadSystem_OnPlayerDataDeleted;
+       
         DeleteSavedDataPanel.OnDeleteAllButtonPressed -= DeleteSavedDataPanel_OnDeleteAllButtonPressed;
         UpgradeRocketMenu.OnSaveTheStatsData -= UpgradeRocketMenu_OnSaveTheStatsData;
     }
@@ -62,8 +60,7 @@ public class GameDataLoader : MonoBehaviour
 
     private void LoadStatData()
     {
-        StatsData statsData = SaveAndLoadSystem.LoadStatsData();
-        OnLoadStatsData?.Invoke(statsData);
+        OnLoadStatsData?.Invoke(SaveAndLoadSystem.LoadStatsData());
     }
 
     private void SaveStatData()
@@ -72,22 +69,19 @@ public class GameDataLoader : MonoBehaviour
         RocketStat[] rocketStats = RocketStatsMananger.Instance.GetRocketStats();
 
         StatsData statsData = new StatsData(currentStatsPoints, rocketStats);
-        SaveAndLoadSystem.SavePlayerStats(statsData);
+        SaveAndLoadSystem.SaveStatsData(statsData);
     }
 
     private void RocketLevelMananger_OnSavedExperience()
     {
         SavePlayerData();
-    }
-
-    private void SaveAndLoadSystem_OnPlayerDataDeleted()
-    {
-        LoadPlayerData();
+        SaveStatData();
     }
 
     private void DeleteSavedDataPanel_OnDeleteAllButtonPressed()
     {       
-        SaveAndLoadSystem.DeletePlayerData();
+        SaveAndLoadSystem.DeleteSavedData();
+        ReloadAllSavedData();
     }
 
     private void UpgradeRocketMenu_OnSaveTheStatsData()
@@ -95,4 +89,10 @@ public class GameDataLoader : MonoBehaviour
         SaveStatData();
     }
 
+    private void ReloadAllSavedData()
+    {
+        LoadPlayerData();
+        LoadStatData();
+    }
+    
 }
