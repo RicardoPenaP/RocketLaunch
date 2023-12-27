@@ -9,6 +9,7 @@ public class GameDataLoader : MonoBehaviour
 
     public static event Action<PlayerData> OnLoadPlayerData;
     public static event Action<StatsData> OnLoadStatsData;
+    public static event Action<MissionsData> OnLoadMissionsData;
     
     private void Awake()
     {
@@ -29,6 +30,7 @@ public class GameDataLoader : MonoBehaviour
     {
         LoadPlayerData();
         LoadStatData();
+        LoadMissionsData();
 
         if (RocketLevelMananger.Instance)
         {
@@ -70,6 +72,17 @@ public class GameDataLoader : MonoBehaviour
 
         StatsData statsData = new StatsData(currentStatsPoints, rocketStats);
         SaveAndLoadSystem.SaveStatsData(statsData);
+    }
+
+    private void LoadMissionsData()
+    {
+        OnLoadMissionsData?.Invoke(SaveAndLoadSystem.LoadMissionsData());        
+    }
+
+    private void SaveMissionsData()
+    {       
+        MissionsData missionsData = new MissionsData(MissionMananger.Instance.GetStelarSystems());
+        SaveAndLoadSystem.SaveMissionData(missionsData);
     }
 
     private void RocketLevelMananger_OnSavedExperience()

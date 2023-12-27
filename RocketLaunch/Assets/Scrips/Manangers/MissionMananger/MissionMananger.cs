@@ -5,6 +5,7 @@ using GameSceneManagement;
 
 public class MissionMananger : MonoBehaviour
 {
+    private const int AMOUNT_OF_STELAR_SYSTEMS = 3;
     public static MissionMananger Instance { get; private set; }
 
     [Header("Mission Mananger")]
@@ -149,6 +150,30 @@ public class MissionMananger : MonoBehaviour
     public StelarSystem[] GetStelarSystems()
     {
         return stelarSystems;
+    }
+
+    public MissionsData GetNewMissionsData()
+    {
+        return null;
+        //StelarSystem[] stelarSystems = ;
+        //return null;
+       
+
+        //foreach (StelarSystem stelarSystem in stelarSystems)
+        //{
+        //    foreach (Mission mission in stelarSystem.GetMissions())
+        //    {
+        //        mission.SetCompleted(false);
+        //        mission.SetLocked(true);
+        //    }
+        //    stelarSystem.SetCompleted(false);
+        //    stelarSystem.SetLocked(true);
+        //}
+
+        //stelarSystems[0].SetLocked(false);
+        //stelarSystems[0].GetMissions()[0].SetLocked(false);
+
+        //MissionsData missionsData = new MissionsData(stelarSystems);
     }
 
   

@@ -171,4 +171,15 @@ public class RocketStatsMananger : MonoBehaviour
     public float GetExperienceMultiplierAugmentCoeficient() => rocketStatsData.GetExperienceMultiplierAugmentCoeficient();
 
     public float GetFuelCapacityMultiplierAugmentCoeficient() => rocketStatsData.GetFuelCapacityMultiplierAugmentCoeficient();
+
+    public static StatsData GetNewStatsData()
+    {
+        RocketStat[] rocketStats = new RocketStat[STATS_AMOUNT];
+        for (int i = 0; i < rocketStats.Length; i++)
+        {
+            rocketStats[i] = new RocketStat((StatType)i);
+        }
+        StatsData statsData = new StatsData(0, rocketStats);
+        return statsData;
+    }
 }
