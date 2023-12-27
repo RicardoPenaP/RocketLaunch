@@ -109,25 +109,8 @@ public static class SaveAndLoadSystem
     }
 
     private static void CreateNewMissionsDataSaveFile()
-    {
-        StelarSystem[] stelarSystems = MissionMananger.Instance.GetStelarSystems();
-
-        foreach (StelarSystem stelarSystem in stelarSystems)
-        {
-            foreach (Mission mission in stelarSystem.GetMissions())
-            {
-                mission.SetCompleted(false);
-                mission.SetLocked(true);
-            }
-            stelarSystem.SetCompleted(false);
-            stelarSystem.SetLocked(true);
-        }
-
-        stelarSystems[0].SetLocked(false);
-        stelarSystems[0].GetMissions()[0].SetLocked(false);
-
-        MissionsData missionsData = new MissionsData(stelarSystems);
-        SaveMissionData(missionsData);
+    {       
+        SaveMissionData(MissionMananger.Instance.GetNewMissionsData());
     }
 
 }

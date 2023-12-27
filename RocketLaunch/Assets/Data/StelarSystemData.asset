@@ -1,0 +1,90 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddf042991d03a864fa02d40907d1892f, type: 3}
+  m_Name: StelarSystemData
+  m_EditorClassIdentifier: 
+  stelarSystems:
+  - stelarSystemID: 1
+    systemName: Andromeda
+    missions:
+    - gameScene: 2
+      missionIndex: 1
+      locked: 0
+      completed: 0
+    - gameScene: 3
+      missionIndex: 2
+      locked: 1
+      completed: 0
+    - gameScene: 4
+      missionIndex: 3
+      locked: 1
+      completed: 0
+    - gameScene: 5
+      missionIndex: 4
+      locked: 1
+      completed: 0
+    - gameScene: 6
+      missionIndex: 5
+      locked: 1
+      completed: 0
+    locked: 0
+    completed: 0
+  - stelarSystemID: 2
+    systemName: Bull'Kathos
+    missions:
+    - gameScene: 7
+      missionIndex: 1
+      locked: 1
+      completed: 0
+    - gameScene: 8
+      missionIndex: 2
+      locked: 1
+      completed: 0
+    - gameScene: 9
+      missionIndex: 3
+      locked: 1
+      completed: 0
+    - gameScene: 10
+      missionIndex: 4
+      locked: 1
+      completed: 0
+    - gameScene: 11
+      missionIndex: 5
+      locked: 1
+      completed: 0
+    locked: 1
+    completed: 0
+  - stelarSystemID: 3
+    systemName: Artemis
+    missions:
+    - gameScene: 12
+      missionIndex: 1
+      locked: 1
+      completed: 0
+    - gameScene: 13
+      missionIndex: 2
+      locked: 1
+      completed: 0
+    - gameScene: 14
+      missionIndex: 3
+      locked: 1
+      completed: 0
+    - gameScene: 15
+      missionIndex: 4
+      locked: 1
+      completed: 0
+    - gameScene: 16
+      missionIndex: 5
+      locked: 1
+      completed: 0
+    locked: 1
+    completed: 0

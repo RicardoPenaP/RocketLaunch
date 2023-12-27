@@ -2,14 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using GameSceneManagement;
+using System;
 
 public class MissionMananger : MonoBehaviour
-{
-    private const int AMOUNT_OF_STELAR_SYSTEMS = 3;
+{  
     public static MissionMananger Instance { get; private set; }
 
     [Header("Mission Mananger")]
-    [SerializeField] StelarSystem[] stelarSystems;
+    [SerializeField] StelarSystemData stelarSystemData;
+
+    public event Action OnMissionCompleted;
+
+    private StelarSystem[] stelarSystems;
 
     private Mission currentMission;
     private Mission nextMission;
@@ -25,6 +29,7 @@ public class MissionMananger : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(this);
         }
+        GameDataLoader.OnLoadMissionsData += GameDataLoader_OnLoadMissionsData;
     }
 
     private void Start()
@@ -36,6 +41,7 @@ public class MissionMananger : MonoBehaviour
 
     private void OnDestroy()
     {
+        GameDataLoader.OnLoadMissionsData -= GameDataLoader_OnLoadMissionsData;
         MissionButton.OnAnyMissionButtonPressed -= MissionButton_OnAnyMissionButtonPressed;
         LevelMananger.OnLevelCompleted -= LevelMananger_OnLevelCompleted;
         LevelMananger.OnGoToNextLevel -= LevelMananager_OnGoToNextLevel;
@@ -128,11 +134,17 @@ public class MissionMananger : MonoBehaviour
     {
         SetCurrentMissionCompleted();
         UnlockNextMission();
+        OnMissionCompleted?.Invoke();
     }
 
     private void LevelMananager_OnGoToNextLevel()
     {
         LoadNextMission();
+    }
+
+    private void GameDataLoader_OnLoadMissionsData(MissionsData missionsData)
+    {
+        stelarSystems = missionsData.GetStelarSystems();
     }
 
     public StelarSystem GetStelarSystem(StelarSystemID stelarSystemID)
@@ -153,27 +165,26 @@ public class MissionMananger : MonoBehaviour
     }
 
     public MissionsData GetNewMissionsData()
-    {
-        return null;
-        //StelarSystem[] stelarSystems = ;
-        //return null;
-       
+    {        
+        StelarSystem[] stelarSystems = stelarSystemData.GetStelarSystems();
 
-        //foreach (StelarSystem stelarSystem in stelarSystems)
-        //{
-        //    foreach (Mission mission in stelarSystem.GetMissions())
-        //    {
-        //        mission.SetCompleted(false);
-        //        mission.SetLocked(true);
-        //    }
-        //    stelarSystem.SetCompleted(false);
-        //    stelarSystem.SetLocked(true);
-        //}
+        foreach (StelarSystem stelarSystem in stelarSystems)
+        {
+            foreach (Mission mission in stelarSystem.GetMissions())
+            {
+                mission.SetCompleted(false);
+                mission.SetLocked(true);
+            }
+            stelarSystem.SetCompleted(false);
+            stelarSystem.SetLocked(true);
+        }
 
-        //stelarSystems[0].SetLocked(false);
-        //stelarSystems[0].GetMissions()[0].SetLocked(false);
+        stelarSystems[0].SetLocked(false);
+        stelarSystems[0].GetMissions()[0].SetLocked(false);
 
-        //MissionsData missionsData = new MissionsData(stelarSystems);
+        MissionsData missionsData = new MissionsData(stelarSystems);
+
+        return missionsData;
     }
 
   

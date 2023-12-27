@@ -28,21 +28,33 @@ public class GameDataLoader : MonoBehaviour
 
     private void Start()
     {
-        LoadPlayerData();
-        LoadStatData();
-        LoadMissionsData();
+        LoadAllSavedData();
 
         if (RocketLevelMananger.Instance)
         {
             RocketLevelMananger.Instance.OnSavedExperience += RocketLevelMananger_OnSavedExperience;
         }
+
+        if (MissionMananger.Instance)
+        {
+            MissionMananger.Instance.OnMissionCompleted += MissionMananger_OnMissionCompleted;
+        }
     }
 
     private void OnDestroy()
-    {
-       
+    {       
         DeleteSavedDataPanel.OnDeleteAllButtonPressed -= DeleteSavedDataPanel_OnDeleteAllButtonPressed;
         UpgradeRocketMenu.OnSaveTheStatsData -= UpgradeRocketMenu_OnSaveTheStatsData;
+
+        if (RocketLevelMananger.Instance)
+        {
+            RocketLevelMananger.Instance.OnSavedExperience += RocketLevelMananger_OnSavedExperience;
+        }
+
+        if (MissionMananger.Instance)
+        {
+            MissionMananger.Instance.OnMissionCompleted -= MissionMananger_OnMissionCompleted;
+        }
     }
 
     private void LoadPlayerData()
@@ -76,7 +88,7 @@ public class GameDataLoader : MonoBehaviour
 
     private void LoadMissionsData()
     {
-        OnLoadMissionsData?.Invoke(SaveAndLoadSystem.LoadMissionsData());        
+        OnLoadMissionsData?.Invoke(SaveAndLoadSystem.LoadMissionsData()); 
     }
 
     private void SaveMissionsData()
@@ -94,7 +106,7 @@ public class GameDataLoader : MonoBehaviour
     private void DeleteSavedDataPanel_OnDeleteAllButtonPressed()
     {       
         SaveAndLoadSystem.DeleteSavedData();
-        ReloadAllSavedData();
+        LoadAllSavedData();
     }
 
     private void UpgradeRocketMenu_OnSaveTheStatsData()
@@ -102,10 +114,16 @@ public class GameDataLoader : MonoBehaviour
         SaveStatData();
     }
 
-    private void ReloadAllSavedData()
+    private void MissionMananger_OnMissionCompleted()
+    {
+        SaveMissionsData();
+    }
+
+    private void LoadAllSavedData()
     {
         LoadPlayerData();
         LoadStatData();
+        LoadMissionsData();
     }
     
 }
