@@ -5,6 +5,8 @@ using System;
 
 public class RocketLevelMananger : MonoBehaviour
 {
+    private const int DEFAULT_PLAYER_LEVEL = 1;
+    private const float DEFAULT_CURRENT_EXPERIENCE = 0f;
     public static RocketLevelMananger Instance { get; private set; }
 
     [Header("Experience Mananger")]
@@ -100,5 +102,11 @@ public class RocketLevelMananger : MonoBehaviour
     public float GetCurrentExperience()
     {
         return currentExperience;
+    }
+
+    public static PlayerData GetNewPlayerData()
+    {
+        PlayerData playerData = new PlayerData(DEFAULT_PLAYER_LEVEL,DEFAULT_CURRENT_EXPERIENCE);
+        return playerData;
     }
 }

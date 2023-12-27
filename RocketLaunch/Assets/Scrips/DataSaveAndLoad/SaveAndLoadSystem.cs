@@ -5,9 +5,6 @@ using System;
 
 public static class SaveAndLoadSystem
 {
-    private const int DEFAULT_PLAYER_LEVEL = 1;
-    private const float DEFAULT_CURRENT_EXPERIENCE = 0f;
-
     private static readonly string playerDataPath = Application.persistentDataPath +"/player.data";
     private static readonly string statsDataPath = Application.persistentDataPath + "/stats.data";
     private static readonly string missionsDataPath = Application.persistentDataPath + "/missions.data";
@@ -48,9 +45,8 @@ public static class SaveAndLoadSystem
     }    
 
     private static void CreateNewPlayerDataSaveFile()
-    {
-        PlayerData playerData = new PlayerData(DEFAULT_PLAYER_LEVEL, DEFAULT_CURRENT_EXPERIENCE);
-        SavePlayerData(playerData);
+    {        
+        SavePlayerData(RocketLevelMananger.GetNewPlayerData());
     }
 
     public static void SaveStatsData(StatsData statsData)
