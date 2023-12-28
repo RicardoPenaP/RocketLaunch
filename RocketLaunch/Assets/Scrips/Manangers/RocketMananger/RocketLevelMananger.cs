@@ -16,6 +16,7 @@ public class RocketLevelMananger : MonoBehaviour
 
     public event Action OnRocketLevelUp;
     public event Action OnSavedExperience;
+    public event Action<PlayerExperienceData> OnUpdateVisuals;
 
     private int currentLevel = 1;
     private float currentExperience = 0;
@@ -70,15 +71,24 @@ public class RocketLevelMananger : MonoBehaviour
     
     private void SaveExperience(float amount)
     {
-        currentExperience += amount;
+        float targetExperience = currentExperience + amount;
+        //currentExperience += amount;
 
-        if (currentExperience >= maxExperience)
-        {
-            float remainingExp = currentExperience - maxExperience;
-            currentExperience = 0;
+        if (targetExperience >= maxExperience)
+        {            
+            float remainingExp = targetExperience - maxExperience;
+            targetExperience = maxExperience;
+            PlayerExperienceData playerExperienceData = new PlayerExperienceData(currentExperience, targetExperience, maxExperience);
+            OnUpdateVisuals(playerExperienceData);
             LevelUp();
             SaveExperience(remainingExp);
             return;
+        }
+        else
+        {
+            PlayerExperienceData playerExperienceData = new PlayerExperienceData(currentExperience, targetExperience, maxExperience);
+            OnUpdateVisuals(playerExperienceData);
+            currentExperience = targetExperience;
         }
 
         OnSavedExperience?.Invoke();
@@ -88,6 +98,7 @@ public class RocketLevelMananger : MonoBehaviour
     {
         if (currentLevel < maxLevel)
         {
+            currentExperience = 0;
             currentLevel++;
             maxExperience *= experienceAugmentCoeficient;            
             OnRocketLevelUp?.Invoke();            

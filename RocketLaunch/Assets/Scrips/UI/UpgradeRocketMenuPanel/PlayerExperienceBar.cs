@@ -10,5 +10,5 @@ public class PlayerExperienceBar : MonoBehaviour
     [SerializeField] private Image fillImage;
     [SerializeField] private TextMeshProUGUI experienceText;
 
-
+    
 }

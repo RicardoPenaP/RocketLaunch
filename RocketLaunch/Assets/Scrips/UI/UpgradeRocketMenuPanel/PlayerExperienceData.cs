@@ -9,6 +9,10 @@ public class PlayerExperienceData
 
     public PlayerExperienceData(float currentExperience, float targetExperience, float maxExperience)
     {
-
+        this.currentExperience = currentExperience;
+        this.targetExperience = targetExperience;
+        this.maxExperience = maxExperience;
+        normalizedCurrentExperience = currentExperience / maxExperience;
+        normalizedTargetExperience = targetExperience / maxExperience;
     }
 }
