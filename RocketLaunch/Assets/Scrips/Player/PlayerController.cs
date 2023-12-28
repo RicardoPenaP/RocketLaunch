@@ -17,7 +17,8 @@ public class PlayerController : MonoBehaviour
 
     private PlayerInmune playerInmune;
     private LevelPlatform lastPlatformReached;
-    private PlayerCollisionHandler playerCollisionHandler;    
+    private PlayerCollisionHandler playerCollisionHandler;
+    private PlayerLandingController playerLandingController;
 
     private int currentLifesAmount;
     private bool playerCrahsed = false;    
@@ -26,7 +27,8 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         playerInmune = GetComponent<PlayerInmune>();
-        playerCollisionHandler = GetComponent<PlayerCollisionHandler>();        
+        playerCollisionHandler = GetComponent<PlayerCollisionHandler>();
+        playerLandingController = GetComponent<PlayerLandingController>();
         IsAlive = true;        
     }
 
@@ -36,6 +38,7 @@ public class PlayerController : MonoBehaviour
         OnCurrentLifesChange?.Invoke(currentLifesAmount);
         SetStartPlatform();
         playerCollisionHandler.OnCollisionEnterWithObject += PlayerCollisionHandler_OnCollisionEnterWithObject;
+        playerLandingController.OnPreLandingStart += PlayerLandingController_OnStartPrelanding;
     }
 
     private void Update()
@@ -49,6 +52,7 @@ public class PlayerController : MonoBehaviour
     private void OnDestroy()
     {       
         playerCollisionHandler.OnCollisionEnterWithObject -= PlayerCollisionHandler_OnCollisionEnterWithObject;
+        playerLandingController.OnPreLandingStart -= PlayerLandingController_OnStartPrelanding;
     }
 
     private void SetStartPlatform()
@@ -133,6 +137,12 @@ public class PlayerController : MonoBehaviour
                 break;
         }
     }
+
+    private void PlayerLandingController_OnStartPrelanding(object sender, EventArgs e)
+    {
+        enabled = false;
+    }
+
 
     public void SetLastPlatformReached(LevelPlatform levelPlatform)
     {

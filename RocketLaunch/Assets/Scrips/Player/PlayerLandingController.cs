@@ -57,6 +57,10 @@ public class PlayerLandingController : MonoBehaviour
     private float yellowAreaMultiplier;
     private float greenAreaMultiplier;
 
+
+    public bool IsPreLanding { get { return isPreLanding; } }
+    public bool IsLanding { get { return isLanding; } }
+
     private void OnDrawGizmos()
     {
         if (!showGizmos)
