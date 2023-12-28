@@ -35,9 +35,6 @@ public class RocketLevelMananger : MonoBehaviour
             DontDestroyOnLoad(this);
         }
 
-        //For Testing
-        TestInput.OnTestInputPressed += (float value) => { SaveExperience(value); };
-
         GameDataLoader.OnLoadPlayerData += GameDataLoader_OnLoadPlayerPlayerData;
     }
 
@@ -51,10 +48,7 @@ public class RocketLevelMananger : MonoBehaviour
     }
 
     private void OnDestroy()
-    {
-        //For Testing
-        TestInput.OnTestInputPressed += (float value) => { SaveExperience(value); };
-
+    {      
         LevelMananger.OnLevelCompleted -= LevelMananger_OnLevelCompleted;
         GameDataLoader.OnLoadPlayerData -= GameDataLoader_OnLoadPlayerPlayerData;
         if (UpgradeRocketMenu.Instance)
