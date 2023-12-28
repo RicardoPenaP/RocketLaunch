@@ -40,13 +40,21 @@ public class RocketLevelMananger : MonoBehaviour
 
     private void Start()
     {
-        LevelMananger.OnLevelCompleted += LevelMananger_OnLevelCompleted;       
+        LevelMananger.OnLevelCompleted += LevelMananger_OnLevelCompleted;
+        if (UpgradeRocketMenu.Instance)
+        {
+            UpgradeRocketMenu.Instance.OnMenuOpened += UpgradeRocketMenu_OnMenuOpened;
+        }
     }
 
     private void OnDestroy()
     {
         LevelMananger.OnLevelCompleted -= LevelMananger_OnLevelCompleted;
         GameDataLoader.OnLoadPlayerData -= GameDataLoader_OnLoadPlayerPlayerData;
+        if (UpgradeRocketMenu.Instance)
+        {
+            UpgradeRocketMenu.Instance.OnMenuOpened -= UpgradeRocketMenu_OnMenuOpened;
+        }
     }
 
     private void LevelMananger_OnLevelCompleted(LevelMananger.RewardsData rewardsData)
@@ -67,6 +75,11 @@ public class RocketLevelMananger : MonoBehaviour
             }
             currentExperience = playerData.GetCurrentExperience();
         }
+    }
+
+    private void UpgradeRocketMenu_OnMenuOpened()
+    {
+        OnUpdateVisuals(new PlayerExperienceData(0,currentExperience,maxExperience));
     }
     
     private void SaveExperience(float amount)

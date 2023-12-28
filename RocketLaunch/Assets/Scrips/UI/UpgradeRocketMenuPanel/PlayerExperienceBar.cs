@@ -9,6 +9,77 @@ public class PlayerExperienceBar : MonoBehaviour
     [Header("Player Experience Bar")]
     [SerializeField] private Image fillImage;
     [SerializeField] private TextMeshProUGUI experienceText;
+    [SerializeField] private float totalAnimationDurationTime = 1f;
 
-    
+    private Queue<PlayerExperienceData> updateVisualQueue;
+
+    private void Awake()
+    {
+        updateVisualQueue = new Queue<PlayerExperienceData>();
+    }
+
+    private void OnEnable()
+    {
+        if (updateVisualQueue.Count > 0)
+        {
+            StartCoroutine(UpdateVisualsRoutine());
+        }
+        
+    }
+
+    private void Start()
+    {
+        if (RocketLevelMananger.Instance)
+        {
+            RocketLevelMananger.Instance.OnUpdateVisuals += RocketLevelMananger_OnUpdateVisuals;
+        }
+    }
+
+    private void OnDisable()
+    {
+        StopAllCoroutines();
+    }
+
+    private void OnDestroy()
+    {
+        if (RocketLevelMananger.Instance)
+        {
+            RocketLevelMananger.Instance.OnUpdateVisuals -= RocketLevelMananger_OnUpdateVisuals;
+        }
+    }
+
+    private void RocketLevelMananger_OnUpdateVisuals(PlayerExperienceData playerExperienceData)
+    {
+        updateVisualQueue.Enqueue(playerExperienceData);
+    }
+
+    private void UpdateText(float currentValue, float maxValue)
+    {
+        experienceText.text = $"{currentValue.ToString("0")}/{maxValue.ToString("0")}";
+    }
+
+    private IEnumerator UpdateVisualsRoutine()
+    {
+        while (updateVisualQueue.Count > 0)
+        { 
+            PlayerExperienceData currentPlayerExperienceData = updateVisualQueue.Dequeue();
+
+            float timer = totalAnimationDurationTime * currentPlayerExperienceData.normalizedCurrentExperience;
+            float targetTime = totalAnimationDurationTime * currentPlayerExperienceData.normalizedTargetExperience;
+
+            fillImage.fillAmount = currentPlayerExperienceData.normalizedCurrentExperience;
+            UpdateText(currentPlayerExperienceData.currentExperience, currentPlayerExperienceData.maxExperience);
+
+            while (timer < targetTime)
+            {
+                timer += Time.deltaTime;
+                float progress = timer / totalAnimationDurationTime;
+                fillImage.fillAmount = progress;
+                float currentValue = Mathf.Lerp(0, currentPlayerExperienceData.maxExperience, progress);
+                UpdateText(currentValue, currentPlayerExperienceData.maxExperience);
+                yield return null;
+            }
+        }
+    }
+
 }
