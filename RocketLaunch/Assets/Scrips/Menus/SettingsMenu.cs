@@ -31,6 +31,8 @@ public class SettingsMenu : Menu<SettingsMenu>
         {
             DeleteSavedDataButton.onClick.AddListener(DeleteSavedDataButton_OnClick);
         }
+
+        DeleteSavedDataPanel.OnDeleteAllButtonPressed += DeleteSavedDataPanel_OnDeleteAllButtonPressed;
     }
 
     private void Start()
@@ -66,7 +68,7 @@ public class SettingsMenu : Menu<SettingsMenu>
             MainMenu.Instance.OnSettingsButtonPressed -= MainMenu_OnSettingsButtonPressed;
         }
 
-
+        DeleteSavedDataPanel.OnDeleteAllButtonPressed -= DeleteSavedDataPanel_OnDeleteAllButtonPressed;
     }
 
     protected override void CloseMenu(Action onCloseAnimationEndedActions = null)
@@ -95,6 +97,12 @@ public class SettingsMenu : Menu<SettingsMenu>
     private void MainMenu_OnSettingsButtonPressed()
     {
         OpenMenu();
+    }
+
+    private void DeleteSavedDataPanel_OnDeleteAllButtonPressed()
+    {
+        OnGoBackButtonPressed?.Invoke();
+        CloseMenu();
     }
 
 }
