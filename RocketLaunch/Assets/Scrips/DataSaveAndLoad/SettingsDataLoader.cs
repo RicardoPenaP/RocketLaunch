@@ -13,8 +13,7 @@ namespace Settings
         private const string SFX_VOLUME_KEY = "SFXVolume";
 
         private void Awake()
-        {
-            //PlayerPrefs.DeleteAll();
+        {            
             LoadSettingsSavedData();
         }
 
