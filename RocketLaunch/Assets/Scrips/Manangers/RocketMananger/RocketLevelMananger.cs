@@ -41,20 +41,14 @@ public class RocketLevelMananger : MonoBehaviour
     private void Start()
     {
         LevelMananger.OnLevelCompleted += LevelMananger_OnLevelCompleted;
-        if (UpgradeRocketMenu.Instance)
-        {
-            UpgradeRocketMenu.Instance.OnMenuOpened += UpgradeRocketMenu_OnMenuOpened;
-        }
+        UpgradeRocketMenu.OnUpgradeRocketMenuOpened += UpgradeRocketMenu_OnUpgradeRocketMenuOpened;
     }
 
     private void OnDestroy()
     {      
         LevelMananger.OnLevelCompleted -= LevelMananger_OnLevelCompleted;
         GameDataLoader.OnLoadPlayerData -= GameDataLoader_OnLoadPlayerPlayerData;
-        if (UpgradeRocketMenu.Instance)
-        {
-            UpgradeRocketMenu.Instance.OnMenuOpened -= UpgradeRocketMenu_OnMenuOpened;
-        }
+        UpgradeRocketMenu.OnUpgradeRocketMenuOpened -= UpgradeRocketMenu_OnUpgradeRocketMenuOpened;
     }
 
     private void LevelMananger_OnLevelCompleted(LevelMananger.RewardsData rewardsData)
@@ -77,9 +71,9 @@ public class RocketLevelMananger : MonoBehaviour
         }
     }
 
-    private void UpgradeRocketMenu_OnMenuOpened()
+    private void UpgradeRocketMenu_OnUpgradeRocketMenuOpened()
     {
-        OnUpdateVisuals(new PlayerExperienceData(0,currentExperience,maxExperience));
+        OnUpdateVisuals?.Invoke(new PlayerExperienceData(0,currentExperience,maxExperience));
     }
     
     private void SaveExperience(float amount)
@@ -92,7 +86,7 @@ public class RocketLevelMananger : MonoBehaviour
             float remainingExp = targetExperience - maxExperience;
             targetExperience = maxExperience;
             PlayerExperienceData playerExperienceData = new PlayerExperienceData(currentExperience, targetExperience, maxExperience);
-            OnUpdateVisuals(playerExperienceData);
+            OnUpdateVisuals?.Invoke(playerExperienceData);
             LevelUp();
             SaveExperience(remainingExp);
             return;
@@ -100,7 +94,7 @@ public class RocketLevelMananger : MonoBehaviour
         else
         {
             PlayerExperienceData playerExperienceData = new PlayerExperienceData(currentExperience, targetExperience, maxExperience);
-            OnUpdateVisuals(playerExperienceData);
+            OnUpdateVisuals?.Invoke(playerExperienceData);
             currentExperience = targetExperience;
         }
 
