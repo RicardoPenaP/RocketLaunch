@@ -12,7 +12,7 @@ public class SFXController : MonoBehaviour
     [Header("Audio Clips References")]
     [SerializeField] private AudioClip mainEngineSFX;
     [SerializeField] private AudioClip sideEngineSFX;
-    [SerializeField] private AudioClip explosionEngineSFX;
+    [SerializeField] private AudioClip explosionSFX;
 
     private PlayerController playerController;
     private EngineController engineController;
