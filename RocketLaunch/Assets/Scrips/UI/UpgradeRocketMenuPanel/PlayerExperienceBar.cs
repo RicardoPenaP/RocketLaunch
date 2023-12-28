@@ -13,6 +13,8 @@ public class PlayerExperienceBar : MonoBehaviour
 
     private Queue<PlayerExperienceData> updateVisualQueue;
 
+    private bool isUpdating = false;
+
     private void Awake()
     {
         updateVisualQueue = new Queue<PlayerExperienceData>();
@@ -20,8 +22,9 @@ public class PlayerExperienceBar : MonoBehaviour
 
     private void OnEnable()
     {
-        if (updateVisualQueue.Count > 0)
+        if (updateVisualQueue.Count > 0 )
         {
+            isUpdating = true;
             StartCoroutine(UpdateVisualsRoutine());
         }
         
@@ -51,6 +54,11 @@ public class PlayerExperienceBar : MonoBehaviour
     private void RocketLevelMananger_OnUpdateVisuals(PlayerExperienceData playerExperienceData)
     {
         updateVisualQueue.Enqueue(playerExperienceData);
+        if (!isUpdating && gameObject.activeInHierarchy)
+        {
+            isUpdating = true;
+            StartCoroutine(UpdateVisualsRoutine());
+        }
     }
 
     private void UpdateText(float currentValue, float maxValue)
@@ -79,7 +87,12 @@ public class PlayerExperienceBar : MonoBehaviour
                 UpdateText(currentValue, currentPlayerExperienceData.maxExperience);
                 yield return null;
             }
+
+            UpdateText(currentPlayerExperienceData.targetExperience, currentPlayerExperienceData.maxExperience);
+            fillImage.fillAmount = currentPlayerExperienceData.normalizedTargetExperience;
         }
+
+        isUpdating = false;
     }
 
 }

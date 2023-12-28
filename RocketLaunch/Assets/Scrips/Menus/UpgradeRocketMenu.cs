@@ -32,6 +32,7 @@ public class UpgradeRocketMenu : Menu<UpgradeRocketMenu>
         {
             resetStatsButton.onClick.AddListener(ResetStatsButton_OnClick);
         }
+
     }
 
     private void Start()
