@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Settings;
+using System;
 
 public class SFXController : MonoBehaviour
 {
@@ -47,6 +48,7 @@ public class SFXController : MonoBehaviour
         if (playerController)
         {
             playerController.OnPlayerCrash -= PlayerController_OnPlayerCrash;
+            playerController.OnPlayerReset -= PlayerController_OnPlayerReset;
         }
 
         if (engineController)
@@ -54,11 +56,6 @@ public class SFXController : MonoBehaviour
             engineController.OnMainEngineStateChange -= EngineController_OnMainEngineStateChange;
             engineController.OnSideEngineStateChange -= EngineController_OnSideEngineStateChange;
         }
-    }
-
-    private void SettingsController_OnSFXVolumeChange()
-    {
-        SetAudioSourceVolume();
     }
 
     private void SetAudioSourceVolume()
@@ -101,7 +98,7 @@ public class SFXController : MonoBehaviour
 
     private void PlayExposionSFX()
     {
-        primaryAudioSource.PlayOneShot(explosionEngineSFX);
+        primaryAudioSource.PlayOneShot(explosionSFX);
     }
 
     private void EngineController_OnMainEngineStateChange(bool state)
@@ -132,5 +129,17 @@ public class SFXController : MonoBehaviour
     {
         PlayExposionSFX();
     }
+
+
+    private void SettingsController_OnSFXVolumeChange()
+    {
+        SetAudioSourceVolume();
+    }
+
+    private void PlayerController_OnPlayerReset(object sender, EventArgs e)
+    {
+        primaryAudioSource.Stop();
+    }
+
 
 }
