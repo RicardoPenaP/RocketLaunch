@@ -1,18 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class PlayerExperienceBar : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [Header("Player Experience Bar")]
+    [SerializeField] private Image fillImage;
+    [SerializeField] private TextMeshProUGUI experienceText;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
 }
