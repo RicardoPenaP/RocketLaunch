@@ -24705,6 +24705,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   primaryAudioSource: {fileID: 8140541225124957761}
   secondaryAudioSource: {fileID: 8422733953832442862}
+  mainEngineSFX: {fileID: 8300000, guid: ee1f7c488288e9e40955b8f4b1994da5, type: 3}
+  sideEngineSFX: {fileID: 8300000, guid: 49f22f02feac01343b1f2fec33970438, type: 3}
+  explosionEngineSFX: {fileID: 8300000, guid: d0795bef0c736f44192257453b7693d1, type: 3}
 --- !u!1 &8593927077722256792
 GameObject:
   m_ObjectHideFlags: 0
