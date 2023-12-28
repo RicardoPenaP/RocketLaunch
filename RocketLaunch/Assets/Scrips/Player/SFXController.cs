@@ -32,6 +32,7 @@ public class SFXController : MonoBehaviour
         if (playerController)
         {
             playerController.OnPlayerCrash += PlayerController_OnPlayerCrash;
+            playerController.OnPlayerReset += PlayerController_OnPlayerReset;
         }
 
         if (engineController)
