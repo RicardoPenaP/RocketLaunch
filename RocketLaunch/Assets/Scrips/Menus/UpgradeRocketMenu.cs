@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 using TMPro;
+using GameSceneManagement;
 
 
 public class UpgradeRocketMenu : Menu<UpgradeRocketMenu>
@@ -94,11 +95,20 @@ public class UpgradeRocketMenu : Menu<UpgradeRocketMenu>
         {
             remaningStatPointsText.text = $"Remaining Points: {RocketStatsMananger.Instance.GetCurrentStatPoints()}";
         }
+
+        if (SceneManagement.GetCurrentScene() != GameScene.MainMenu && TransitionFade.Instance)
+        {
+            TransitionFade.Instance.FadeIn();
+        }
         base.OpenMenu(onOpenAnimationEndedActions);
     }
 
     protected override void CloseMenu(Action onCloseAnimationEndedActions = null)
     {
+        if (SceneManagement.GetCurrentScene() != GameScene.MainMenu && TransitionFade.Instance)
+        {
+            TransitionFade.Instance.FadeOut();
+        }
         OnSaveTheStatsData?.Invoke();
         base.CloseMenu(onCloseAnimationEndedActions);
     }
