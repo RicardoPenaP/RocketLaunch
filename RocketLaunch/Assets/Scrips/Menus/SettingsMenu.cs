@@ -4,13 +4,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 using Settings;
+using GameSceneManagement;
 
 public class SettingsMenu : Menu<SettingsMenu>
 {
     [Header("Settings Menu")]
     [SerializeField] private Button goBackButton;
     [SerializeField] private Button resetButton;
-    [SerializeField] private Button DeleteSavedDataButton;
+    [SerializeField] private Button deleteSavedDataButton;
 
     public event Action OnGoBackButtonPressed;
     public event Action OnResetButtonPressed;
@@ -27,9 +28,9 @@ public class SettingsMenu : Menu<SettingsMenu>
         {
             resetButton.onClick.AddListener(ResetButton_OnClick);
         }
-        if (DeleteSavedDataButton)
+        if (deleteSavedDataButton)
         {
-            DeleteSavedDataButton.onClick.AddListener(DeleteSavedDataButton_OnClick);
+            deleteSavedDataButton.onClick.AddListener(DeleteSavedDataButton_OnClick);
         }
 
         DeleteSavedDataPanel.OnDeleteAllButtonPressed += DeleteSavedDataPanel_OnDeleteAllButtonPressed;
@@ -41,6 +42,12 @@ public class SettingsMenu : Menu<SettingsMenu>
         {
             MainMenu.Instance.OnSettingsButtonPressed += MainMenu_OnSettingsButtonPressed;
         }
+
+        if (SceneManagement.GetCurrentScene() != GameScene.MainMenu)
+        {
+            deleteSavedDataButton.gameObject.SetActive(false);
+        }
+
         gameObject.SetActive(false);
         menuOpened = false;
     }
@@ -58,9 +65,9 @@ public class SettingsMenu : Menu<SettingsMenu>
             resetButton.onClick.RemoveListener(ResetButton_OnClick);
         }
 
-        if (DeleteSavedDataButton)
+        if (deleteSavedDataButton)
         {
-            DeleteSavedDataButton.onClick.RemoveListener(DeleteSavedDataButton_OnClick);
+            deleteSavedDataButton.onClick.RemoveListener(DeleteSavedDataButton_OnClick);
         }
 
         if (MainMenu.Instance)
