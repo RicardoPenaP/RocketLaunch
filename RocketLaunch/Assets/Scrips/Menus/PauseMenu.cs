@@ -12,12 +12,26 @@ public class PauseMenu : Menu<PauseMenu>
     [SerializeField] private Button settingsButton;
     [SerializeField] private Button mainMenuButton;
 
+    public event Action OnSettingsButtonPressed;
+    public event Action OnPauseMenuClose;
+
     protected override void Awake()
     {
         base.Awake();
-        resumeButton.onClick.AddListener(ResumeButton_OnClick);
-        settingsButton.onClick.AddListener(SettingsButton_OnClick);
-        mainMenuButton.onClick.AddListener(MainMenuButton_OnClick);        
+        if (resumeButton)
+        {
+            resumeButton.onClick.AddListener(ResumeButton_OnClick);
+        }
+
+        if (settingsButton)
+        {
+            settingsButton.onClick.AddListener(SettingsButton_OnClick);
+        }
+
+        if (mainMenuButton)
+        {
+            mainMenuButton.onClick.AddListener(MainMenuButton_OnClick);
+        }   
     }
 
     private void Start()
@@ -34,10 +48,32 @@ public class PauseMenu : Menu<PauseMenu>
     protected override void OnDestroy()
     {
         base.OnDestroy();
+
+        if (resumeButton)
+        {
+            resumeButton.onClick.RemoveListener(ResumeButton_OnClick);
+        }
+
+        if (settingsButton)
+        {
+            settingsButton.onClick.RemoveListener(SettingsButton_OnClick);
+        }
+
+        if (mainMenuButton)
+        {
+            mainMenuButton.onClick.RemoveListener(MainMenuButton_OnClick);
+        }
+
         if (InputMananger.Instance)
         {
             InputMananger.Instance.OnPauseInputTriggered -= InputMananger_OnPauseInputTriggered;
         }
+    }
+
+    protected override void CloseMenu(Action onCloseAnimationEndedActions = null)
+    {
+        OnPauseMenuClose?.Invoke();
+        base.CloseMenu(onCloseAnimationEndedActions);
     }
 
     private void InputMananger_OnPauseInputTriggered()
@@ -59,8 +95,7 @@ public class PauseMenu : Menu<PauseMenu>
 
     private void SettingsButton_OnClick()
     {
-        //Open settings menu
-        Debug.Log("Still working on that");
+        OnSettingsButtonPressed?.Invoke();
     }
 
     private void MainMenuButton_OnClick()

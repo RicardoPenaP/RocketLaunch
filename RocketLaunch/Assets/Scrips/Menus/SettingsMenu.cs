@@ -48,6 +48,12 @@ public class SettingsMenu : Menu<SettingsMenu>
             deleteSavedDataButton.gameObject.SetActive(false);
         }
 
+        if (PauseMenu.Instance)
+        {
+            PauseMenu.Instance.OnSettingsButtonPressed += PauseMenu_OnSettingsButtonPressed;
+            PauseMenu.Instance.OnPauseMenuClose += PauseMenu_OnPauseMenuClose;
+        }
+
         gameObject.SetActive(false);
         menuOpened = false;
     }
@@ -73,6 +79,12 @@ public class SettingsMenu : Menu<SettingsMenu>
         if (MainMenu.Instance)
         {
             MainMenu.Instance.OnSettingsButtonPressed -= MainMenu_OnSettingsButtonPressed;
+        }
+
+        if (PauseMenu.Instance)
+        {
+            PauseMenu.Instance.OnSettingsButtonPressed -= PauseMenu_OnSettingsButtonPressed;
+            PauseMenu.Instance.OnPauseMenuClose -= PauseMenu_OnPauseMenuClose;
         }
 
         DeleteSavedDataPanel.OnDeleteAllButtonPressed -= DeleteSavedDataPanel_OnDeleteAllButtonPressed;
@@ -104,6 +116,16 @@ public class SettingsMenu : Menu<SettingsMenu>
     private void MainMenu_OnSettingsButtonPressed()
     {
         OpenMenu();
+    }
+
+    private void PauseMenu_OnSettingsButtonPressed()
+    {
+        OpenMenu();
+    }
+
+    private void PauseMenu_OnPauseMenuClose()
+    {
+        CloseMenu();
     }
 
     private void DeleteSavedDataPanel_OnDeleteAllButtonPressed()
