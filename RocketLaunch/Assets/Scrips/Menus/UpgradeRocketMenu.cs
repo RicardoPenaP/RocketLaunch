@@ -48,13 +48,17 @@ public class UpgradeRocketMenu : Menu<UpgradeRocketMenu>
             RocketStatsMananger.Instance.OnCurrentStatPointsChanged += RocketStatMananger_OnCurrentStatPointsChanged;
         }
 
+        if (LevelCompletedMenu.Instance)
+        {
+            LevelCompletedMenu.Instance.OnUpgradeRocketButtonPressed += LevelCompletedMenu_OnUpgradeRocketButtonPressed;
+        }
+
         gameObject.SetActive(false);
         menuOpened = false;
     }
 
     protected override void OnDestroy()
-    {
-        base.OnDestroy();
+    {        
         if (goBackButton)
         {
             goBackButton.onClick.RemoveListener(GoBackButton_OnClick);
@@ -69,11 +73,27 @@ public class UpgradeRocketMenu : Menu<UpgradeRocketMenu>
         {
             RocketStatsMananger.Instance.OnCurrentStatPointsChanged -= RocketStatMananger_OnCurrentStatPointsChanged;
         }
+
+        if (LevelCompletedMenu.Instance)
+        {
+            LevelCompletedMenu.Instance.OnUpgradeRocketButtonPressed -= LevelCompletedMenu_OnUpgradeRocketButtonPressed;
+        }
+
+        base.OnDestroy();
     }
 
     protected override void OpenMenu(Action onOpenAnimationEndedActions = null)
     {
         OnUpgradeRocketMenuOpened?.Invoke();
+        if (RocketLevelMananger.Instance)
+        {
+            levelText.text = $"Level: {RocketLevelMananger.Instance.GetCurrentLevel()}";
+        }
+
+        if (RocketStatsMananger.Instance)
+        {
+            remaningStatPointsText.text = $"Remaining Points: {RocketStatsMananger.Instance.GetCurrentStatPoints()}";
+        }
         base.OpenMenu(onOpenAnimationEndedActions);
     }
 
@@ -96,15 +116,6 @@ public class UpgradeRocketMenu : Menu<UpgradeRocketMenu>
 
     private void PlayMenu_OnUpgradeRocketButtonPressed()
     {
-        if (RocketLevelMananger.Instance)
-        {
-            levelText.text = $"Level: {RocketLevelMananger.Instance.GetCurrentLevel()}";
-        }
-
-        if (RocketStatsMananger.Instance)
-        {
-            remaningStatPointsText.text = $"Remaining Points: {RocketStatsMananger.Instance.GetCurrentStatPoints()}";
-        }
         OpenMenu();
     }
 
@@ -113,5 +124,8 @@ public class UpgradeRocketMenu : Menu<UpgradeRocketMenu>
         remaningStatPointsText.text = $"Remaining Points: {currentStatPoints}";
     }
 
-
+    private void LevelCompletedMenu_OnUpgradeRocketButtonPressed()
+    {
+        OpenMenu();
+    }
 }

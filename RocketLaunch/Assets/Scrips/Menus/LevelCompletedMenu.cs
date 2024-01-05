@@ -13,6 +13,8 @@ public class LevelCompletedMenu : Menu<LevelCompletedMenu>
     [SerializeField] private Button playAgainButton;
     [SerializeField] private Button nextLevelButton;
     [SerializeField] private Button mainMenuButton;
+    [SerializeField] private Button upgradeRocketButton;
+    
     [Header("Text references")]
     [SerializeField] private TextMeshProUGUI expecienceAmountText;
     [SerializeField] private TextMeshProUGUI lifesRemainingAmountText;
@@ -21,6 +23,7 @@ public class LevelCompletedMenu : Menu<LevelCompletedMenu>
     [SerializeField] private TextMeshProUGUI totalAmountText;
 
     public event Action OnNextLevelButtonPressed;
+    public event Action OnUpgradeRocketButtonPressed;
 
     protected override void Awake()
     {
@@ -39,6 +42,11 @@ public class LevelCompletedMenu : Menu<LevelCompletedMenu>
         if (mainMenuButton)
         {
             mainMenuButton.onClick.AddListener(MainMenuButton_OnClick);
+        }
+        
+        if (upgradeRocketButton)
+        {
+            upgradeRocketButton.onClick.AddListener(UpgradeRocketButton_OnClick);
         }
     }
 
@@ -68,6 +76,12 @@ public class LevelCompletedMenu : Menu<LevelCompletedMenu>
         {
             mainMenuButton.onClick.RemoveListener(MainMenuButton_OnClick);
         }
+
+        if (upgradeRocketButton)
+        {
+            upgradeRocketButton.onClick.RemoveListener(UpgradeRocketButton_OnClick);
+        }
+
         base.OnDestroy();
     }
 
@@ -84,6 +98,10 @@ public class LevelCompletedMenu : Menu<LevelCompletedMenu>
     private void MainMenuButton_OnClick()
     {
         CloseMenu(LoadMainMenuScene);
+    }
+    private void UpgradeRocketButton_OnClick()
+    {
+        OnUpgradeRocketButtonPressed?.Invoke();
     }
 
     private void LoadMainMenuScene()
