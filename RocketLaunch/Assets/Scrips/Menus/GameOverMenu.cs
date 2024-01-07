@@ -63,8 +63,7 @@ public class GameOverMenu : Menu<GameOverMenu>
 
     private void MainMenuButton_OnClick()
     {
-        //Go back to main menu scene
-        Debug.Log("Still working on that");
+        SceneManagement.LoadScene(GameScene.MainMenu);
     }
 
     private void PlayAgain()
