@@ -12,3 +12,44 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19ee5a02100b2234c9a7af4b60e6e7a9, type: 3}
   m_Name: MissionExperienceData
   m_EditorClassIdentifier: 
+  missionsExperienceList:
+  - gameScene: 2
+    experience: 10
+  - gameScene: 3
+    experience: 20
+  - gameScene: 4
+    experience: 30
+  - gameScene: 5
+    experience: 40
+  - gameScene: 6
+    experience: 50
+  - gameScene: 7
+    experience: 60
+  - gameScene: 8
+    experience: 70
+  - gameScene: 9
+    experience: 80
+  - gameScene: 10
+    experience: 90
+  - gameScene: 11
+    experience: 100
+  - gameScene: 12
+    experience: 100
+  - gameScene: 13
+    experience: 200
+  - gameScene: 14
+    experience: 300
+  - gameScene: 15
+    experience: 400
+  - gameScene: 16
+    experience: 500
+  - gameScene: 17
+    experience: 1000
+  - gameScene: 18
+    experience: 2000
+  - gameScene: 19
+    experience: 3000
+  - gameScene: 20
+    experience: 4000
+  - gameScene: 21
+    experience: 5000
