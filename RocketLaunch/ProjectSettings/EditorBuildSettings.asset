@@ -27,6 +27,21 @@ EditorBuildSettings:
     path: Assets/Scenes/Galaxy1/Level1-5.unity
     guid: 9c867ae484619044b91de853e1c4c58c
   - enabled: 1
+    path: Assets/Scenes/Galaxy1/Level1-6.unity
+    guid: 80c9b8e45561a5145ae6ab514eeebd81
+  - enabled: 1
+    path: Assets/Scenes/Galaxy1/Level1-7.unity
+    guid: ad52ca87aed99dc4890c2dc3f31b5723
+  - enabled: 1
+    path: Assets/Scenes/Galaxy1/Level1-8.unity
+    guid: 1127deaf00c280e45adba04d3c70c19d
+  - enabled: 1
+    path: Assets/Scenes/Galaxy1/Level1-9.unity
+    guid: 56b98df4065998041a58e48002c62cd7
+  - enabled: 1
+    path: Assets/Scenes/Galaxy1/Level1-10.unity
+    guid: 0d0bffba0613e1240a7426d0b3695b3d
+  - enabled: 1
     path: Assets/Scenes/Galaxy2/Level2-1.unity
     guid: b232e8053fe4bbd41ab1e0d47f4eb3e1
   - enabled: 1
