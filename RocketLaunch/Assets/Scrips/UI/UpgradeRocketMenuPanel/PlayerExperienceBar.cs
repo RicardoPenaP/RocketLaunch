@@ -27,6 +27,15 @@ public class PlayerExperienceBar : MonoBehaviour
             isUpdating = true;            
             StartCoroutine(UpdateVisualsRoutine());
         }
+        else
+        {
+            if (RocketLevelMananger.Instance)
+            {
+                PlayerExperienceData playerExperienceData = RocketLevelMananger.Instance.GetActualPlayerExperienceData();
+                UpdateText(playerExperienceData.currentExperience, playerExperienceData.maxExperience);
+                UpdateFillBar(playerExperienceData.normalizedCurrentExperience);
+            }           
+        }
     }
 
     private void Start()
@@ -65,6 +74,11 @@ public class PlayerExperienceBar : MonoBehaviour
         experienceText.text = $"{currentValue.ToString("0")}/{maxValue.ToString("0")}";
     }
 
+    private void UpdateFillBar(float normalizedCurrentValue)
+    {
+        fillImage.fillAmount = normalizedCurrentValue;
+    }
+
     private IEnumerator UpdateVisualsRoutine()
     {
         while (updateVisualQueue.Count > 0)
@@ -74,14 +88,14 @@ public class PlayerExperienceBar : MonoBehaviour
             float timer = totalAnimationDurationTime * currentPlayerExperienceData.normalizedCurrentExperience;
             float targetTime = totalAnimationDurationTime * currentPlayerExperienceData.normalizedTargetExperience;
 
-            fillImage.fillAmount = currentPlayerExperienceData.normalizedCurrentExperience;
+            UpdateFillBar(currentPlayerExperienceData.normalizedCurrentExperience);            
             UpdateText(currentPlayerExperienceData.currentExperience, currentPlayerExperienceData.maxExperience);
 
             while (timer < targetTime)
             {
                 timer += Time.deltaTime;
-                float progress = timer / totalAnimationDurationTime;
-                fillImage.fillAmount = progress;
+                float progress = timer / totalAnimationDurationTime;                
+                UpdateFillBar(progress);
                 float currentValue = Mathf.Lerp(0, currentPlayerExperienceData.maxExperience, progress);
                 UpdateText(currentValue, currentPlayerExperienceData.maxExperience);
                 yield return null;

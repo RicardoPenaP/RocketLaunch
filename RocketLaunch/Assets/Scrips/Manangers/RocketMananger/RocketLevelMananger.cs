@@ -67,9 +67,7 @@ public class RocketLevelMananger : MonoBehaviour
             }
             currentExperience = playerData.GetCurrentExperience();
         }
-    }
-
-   
+    }   
     
     private void SaveExperience(float amount)
     {
@@ -121,5 +119,10 @@ public class RocketLevelMananger : MonoBehaviour
     {
         PlayerData playerData = new PlayerData(DEFAULT_PLAYER_LEVEL,DEFAULT_CURRENT_EXPERIENCE);
         return playerData;
+    }
+
+    public PlayerExperienceData GetActualPlayerExperienceData()
+    {
+        return new PlayerExperienceData(currentExperience, currentExperience, maxExperience);
     }
 }
