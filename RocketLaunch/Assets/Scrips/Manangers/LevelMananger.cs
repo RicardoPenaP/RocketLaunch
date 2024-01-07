@@ -15,9 +15,10 @@ public class LevelMananger : MonoBehaviour
     }
     
     public static event Action OnGoToNextLevel;
-    public static event Action<RewardsData> OnLevelCompleted;   
+    public static event Action<RewardsData> OnLevelCompleted;
 
-    [Header("Level Mananger")]    
+    [Header("Level Mananger")]
+    [SerializeField] private MissionsExperienceData myMissionsExperienceData;
     [SerializeField,Min(0)] private float levelExperienceReward = 100f;
     [SerializeField,Range(0f, 10f)] private float maxRemainingLifesMultiplier = 3f;
     [SerializeField, Range(0f, 10f)] private float maxLandingTriesMultiplier = 3f;
