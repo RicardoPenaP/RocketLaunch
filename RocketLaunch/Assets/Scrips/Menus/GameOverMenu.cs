@@ -63,12 +63,12 @@ public class GameOverMenu : Menu<GameOverMenu>
 
     private void MainMenuButton_OnClick()
     {
-        SceneManagement.LoadScene(GameScene.MainMenu);
+        CloseMenu(() => { SceneManagement.LoadScene(GameScene.MainMenu); });        
     }
 
     private void PlayAgain()
     {
-        SceneManagement.ReloadCurrentScene();
+        CloseMenu(() => { SceneManagement.ReloadCurrentScene(); });        
     }
 
     private void LevelMananger_OnGameOver()

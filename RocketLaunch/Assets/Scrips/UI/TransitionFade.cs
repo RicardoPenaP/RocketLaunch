@@ -54,6 +54,8 @@ public class TransitionFade : MonoBehaviour
     {        
         float timer = 0f;
         Color imageColor = fadeImage.color;
+        imageColor.a = startingAlpha;       
+        fadeImage.color = imageColor;
 
         while (timer < fadeDuration)
         {
@@ -63,6 +65,9 @@ public class TransitionFade : MonoBehaviour
             fadeImage.color = imageColor;
             yield return null;
         }
+
+        imageColor.a = targetAlpha;
+        fadeImage.color = imageColor;
 
         onFadeRoutineEnded?.Invoke();
     }

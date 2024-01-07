@@ -25,14 +25,7 @@ namespace GameSceneManagement
 
         public static void ReloadCurrentScene()
         {
-            if (TransitionFade.Instance)
-            {
-                TransitionFade.Instance.FadeIn(()=>LoadScene(currentGameScene));
-            }
-            else
-            {
-                LoadScene(currentGameScene);
-            }
+            LoadScene(currentGameScene);
         }     
         
         public static GameScene GetCurrentScene()
