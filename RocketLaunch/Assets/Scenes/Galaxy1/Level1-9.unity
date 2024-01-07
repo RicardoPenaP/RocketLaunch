@@ -687,12 +687,7 @@ PrefabInstance:
     - target: {fileID: 1315391543122370289, guid: 6f3958a9186758e4cb50b548eddd2c46,
         type: 3}
       propertyPath: movementDistance.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1315391543122370289, guid: 6f3958a9186758e4cb50b548eddd2c46,
-        type: 3}
-      propertyPath: movementDistance.y
-      value: 5
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5478833149390536440, guid: 6f3958a9186758e4cb50b548eddd2c46,
         type: 3}
@@ -782,12 +777,7 @@ PrefabInstance:
     - target: {fileID: 1315391543122370289, guid: 6f3958a9186758e4cb50b548eddd2c46,
         type: 3}
       propertyPath: movementDistance.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1315391543122370289, guid: 6f3958a9186758e4cb50b548eddd2c46,
-        type: 3}
-      propertyPath: movementDistance.y
-      value: 5
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5478833149390536440, guid: 6f3958a9186758e4cb50b548eddd2c46,
         type: 3}
@@ -1192,12 +1182,7 @@ PrefabInstance:
     - target: {fileID: 1315391543122370289, guid: 0e88191b13497bc4681f5a9eb54c04ad,
         type: 3}
       propertyPath: movementDistance.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1315391543122370289, guid: 0e88191b13497bc4681f5a9eb54c04ad,
-        type: 3}
-      propertyPath: movementDistance.y
-      value: 5
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5478833149390536440, guid: 0e88191b13497bc4681f5a9eb54c04ad,
         type: 3}
@@ -1282,12 +1267,12 @@ PrefabInstance:
     - target: {fileID: 3946735903609628312, guid: 7f96067ad4e893d49af94ac36508b09a,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -80
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3946735903609628312, guid: 7f96067ad4e893d49af94ac36508b09a,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 3946735903609628312, guid: 7f96067ad4e893d49af94ac36508b09a,
         type: 3}
@@ -1426,12 +1411,7 @@ PrefabInstance:
     - target: {fileID: 1315391543122370289, guid: 0e88191b13497bc4681f5a9eb54c04ad,
         type: 3}
       propertyPath: movementDistance.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1315391543122370289, guid: 0e88191b13497bc4681f5a9eb54c04ad,
-        type: 3}
-      propertyPath: movementDistance.y
-      value: 5
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5478833149390536440, guid: 0e88191b13497bc4681f5a9eb54c04ad,
         type: 3}
