@@ -97,8 +97,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70a84a098aa0cfd4b936e3978c2641cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canMove: 0
-  showGizmos: 0
+  canMove: 1
+  showGizmos: 1
+  randomStartingDirecntion: 1
   movementDistance: {x: 0, y: 0, z: 0}
   movementSpeed: 10
 --- !u!65 &550368535216282732

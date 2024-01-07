@@ -7,6 +7,7 @@ public class ObstacleMovement : MonoBehaviour
     [Header("Obstacle Movement")]
     [SerializeField] private bool canMove = false;
     [SerializeField] private bool showGizmos = false;
+    [SerializeField] private bool randomStartingDirecntion = false;
     [SerializeField] private Vector3 movementDistance;
     [SerializeField,Min(0f)] private float movementSpeed = 10f;
 
@@ -71,9 +72,26 @@ public class ObstacleMovement : MonoBehaviour
     {
         startPosition = transform.position;
         maxPosition = startPosition + (movementDistance / 2);
-        minPosition = startPosition - (movementDistance / 2);       
+        minPosition = startPosition - (movementDistance / 2);
 
-        movementDirection = (maxPosition - transform.position).normalized;
+        if (randomStartingDirecntion)
+        {
+            if (Random.Range(0,2) > 0)
+            {
+                movementDirection = (minPosition - transform.position).normalized;
+            }
+            else
+            {
+                movementDirection = (maxPosition - transform.position).normalized;
+            }
+
+        }
+        else
+        {
+            movementDirection = (maxPosition - transform.position).normalized;
+        }
+
+       
 
         maxDistance = Vector3.Distance(startPosition, maxPosition);
     }
