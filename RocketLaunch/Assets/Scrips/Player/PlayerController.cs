@@ -43,7 +43,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if (InputMananger.Instance.GetResetInputWasTriggered())
+        if (InputMananger.Instance.GetResetInputWasTriggered() && Time.timeScale > 0f)
         {
             Crash();
         }            
