@@ -9653,15 +9653,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxFuelAmount: 100
-  fuelConsuptionSpeed: 25
+  fuelConsuptionSpeed: 15
   maxEnginePower: 100
   powerSpeed: 40
-  powerHeatRateMultiplierPercentage: 0.15
+  powerHeatRateMultiplierPercentage: 0.1
   maxEngineTemperature: 100
-  heatRate: 5
+  heatRate: 3
   overheatRestTime: 2
   coolingRate: 7
-  sideEngineComsuptionPercentage: 0.5
+  sideEngineComsuptionPercentage: 0.2
 --- !u!1 &4090625583501126721
 GameObject:
   m_ObjectHideFlags: 0

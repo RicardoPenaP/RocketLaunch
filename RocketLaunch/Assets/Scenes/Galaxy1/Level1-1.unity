@@ -2067,6 +2067,11 @@ PrefabInstance:
       propertyPath: nextLevel
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 4657135219285565799, guid: bf0568a8e1caea541afd5818debeccab,
+        type: 3}
+      propertyPath: levelExperienceReward
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bf0568a8e1caea541afd5818debeccab, type: 3}
 --- !u!1001 &6905798909786013125
