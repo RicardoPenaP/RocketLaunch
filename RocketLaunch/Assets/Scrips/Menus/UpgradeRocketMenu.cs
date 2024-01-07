@@ -10,7 +10,6 @@ using GameSceneManagement;
 public class UpgradeRocketMenu : Menu<UpgradeRocketMenu>
 {
     public static event Action OnSaveTheStatsData;
-    public static event Action OnUpgradeRocketMenuOpened;
 
     [Header("Upgrade Rocket Menu")]
     [SerializeField] private TextMeshProUGUI levelText;
@@ -84,8 +83,7 @@ public class UpgradeRocketMenu : Menu<UpgradeRocketMenu>
     }
 
     protected override void OpenMenu(Action onOpenAnimationEndedActions = null)
-    {
-        OnUpgradeRocketMenuOpened?.Invoke();
+    {        
         if (RocketLevelMananger.Instance)
         {
             levelText.text = $"Level: {RocketLevelMananger.Instance.GetCurrentLevel()}";

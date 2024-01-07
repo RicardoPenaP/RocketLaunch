@@ -24,10 +24,9 @@ public class PlayerExperienceBar : MonoBehaviour
     {
         if (updateVisualQueue.Count > 0 )
         {
-            isUpdating = true;
+            isUpdating = true;            
             StartCoroutine(UpdateVisualsRoutine());
         }
-        
     }
 
     private void Start()
