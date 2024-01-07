@@ -18,8 +18,7 @@ public class LevelMananger : MonoBehaviour
     public static event Action<RewardsData> OnLevelCompleted;
 
     [Header("Level Mananger")]
-    [SerializeField] private MissionsExperienceData myMissionsExperienceData;
-    [SerializeField,Min(0)] private float levelExperienceReward = 100f;
+    [SerializeField] private MissionsExperienceData myMissionsExperienceData;    
     [SerializeField,Range(0f, 10f)] private float maxRemainingLifesMultiplier = 3f;
     [SerializeField, Range(0f, 10f)] private float maxLandingTriesMultiplier = 3f;
     [SerializeField, Range(0f, 1f)] private float eachLandingTryCost = 0.1f;
@@ -98,7 +97,6 @@ public class LevelMananger : MonoBehaviour
             float rocketStatMultiplierAugmentCoeficient = RocketStatsMananger.Instance.GetExperienceMultiplierAugmentCoeficient();
             levelExperienceRewardMultiplier += rocketStatMultiplierAugmentCoeficient * rocketStatLevel;            
         }
-        levelExperienceReward *= levelExperienceRewardMultiplier;
     }
 
     private void PlayerController_OnDie(object sender, EventArgs e)
@@ -115,6 +113,7 @@ public class LevelMananger : MonoBehaviour
         levelCompleted = true;
         PlayerLandingController.LandingCompleteData landingCompleteData = (e as PlayerLandingController.LandingCompleteData);
         RewardsData rewardsData = new RewardsData();
+        float levelExperienceReward = myMissionsExperienceData.GetMissionExperience(GameSceneManagement.SceneManagement.GetCurrentScene()) * levelExperienceRewardMultiplier;
         rewardsData.partialExperiece = levelExperienceReward;
         rewardsData.lifesMultiplier = maxRemainingLifesMultiplier * landingCompleteData.normalizedAmountOfRemaningLifes;
         rewardsData.landingTriesMultiplier = maxLandingTriesMultiplier - (eachLandingTryCost * (landingCompleteData.landingTries - 1)) > 1f ? maxLandingTriesMultiplier - (eachLandingTryCost * (landingCompleteData.landingTries-1)) : 1f;

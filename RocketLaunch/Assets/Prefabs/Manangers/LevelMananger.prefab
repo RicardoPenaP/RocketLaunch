@@ -44,8 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4290d0ee64e74d4cab0c3eee2c9b8a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextLevel: 2
-  levelExperienceReward: 100
+  myMissionsExperienceData: {fileID: 11400000, guid: 0a3484732485e33429f923eaa73ceb10,
+    type: 2}
   maxRemainingLifesMultiplier: 3
   maxLandingTriesMultiplier: 3
   eachLandingTryCost: 0.1
