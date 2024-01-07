@@ -41,27 +41,12 @@ public class ObstacleMovement : MonoBehaviour
 
         Vector3 startPoint = position;
         Vector3 finishPoint = position;
-        startPoint.y -= movementDistance.y / 2;
-        finishPoint.y += movementDistance.y / 2;
+        startPoint -= movementDistance / 2;
+        finishPoint += movementDistance / 2;
 
         Gizmos.color = Color.green;
         Gizmos.DrawLine(startPoint, finishPoint);
 
-        startPoint = position;
-        startPoint.x -= movementDistance.x / 2;
-        finishPoint = position;
-        finishPoint.x += movementDistance.x / 2;
-
-        Gizmos.color = Color.red;
-        Gizmos.DrawLine(startPoint, finishPoint);
-
-        startPoint = position;
-        startPoint.z -= movementDistance.z / 2;
-        finishPoint = position;
-        finishPoint.z += movementDistance.z / 2;
-
-        Gizmos.color = Color.blue;
-        Gizmos.DrawLine(startPoint, finishPoint);
     }
 
     private void OnValidate()
