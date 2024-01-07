@@ -875,6 +875,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 949086605}
     m_Modifications:
+    - target: {fileID: 861115697075285976, guid: 63cf15981b2fc224b9c4118fbc0dc7c9,
+        type: 3}
+      propertyPath: rotationActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 861115697075285976, guid: 63cf15981b2fc224b9c4118fbc0dc7c9,
+        type: 3}
+      propertyPath: randomRotationAxis
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4345050384660868441, guid: 63cf15981b2fc224b9c4118fbc0dc7c9,
         type: 3}
       propertyPath: m_Name
@@ -968,7 +978,12 @@ PrefabInstance:
     - target: {fileID: 6608246751416475835, guid: 63cf15981b2fc224b9c4118fbc0dc7c9,
         type: 3}
       propertyPath: canMove
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6608246751416475835, guid: 63cf15981b2fc224b9c4118fbc0dc7c9,
+        type: 3}
+      propertyPath: showGizmos
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6608246751416475835, guid: 63cf15981b2fc224b9c4118fbc0dc7c9,
         type: 3}
@@ -977,8 +992,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6608246751416475835, guid: 63cf15981b2fc224b9c4118fbc0dc7c9,
         type: 3}
+      propertyPath: movementDistance.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6608246751416475835, guid: 63cf15981b2fc224b9c4118fbc0dc7c9,
+        type: 3}
       propertyPath: movementDistance.y
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6608246751416475835, guid: 63cf15981b2fc224b9c4118fbc0dc7c9,
+        type: 3}
+      propertyPath: movementDistance.z
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 63cf15981b2fc224b9c4118fbc0dc7c9, type: 3}
