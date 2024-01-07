@@ -5,178 +5,178 @@ using System;
 
 public class ObstacleController : MonoBehaviour
 {
-    public enum MovementType { Static, Linear, Ocillate }
+    //public enum MovementType { Static, Linear, Ocillate }
 
-    [Header("Obstacle Controller")]
-    [Header("General Settings")]
-    [SerializeField, Min(0f)] private float changeDirectionTime = 0f;
+    //[Header("Obstacle Controller")]
+    //[Header("General Settings")]
+    //[SerializeField, Min(0f)] private float changeDirectionTime = 0f;
 
-    [Header("Linear Settings")]
-    [SerializeField] private MovementType movementType;
-    [SerializeField] private float movementSpeed;
-    [SerializeField] private Vector3 movementDirection;
-    [SerializeField,Range(-1f,1f)] private float startingDirection = 1f;
+    //[Header("Linear Settings")]
+    //[SerializeField] private MovementType movementType;
+    //[SerializeField] private float movementSpeed;
+    //[SerializeField] private Vector3 movementDirection;
+    //[SerializeField,Range(-1f,1f)] private float startingDirection = 1f;
 
-    [Header("Ocilliate Settings")]
-    [SerializeField] private Vector3 maxPositionDistance;    
-    [SerializeField] private AnimationCurve xAnimationCurve;
-    [SerializeField] private AnimationCurve yAnimationCurve;
-    [SerializeField] private AnimationCurve zAnimationCurve;
+    //[Header("Ocilliate Settings")]
+    //[SerializeField] private Vector3 maxPositionDistance;    
+    //[SerializeField] private AnimationCurve xAnimationCurve;
+    //[SerializeField] private AnimationCurve yAnimationCurve;
+    //[SerializeField] private AnimationCurve zAnimationCurve;
 
-    [Header("Expasion Settings")]
-    [SerializeField] private bool expansionActive = false;
-    [SerializeField, Min(0f)] private float expansionSpeed = 0f;
-    [SerializeField] private Vector3 expansionDirection;  
+    //[Header("Expasion Settings")]
+    //[SerializeField] private bool expansionActive = false;
+    //[SerializeField, Min(0f)] private float expansionSpeed = 0f;
+    //[SerializeField] private Vector3 expansionDirection;  
 
-    public event EventHandler OnTimerStop;
+    //public event EventHandler OnTimerStop;
 
-    private float timer;
-    private Vector3 maxPosition;
-    private Vector3 startingPosition;
+    //private float timer;
+    //private Vector3 maxPosition;
+    //private Vector3 startingPosition;
 
-    private void Awake()
-    {        
-        OnTimerStop += ChangeMovementDirection;
-        OnTimerStop += ChangeExpansionDirection;
-        ChangeMovementDirection(this, EventArgs.Empty);
+    //private void Awake()
+    //{        
+    //    OnTimerStop += ChangeMovementDirection;
+    //    OnTimerStop += ChangeExpansionDirection;
+    //    ChangeMovementDirection(this, EventArgs.Empty);
 
-        timer = 0;
-        startingPosition = transform.position;
-        maxPosition = startingPosition + maxPositionDistance;        
-    }
+    //    timer = 0;
+    //    startingPosition = transform.position;
+    //    maxPosition = startingPosition + maxPositionDistance;        
+    //}
 
 
-    private void OnValidate()
-    {
-        switch (movementType)
-        {
-            case MovementType.Static:
-                movementSpeed = 0f;
-                movementDirection = Vector3.zero;
-                maxPositionDistance = Vector3.zero;
-                xAnimationCurve = new AnimationCurve();
-                yAnimationCurve = new AnimationCurve();
-                zAnimationCurve = new AnimationCurve();
-                break;
-            case MovementType.Linear:
-                maxPositionDistance = Vector3.zero;
-                xAnimationCurve = new AnimationCurve();
-                yAnimationCurve = new AnimationCurve();
-                zAnimationCurve = new AnimationCurve();
-                break;
-            case MovementType.Ocillate:
-                movementSpeed = 0f;
-                movementDirection = Vector3.zero;
-                break;
+    //private void OnValidate()
+    //{
+    //    switch (movementType)
+    //    {
+    //        case MovementType.Static:
+    //            movementSpeed = 0f;
+    //            movementDirection = Vector3.zero;
+    //            maxPositionDistance = Vector3.zero;
+    //            xAnimationCurve = new AnimationCurve();
+    //            yAnimationCurve = new AnimationCurve();
+    //            zAnimationCurve = new AnimationCurve();
+    //            break;
+    //        case MovementType.Linear:
+    //            maxPositionDistance = Vector3.zero;
+    //            xAnimationCurve = new AnimationCurve();
+    //            yAnimationCurve = new AnimationCurve();
+    //            zAnimationCurve = new AnimationCurve();
+    //            break;
+    //        case MovementType.Ocillate:
+    //            movementSpeed = 0f;
+    //            movementDirection = Vector3.zero;
+    //            break;
            
-        }
+    //    }
 
-        if (!expansionActive)
-        {
-            expansionSpeed = 0f;
-            expansionDirection = Vector3.zero;
+    //    if (!expansionActive)
+    //    {
+    //        expansionSpeed = 0f;
+    //        expansionDirection = Vector3.zero;
            
-        }
-        else
-        {
-            if (expansionDirection.magnitude > 1f)
-            {
-                expansionDirection = expansionDirection.normalized;
-            }
+    //    }
+    //    else
+    //    {
+    //        if (expansionDirection.magnitude > 1f)
+    //        {
+    //            expansionDirection = expansionDirection.normalized;
+    //        }
             
-        }
+    //    }
 
 
-        startingDirection = startingDirection > Mathf.Epsilon ? 1 : -1;
+    //    startingDirection = startingDirection > Mathf.Epsilon ? 1 : -1;
        
-        if (movementDirection.magnitude > 1f)
-        {
-            movementDirection = movementDirection.normalized;
-        }
+    //    if (movementDirection.magnitude > 1f)
+    //    {
+    //        movementDirection = movementDirection.normalized;
+    //    }
        
-    }
+    //}
 
-    private void Update()
-    {
-        UpdateMovement();
-        UpdateTimer();
-    }
+    //private void Update()
+    //{
+    //    UpdateMovement();
+    //    UpdateTimer();
+    //}
 
-    private void OnDestroy()
-    {
-        OnTimerStop -= ChangeMovementDirection;
-        OnTimerStop -= ChangeExpansionDirection;
-    }
+    //private void OnDestroy()
+    //{
+    //    OnTimerStop -= ChangeMovementDirection;
+    //    OnTimerStop -= ChangeExpansionDirection;
+    //}
 
-    private void UpdateMovement()
-    {
-        if (movementType == MovementType.Static)
-        {
-            return;
-        }
+    //private void UpdateMovement()
+    //{
+    //    if (movementType == MovementType.Static)
+    //    {
+    //        return;
+    //    }
 
-        switch (movementType)
-        {            
-            case MovementType.Linear:
-                LinearMovement();
-                break;
-            case MovementType.Ocillate:
-                OcilliatingMovement();
-                break;           
-        }
+    //    switch (movementType)
+    //    {            
+    //        case MovementType.Linear:
+    //            LinearMovement();
+    //            break;
+    //        case MovementType.Ocillate:
+    //            OcilliatingMovement();
+    //            break;           
+    //    }
 
-        Expansion();
-    }
+    //    Expansion();
+    //}
 
-    private void UpdateTimer()
-    {
-        timer += Time.deltaTime;
-        if (timer >= changeDirectionTime)
-        {
-            ResetTimer();
-            OnTimerStop?.Invoke(this, EventArgs.Empty);
-        }
-    }
+    //private void UpdateTimer()
+    //{
+    //    timer += Time.deltaTime;
+    //    if (timer >= changeDirectionTime)
+    //    {
+    //        ResetTimer();
+    //        OnTimerStop?.Invoke(this, EventArgs.Empty);
+    //    }
+    //}
 
-    private void ResetTimer()
-    {
-        timer = 0f;
-    }
+    //private void ResetTimer()
+    //{
+    //    timer = 0f;
+    //}
 
-    private void ChangeMovementDirection(object sender, EventArgs e)
-    {
-        if (movementType != MovementType.Linear)
-        {
-            return;
-        }
-        movementDirection *= startingDirection;
-        startingDirection *= -1;
-    }
+    //private void ChangeMovementDirection(object sender, EventArgs e)
+    //{
+    //    if (movementType != MovementType.Linear)
+    //    {
+    //        return;
+    //    }
+    //    movementDirection *= startingDirection;
+    //    startingDirection *= -1;
+    //}
 
-    private void ChangeExpansionDirection(object sender, EventArgs e)
-    {
-        expansionDirection *= -1;
-    }
+    //private void ChangeExpansionDirection(object sender, EventArgs e)
+    //{
+    //    expansionDirection *= -1;
+    //}
 
-    private void LinearMovement()
-    {
-        transform.position += movementDirection * movementSpeed * Time.deltaTime;
-    }
+    //private void LinearMovement()
+    //{
+    //    transform.position += movementDirection * movementSpeed * Time.deltaTime;
+    //}
 
-    private void OcilliatingMovement()
-    {
-        float movementProgress = timer / changeDirectionTime;
+    //private void OcilliatingMovement()
+    //{
+    //    float movementProgress = timer / changeDirectionTime;
        
-        Vector3 targetPosition = new Vector3();
-        targetPosition.x = Mathf.Lerp(startingPosition.x, maxPosition.x, xAnimationCurve.Evaluate(movementProgress));
-        targetPosition.y = Mathf.Lerp(startingPosition.y, maxPosition.y, yAnimationCurve.Evaluate(movementProgress));
-        targetPosition.z = Mathf.Lerp(startingPosition.z, maxPosition.z, zAnimationCurve.Evaluate(movementProgress));
+    //    Vector3 targetPosition = new Vector3();
+    //    targetPosition.x = Mathf.Lerp(startingPosition.x, maxPosition.x, xAnimationCurve.Evaluate(movementProgress));
+    //    targetPosition.y = Mathf.Lerp(startingPosition.y, maxPosition.y, yAnimationCurve.Evaluate(movementProgress));
+    //    targetPosition.z = Mathf.Lerp(startingPosition.z, maxPosition.z, zAnimationCurve.Evaluate(movementProgress));
         
-        transform.position = targetPosition;
-    }
+    //    transform.position = targetPosition;
+    //}
 
-    private void Expansion()
-    {
-        transform.localScale += expansionDirection * expansionSpeed * Time.deltaTime;
-    }
+    //private void Expansion()
+    //{
+    //    transform.localScale += expansionDirection * expansionSpeed * Time.deltaTime;
+    //}
 }
