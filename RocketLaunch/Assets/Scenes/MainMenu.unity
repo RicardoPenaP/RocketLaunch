@@ -8542,6 +8542,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 40405084284288504, guid: 8c56d7941bb2b304e87d12159b606495,
         type: 3}
+      propertyPath: baseExperienceForNextLevel
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 40405084284288504, guid: 8c56d7941bb2b304e87d12159b606495,
+        type: 3}
       propertyPath: experienceAugmentCoeficient
       value: 1.2
       objectReference: {fileID: 0}
