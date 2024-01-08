@@ -2166,8 +2166,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -640.0218}
-  m_SizeDelta: {x: 1357.8906, y: 835.3643}
+  m_AnchoredPosition: {x: 0, y: -583.3664}
+  m_SizeDelta: {x: 1357.8906, y: 722.0535}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &524012368
 MonoBehaviour:
@@ -2189,14 +2189,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Developement
-
-    Ricardo Pena
-
-
-    3d Art
-
-'
+  m_text: "Developement by\n\nRicardo Pena\n\n3d Art and Models by\n\nhdl-infographiste\tStargate
+    Goa'uld ring platform v2 variante 2\nJames\t\t\tFloating Platform\nJazOone\t\tSci-fi
+    Compact-Radar\n\n2d Art and Sprites by\n\nKelvin Shadewing\tGalaxies\nicons8.com\t\tIcons\n\nSound
+    and Music by\n\r\nImAFoley\t\tOrbital Rocket Exhaust Close\nCGEffex\t\t\tHuge
+    Explosion1.flac\nbelloq\t\t\tsmall_rocket_flybys_and_explosion.aif\r\n\n\n\n\n\n\n\n\n\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0b93a1ad2860cc045a0fad849102df66, type: 2}
   m_sharedMaterial: {fileID: 2464487202482598312, guid: 0b93a1ad2860cc045a0fad849102df66,
@@ -2224,8 +2221,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 1
