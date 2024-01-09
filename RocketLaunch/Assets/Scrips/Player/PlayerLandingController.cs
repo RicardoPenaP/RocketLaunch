@@ -45,6 +45,7 @@ public class PlayerLandingController : MonoBehaviour
 
     private LandingPlatform landingPlatform;
     private new Rigidbody rigidbody;
+    private Collider[] colliders;
 
     private Vector3 preLandingPosition;
     private Vector3 landingPosition;
@@ -76,7 +77,22 @@ public class PlayerLandingController : MonoBehaviour
     {
         playerCollisionHandler = GetComponent<PlayerCollisionHandler>();
         rigidbody = GetComponent<Rigidbody>();
-        OnPreLandingStart += (object sender, EventArgs e) => { rigidbody.useGravity = false; };
+        colliders = GetComponents<Collider>();
+        OnPreLandingStart += (object sender, EventArgs e) =>
+        {
+            rigidbody.useGravity = false;
+            foreach (Collider collider in colliders)
+            {
+                collider.enabled = false;
+            }
+        };
+        OnLandingStart += (object sender, EventArgs e) =>
+        {
+            foreach (Collider collider in colliders)
+            {
+                collider.enabled = true;
+            }
+        };
         OnLandingFinished += (object sender, EventArgs e) => { rigidbody.useGravity = true; };
     }
 
@@ -131,7 +147,21 @@ public class PlayerLandingController : MonoBehaviour
 
     private void OnDestroy()
     {
-        OnPreLandingStart -= (object sender, EventArgs e) => { rigidbody.useGravity = false; };
+        OnPreLandingStart -= (object sender, EventArgs e) =>
+        {
+            rigidbody.useGravity = false;
+            foreach (Collider collider in colliders)
+            {
+                collider.enabled = false;
+            }
+        };
+        OnLandingStart -= (object sender, EventArgs e) =>
+        {
+            foreach (Collider collider in colliders)
+            {
+                collider.enabled = true;
+            }
+        };
         OnLandingFinished -= (object sender, EventArgs e) => { rigidbody.useGravity = true; };
         if (playerCollisionHandler)
         {
