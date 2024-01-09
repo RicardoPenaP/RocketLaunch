@@ -85,6 +85,22 @@ public class LevelCompletedMenu : Menu<LevelCompletedMenu>
         base.OnDestroy();
     }
 
+    protected override void OpenMenu(Action onOpenAnimationEndedActions = null)
+    {
+        base.OpenMenu(onOpenAnimationEndedActions);
+        if (SceneManagement.GetCurrentScene() == MissionMananger.LAST_MISSION)
+        {
+            nextLevelButton.gameObject.SetActive(false);
+        }
+        else
+        {
+            if (!nextLevelButton.gameObject.activeInHierarchy)
+            {
+                nextLevelButton.gameObject.SetActive(true);
+            }
+        }
+    }
+
     private void PlayAgainButton_OnClick()
     {
         CloseMenu(PlayAgain);

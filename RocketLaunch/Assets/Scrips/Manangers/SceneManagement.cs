@@ -13,7 +13,7 @@ namespace GameSceneManagement
         Level3_1, Level3_2, Level3_3, Level3_4, Level3_5 
     }
     public static class SceneManagement
-    {
+    {        
         private static GameScene currentGameScene = GameScene.MainMenu;
         public static void LoadScene(GameScene gameScene)
         {
