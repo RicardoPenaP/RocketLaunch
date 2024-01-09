@@ -17,11 +17,13 @@ public class SFXController : MonoBehaviour
 
     private PlayerController playerController;
     private EngineController engineController;
+    private PlayerLandingController playerLandingController;
    
     private void Awake()
     {
         playerController = GetComponentInParent<PlayerController>();
         engineController = playerController.GetComponentInChildren<EngineController>();
+        playerLandingController = playerController.GetComponent<PlayerLandingController>();
 
         SettingsController.OnSFXVolumeChange += SettingsController_OnSFXVolumeChange;
         SetAudioSourceVolume();
@@ -40,6 +42,14 @@ public class SFXController : MonoBehaviour
             engineController.OnMainEngineStateChange += EngineController_OnMainEngineStateChange;
             engineController.OnSideEngineStateChange += EngineController_OnSideEngineStateChange;
         }
+
+        if (playerLandingController)
+        {
+            playerLandingController.OnPreLandingStart += PlayerLandingController_OnPreLandingStart;
+            playerLandingController.OnLandingFinished += PlayerLandingController_OnLandingFinished;
+            playerLandingController.OnSideEngineStarted += PlayerLandingController_OnSideEngineStarted;
+            playerLandingController.OnSideEngineStoped += PlayerLandingController_OnSideEngineStoped;
+        }
     }
 
     private void OnDestroy()
@@ -57,6 +67,14 @@ public class SFXController : MonoBehaviour
             engineController.OnMainEngineStateChange -= EngineController_OnMainEngineStateChange;
             engineController.OnSideEngineStateChange -= EngineController_OnSideEngineStateChange;
         }
+
+        if (playerLandingController)
+        {
+            playerLandingController.OnPreLandingStart -= PlayerLandingController_OnPreLandingStart;
+            playerLandingController.OnLandingFinished -= PlayerLandingController_OnLandingFinished;
+            playerLandingController.OnSideEngineStarted -= PlayerLandingController_OnSideEngineStarted;
+            playerLandingController.OnSideEngineStoped -= PlayerLandingController_OnSideEngineStoped;
+        }
     }
 
     private void SetAudioSourceVolume()
@@ -71,6 +89,28 @@ public class SFXController : MonoBehaviour
         {
             primaryAudioSource.PlayOneShot(mainEngineSFX);
         }
+    }
+
+    private void PlayMainEngineSFXOnLoop()
+    {
+        StartCoroutine(MainEngineSFXOnLoopRoutine());
+    }
+
+    private void StopPlayingMainEngineSFXOnLoop()
+    {
+        StopCoroutine(MainEngineSFXOnLoopRoutine());
+        StopPlayingMainEngineSFX();
+    }
+
+    private void PlaySideEngineSFXOnLoop()
+    {
+        StartCoroutine(SideEngineSFXOnLoopRoutine());
+    }
+
+    private void StopPlayingSideEngineSFXOnLoop()
+    {
+        StopCoroutine(SideEngineSFXOnLoopRoutine());
+        StopPlayingSideEngineSFX();
     }
 
     private void StopPlayingMainEngineSFX()
@@ -131,7 +171,6 @@ public class SFXController : MonoBehaviour
         PlayExposionSFX();
     }
 
-
     private void SettingsController_OnSFXVolumeChange()
     {
         SetAudioSourceVolume();
@@ -140,6 +179,44 @@ public class SFXController : MonoBehaviour
     private void PlayerController_OnPlayerReset(object sender, EventArgs e)
     {
         primaryAudioSource.Stop();
+    }
+
+    private void PlayerLandingController_OnPreLandingStart(object sender, EventArgs e)
+    {
+        PlayMainEngineSFXOnLoop();
+    }
+
+    private void PlayerLandingController_OnLandingFinished(object sender, EventArgs e)
+    {
+        StopPlayingMainEngineSFXOnLoop();
+    }
+
+    private void PlayerLandingController_OnSideEngineStarted(PlayerMovement.RotationDirection rotationDirection)
+    {
+        PlaySideEngineSFXOnLoop();
+    }
+
+    private void PlayerLandingController_OnSideEngineStoped(PlayerMovement.RotationDirection rotationDirection)
+    {
+        StopPlayingSideEngineSFXOnLoop();
+    }
+
+    private IEnumerator MainEngineSFXOnLoopRoutine()
+    {
+        while (true)
+        {
+            PlayMainEngineSFX();
+            yield return null;
+        }
+    }
+
+    private IEnumerator SideEngineSFXOnLoopRoutine()
+    {
+        while (true)
+        {
+            PlaySideEngineSFX();
+            yield return null;
+        }
     }
 
 
