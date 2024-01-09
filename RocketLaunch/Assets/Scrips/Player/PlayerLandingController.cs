@@ -34,7 +34,7 @@ public class PlayerLandingController : MonoBehaviour
 
     public event EventHandler OnPreLandingStart;
     public event EventHandler OnLandingStart;
-    public event EventHandler OnLandingUpdated;
+    public event EventHandler OnLandingVisualsUpdated;
     public event EventHandler OnLandingFinished;
     public event Action<PlayerMovement.RotationDirection> OnSideEngineStarted;
     public event Action<PlayerMovement.RotationDirection> OnSideEngineStoped;
@@ -125,7 +125,7 @@ public class PlayerLandingController : MonoBehaviour
             landingData.targetAngle = landingPlatform.GetLandingAngle();
             landingData.normalizedGreenAreaPercentage = greenAreaPercentage;
             landingData.normalizedYellowAreaPercentage = yellowAreaPercentage;            
-            OnLandingUpdated?.Invoke(this, landingData);
+            OnLandingVisualsUpdated?.Invoke(this, landingData);
         }
     }
 

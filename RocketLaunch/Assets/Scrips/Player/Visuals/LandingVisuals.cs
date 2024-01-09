@@ -25,7 +25,7 @@ public class LandingVisuals : MonoBehaviour
         if (playerLandingController)
         {
             playerLandingController.OnPreLandingStart += PlayerLandingController_OnPreLandingStart;
-            playerLandingController.OnLandingUpdated += PlayerLandingController_OnLandingUpdate;
+            playerLandingController.OnLandingVisualsUpdated += PlayerLandingController_OnLandingVisualsUpdate;
         }
 
         transform.parent.gameObject.SetActive(false);
@@ -36,7 +36,7 @@ public class LandingVisuals : MonoBehaviour
         if (playerLandingController)
         {
             playerLandingController.OnPreLandingStart -= PlayerLandingController_OnPreLandingStart;
-            playerLandingController.OnLandingUpdated -= PlayerLandingController_OnLandingUpdate;
+            playerLandingController.OnLandingVisualsUpdated -= PlayerLandingController_OnLandingVisualsUpdate;
         }
     }
 
@@ -45,7 +45,7 @@ public class LandingVisuals : MonoBehaviour
         transform.parent.gameObject.SetActive(true);
     }
 
-    private void PlayerLandingController_OnLandingUpdate(object sender, EventArgs e)
+    private void PlayerLandingController_OnLandingVisualsUpdate(object sender, EventArgs e)
     {
         PlayerLandingController.LandingData landingData = (e as PlayerLandingController.LandingData);
         yellowAreaImage.fillAmount = landingData.normalizedYellowAreaPercentage;
