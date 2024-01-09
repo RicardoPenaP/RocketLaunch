@@ -18,6 +18,10 @@ public class SFXController : MonoBehaviour
     private PlayerController playerController;
     private EngineController engineController;
     private PlayerLandingController playerLandingController;
+
+    private bool playingMainEngineSFXOnLoop = false;
+    private bool playingSideEngineSFXOnLoop = false;
+
    
     private void Awake()
     {
@@ -98,8 +102,7 @@ public class SFXController : MonoBehaviour
 
     private void StopPlayingMainEngineSFXOnLoop()
     {
-        StopCoroutine(MainEngineSFXOnLoopRoutine());
-        StopPlayingMainEngineSFX();
+        playingMainEngineSFXOnLoop = false;        
     }
 
     private void PlaySideEngineSFXOnLoop()
@@ -109,8 +112,7 @@ public class SFXController : MonoBehaviour
 
     private void StopPlayingSideEngineSFXOnLoop()
     {
-        StopCoroutine(SideEngineSFXOnLoopRoutine());
-        StopPlayingSideEngineSFX();
+        playingSideEngineSFXOnLoop = false;        
     }
 
     private void StopPlayingMainEngineSFX()
@@ -203,20 +205,24 @@ public class SFXController : MonoBehaviour
 
     private IEnumerator MainEngineSFXOnLoopRoutine()
     {
-        while (true)
+        playingMainEngineSFXOnLoop = true;
+        while (playingMainEngineSFXOnLoop)
         {
             PlayMainEngineSFX();
             yield return null;
         }
+        StopPlayingMainEngineSFX();
     }
 
     private IEnumerator SideEngineSFXOnLoopRoutine()
     {
-        while (true)
+        playingSideEngineSFXOnLoop = true;
+        while (playingSideEngineSFXOnLoop)
         {
             PlaySideEngineSFX();
             yield return null;
         }
+        StopPlayingSideEngineSFX();
     }
 
 
