@@ -19,12 +19,12 @@ MonoBehaviour:
   sideEngineTemperatureMultiplierAugmentCoeficient: 0.02
   sideEngineFuelConsumptionMultiplierAugmentCoeficient: 0
   maxTemperatureMultiplierAugmentCoeficient: 0.01
-  coolingSpeedMultiplierAugmentCoeficient: 0.03
+  coolingSpeedMultiplierAugmentCoeficient: 0.1
   overheatTimeMultiplierAugmentCoeficient: 0.005
   angularDragMultiplierAugmentCoeficient: 0.01
   greenAreaMultiplierAugmentCoeficient: 0.01
   yellowAreaMultiplierAugmentCoeficient: 0.01
-  effectivePercentageMultiplierAugmentCoeficient: 0.03
-  pullDistanceMultiplierAugmentCoeficient: 0.03
-  experienceMultiplierAugmentCoeficient: 0.05
+  effectivePercentageMultiplierAugmentCoeficient: 0.05
+  pullDistanceMultiplierAugmentCoeficient: 0.05
+  experienceMultiplierAugmentCoeficient: 0.1
   fuelCapacityMultiplierAugmentCoeficient: 0.05

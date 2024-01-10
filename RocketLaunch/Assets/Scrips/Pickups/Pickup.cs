@@ -12,7 +12,7 @@ public class Pickup : MonoBehaviour
     [SerializeField] private float pickupRange = 4f;
     [SerializeField,Range(0,100)] private int effectivePercentage;
     [SerializeField] private float defaultMovementSpeed = 3f;
-    [SerializeField, Range(0f, 1f)] private float movementSpeedAugmentCoeficient = 0.2f;
+    [SerializeField, Range(0f, 1f)] private float movementSpeedAugmentCoeficient = 0.2f;    
 
     public event Action OnStartMovingTowardsPlayer;
     public event Action OnResetPickUp;
@@ -23,7 +23,7 @@ public class Pickup : MonoBehaviour
 
     private Vector3 startingPos;
 
-    private float currentMovementSpeed;
+    [SerializeField]private float currentMovementSpeed;
 
     private float pickupPercentageOfActionMultiplier;
     private float pickupRangeMultiplier;
@@ -36,7 +36,8 @@ public class Pickup : MonoBehaviour
         playerTransform = playerController.transform;
        
         currentMovementSpeed = defaultMovementSpeed;
-        startingPos = transform.position;        
+        startingPos = transform.position;
+        IsBeenAtractedToThePlayer = false;
     }
 
     private void Start()
@@ -87,7 +88,8 @@ public class Pickup : MonoBehaviour
         }
         Vector3 movementDirection = (playerTransform.position - transform.position).normalized;
         transform.position += movementDirection * currentMovementSpeed * Time.deltaTime;
-        currentMovementSpeed += currentMovementSpeed * movementSpeedAugmentCoeficient * Time.deltaTime;
+        //currentMovementSpeed += currentMovementSpeed * movementSpeedAugmentCoeficient * Time.deltaTime;
+        currentMovementSpeed += currentMovementSpeed * (1f + movementSpeedAugmentCoeficient) * Time.deltaTime;
     }
 
     private void ResetPickup()

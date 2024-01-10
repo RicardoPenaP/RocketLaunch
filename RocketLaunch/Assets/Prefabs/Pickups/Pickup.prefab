@@ -83,8 +83,9 @@ MonoBehaviour:
   pickupType: 0
   pickupRange: 1
   effectivePercentage: 0
-  defaultMovementSpeed: 1
+  defaultMovementSpeed: 5
   movementSpeedAugmentCoeficient: 0.2
+  currentMovementSpeed: 0
 --- !u!114 &4839302263798574082
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -102,7 +103,7 @@ MonoBehaviour:
   invertStartingDirection: 0
   randomStartingDirection: 0
   movementDistance: {x: 0, y: 0, z: 0}
-  movementSpeed: 5
+  movementSpeed: 2
 --- !u!65 &550368535216282732
 BoxCollider:
   m_ObjectHideFlags: 0
