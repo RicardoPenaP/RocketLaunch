@@ -44,12 +44,22 @@ MonoBehaviour:
   - gameScene: 16
     experience: 500
   - gameScene: 17
-    experience: 1000
+    experience: 600
   - gameScene: 18
-    experience: 2000
+    experience: 700
   - gameScene: 19
-    experience: 3000
+    experience: 800
   - gameScene: 20
-    experience: 4000
+    experience: 900
   - gameScene: 21
+    experience: 1000
+  - gameScene: 22
+    experience: 1000
+  - gameScene: 23
+    experience: 2000
+  - gameScene: 24
+    experience: 3000
+  - gameScene: 25
+    experience: 4000
+  - gameScene: 26
     experience: 5000

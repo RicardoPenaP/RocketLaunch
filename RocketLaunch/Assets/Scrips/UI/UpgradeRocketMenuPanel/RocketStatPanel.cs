@@ -139,7 +139,7 @@ public class RocketStatPanel : MonoBehaviour
 
             SetLevelUpButtonActiveState(RocketStatsMananger.Instance.GetCurrentStatPoints() > 0 && rocketStat.GetStatLevel() < RocketStat.MAX_STAT_LEVEL);
             SetLevelDownButtonActiveState(rocketStat.GetStatLevel() > RocketStat.MIN_STAT_LEVEL);
-            SetPlus10ButtonActiveState(RocketStatsMananger.Instance.GetCurrentStatPoints() > 9 && rocketStat.GetStatLevel() < RocketStat.MAX_STAT_LEVEL - 10);
+            SetPlus10ButtonActiveState(RocketStatsMananger.Instance.GetCurrentStatPoints() > 9 && rocketStat.GetStatLevel() <= RocketStat.MAX_STAT_LEVEL - 10);
             SetMinus10ButtonActiveState(rocketStat.GetStatLevel() > RocketStat.MIN_STAT_LEVEL + 9);
         }
     }
@@ -148,7 +148,7 @@ public class RocketStatPanel : MonoBehaviour
     {
         SetLevelUpButtonActiveState(currentStatPoints > 0 && rocketStat.GetStatLevel() < RocketStat.MAX_STAT_LEVEL);
         SetLevelDownButtonActiveState(rocketStat.GetStatLevel() > RocketStat.MIN_STAT_LEVEL);
-        SetPlus10ButtonActiveState(currentStatPoints > 9 && rocketStat.GetStatLevel() < RocketStat.MAX_STAT_LEVEL - 10);
+        SetPlus10ButtonActiveState(currentStatPoints > 9 && rocketStat.GetStatLevel() <= RocketStat.MAX_STAT_LEVEL - 10);
         SetMinus10ButtonActiveState(rocketStat.GetStatLevel() > RocketStat.MIN_STAT_LEVEL + 9);
     }
 

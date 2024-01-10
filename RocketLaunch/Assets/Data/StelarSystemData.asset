@@ -81,28 +81,48 @@ MonoBehaviour:
       missionIndex: 5
       locked: 1
       completed: 0
+    - gameScene: 17
+      missionIndex: 6
+      locked: 1
+      completed: 0
+    - gameScene: 18
+      missionIndex: 7
+      locked: 1
+      completed: 0
+    - gameScene: 19
+      missionIndex: 8
+      locked: 1
+      completed: 0
+    - gameScene: 20
+      missionIndex: 9
+      locked: 1
+      completed: 0
+    - gameScene: 21
+      missionIndex: 10
+      locked: 1
+      completed: 0
     locked: 1
     completed: 0
   - stelarSystemID: 3
     systemName: Artemis
     missions:
-    - gameScene: 17
+    - gameScene: 22
       missionIndex: 1
       locked: 1
       completed: 0
-    - gameScene: 18
+    - gameScene: 23
       missionIndex: 2
       locked: 1
       completed: 0
-    - gameScene: 19
+    - gameScene: 24
       missionIndex: 3
       locked: 1
       completed: 0
-    - gameScene: 20
+    - gameScene: 25
       missionIndex: 4
       locked: 1
       completed: 0
-    - gameScene: 21
+    - gameScene: 26
       missionIndex: 5
       locked: 1
       completed: 0
