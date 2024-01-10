@@ -805,6 +805,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6608246751416475835, guid: 63cf15981b2fc224b9c4118fbc0dc7c9,
         type: 3}
+      propertyPath: movementSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6608246751416475835, guid: 63cf15981b2fc224b9c4118fbc0dc7c9,
+        type: 3}
       propertyPath: movementDistance.y
       value: 10
       objectReference: {fileID: 0}
@@ -1120,6 +1125,11 @@ PrefabInstance:
         type: 3}
       propertyPath: canMove
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6608246751416475835, guid: 63cf15981b2fc224b9c4118fbc0dc7c9,
+        type: 3}
+      propertyPath: movementSpeed
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6608246751416475835, guid: 63cf15981b2fc224b9c4118fbc0dc7c9,
         type: 3}
