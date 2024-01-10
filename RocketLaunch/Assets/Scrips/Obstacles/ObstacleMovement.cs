@@ -112,7 +112,8 @@ public class ObstacleMovement : MonoBehaviour
     {
         if (pickup)
         {
-
+            pickup.OnStartMovingTowardsPlayer += Pickup_OnStartMovingTowardsPlayer;
+            pickup.OnResetPickUp += Pickup_OnResetPickUp;
         }
     }
 
@@ -141,14 +142,23 @@ public class ObstacleMovement : MonoBehaviour
 
     }
 
+    private void OnDestroy()
+    {
+        if (pickup)
+        {
+            pickup.OnStartMovingTowardsPlayer -= Pickup_OnStartMovingTowardsPlayer;
+            pickup.OnResetPickUp -= Pickup_OnResetPickUp;
+        }
+    }
+
     private void Pickup_OnStartMovingTowardsPlayer()
     {
-
+        this.enabled = false;
     }
 
     private void Pickup_OnResetPickUp()
     {
-
+        this.enabled = true;
     }
 
     //private IEnumerator ChangeDirectionCooldownRoutine()

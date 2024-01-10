@@ -99,9 +99,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canMove: 1
   showGizmos: 1
-  randomStartingDirecntion: 1
+  invertStartingDirection: 0
+  randomStartingDirection: 0
   movementDistance: {x: 0, y: 0, z: 0}
-  movementSpeed: 10
+  movementSpeed: 5
 --- !u!65 &550368535216282732
 BoxCollider:
   m_ObjectHideFlags: 0

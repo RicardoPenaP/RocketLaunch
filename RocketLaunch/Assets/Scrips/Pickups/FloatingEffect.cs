@@ -39,15 +39,15 @@ public class FloatingEffect : MonoBehaviour
         Vector3 rotation = Vector3.up * rotationSpeed * Time.deltaTime;
         transform.Rotate(rotation);
 
-        Vector3 newPosition = transform.position + Vector3.up * yMovementDirection * movementSpeed * Time.deltaTime;
-        newPosition.y = Mathf.Clamp(newPosition.y,minY,maxY);
+        //Vector3 newPosition = transform.position + Vector3.up * yMovementDirection * movementSpeed * Time.deltaTime;
+        //newPosition.y = Mathf.Clamp(newPosition.y,minY,maxY);
 
-        if (newPosition.y >= maxY || newPosition.y <= minY)
-        {
-            yMovementDirection *= -1;
-        }
+        //if (newPosition.y >= maxY || newPosition.y <= minY)
+        //{
+        //    yMovementDirection *= -1;
+        //}
 
-        transform.position = newPosition;
+        //transform.position = newPosition;
     }
 
     
