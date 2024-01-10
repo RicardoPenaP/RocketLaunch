@@ -10,7 +10,8 @@ public class FloatingEffect : MonoBehaviour
     [SerializeField] private float maxYOffset;
 
     private Pickup pickup;
-    private  float maxY, minY, yMovementDirection;
+    private float maxY, minY;
+    //private float yMovementDirection;
 
     private void Awake()
     {
@@ -22,7 +23,7 @@ public class FloatingEffect : MonoBehaviour
         float startingY = transform.position.y;
         maxY = startingY + maxYOffset;
         minY = startingY - maxYOffset;
-        yMovementDirection = -1;
+        //yMovementDirection = -1;
     }
 
     private void Update()

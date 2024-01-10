@@ -52,13 +52,13 @@ public class ObstacleShooter : MonoBehaviour
         {
             foreach (Transform shootPosTranform in shootPositions)
             {
-                int ammoIndex = Random.Range(0, obstacleAmmoPrefabs.Length);
+                int ammoIndex = UnityEngine.Random.Range(0, obstacleAmmoPrefabs.Length);
                 Instantiate(obstacleAmmoPrefabs[ammoIndex], shootPosTranform.position, shootPosTranform.rotation, transform.parent).SetMovementDirection(shootPosTranform.up);
             }
         }
         else
         {
-            int ammoIndex = Random.Range(0, obstacleAmmoPrefabs.Length);
+            int ammoIndex = UnityEngine.Random.Range(0, obstacleAmmoPrefabs.Length);
             Instantiate(obstacleAmmoPrefabs[ammoIndex], shootPositions[shootPositionIndex].position, shootPositions[shootPositionIndex].rotation,transform.parent).SetMovementDirection(shootPositions[shootPositionIndex].up);
             shootPositionIndex = shootPositionIndex < shootPositions.Length - 1 ? shootPositionIndex + 1 : 0;
         }
