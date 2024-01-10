@@ -14,6 +14,10 @@ public class Pickup : MonoBehaviour
     [SerializeField] private float defaultMovementSpeed = 3f;
     [SerializeField, Range(0f, 1f)] private float movementSpeedAugmentCoeficient = 0.2f;
 
+    public event Action OnStartMovingTowardsPlayer;
+    public event Action OnResetPickUp;
+    
+
     private PlayerController playerController;
     private Transform playerTransform;
 
@@ -71,12 +75,16 @@ public class Pickup : MonoBehaviour
 
     private void MoveTowardsThePlayer()
     {
-        if (Vector3.Distance(transform.position,playerTransform.position) >= pickupRange)
+        if (Vector3.Distance(transform.position,playerTransform.position) <= pickupRange && !IsBeenAtractedToThePlayer)
         {
-            IsBeenAtractedToThePlayer = false;
+            IsBeenAtractedToThePlayer = true;
+            OnStartMovingTowardsPlayer?.Invoke();
+        }
+
+        if (!IsBeenAtractedToThePlayer)
+        {
             return;
         }
-        IsBeenAtractedToThePlayer = true;
         Vector3 movementDirection = (playerTransform.position - transform.position).normalized;
         transform.position += movementDirection * currentMovementSpeed * Time.deltaTime;
         currentMovementSpeed += currentMovementSpeed * movementSpeedAugmentCoeficient * Time.deltaTime;
@@ -84,6 +92,7 @@ public class Pickup : MonoBehaviour
 
     private void ResetPickup()
     {
+        OnResetPickUp?.Invoke();
         transform.position = startingPos;
         IsBeenAtractedToThePlayer = false;
         gameObject.SetActive(true);
@@ -107,5 +116,6 @@ public class Pickup : MonoBehaviour
     private void PlayerController_OnPlayerReset(object sender, EventArgs e)
     {
         ResetPickup();
+        
     }
 }

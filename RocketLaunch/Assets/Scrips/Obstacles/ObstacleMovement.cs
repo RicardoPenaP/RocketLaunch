@@ -12,6 +12,7 @@ public class ObstacleMovement : MonoBehaviour
     [SerializeField] private Vector3 movementDistance;
     [SerializeField,Min(0f)] private float movementSpeed = 10f;
 
+    private Pickup pickup;
 
     private Vector3 startPosition;
     private Vector3 maxPosition;
@@ -71,6 +72,8 @@ public class ObstacleMovement : MonoBehaviour
 
     private void Awake()
     {
+        pickup = GetComponent<Pickup>();
+
         startPosition = transform.position;
         maxPosition = startPosition + (movementDistance / 2);
         minPosition = startPosition - (movementDistance / 2);
@@ -105,6 +108,14 @@ public class ObstacleMovement : MonoBehaviour
         maxDistance = Vector3.Distance(startPosition, maxPosition);
     }
 
+    private void Start()
+    {
+        if (pickup)
+        {
+
+        }
+    }
+
     private void FixedUpdate()
     {
         if (!canMove)
@@ -127,6 +138,16 @@ public class ObstacleMovement : MonoBehaviour
             //canChangeDirection = false;
             //StartCoroutine(ChangeDirectionCooldownRoutine());
         }
+
+    }
+
+    private void Pickup_OnStartMovingTowardsPlayer()
+    {
+
+    }
+
+    private void Pickup_OnResetPickUp()
+    {
 
     }
 
