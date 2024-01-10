@@ -9656,11 +9656,11 @@ MonoBehaviour:
   fuelConsuptionSpeed: 15
   maxEnginePower: 100
   powerSpeed: 40
-  powerHeatRateMultiplierPercentage: 0.1
+  powerHeatRateMultiplierPercentage: 0.07
   maxEngineTemperature: 100
-  heatRate: 3
+  heatRate: 2
   overheatRestTime: 2
-  coolingRate: 7
+  coolingRate: 8
   sideEngineComsuptionPercentage: 0.2
 --- !u!1 &4090625583501126721
 GameObject:
