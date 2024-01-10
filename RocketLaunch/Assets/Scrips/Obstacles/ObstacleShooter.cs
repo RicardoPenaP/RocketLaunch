@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class ObstacleShooter : MonoBehaviour
 {
@@ -11,22 +12,32 @@ public class ObstacleShooter : MonoBehaviour
     [SerializeField] private float shootRate = 1f;
     [SerializeField] private bool shootFromAllShootPositionsAtTheSameTime = false;
 
+    private static PlayerLandingController playerLandingController;
+
     private bool canShoot = false;
     private float shootRestTime;
-    private int shootPositionIndex = 0;
+    private int shootPositionIndex = 0;    
 
     private void Awake()
     {
         shootRestTime = 1 / shootRate;
+        if (!playerLandingController)
+        {
+            playerLandingController = FindObjectOfType<PlayerLandingController>();
+        }
     }
 
     private void Start()
     {
         StartCoroutine(ShootRestRoutine());
+        if (playerLandingController)
+        {
+            playerLandingController.OnPreLandingStart += PlayerLandingController_OnPreLandingStart;
+        }
     }
 
     private void Update()
-    {
+    {        
         if (canShoot)
         {
             Shoot();
@@ -53,6 +64,12 @@ public class ObstacleShooter : MonoBehaviour
         }
 
         StartCoroutine(ShootRestRoutine());
+    }
+
+    private void PlayerLandingController_OnPreLandingStart(object sender, EventArgs e)
+    {
+        StopAllCoroutines();
+        this.enabled = false;
     }
 
     private IEnumerator ShootRestRoutine()
