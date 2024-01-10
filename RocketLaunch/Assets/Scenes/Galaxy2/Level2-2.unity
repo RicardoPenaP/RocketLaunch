@@ -688,6 +688,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 949086605}
     m_Modifications:
+    - target: {fileID: 861115697075285976, guid: 63cf15981b2fc224b9c4118fbc0dc7c9,
+        type: 3}
+      propertyPath: rotationActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 861115697075285976, guid: 63cf15981b2fc224b9c4118fbc0dc7c9,
+        type: 3}
+      propertyPath: randomRotationAxis
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4345050384660868441, guid: 63cf15981b2fc224b9c4118fbc0dc7c9,
         type: 3}
       propertyPath: m_Name
@@ -981,6 +991,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 949086605}
     m_Modifications:
+    - target: {fileID: 861115697075285976, guid: 63cf15981b2fc224b9c4118fbc0dc7c9,
+        type: 3}
+      propertyPath: rotationActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 861115697075285976, guid: 63cf15981b2fc224b9c4118fbc0dc7c9,
+        type: 3}
+      propertyPath: randomRotationAxis
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4345050384660868441, guid: 63cf15981b2fc224b9c4118fbc0dc7c9,
         type: 3}
       propertyPath: m_Name

@@ -1929,6 +1929,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 999401755536680666, guid: d9861a88f1a55904bb6f971de7fa0b02,
+        type: 3}
+      propertyPath: powerHeatRateMultiplierPercentage
+      value: 0.05
+      objectReference: {fileID: 0}
     - target: {fileID: 4090625583501126721, guid: d9861a88f1a55904bb6f971de7fa0b02,
         type: 3}
       propertyPath: m_Name
