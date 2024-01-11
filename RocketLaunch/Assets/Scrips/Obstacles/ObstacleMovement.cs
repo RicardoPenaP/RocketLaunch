@@ -54,20 +54,20 @@ public class ObstacleMovement : MonoBehaviour
 
     private void OnValidate()
     {
-        if (movementDistance.x < 0)
-        {
-            movementDistance.x = 0;
-        }
+        //if (movementDistance.x < 0)
+        //{
+        //    movementDistance.x = 0;
+        //}
 
-        if (movementDistance.y < 0)
-        {
-            movementDistance.y = 0;
-        }
+        //if (movementDistance.y < 0)
+        //{
+        //    movementDistance.y = 0;
+        //}
 
-        if (movementDistance.z < 0)
-        {
-            movementDistance.z = 0;
-        }
+        //if (movementDistance.z < 0)
+        //{
+        //    movementDistance.z = 0;
+        //}
     }
 
     private void Awake()
