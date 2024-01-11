@@ -126,5 +126,25 @@ MonoBehaviour:
       missionIndex: 5
       locked: 1
       completed: 0
+    - gameScene: 27
+      missionIndex: 6
+      locked: 1
+      completed: 0
+    - gameScene: 28
+      missionIndex: 7
+      locked: 1
+      completed: 0
+    - gameScene: 29
+      missionIndex: 8
+      locked: 1
+      completed: 0
+    - gameScene: 30
+      missionIndex: 9
+      locked: 1
+      completed: 0
+    - gameScene: 31
+      missionIndex: 10
+      locked: 1
+      completed: 0
     locked: 1
     completed: 0

@@ -63,3 +63,13 @@ MonoBehaviour:
     experience: 4000
   - gameScene: 26
     experience: 5000
+  - gameScene: 27
+    experience: 6000
+  - gameScene: 28
+    experience: 7000
+  - gameScene: 29
+    experience: 8000
+  - gameScene: 30
+    experience: 9000
+  - gameScene: 31
+    experience: 10000

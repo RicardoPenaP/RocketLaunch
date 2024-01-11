@@ -145,7 +145,34 @@ public class MissionMananger : MonoBehaviour
 
     private void GameDataLoader_OnLoadMissionsData(MissionsData missionsData)
     {
-        stelarSystems = missionsData.GetStelarSystems();
+        //stelarSystems = missionsData.GetStelarSystems();
+        StelarSystem[] savedStelarSystems = missionsData.GetStelarSystems();
+        StelarSystem[] defaultStelarSystems = stelarSystemData.GetStelarSystems();
+
+        if (savedStelarSystems.Length == defaultStelarSystems.Length)
+        {
+            for (int i = 0; i < savedStelarSystems.Length; i++)
+            {
+                if (savedStelarSystems[i].GetMissions().Length != defaultStelarSystems[i].GetMissions().Length)
+                {
+                    Mission[] savedMissions = savedStelarSystems[i].GetMissions();
+                    Mission[] newMissions = defaultStelarSystems[i].GetMissions();
+                    for (int j = 0; j < newMissions.Length; j++)
+                    {
+                        if (j < savedMissions.Length)
+                        {
+                            newMissions[j] = savedMissions[j];
+                        }
+                    }
+
+                    savedStelarSystems[i].SetMissions(newMissions);
+                }
+            }
+        }
+
+        stelarSystems = savedStelarSystems;
+
+
     }
 
     public StelarSystem GetStelarSystem(StelarSystemID stelarSystemID)

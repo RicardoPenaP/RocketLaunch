@@ -43,6 +43,11 @@ public class StelarSystem
         return missions;
     }
 
+    public void SetMissions(Mission[] missions)
+    {
+        this.missions = missions;
+    }
+
     public string GetSystemName()
     {
         return systemName;
