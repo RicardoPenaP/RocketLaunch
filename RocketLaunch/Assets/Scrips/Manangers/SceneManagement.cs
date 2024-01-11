@@ -11,7 +11,8 @@ namespace GameSceneManagement
         Level1_6, Level1_7, Level1_8, Level1_9, Level1_10,
         Level2_1, Level2_2, Level2_3, Level2_4, Level2_5,
         Level2_6, Level2_7, Level2_8, Level2_9, Level2_10,
-        Level3_1, Level3_2, Level3_3, Level3_4, Level3_5 
+        Level3_1, Level3_2, Level3_3, Level3_4, Level3_5,
+        Level3_6, Level3_7, Level3_8, Level3_9, Level3_10
     }
     public static class SceneManagement
     {        
