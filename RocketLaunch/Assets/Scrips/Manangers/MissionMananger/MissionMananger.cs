@@ -6,7 +6,7 @@ using System;
 
 public class MissionMananger : MonoBehaviour
 {
-    public const GameScene LAST_MISSION = GameScene.Level3_5;
+    public const GameScene LAST_MISSION = GameScene.Level3_10;
     public static MissionMananger Instance { get; private set; }
 
     [Header("Mission Mananger")]
