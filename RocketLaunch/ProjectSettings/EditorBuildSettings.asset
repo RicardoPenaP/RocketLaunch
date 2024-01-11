@@ -86,4 +86,19 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Galaxy3/Level3-5.unity
     guid: 5a4f804d5ee4abe4ab799c45869b65a5
+  - enabled: 1
+    path: Assets/Scenes/Galaxy3/Level3-6.unity
+    guid: 29050a1909f556740a4513cdde73127b
+  - enabled: 1
+    path: Assets/Scenes/Galaxy3/Level3-7.unity
+    guid: e2403e10046098a4d9eb8cb639aeeb2a
+  - enabled: 1
+    path: Assets/Scenes/Galaxy3/Level3-8.unity
+    guid: 2317a6de5224787468af3532621fef0c
+  - enabled: 1
+    path: Assets/Scenes/Galaxy3/Level3-9.unity
+    guid: be6dea5a96398b546975ef8185a40e83
+  - enabled: 1
+    path: Assets/Scenes/Galaxy3/Level3-10.unity
+    guid: 77e1b3bda93624548ac1433228fdb44f
   m_configObjects: {}
